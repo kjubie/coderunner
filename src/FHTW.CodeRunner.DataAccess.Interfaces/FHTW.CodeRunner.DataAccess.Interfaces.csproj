@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FHTW.CodeRunner.DataAccess.Entities\FHTW.CodeRunner.DataAccess.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
