@@ -17,4 +17,9 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FHTW.CodeRunner.DataAccess.Entities\FHTW.CodeRunner.DataAccess.Entities.csproj" />
+    <ProjectReference Include="..\FHTW.CodeRunner.DataAccess.Interfaces\FHTW.CodeRunner.DataAccess.Interfaces.csproj" />
+  </ItemGroup>
+
 </Project>
