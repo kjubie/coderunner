@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.8" />
   </ItemGroup>
 
@@ -29,6 +30,10 @@
     <ProjectReference Include="..\FHTW.CodeRunner.BusinessLogic\FHTW.CodeRunner.BusinessLogic.csproj" />
     <ProjectReference Include="..\FHTW.CodeRunner.Services.DTOs\FHTW.CodeRunner.Services.DTOs.csproj" />
     <ProjectReference Include="..\FHTW.CodeRunner.Services.Interfaces\FHTW.CodeRunner.Services.Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="AutoMapper\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
