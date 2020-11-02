@@ -5,29 +5,27 @@ VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.Services", "FHTW.CodeRunner.Services\FHTW.CodeRunner.Services.csproj", "{91283CA3-22DB-4BC3-97E1-41B2A5AFE665}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHTW.CodeRunner.Services.DTOs", "FHTW.CodeRunner.Services.DTOs\FHTW.CodeRunner.Services.DTOs.csproj", "{ECD39273-4DC0-4C85-9F53-03CC7979029F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.Services.DTOs", "FHTW.CodeRunner.Services.DTOs\FHTW.CodeRunner.Services.DTOs.csproj", "{ECD39273-4DC0-4C85-9F53-03CC7979029F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHTW.CodeRunner.Services.Interfaces", "FHTW.CodeRunner.Services.Interfaces\FHTW.CodeRunner.Services.Interfaces.csproj", "{FFA7C28E-F03C-46B5-AC80-F9E2F68E3EF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.Services.Interfaces", "FHTW.CodeRunner.Services.Interfaces\FHTW.CodeRunner.Services.Interfaces.csproj", "{FFA7C28E-F03C-46B5-AC80-F9E2F68E3EF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHTW.CodeRunner.Services.Tests", "FHTW.CodeRunner.Services.Tests\FHTW.CodeRunner.Services.Tests.csproj", "{EB515EBB-1CB8-4223-B74F-62F57566A696}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.Services.Tests", "FHTW.CodeRunner.Services.Tests\FHTW.CodeRunner.Services.Tests.csproj", "{EB515EBB-1CB8-4223-B74F-62F57566A696}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHTW.CodeRunner.BusinessLogic", "FHTW.CodeRunner.BusinessLogic\FHTW.CodeRunner.BusinessLogic.csproj", "{2BF5440E-92A2-475F-AC51-DFDD82AC176F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.BusinessLogic", "FHTW.CodeRunner.BusinessLogic\FHTW.CodeRunner.BusinessLogic.csproj", "{2BF5440E-92A2-475F-AC51-DFDD82AC176F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHTW.CodeRunner.BusinessLogic.Entities", "FHTW.CodeRunner.BusinessLogic.Entities\FHTW.CodeRunner.BusinessLogic.Entities.csproj", "{8D91C3A3-71AF-4E80-83B7-3FDFFA2A9F26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.BusinessLogic.Entities", "FHTW.CodeRunner.BusinessLogic.Entities\FHTW.CodeRunner.BusinessLogic.Entities.csproj", "{8D91C3A3-71AF-4E80-83B7-3FDFFA2A9F26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHTW.CodeRunner.BusinessLogic.Interfaces", "FHTW.CodeRunner.BusinessLogic.Interfaces\FHTW.CodeRunner.BusinessLogic.Interfaces.csproj", "{7B325341-3A56-484B-8105-8118EE58136B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.BusinessLogic.Interfaces", "FHTW.CodeRunner.BusinessLogic.Interfaces\FHTW.CodeRunner.BusinessLogic.Interfaces.csproj", "{7B325341-3A56-484B-8105-8118EE58136B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHTW.CodeRunner.BusinessLogic.Tests", "FHTW.CodeRunner.BusinessLogic.Tests\FHTW.CodeRunner.BusinessLogic.Tests.csproj", "{3335607D-355B-49B8-BCE3-2EF133DB5DA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.BusinessLogic.Tests", "FHTW.CodeRunner.BusinessLogic.Tests\FHTW.CodeRunner.BusinessLogic.Tests.csproj", "{3335607D-355B-49B8-BCE3-2EF133DB5DA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHTW.CodeRunner.DataAccess", "FHTW.CodeRunner.DataAccess\FHTW.CodeRunner.DataAccess.csproj", "{3A32D01D-4D76-46A1-8A77-7CFA9774E8B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.DataAccess.Entities", "FHTW.CodeRunner.DataAccess.Entities\FHTW.CodeRunner.DataAccess.Entities.csproj", "{2DC056B1-D8F3-4C48-97E7-67D4DCE7C09E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHTW.CodeRunner.DataAccess.Entities", "FHTW.CodeRunner.DataAccess.Entities\FHTW.CodeRunner.DataAccess.Entities.csproj", "{2DC056B1-D8F3-4C48-97E7-67D4DCE7C09E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.DataAccess.Interfaces", "FHTW.CodeRunner.DataAccess.Interfaces\FHTW.CodeRunner.DataAccess.Interfaces.csproj", "{30246E82-2048-4A13-9652-61A1890F21B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHTW.CodeRunner.DataAccess.Interfaces", "FHTW.CodeRunner.DataAccess.Interfaces\FHTW.CodeRunner.DataAccess.Interfaces.csproj", "{30246E82-2048-4A13-9652-61A1890F21B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.DataAccess.Sql", "FHTW.CodeRunner.DataAccess.Sql\FHTW.CodeRunner.DataAccess.Sql.csproj", "{6EAEFC63-CF39-40C7-8D8B-18847AA25AD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHTW.CodeRunner.DataAccess.Sql", "FHTW.CodeRunner.DataAccess.Sql\FHTW.CodeRunner.DataAccess.Sql.csproj", "{6EAEFC63-CF39-40C7-8D8B-18847AA25AD6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHTW.CodeRunner.DataAccess.Tests", "FHTW.CodeRunner.DataAccess.Tests\FHTW.CodeRunner.DataAccess.Tests.csproj", "{C45CF8EA-1400-4BF6-98D9-707AB952A7BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.DataAccess.Tests", "FHTW.CodeRunner.DataAccess.Tests\FHTW.CodeRunner.DataAccess.Tests.csproj", "{C45CF8EA-1400-4BF6-98D9-707AB952A7BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,10 +65,6 @@ Global
 		{3335607D-355B-49B8-BCE3-2EF133DB5DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3335607D-355B-49B8-BCE3-2EF133DB5DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3335607D-355B-49B8-BCE3-2EF133DB5DA1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A32D01D-4D76-46A1-8A77-7CFA9774E8B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3A32D01D-4D76-46A1-8A77-7CFA9774E8B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3A32D01D-4D76-46A1-8A77-7CFA9774E8B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3A32D01D-4D76-46A1-8A77-7CFA9774E8B4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2DC056B1-D8F3-4C48-97E7-67D4DCE7C09E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2DC056B1-D8F3-4C48-97E7-67D4DCE7C09E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DC056B1-D8F3-4C48-97E7-67D4DCE7C09E}.Release|Any CPU.ActiveCfg = Release|Any CPU
