@@ -16,12 +16,13 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         {
             return context.Exercise
                     .Include(e => e.FkUser)
-                    .Include(e => e.ExerciseVersion.OrderByDescending(v => v.VersionNumber).First())
+                    .Include(e => e.ExerciseVersion)
                         .ThenInclude(v => v.FkUser)
-                    .Include(e => e.ExerciseVersion.OrderByDescending(v => v.VersionNumber).First())
+                    .Include(e => e.ExerciseVersion)
                         .ThenInclude(v => v.ExerciseLanguage)
                             .ThenInclude(el => el.FkWrittenLanguage)
-                    .Single(e => e.Id == id);
+                            .AsEnumerable()
+                    .FirstOrDefault(e => e.Id == id);
             //throw new NotImplementedException();
         }
     }

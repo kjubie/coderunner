@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FHTW.CodeRunner.BusinessLogic.Entities\FHTW.CodeRunner.BusinessLogic.Entities.csproj" />
     <ProjectReference Include="..\FHTW.CodeRunner.BusinessLogic.Interfaces\FHTW.CodeRunner.BusinessLogic.Interfaces.csproj" />
     <ProjectReference Include="..\FHTW.CodeRunner.DataAccess.Entities\FHTW.CodeRunner.DataAccess.Entities.csproj" />
