@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace FHTW.CodeRunner.DataAccess.Sql
 {
-    public class CodeRunnerRepository : IRepository
+    public class ExerciseRepository : IExerciseRepository
     {
         private readonly CodeRunnerContext context;
 
-        public CodeRunnerRepository(CodeRunnerContext dbcontext) => context = dbcontext;
+        public ExerciseRepository(CodeRunnerContext dbcontext) => context = dbcontext;
 
-        Exercise IRepository.GetExerciseById(int id)
+        Exercise IExerciseRepository.GetExerciseById(int id)
         {
             return context.Exercise.Single(exercise => exercise.Id == id);
             //throw new NotImplementedException();

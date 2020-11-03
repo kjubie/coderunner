@@ -16,7 +16,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         [Test]
         public void Test1()
         {
-            IRepository repo = new CodeRunnerRepository(new CodeRunnerContext());
+            IExerciseRepository repo = new ExerciseRepository(new CodeRunnerContext());
             Exercise exercise = repo.GetExerciseById(1);
             Assert.IsNotNull(exercise);
             Benutzer b = exercise.FkUser;
