@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CreateExercise } from '../data-objects/create-exercise';
 
 @Component({
   selector: 'app-exercise-create',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class ExerciseCreateComponent {
 
+  tabSelected: string = "general";
+  exercise: CreateExercise;
+  
+  setTab(tab: string) {
+    this.tabSelected = tab;
+  }
+
+  moveToNextTab(tab: string) {
+    // ToDo: set data of this tab for further use
+    this.setTab(tab);
+  }
 }

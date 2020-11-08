@@ -1,0 +1,52 @@
+.tab {
+    font-size: larger;
+    margin: 50px 35px 60px 0px;
+    color: rgb(53, 171, 240);
+ }
+
+ .tab:hover {
+    color: black;
+    border-color: black;
+    cursor: pointer;
+ }
+
+ .activeTab {
+     font-weight: bolder;
+     border-bottom: rgb(53, 171, 240) solid 2px;
+ }
+
+ .tabContent {
+     margin-top: 40px;
+ }
+
+ .tabHeading {
+     font-weight: bolder;
+     margin-bottom: 5px;
+ }
+
+ .description {
+    color: rgb(129, 129, 129);
+ }
+
+ .contentSeperator {
+    border-top: rgb(53, 171, 240) solid 3px;
+    padding-top: 20px;
+ }
+
+ label {
+    font-weight: bolder;
+    margin-top: 10px;
+ }
+
+ input[type=text], textarea, select {
+    border-radius: 10px;
+    background-color: white;
+    border: rgb(129, 129, 129) solid 1.5px;
+    margin-top: 10px;
+    padding-left: 5px;
+ }
+
+ .next-btn {
+    margin-top: 25px;
+    width: 15%;
+ }

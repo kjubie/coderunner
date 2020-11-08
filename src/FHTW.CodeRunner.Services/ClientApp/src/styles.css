@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
+body {
+  background-color: lightgray;
+}
+
 a {
   color: rgb(53, 171, 240);
 }
@@ -17,8 +21,4 @@ code {
 
 h2 {
   text-align: center;
-}
-
-.bg-blue {
-  background-color: rgb(53, 171, 240);
 }
