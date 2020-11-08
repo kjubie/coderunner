@@ -3,30 +3,35 @@
 // </copyright>
 
 using System;
+using System.Linq;
 using FHTW.CodeRunner.DataAccess.Entities;
-using FHTW.CodeRunner.DataAccess.Interfaces;
-using FHTW.CodeRunner.DataAccess.Sql;
 using NUnit.Framework;
 
 namespace FHTW.CodeRunner.DataAccess.Tests
 {
     public class ExerciseRepositoryTests
     {
+        private CodeRunnerTestDb context;
+
         [SetUp]
         public void Setup()
         {
+            this.context = new CodeRunnerTestDb();
         }
 
         [Test]
         public void Test1()
         {
-            IExerciseRepository repo = new ExerciseRepository(new CodeRunnerContext());
-            Exercise exercise = repo.GetExerciseById(1);
-            Assert.IsNotNull(exercise);
-            Benutzer b = exercise.FkUser;
-            Assert.IsNotNull(b);
-            Assert.IsNotNull(b.Name);
-            Console.WriteLine(b.Name);
+            using var c = new CodeRunnerContext(this.context.contextOptions);
+
+            // IExerciseRepository repo = new ExerciseRepository(c);
+
+            // Exercise exercise = repo.GetExerciseById(1);
+            var user = c.Benutzer.FirstOrDefault();
+            Assert.IsNotNull(user);
+            Assert.IsTrue(user.Name == "Hans");
+
+            // Assert.IsNotNull(exercise.Title);
         }
     }
 }
