@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="Benutzer.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -9,12 +13,12 @@ namespace FHTW.CodeRunner.Services.DTOs
     {
         public Benutzer()
         {
-            Collection = new HashSet<Collection>();
-            Comment = new HashSet<Comment>();
-            Difficulty = new HashSet<Difficulty>();
-            Exercise = new HashSet<Exercise>();
-            ExerciseVersion = new HashSet<ExerciseVersion>();
-            Rating = new HashSet<Rating>();
+            this.Collection = new HashSet<Collection>();
+            this.Comment = new HashSet<Comment>();
+            this.Difficulty = new HashSet<Difficulty>();
+            this.Exercise = new HashSet<Exercise>();
+            this.ExerciseVersion = new HashSet<ExerciseVersion>();
+            this.Rating = new HashSet<Rating>();
         }
 
         [DataMember(Name = "id")]

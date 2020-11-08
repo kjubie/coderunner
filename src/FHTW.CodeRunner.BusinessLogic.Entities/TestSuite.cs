@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="TestSuite.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
@@ -7,8 +11,8 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     {
         public TestSuite()
         {
-            ExerciseBody = new HashSet<ExerciseBody>();
-            TestCase = new HashSet<TestCase>();
+            this.ExerciseBody = new HashSet<ExerciseBody>();
+            this.TestCase = new HashSet<TestCase>();
         }
 
         public int Id { get; set; }

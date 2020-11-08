@@ -1,5 +1,10 @@
-﻿using System;
+﻿// <copyright file="Rating.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
+
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
     public class Rating

@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="ExerciseLanguage.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
@@ -7,7 +11,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     {
         public ExerciseLanguage()
         {
-            ExerciseBody = new HashSet<ExerciseBody>();
+            this.ExerciseBody = new HashSet<ExerciseBody>();
         }
 
         public int Id { get; set; }

@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="ProgrammingLanguage.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -9,8 +13,8 @@ namespace FHTW.CodeRunner.Services.DTOs
     {
         public ProgrammingLanguage()
         {
-            CollectionExercise = new HashSet<CollectionExercise>();
-            ExerciseBody = new HashSet<ExerciseBody>();
+            this.CollectionExercise = new HashSet<CollectionExercise>();
+            this.ExerciseBody = new HashSet<ExerciseBody>();
         }
 
         [DataMember(Name = "id")]

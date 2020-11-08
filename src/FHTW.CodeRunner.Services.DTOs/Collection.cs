@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="Collection.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -9,8 +13,8 @@ namespace FHTW.CodeRunner.Services.DTOs
     {
         public Collection()
         {
-            CollectionLanguage = new HashSet<CollectionLanguage>();
-            CollectionTag = new HashSet<CollectionTag>();
+            this.CollectionLanguage = new HashSet<CollectionLanguage>();
+            this.CollectionTag = new HashSet<CollectionTag>();
         }
 
         [DataMember(Name = "id")]

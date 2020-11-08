@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="ExerciseHeader.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -9,7 +13,7 @@ namespace FHTW.CodeRunner.Services.DTOs
     {
         public ExerciseHeader()
         {
-            ExerciseLanguage = new HashSet<ExerciseLanguage>();
+            this.ExerciseLanguage = new HashSet<ExerciseLanguage>();
         }
 
         [DataMember(Name = "id")]

@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="Exercise.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
@@ -7,12 +11,12 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     {
         public Exercise()
         {
-            CollectionExercise = new HashSet<CollectionExercise>();
-            Comment = new HashSet<Comment>();
-            Difficulty = new HashSet<Difficulty>();
-            ExerciseTag = new HashSet<ExerciseTag>();
-            ExerciseVersion = new HashSet<ExerciseVersion>();
-            Rating = new HashSet<Rating>();
+            this.CollectionExercise = new HashSet<CollectionExercise>();
+            this.Comment = new HashSet<Comment>();
+            this.Difficulty = new HashSet<Difficulty>();
+            this.ExerciseTag = new HashSet<ExerciseTag>();
+            this.ExerciseVersion = new HashSet<ExerciseVersion>();
+            this.Rating = new HashSet<Rating>();
         }
 
         public int Id { get; set; }

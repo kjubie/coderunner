@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="Collection.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
@@ -7,8 +11,8 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     {
         public Collection()
         {
-            CollectionLanguage = new HashSet<CollectionLanguage>();
-            CollectionTag = new HashSet<CollectionTag>();
+            this.CollectionLanguage = new HashSet<CollectionLanguage>();
+            this.CollectionTag = new HashSet<CollectionTag>();
         }
 
         public int Id { get; set; }

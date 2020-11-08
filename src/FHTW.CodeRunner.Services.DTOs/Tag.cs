@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="Tag.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -9,8 +13,8 @@ namespace FHTW.CodeRunner.Services.DTOs
     {
         public Tag()
         {
-            CollectionTag = new HashSet<CollectionTag>();
-            ExerciseTag = new HashSet<ExerciseTag>();
+            this.CollectionTag = new HashSet<CollectionTag>();
+            this.ExerciseTag = new HashSet<ExerciseTag>();
         }
 
         [DataMember(Name = "id")]

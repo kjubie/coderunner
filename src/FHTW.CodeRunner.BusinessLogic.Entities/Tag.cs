@@ -1,13 +1,18 @@
-﻿using System;
+﻿// <copyright file="Tag.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
+
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
     public class Tag
     {
         public Tag()
         {
-            CollectionTag = new HashSet<CollectionTag>();
-            ExerciseTag = new HashSet<ExerciseTag>();
+            this.CollectionTag = new HashSet<CollectionTag>();
+            this.ExerciseTag = new HashSet<ExerciseTag>();
         }
 
         public int Id { get; set; }

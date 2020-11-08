@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="ExerciseLogic.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
@@ -20,6 +24,7 @@ namespace FHTW.CodeRunner.BusinessLogic
             this.exerciseRepository = exerciseRepository;
         }
 
+        /// <inheritdoc/>
         public BlEntities.Exercise GetTestExercise(int id)
         {
             var dalExercise = this.exerciseRepository.GetExerciseById(id);

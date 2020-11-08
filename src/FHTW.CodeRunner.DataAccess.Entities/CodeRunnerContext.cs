@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="CodeRunnerContext.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -16,25 +20,44 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         }
 
         public virtual DbSet<Benutzer> Benutzer { get; set; }
+
         public virtual DbSet<Collection> Collection { get; set; }
+
         public virtual DbSet<CollectionExercise> CollectionExercise { get; set; }
+
         public virtual DbSet<CollectionLanguage> CollectionLanguage { get; set; }
+
         public virtual DbSet<CollectionTag> CollectionTag { get; set; }
+
         public virtual DbSet<Comment> Comment { get; set; }
+
         public virtual DbSet<Difficulty> Difficulty { get; set; }
+
         public virtual DbSet<Exercise> Exercise { get; set; }
+
         public virtual DbSet<ExerciseBody> ExerciseBody { get; set; }
+
         public virtual DbSet<ExerciseHeader> ExerciseHeader { get; set; }
+
         public virtual DbSet<ExerciseLanguage> ExerciseLanguage { get; set; }
+
         public virtual DbSet<ExerciseTag> ExerciseTag { get; set; }
+
         public virtual DbSet<ExerciseVersion> ExerciseVersion { get; set; }
+
         public virtual DbSet<ProgrammingLanguage> ProgrammingLanguage { get; set; }
+
         public virtual DbSet<Rating> Rating { get; set; }
+
         public virtual DbSet<Tag> Tag { get; set; }
+
         public virtual DbSet<TestCase> TestCase { get; set; }
+
         public virtual DbSet<TestSuite> TestSuite { get; set; }
+
         public virtual DbSet<WrittenLanguage> WrittenLanguage { get; set; }
 
+        /// <inheritdoc/>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -44,6 +67,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
             }
         }
 
+        /// <inheritdoc/>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Benutzer>(entity =>
@@ -297,7 +321,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
                 entity.Property(e => e.Id).ValueGeneratedNever();
             });
 
-            OnModelCreatingPartial(modelBuilder);
+            this.OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

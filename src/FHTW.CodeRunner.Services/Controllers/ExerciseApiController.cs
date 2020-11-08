@@ -1,10 +1,14 @@
-﻿using AutoMapper;
-using FHTW.CodeRunner.BusinessLogic.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+﻿// <copyright file="ExerciseApiController.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using FHTW.CodeRunner.BusinessLogic.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
 using SvcEntities = FHTW.CodeRunner.Services.DTOs;
 

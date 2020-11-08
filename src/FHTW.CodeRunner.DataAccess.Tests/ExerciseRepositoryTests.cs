@@ -1,8 +1,12 @@
-using NUnit.Framework;
-using FHTW.CodeRunner.DataAccess.Entities;
-using FHTW.CodeRunner.DataAccess.Sql;
-using FHTW.CodeRunner.DataAccess.Interfaces;
+// <copyright file="ExerciseRepositoryTests.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
 using System;
+using FHTW.CodeRunner.DataAccess.Entities;
+using FHTW.CodeRunner.DataAccess.Interfaces;
+using FHTW.CodeRunner.DataAccess.Sql;
+using NUnit.Framework;
 
 namespace FHTW.CodeRunner.DataAccess.Tests
 {
