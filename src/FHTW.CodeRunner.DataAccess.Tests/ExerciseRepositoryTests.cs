@@ -3,6 +3,7 @@
 // </copyright>
 
 using FHTW.CodeRunner.DataAccess.Entities;
+using FHTW.CodeRunner.DataAccess.Sql;
 using NUnit.Framework;
 using System.Linq;
 

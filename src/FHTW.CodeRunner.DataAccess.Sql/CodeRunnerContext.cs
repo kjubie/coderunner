@@ -5,8 +5,9 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using FHTW.CodeRunner.DataAccess.Entities;
 
-namespace FHTW.CodeRunner.DataAccess.Entities
+namespace FHTW.CodeRunner.DataAccess.Sql
 {
     public partial class CodeRunnerContext : DbContext
     {
