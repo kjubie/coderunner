@@ -1,22 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { CreateExercise } from '../data-objects/create-exercise';
+import { Component, OnInit, NgModule } from '@angular/core';
+import { Exercise } from '../data-objects/exercise';
+
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-exercise-create',
   templateUrl: './exercise-create.component.html',
   styleUrls: ['./exercise-create.component.css']
 })
-export class ExerciseCreateComponent {
+@NgModule({
+  declarations: [
+	AppComponent
+  ],
+  imports: [
+	BrowserModule,
+	FormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class ExerciseCreateComponent implements OnInit {
 
   tabSelected: string = "general";
-  exercise: CreateExercise;
+  exercise: Exercise;
   
   setTab(tab: string) {
     this.tabSelected = tab;
   }
 
-  moveToNextTab(tab: string) {
-    // ToDo: set data of this tab for further use
-    this.setTab(tab);
+  ngOnInit() {
+    this.exercise = new Exercise();
+    this.exercise.created = new Date();
   }
 }
