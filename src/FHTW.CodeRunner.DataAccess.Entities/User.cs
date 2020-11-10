@@ -10,9 +10,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
     [Table("benutzer")]
-    public partial class Benutzer
+    public partial class User
     {
-        public Benutzer()
+        public User()
         {
             this.Collection = new HashSet<Collection>();
             this.Comment = new HashSet<Comment>();

@@ -20,7 +20,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         {
         }
 
-        public virtual DbSet<Benutzer> Benutzer { get; set; }
+        public virtual DbSet<User> Benutzer { get; set; }
 
         public virtual DbSet<Collection> Collection { get; set; }
 
@@ -71,7 +71,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         /// <inheritdoc/>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Benutzer>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
             });

@@ -44,8 +44,8 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         public virtual Exercise FkExercise { get; set; }
 
         [ForeignKey(nameof(FkUserId))]
-        [InverseProperty(nameof(Benutzer.ExerciseVersion))]
-        public virtual Benutzer FkUser { get; set; }
+        [InverseProperty(nameof(User.ExerciseVersion))]
+        public virtual User FkUser { get; set; }
 
         [InverseProperty("FkExerciseVersion")]
         public virtual ICollection<ExerciseLanguage> ExerciseLanguage { get; set; }

@@ -38,8 +38,8 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         public int FkUserId { get; set; }
 
         [ForeignKey(nameof(FkUserId))]
-        [InverseProperty(nameof(Benutzer.Exercise))]
-        public virtual Benutzer FkUser { get; set; }
+        [InverseProperty(nameof(User.Exercise))]
+        public virtual User FkUser { get; set; }
 
         [InverseProperty("FkExercise")]
         public virtual ICollection<CollectionExercise> CollectionExercise { get; set; }

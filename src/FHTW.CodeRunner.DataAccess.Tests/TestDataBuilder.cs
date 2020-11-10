@@ -16,16 +16,16 @@ namespace FHTW.CodeRunner.DataAccess.Tests
     {
         static TestDataBuilder()
         {
-            BuilderSetup.DisablePropertyNamingFor<Benutzer, int>(x => x.Id);
+            BuilderSetup.DisablePropertyNamingFor<User, int>(x => x.Id);
         }
 
         /// <summary>
         /// Create a new users with generated data.
         /// </summary>
         /// <returns>new user.</returns>
-        public static Benutzer Benutzer()
+        public static User Benutzer()
         {
-            return Builder<Benutzer>.CreateNew().Build();
+            return Builder<User>.CreateNew().Build();
         }
 
         /// <summary>
@@ -33,10 +33,10 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         /// </summary>
         /// <param name="amount">the amount of users generated.</param>
         /// <returns>list of new users.</returns>
-        public static IList<Benutzer> ManyBenutzer(int amount)
+        public static IList<User> ManyBenutzer(int amount)
         {
             Debug.Assert(amount > 1, "use Benutzer() for creating one User");
-            return Builder<Benutzer>.CreateListOfSize(amount).Build();
+            return Builder<User>.CreateListOfSize(amount).Build();
         }
     }
 }
