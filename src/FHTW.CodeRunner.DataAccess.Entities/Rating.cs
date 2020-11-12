@@ -30,7 +30,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         public virtual Exercise FkExercise { get; set; }
 
         [ForeignKey(nameof(FkUserId))]
-        [InverseProperty(nameof(Benutzer.Rating))]
-        public virtual Benutzer FkUser { get; set; }
+        [InverseProperty(nameof(User.Rating))]
+        public virtual User FkUser { get; set; }
     }
 }

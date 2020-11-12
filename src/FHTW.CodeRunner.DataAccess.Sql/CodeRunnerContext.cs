@@ -5,8 +5,9 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using FHTW.CodeRunner.DataAccess.Entities;
 
-namespace FHTW.CodeRunner.DataAccess.Entities
+namespace FHTW.CodeRunner.DataAccess.Sql
 {
     public partial class CodeRunnerContext : DbContext
     {
@@ -19,7 +20,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         {
         }
 
-        public virtual DbSet<Benutzer> Benutzer { get; set; }
+        public virtual DbSet<User> Benutzer { get; set; }
 
         public virtual DbSet<Collection> Collection { get; set; }
 
@@ -70,7 +71,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         /// <inheritdoc/>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Benutzer>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
             });

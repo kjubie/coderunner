@@ -2,31 +2,43 @@
 <div class="container">
   <div>
     <a class="tab" [ngClass]="{'activeTab' : tabSelected == 'general'}" (click)="setTab('general')">General</a>
+    <a class="tab" [ngClass]="{'activeTab' : tabSelected == 'writtenLang'}" (click)="setTab('writtenLang')">Written Language</a>
     <a class="tab" [ngClass]="{'activeTab' : tabSelected == 'programming'}" (click)="setTab('programming')">Programming Language</a>
+    <a class="tab" [ngClass]="{'activeTab' : tabSelected == 'test'}" (click)="setTab('test')">Test Suit</a>
     <!-- <a class="tab" [ngClass]="{'activeTab' : tabSelected == 'metadata'}" (click)="setTab('metadata')">Metadata</a> -->
-    <a class="tab" [ngClass]="{'activeTab' : tabSelected == 'tags'}" (click)="setTab('tags')">Tags</a>
+    <!-- <a class="tab" [ngClass]="{'activeTab' : tabSelected == 'tags'}" (click)="setTab('tags')">Tags</a> -->
     <a class="tab" [ngClass]="{'activeTab' : tabSelected == 'save'}" (click)="setTab('save')">Save</a>
   </div>
   <div class="ods-box">
     <div class="tabContent" *ngIf="tabSelected == 'general'">
       <h4 class="tabHeading">General</h4>
-      <h6 class="description">Cross-Example Description</h6>
+      <h6 class="description">General Cross-Example Information</h6>
       <div class="container contentSeperator">
         <form>
           <div class="from-group row">
-            <label for="fullTitle" class="col-2 col-form-label">Exercise Title</label>
+            <label for="title" class="col-2 col-form-label">Title</label>
             <div class="col-10">
-              <input type="text" class="form-control-plaintext" id="fullTitle" value="Full Title">
+              <input type="text" class="form-control-plaintext" id="title" name="title" placeholder="Title" [(ngModel)]="exercise.title">
             </div>
-            <label for="shortTitle" class="col-2 col-form-label">Short Title</label>
+            <label for="user" class="col-2 col-form-label">Author</label>
             <div class="col-10">
-              <input type="text" class="form-control-plaintext" id="shortTitle" value="Short Title">
+              <!-- ToDo: set readonly and load current user -->
+              <input type="text" class="form-control-plaintext" id="user" name="user" placeholder="Username" [(ngModel)]="exercise.user.name">
             </div>
-            <label for="introduction" class="col-2 col-form-label">Exercise Introduction</label>
-            <div class="col-10">
-              <textarea class="form-control-plaintext" id="introduction" rows="4"></textarea>
-            </div>
-            <!-- Select Language -->
+          </div>
+          <div class="text-right">
+            <input type="button" class="btn btn-primary next-btn" (click)="setTab('writtenLang')" value="Next">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="tabContent" *ngIf="tabSelected == 'writtenLang'">
+      <h4 class="tabHeading">Written Language</h4>
+      <h6 class="description">Written / Spoken Language specific Description</h6>
+      <div class="container contentSeperator">
+        <form>
+          <div class="from-group row">
+            <!-- ToDo: add new language and set details for every language -->
             <label for="writtenLang" class="col-2 col-form-label">Written Language</label>
             <div class="col-10">
               <select class="form-control" id="writtenLang">
@@ -34,10 +46,21 @@
                 <option>German</option>
               </select>
             </div>
+            <label for="fullTitle" class="col-2 col-form-label">Exercise Title</label>
+            <div class="col-10">
+              <input type="text" class="form-control-plaintext" id="fullTitle" name="fullTitle" placeholder="Full Title" [(ngModel)]="exercise.header.fullTitle">
+            </div>
+            <label for="shortTitle" class="col-2 col-form-label">Short Title</label>
+            <div class="col-10">
+              <input type="text" class="form-control-plaintext" id="shortTitle" name="shortTitle" placeholder="Short Title" [(ngModel)]="exercise.header.shortTitle">
+            </div>
+            <label for="introduction" class="col-2 col-form-label">Exercise Introduction</label>
+            <div class="col-10">
+              <textarea class="form-control-plaintext" id="introduction" name="introduction" rows="4" [(ngModel)]="exercise.header.introduction"></textarea>
+            </div>
           </div>
           <div class="text-right">
-            <input type="button" class="btn btn-primary next-btn" (click)="moveToNextTab('programming')" value="Next">
-            <!-- <button class="btn btn-primary next-btn" (click)="moveToNextTab('programming')">Next</button> -->
+            <input type="button" class="btn btn-primary next-btn" (click)="setTab('programming')" value="Next">
           </div>
         </form>
       </div>
@@ -52,7 +75,7 @@
             <div class="col-10">
               <!-- ToDo: read from Database -->
               <!-- Possibility to add new Language here? -->
-              <select class="form-control" id="writtenLang">
+              <select class="form-control" id="programmingLang">
                 <option>C#</option>
                 <option>Java</option>
                 <option>Python</option>
@@ -62,23 +85,73 @@
             </div>
             <label for="description" class="col-2 col-form-label">Description</label>
             <div class="col-10">
-              <textarea class="form-control-plaintext" id="description" rows="9"></textarea>
+              <textarea class="form-control-plaintext" id="description" name="description" rows="9" [(ngModel)]="exercise.header.body.description"></textarea>
             </div>
             <label for="example" class="col-2 col-form-label">Example</label>
             <div class="col-10">
-              <textarea class="form-control-plaintext" id="example" rows="6"></textarea>
+              <textarea class="form-control-plaintext" id="example" name="example" rows="6" [(ngModel)]="exercise.header.body.example"></textarea>
             </div>
             <label for="hint" class="col-2 col-form-label">Hint</label>
             <div class="col-10">
-              <input type="text" class="form-control-plaintext" id="hint" placeholder="Hint(s)">
+              <input type="text" class="form-control-plaintext" id="hint" name="hint" placeholder="Hint(s)" [(ngModel)]="exercise.header.body.hint">
             </div>
-            <label for="points" class="col-2 col-form-label">Points</label>
+            <!-- Add Possibility to add multiple tags to exercise -->
+            <label for="tags" class="col-2 col-form-label">Tags</label>
             <div class="col-10">
-              <input type="text" class="form-control-plaintext" id="points" placeholder="Reachable Points">
+              <p>
+                Under Construction
+              </p>
             </div>
           </div>
           <div class="text-right">
-            <input type="button" class="btn btn-primary next-btn" (click)="moveToNextTab('tags')" value="Next">
+            <input type="button" class="btn btn-primary next-btn" (click)="setTab('test')" value="Next">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="tabContent" *ngIf="tabSelected == 'test'">
+      <h4 class="tabHeading">Test Suit</h4>
+      <h6 class="description">Create Programming Language Specific Tests</h6>
+      <div class="container contentSeperator">
+        <form>
+          <div class="from-group row">
+            <label for="programmingLang" class="col-2 col-form-label">Language</label>
+            <div class="col-10">
+              <!-- ToDo: read from Database -->
+              <!-- Possibility to add new Language here? -->
+              <select class="form-control">
+                <option>C#</option>
+                <option>Java</option>
+                <option>Python</option>
+                <option>Kotlin</option>
+                <option>C++</option>
+              </select>
+            </div>
+            <label for="questionType" class="col-2 col-form-label">Question Type</label>
+            <div class="col-10">
+              <input type="text" class="form-control-plaintext" id="questionType" name="questionType" [(ngModel)]="exercise.header.body.testSuit.questionType">
+            </div>
+            <label for="prefill" class="col-2 col-form-label">Prefill</label>
+            <div class="col-10">
+              <textarea class="form-control-plaintext" id="prefill" name="prefill" rows="6" [(ngModel)]="exercise.header.body.testSuit.prefill"></textarea>
+            </div>
+            <label for="solution" class="col-2 col-form-label">Solution</label>
+            <div class="col-10">
+              <textarea class="form-control-plaintext" id="solution" name="solution" row="5" [(ngModel)]="exercise.header.body.testSuit.solution"></textarea>
+            </div>
+            <label for="complexity" class="col-2 col-form-label">Complexity</label>
+            <div class="col-10">
+              <input type="number" class="form-control-plaintext" id="complexity" name="complexity" [(ngModel)]="exercise.header.body.testSuit.complexity">
+            </div>
+            <label for="testCases" class="col-2 col-form-label">Test Cases</label>
+            <div class="col-10">
+              <p>
+                Under Construction
+              </p>
+            </div>
+          </div>
+          <div class="text-right">
+            <input type="button" class="btn btn-primary next-btn" (click)="setTab('save')" value="Next">
           </div>
         </form>
       </div>
@@ -90,26 +163,26 @@
         <p>Under construction</p>
       </div>
     </div> -->
-    <div class="tabContent" *ngIf="tabSelected == 'tags'"v>
+    <!-- <div class="tabContent" *ngIf="tabSelected == 'tags'"v>
       <h4 class="tabHeading">Tags</h4>
       <h6 class="description">Possible Tags for Filtering</h6>
       <div class="container contentSeperator">
         <form>
           <div class="form-group row">
-            <!-- ToDo: ng-for and AddButton to add more Tags -->
+            ToDo: ng-for and AddButton to add more Tags
             <label for="tag" class="col-2 col-form-label">Name</label>
             <div class="col-10">
               <input type="text" class="form-control-plaintext" id="tag" value="Tag Name">
             </div>
           </div>
           <div class="text-right">
-            <input type="button" class="btn btn-primary next-btn" (click)="moveToNextTab('save')" value="Next">
+            <input type="button" class="btn btn-primary next-btn" (click)="setTab('save')" value="Next">
           </div>
         </form>
         <h6>Possibilty to add more than one Tag to Exercise</h6>
         <p>Under construction</p>
       </div>
-    </div>
+    </div> -->
     <div class="tabContent" *ngIf="tabSelected == 'save'">
       <h4 class="tabHeading">Overview</h4>
       <h6 class="description">Overview of Exercise before Saving</h6>
