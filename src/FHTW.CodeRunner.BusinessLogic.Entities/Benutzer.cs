@@ -12,8 +12,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public Benutzer()
         {
             this.Collection = new HashSet<Collection>();
-            this.Comment = new HashSet<Comment>();
-            this.Difficulty = new HashSet<Difficulty>();
             this.Exercise = new HashSet<Exercise>();
             this.ExerciseVersion = new HashSet<ExerciseVersion>();
             this.Rating = new HashSet<Rating>();
@@ -24,10 +22,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public string Name { get; set; }
 
         public ICollection<Collection> Collection { get; set; }
-
-        public ICollection<Comment> Comment { get; set; }
-
-        public ICollection<Difficulty> Difficulty { get; set; }
 
         public ICollection<Exercise> Exercise { get; set; }
 

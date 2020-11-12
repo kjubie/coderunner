@@ -11,16 +11,10 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     {
         public ProgrammingLanguage()
         {
-            this.CollectionExercise = new HashSet<CollectionExercise>();
-            this.ExerciseBody = new HashSet<ExerciseBody>();
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public ICollection<CollectionExercise> CollectionExercise { get; set; }
-
-        public ICollection<ExerciseBody> ExerciseBody { get; set; }
     }
 }

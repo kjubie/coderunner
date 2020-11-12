@@ -23,8 +23,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
 
         public int? Points { get; set; }
 
-        public int FkTestSuiteId { get; set; }
-
         public TestSuite FkTestSuite { get; set; }
     }
 }

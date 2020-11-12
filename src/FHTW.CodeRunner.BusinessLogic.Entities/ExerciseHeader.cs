@@ -11,7 +11,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     {
         public ExerciseHeader()
         {
-            this.ExerciseLanguage = new HashSet<ExerciseLanguage>();
         }
 
         public int Id { get; set; }
@@ -21,7 +20,5 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public string ShortTitle { get; set; }
 
         public string Introduction { get; set; }
-
-        public ICollection<ExerciseLanguage> ExerciseLanguage { get; set; }
     }
 }

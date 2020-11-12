@@ -11,16 +11,10 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     {
         public Tag()
         {
-            this.CollectionTag = new HashSet<CollectionTag>();
-            this.ExerciseTag = new HashSet<ExerciseTag>();
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public ICollection<CollectionTag> CollectionTag { get; set; }
-
-        public ICollection<ExerciseTag> ExerciseTag { get; set; }
     }
 }

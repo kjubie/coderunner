@@ -11,15 +11,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     {
         public int Id { get; set; }
 
-        public int FkCollectionLanguageId { get; set; }
-
         public int VersionNumber { get; set; }
-
-        public int FkExerciseId { get; set; }
-
-        public int FkProgrammingLanguageId { get; set; }
-
-        public int FkWrittenLanguageId { get; set; }
 
         public CollectionLanguage FkCollectionLanguage { get; set; }
 

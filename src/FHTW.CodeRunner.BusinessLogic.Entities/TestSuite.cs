@@ -11,7 +11,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     {
         public TestSuite()
         {
-            this.ExerciseBody = new HashSet<ExerciseBody>();
             this.TestCase = new HashSet<TestCase>();
         }
 
@@ -24,8 +23,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public string Solution { get; set; }
 
         public int? Complexity { get; set; }
-
-        public ICollection<ExerciseBody> ExerciseBody { get; set; }
 
         public ICollection<TestCase> TestCase { get; set; }
     }

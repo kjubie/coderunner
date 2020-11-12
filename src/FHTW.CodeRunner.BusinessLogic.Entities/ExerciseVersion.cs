@@ -24,12 +24,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
 
         public DateTime LastModified { get; set; }
 
-        public int FkUserId { get; set; }
-
-        public int FkExerciseId { get; set; }
-
-        public Exercise FkExercise { get; set; }
-
         public Benutzer FkUser { get; set; }
 
         public ICollection<ExerciseLanguage> ExerciseLanguage { get; set; }
