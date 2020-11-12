@@ -1,10 +1,14 @@
-﻿using FHTW.CodeRunner.DataAccess.Entities;
+﻿// <copyright file="CodeRunnerTestDb.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Text;
-using Microsoft.EntityFrameworkCore;
+using FHTW.CodeRunner.DataAccess.Entities;
 using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace FHTW.CodeRunner.DataAccess.Tests
@@ -13,9 +17,8 @@ namespace FHTW.CodeRunner.DataAccess.Tests
     {
         private readonly DbConnection connection;
 
-
         public CodeRunnerTestDb()
-            :base(new DbContextOptionsBuilder<CodeRunnerContext>()
+            : base(new DbContextOptionsBuilder<CodeRunnerContext>()
                     .UseSqlite(CreateInMemoryDatabase())
                     .Options)
         {

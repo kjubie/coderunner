@@ -1,4 +1,8 @@
-﻿using FHTW.CodeRunner.DataAccess.Entities;
+﻿// <copyright file="DbTestController.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using FHTW.CodeRunner.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,6 +13,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
     class DbTestController
     {
         public readonly DbContextOptions<CodeRunnerContext> contextOptions;
+
         protected DbTestController(DbContextOptions<CodeRunnerContext> options)
         {
             this.contextOptions = options;
