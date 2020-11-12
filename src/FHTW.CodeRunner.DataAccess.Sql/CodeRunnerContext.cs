@@ -3,9 +3,9 @@
 // </copyright>
 
 using System;
+using FHTW.CodeRunner.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using FHTW.CodeRunner.DataAccess.Entities;
 
 namespace FHTW.CodeRunner.DataAccess.Sql
 {
