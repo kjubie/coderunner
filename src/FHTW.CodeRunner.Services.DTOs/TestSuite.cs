@@ -13,7 +13,6 @@ namespace FHTW.CodeRunner.Services.DTOs
     {
         public TestSuite()
         {
-            this.ExerciseBody = new HashSet<ExerciseBody>();
             this.TestCase = new HashSet<TestCase>();
         }
 
@@ -31,9 +30,6 @@ namespace FHTW.CodeRunner.Services.DTOs
 
         [DataMember(Name = "complexity")]
         public int? Complexity { get; set; }
-
-        [DataMember(Name = "exerciseBodyList")]
-        public ICollection<ExerciseBody> ExerciseBody { get; set; }
 
         [DataMember(Name = "testCaseList")]
         public ICollection<TestCase> TestCase { get; set; }

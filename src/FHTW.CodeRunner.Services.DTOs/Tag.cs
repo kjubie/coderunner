@@ -13,8 +13,6 @@ namespace FHTW.CodeRunner.Services.DTOs
     {
         public Tag()
         {
-            this.CollectionTag = new HashSet<CollectionTag>();
-            this.ExerciseTag = new HashSet<ExerciseTag>();
         }
 
         [DataMember(Name = "id")]
@@ -22,11 +20,5 @@ namespace FHTW.CodeRunner.Services.DTOs
 
         [DataMember(Name = "name")]
         public string Name { get; set; }
-
-        [DataMember(Name = "collectionTagList")]
-        public ICollection<CollectionTag> CollectionTag { get; set; }
-
-        [DataMember(Name = "exerciseTagList")]
-        public ICollection<ExerciseTag> ExerciseTag { get; set; }
     }
 }

@@ -32,5 +32,12 @@ namespace FHTW.CodeRunner.BusinessLogic
 
             return blExercise;
         }
+
+        /// <inheritdoc/>
+        public void SaveExercise(BlEntities.Exercise exercise)
+        {
+            var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
+            // this.exerciseRepository.Create(dalExercise);
+        }
     }
 }

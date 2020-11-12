@@ -21,15 +21,27 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         {
             return this.context.Exercise
                     .Include(e => e.FkUser)
+                    .Include(e => e.ExerciseTag)
+                        .ThenInclude(et => et.FkTag)
                     .Include(e => e.ExerciseVersion)
                         .ThenInclude(v => v.FkUser)
                     .Include(e => e.ExerciseVersion)
                         .ThenInclude(v => v.ExerciseLanguage)
                             .ThenInclude(el => el.FkWrittenLanguage)
-                            .AsEnumerable()
+                    .Include(e => e.ExerciseVersion)
+                        .ThenInclude(v => v.ExerciseLanguage)
+                            .ThenInclude(el => el.FkExerciseHeader)
+                    .Include(e => e.ExerciseVersion)
+                        .ThenInclude(v => v.ExerciseLanguage)
+                            .ThenInclude(el => el.ExerciseBody)
+                                .ThenInclude(eb => eb.FkTestSuite)
+                                    .ThenInclude(ts => ts.TestCase)
+                    .Include(e => e.ExerciseVersion)
+                        .ThenInclude(v => v.ExerciseLanguage)
+                            .ThenInclude(el => el.ExerciseBody)
+                                .ThenInclude(eb => eb.FkProgrammingLanguage)
+                    .AsEnumerable()
                     .FirstOrDefault(e => e.Id == id);
-
-            // throw new NotImplementedException();
         }
     }
 }

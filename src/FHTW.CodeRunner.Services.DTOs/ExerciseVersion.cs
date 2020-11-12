@@ -31,15 +31,6 @@ namespace FHTW.CodeRunner.Services.DTOs
         [DataMember(Name = "lastModified")]
         public DateTime LastModified { get; set; }
 
-        [DataMember(Name = "userId")]
-        public int FkUserId { get; set; }
-
-        [DataMember(Name = "exerciseId")]
-        public int FkExerciseId { get; set; }
-
-        [DataMember(Name = "exercise")]
-        public Exercise FkExercise { get; set; }
-
         [DataMember(Name = "user")]
         public Benutzer FkUser { get; set; }
 

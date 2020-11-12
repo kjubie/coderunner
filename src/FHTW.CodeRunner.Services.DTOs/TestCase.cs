@@ -31,11 +31,5 @@ namespace FHTW.CodeRunner.Services.DTOs
 
         [DataMember(Name = "points")]
         public int? Points { get; set; }
-
-        [DataMember(Name = "testSuiteId")]
-        public int FkTestSuiteId { get; set; }
-
-        [DataMember(Name = "testSuite")]
-        public TestSuite FkTestSuite { get; set; }
     }
 }

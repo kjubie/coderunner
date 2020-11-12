@@ -13,8 +13,6 @@ namespace FHTW.CodeRunner.Services.DTOs
     {
         public WrittenLanguage()
         {
-            this.CollectionExercise = new HashSet<CollectionExercise>();
-            this.ExerciseLanguage = new HashSet<ExerciseLanguage>();
         }
 
         [DataMember(Name = "id")]
@@ -22,11 +20,5 @@ namespace FHTW.CodeRunner.Services.DTOs
 
         [DataMember(Name = "name")]
         public string Name { get; set; }
-
-        [DataMember(Name = "collectionExerciseList")]
-        public ICollection<CollectionExercise> CollectionExercise { get; set; }
-
-        [DataMember(Name = "exerciseLanguageList")]
-        public ICollection<ExerciseLanguage> ExerciseLanguage { get; set; }
     }
 }

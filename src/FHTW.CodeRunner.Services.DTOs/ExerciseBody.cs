@@ -14,9 +14,6 @@ namespace FHTW.CodeRunner.Services.DTOs
         [DataMember(Name = "id")]
         public int Id { get; set; }
 
-        [DataMember(Name = "programmingLanguageId")]
-        public int FkProgrammingLanguageId { get; set; }
-
         [DataMember(Name = "description")]
         public string Description { get; set; }
 
@@ -25,12 +22,6 @@ namespace FHTW.CodeRunner.Services.DTOs
 
         [DataMember(Name = "hint")]
         public string Hint { get; set; }
-
-        [DataMember(Name = "exerciseLanguageId")]
-        public int FkExerciseLanguageId { get; set; }
-
-        [DataMember(Name = "testSuiteId")]
-        public int FkTestSuiteId { get; set; }
 
         [DataMember(Name = "exerciseLanguage")]
         public ExerciseLanguage FkExerciseLanguage { get; set; }
