@@ -12,6 +12,11 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LoginComponent } from './login/login.component';
 import { ExerciseCollectionComponent } from './exercise-collection/exercise-collection.component';
 import { ExerciseCreateComponent } from './exercise-create/exercise-create.component';
+import { SaveTabComponent } from './exercise-create/tabs/save-tab/save-tab.component';
+import { TestSuitTabComponent } from './exercise-create/tabs/test-suit-tab/test-suit-tab.component';
+import { ProgrammingTabComponent } from './exercise-create/tabs/programming-tab/programming-tab.component';
+import { WrittenLangTabComponent } from './exercise-create/tabs/written-lang-tab/written-lang-tab.component';
+import { GeneralTabComponent } from './exercise-create/tabs/general-tab/general-tab.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,12 @@ import { ExerciseCreateComponent } from './exercise-create/exercise-create.compo
     LoginComponent,
     HomeComponent,
     ExerciseCreateComponent,
-    ExerciseCollectionComponent
+    ExerciseCollectionComponent,
+    GeneralTabComponent,
+    WrittenLangTabComponent,
+    ProgrammingTabComponent,
+    TestSuitTabComponent,
+    SaveTabComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

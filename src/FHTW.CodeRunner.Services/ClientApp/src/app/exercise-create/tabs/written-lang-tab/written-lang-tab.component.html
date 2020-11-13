@@ -1,0 +1,31 @@
+<h4 class="tabHeading">Written Language</h4>
+<h6 class="description">Written / Spoken Language specific Description</h6>
+<div class="container contentSeperator">
+    <form>
+        <div class="from-group row">
+            <!-- ToDo: add new language and set details for every language -->
+            <label for="writtenLang" class="col-2 col-form-label">Written Language</label>
+            <div class="col-10">
+                <select class="form-control" id="writtenLang">
+                    <option>English</option>
+                    <option>German</option>
+                </select>
+            </div>
+            <label for="fullTitle" class="col-2 col-form-label">Exercise Title</label>
+            <div class="col-10">
+                <input type="text" class="form-control-plaintext" id="fullTitle" name="fullTitle" placeholder="Full Title" [(ngModel)]="exercise.header.fullTitle">
+            </div>
+            <label for="shortTitle" class="col-2 col-form-label">Short Title</label>
+            <div class="col-10">
+                <input type="text" class="form-control-plaintext" id="shortTitle" name="shortTitle" placeholder="Short Title" [(ngModel)]="exercise.header.shortTitle">
+            </div>
+            <label for="introduction" class="col-2 col-form-label">Exercise Introduction</label>
+            <div class="col-10">
+                <textarea class="form-control-plaintext" id="introduction" name="introduction" rows="4" [(ngModel)]="exercise.header.introduction"></textarea>
+            </div>
+        </div>
+        <div class="text-right">
+            <input type="button" class="btn btn-primary next-btn" (click)="setTab('programming')" value="Next">
+        </div>
+    </form>
+</div>

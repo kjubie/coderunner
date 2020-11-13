@@ -1,0 +1,20 @@
+<h4 class="tabHeading">General</h4>
+<h6 class="description">General Cross-Example Information</h6>
+<div class="container contentSeperator">
+    <form>
+        <div class="from-group row">
+            <label for="title" class="col-2 col-form-label">Title</label>
+            <div class="col-10">
+                <input type="text" class="form-control-plaintext" id="title" name="title" placeholder="Title" [(ngModel)]="exercise.title">
+            </div>
+            <label for="user" class="col-2 col-form-label">Author</label>
+            <div class="col-10">
+                <!-- ToDo: set readonly and load current user -->
+                <input type="text" class="form-control-plaintext" id="user" name="user" placeholder="Username" [(ngModel)]="exercise.user.name">
+            </div>
+        </div>
+        <div class="text-right">
+            <input type="button" class="btn btn-primary next-btn" (click)="setTab('writtenLang')" value="Next">
+        </div>
+    </form>
+</div>
