@@ -9,25 +9,29 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
 using SvcEntities = FHTW.CodeRunner.Services.DTOs;
 
 namespace FHTW.CodeRunner.Services.Controllers
 {
     [ApiController]
+    [Route("api")]
     public class ExerciseApiController : ControllerBase
     {
-        private readonly IMapper mapper = AutoMapper.MapperProfile.InitializeAutoMapper().CreateMapper();
+        private readonly ILogger logger;
+        private readonly IMapper mapper;
         private readonly IExerciseLogic exerciseLogic;
 
-        public ExerciseApiController(IMapper mapper, IExerciseLogic exerciseLogic)
+        public ExerciseApiController(ILogger<ExerciseApiController> logger, IMapper mapper, IExerciseLogic exerciseLogic)
         {
+            this.logger = logger;
             this.mapper = mapper;
             this.exerciseLogic = exerciseLogic;
         }
 
         [HttpGet]
-        [Route("api/exercise/{id}")]
+        [Route("exercise/{id}")]
         public virtual IActionResult GetTestExercise(int id)
         {
             BlEntities.Exercise blExercise = this.exerciseLogic.GetTestExercise(id);
@@ -37,7 +41,7 @@ namespace FHTW.CodeRunner.Services.Controllers
         }
 
         [HttpPost]
-        [Route("api/exercise")]
+        [Route("exercise")]
         public virtual IActionResult SaveExercise([FromBody] SvcEntities.Exercise body)
         {
             if (body == null)

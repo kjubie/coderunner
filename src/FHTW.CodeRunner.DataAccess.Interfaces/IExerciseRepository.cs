@@ -10,5 +10,7 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
     public interface IExerciseRepository
     {
         Exercise GetExerciseById(int id);
+
+        void SaveExercise(Exercise exercise);
     }
 }

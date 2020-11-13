@@ -13,6 +13,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
 
         public int Number { get; set; }
 
-        public Benutzer FkUser { get; set; }
+        public User FkUser { get; set; }
     }
 }

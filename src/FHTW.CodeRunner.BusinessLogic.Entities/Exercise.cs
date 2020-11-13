@@ -25,7 +25,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
 
         public DateTime Created { get; set; }
 
-        public Benutzer FkUser { get; set; }
+        public User FkUser { get; set; }
 
         public ICollection<CollectionExercise> CollectionExercise { get; set; }
 

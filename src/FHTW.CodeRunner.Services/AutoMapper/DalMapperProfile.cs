@@ -24,7 +24,7 @@ namespace FHTW.CodeRunner.Services.AutoMapper
         /// </summary>
         public DalMapperProfile()
         {
-            this.CreateMap<BlEntities.Benutzer, DalEntities.User>()
+            this.CreateMap<BlEntities.User, DalEntities.User>()
                 .ReverseMap();
 
             this.CreateMap<BlEntities.Collection, DalEntities.Collection>()

@@ -32,7 +32,7 @@ namespace FHTW.CodeRunner.Services.DTOs
         public DateTime LastModified { get; set; }
 
         [DataMember(Name = "user")]
-        public Benutzer FkUser { get; set; }
+        public User FkUser { get; set; }
 
         [DataMember(Name = "exerciseLanguageList")]
         public ICollection<ExerciseLanguage> ExerciseLanguage { get; set; }

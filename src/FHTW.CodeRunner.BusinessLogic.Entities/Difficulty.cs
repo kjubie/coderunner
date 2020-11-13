@@ -15,6 +15,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
 
         public Exercise FkExercise { get; set; }
 
-        public Benutzer FkUser { get; set; }
+        public User FkUser { get; set; }
     }
 }

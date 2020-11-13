@@ -35,7 +35,7 @@ namespace FHTW.CodeRunner.Services
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connection = @"Host=localhost;Database=coderunnerdb;Username=postgres;Password=admin";
+            string connection = this.Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<CodeRunnerContext>(
                 options =>
@@ -67,11 +67,24 @@ namespace FHTW.CodeRunner.Services
 
             services.AddTransient<IExerciseLogic, ExerciseLogic>();
             services.AddTransient<IExerciseRepository, ExerciseRepository>();
+
+            services.AddLogging(configuration =>
+            {
+                configuration.AddDebug();
+                configuration.AddConsole();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<CodeRunnerContext>();
+                // context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

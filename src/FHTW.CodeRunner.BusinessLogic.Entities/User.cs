@@ -1,4 +1,4 @@
-﻿// <copyright file="Benutzer.cs" company="FHTW CodeRunner">
+﻿// <copyright file="User.cs" company="FHTW CodeRunner">
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
-    public class Benutzer
+    public class User
     {
-        public Benutzer()
+        public User()
         {
             this.Collection = new HashSet<Collection>();
             this.Exercise = new HashSet<Exercise>();

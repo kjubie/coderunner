@@ -30,7 +30,7 @@ namespace FHTW.CodeRunner.Services.DTOs
         public int FkUserId { get; set; }
 
         [DataMember(Name = "user")]
-        public Benutzer FkUser { get; set; }
+        public User FkUser { get; set; }
 
         [DataMember(Name = "collectionLanguageList")]
         public ICollection<CollectionLanguage> CollectionLanguage { get; set; }

@@ -27,6 +27,6 @@ namespace FHTW.CodeRunner.Services.DTOs
         public Exercise FkExercise { get; set; }
 
         [DataMember(Name = "user")]
-        public Benutzer FkUser { get; set; }
+        public User FkUser { get; set; }
     }
 }

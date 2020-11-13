@@ -16,6 +16,11 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
         public ExerciseRepository(CodeRunnerContext dbcontext) => this.context = dbcontext;
 
+        public void SaveExercise(Exercise exercise)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <inheritdoc/>
         Exercise IExerciseRepository.GetExerciseById(int id)
         {

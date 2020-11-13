@@ -24,7 +24,7 @@ namespace FHTW.CodeRunner.Services.AutoMapper
         /// </summary>
         public BlMapperProfile()
         {
-            this.CreateMap<SvcEntities.Benutzer, BlEntities.Benutzer>()
+            this.CreateMap<SvcEntities.User, BlEntities.User>()
                 .ReverseMap();
 
             this.CreateMap<SvcEntities.Collection, BlEntities.Collection>()
