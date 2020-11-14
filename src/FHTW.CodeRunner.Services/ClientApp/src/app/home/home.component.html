@@ -1,0 +1,32 @@
+<!-- Search Bar  -->
+<div class="input-group md-form form-sm form-2 pl-0">
+  <input class="form-control my-0 py-1 blue-border" type="text" placeholder="Search for an exercise..." aria-label="Search">
+  <div class="input-group-append">
+    <span class="input-group-text lighten-3 searchIcon"><img src="../../assets/img/search.png" alt="search"></span>
+  </div>
+</div>
+
+<!-- Filter options (ToDo: get data from DB, Improve Toggle function!) -->
+<div class="btn-group">
+  <button type="button" class="btn btn-secondary btn-md dropdown-toggle btn-dropdown blue" data-toggle="dropdown" (click)="languageDropdown()">
+    Language
+  </button>
+  <div class="dropdown-menu" id="languageDropdown">
+    <a class="dropdown-item" *ngFor="let lang of languages">{{ lang }}</a>
+  </div>
+</div>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-secondary btn-md dropdown-toggle btn-dropdown blue" data-toggle="dropdown" (click)="programmingDropdown()">
+    Programming Language
+  </button>
+  <div class="dropdown-menu" id="programmingDropdown">
+    <a class="dropdown-item" *ngFor="let lang of programmingLangs">{{ lang }}</a>
+  </div>
+</div>
+
+<!-- ToDo: get data from db, implement filters, different display options -->
+<h2>Exercise-List</h2>
+<div class="container">
+  <p style="text-align: center; font-size: larger;"><i>Under construction</i></p>
+</div>

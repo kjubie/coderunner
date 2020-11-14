@@ -1,0 +1,45 @@
+<h4 class="tabHeading">Test Suit</h4>
+<h6 class="description">Create Programming Language Specific Tests</h6>
+<div class="container contentSeperator">
+    <form>
+        <div class="from-group row">
+            <label for="programmingLang" class="col-2 col-form-label">Language</label>
+            <div class="col-10">
+                <!-- ToDo: read from Database -->
+                <!-- Possibility to add new Language here? -->
+                <select class="form-control">
+                    <option>C#</option>
+                    <option>Java</option>
+                    <option>Python</option>
+                    <option>Kotlin</option>
+                    <option>C++</option>
+                </select>
+            </div>
+            <label for="questionType" class="col-2 col-form-label">Question Type</label>
+            <div class="col-10">
+                <input type="text" class="form-control-plaintext" id="questionType" name="questionType" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.testSuit.questionType">
+            </div>
+            <label for="prefill" class="col-2 col-form-label">Prefill</label>
+            <div class="col-10">
+                <textarea class="form-control-plaintext" id="prefill" name="prefill" rows="6" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.testSuit.prefill"></textarea>
+            </div>
+            <label for="solution" class="col-2 col-form-label">Solution</label>
+            <div class="col-10">
+                <textarea class="form-control-plaintext" id="solution" name="solution" row="5" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.testSuit.solution"></textarea>
+            </div>
+            <label for="complexity" class="col-2 col-form-label">Complexity</label>
+            <div class="col-10">
+                <input type="number" class="form-control-plaintext" id="complexity" name="complexity" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.testSuit.complexity">
+            </div>
+            <label for="testCases" class="col-2 col-form-label">Test Cases</label> <!-- exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.testSuit.testCaseList[] -->
+            <div class="col-10">
+                <p>
+                    Under Construction
+                </p>
+            </div>
+        </div>
+        <div class="text-right">
+            <input type="button" class="btn btn-primary next-btn" (click)="setTab('save')" value="Next">
+        </div>
+    </form>
+</div>

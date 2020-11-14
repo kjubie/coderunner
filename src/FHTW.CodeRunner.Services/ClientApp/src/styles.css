@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+body {
+  background-color: lightgray;
+}
+
+a {
+  color: rgb(53, 171, 240);
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color:  rgb(53, 171, 240);
+  border-color:  rgb(53, 171, 240);
+}
+
+h2 {
+  text-align: center;
+}
