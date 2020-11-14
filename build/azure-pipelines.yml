@@ -13,5 +13,66 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- task: UseDotNet@2
+  inputs:
+    version: '5.0.x'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+  displayName: 'Build'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Run test for the Service Layer'
+  inputs:
+    command: 'test'
+    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    projects: '**/*Services.Tests*.csproj'
+    testRunTitle: 'Service Unit Tests'
+   
+- task: DotNetCoreCLI@2
+  displayName: 'Run test for the Business Layer'
+  inputs:
+    command: 'test'
+    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    projects: '**/*BusinessLogic.Tests*.csproj'
+    testRunTitle: 'BusinessLogic Unit Tests'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Run test for the Data Access Layer'
+  inputs:
+    command: 'test'
+    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    projects: '**/*DataAccess.Tests*.csproj'
+    testRunTitle: 'DataAccess Unit Tests'
+
+- task: reportgenerator@4
+  inputs:
+    reports: '$(Build.SourcesDirectory)/**/*.cobertura.xml'
+    targetdir: '$(Build.SourcesDirectory)/CoverageResults'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish Code Coverage'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(Build.SourcesDirectory)/CoverageResults/Cobertura.xml'
+
+# do this after you've built your app, near the end of your pipeline in most cases
+# for example, you do this before you deploy to an Azure web app on Windows
+- task: DotNetCoreCLI@2
+  inputs:
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
+  displayName: 'Publish'
+
+# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'iPacksNet'
+  displayName: 'Upload as an Artifact'
+
