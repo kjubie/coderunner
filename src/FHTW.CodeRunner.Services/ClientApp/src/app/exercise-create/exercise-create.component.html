@@ -14,10 +14,10 @@
       <general-tab [exercise]="exercise" (newTabSelectedEvent)="setTab($event)"></general-tab>
     </div>
     <div class="tabContent" *ngIf="tabSelected == 'writtenLang'">
-      <written-lang-tab [exercise]="exercise" (newTabSelectedEvent)="setTab($event)"></written-lang-tab>
+      <written-lang-tab [exercise]="exercise" [languages]="writtenLang" (newTabSelectedEvent)="setTab($event)"></written-lang-tab>
     </div>
     <div class="tabContent" *ngIf="tabSelected == 'programming'">
-      <programming-tab [exercise]="exercise" (newTabSelectedEvent)="setTab($event)"></programming-tab>
+      <programming-tab [exercise]="exercise" [languages]="programmingLang" (newTabSelectedEvent)="setTab($event)"></programming-tab>
     </div>
     <div class="tabContent" *ngIf="tabSelected == 'test'">
       <test-suit-tab [exercise]="exercise" (newTabSelectedEvent)="setTab($event)"></test-suit-tab>
@@ -50,7 +50,7 @@
       </div>
     </div> -->
     <div class="tabContent" *ngIf="tabSelected == 'save'">
-      <save-tab></save-tab>
+      <save-tab [exercise]="exercise" (saveExerciseEvent)="saveExercise($event)"></save-tab>
     </div>
   </div>
 </div>

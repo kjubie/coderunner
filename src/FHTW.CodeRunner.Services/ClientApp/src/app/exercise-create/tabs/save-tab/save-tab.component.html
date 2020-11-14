@@ -1,4 +1,102 @@
 <h4 class="tabHeading">Overview</h4>
 <h6 class="description">Overview of Exercise before Saving</h6>
 <div class="container contentSeperator">
-<p>Under construction</p>
+    <form>
+        <h5>General Data</h5>
+        <div class="container contentSeperator">
+            <div class="from-group row">
+                <label for="title" class="col-2 col-form-label">Title</label>
+                <div class="col-10">
+                    <input type="text" class="form-control-plaintext" id="title" readonly name="title" [(ngModel)]="exercise.title">
+                </div>
+                <label for="user" class="col-2 col-form-label">Author</label>
+                <div class="col-10">
+                    <input type="text" class="form-control-plaintext" id="user" readonly name="user" [(ngModel)]="exercise.user.name">
+                </div>
+            </div>
+        </div>
+        <h5>Language Specific</h5>
+        <div class="container contentSeperator">
+            <div class="from-group row">
+                <label for="writtenLang" class="col-2 col-form-label">Written Language</label>
+                <div class="col-10">
+                    <input type="text" class="form-control-plaintext" id="writtenLang" readonly name="name" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].writtenLanguage.name">
+                </div>
+                <label for="fullTitle" class="col-2 col-form-label">Exercise Title</label>
+                <div class="col-10">
+                    <input type="text" class="form-control-plaintext" id="fullTitle" readonly name="fullTitle" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.fullTitle">
+                </div>
+                <label for="shortTitle" class="col-2 col-form-label">Short Title</label>
+                <div class="col-10">
+                    <input type="text" class="form-control-plaintext" id="shortTitle" readonly name="shortTitle" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.shortTitle">
+                </div>
+                <label for="introduction" class="col-2 col-form-label">Exercise Introduction</label>
+                <div class="col-10">
+                    <textarea class="form-control-plaintext" id="introduction" readonly name="introduction" rows="4" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.introduction"></textarea>
+                </div>
+            </div>
+        </div>
+        <h5>Programming Language Specific</h5>
+        <div class="container contentSeperator">
+            <div class="from-group row">
+                <label for="programmingLang" class="col-2 col-form-label">Language</label>
+                <div class="col-10">
+                    <input type="text" class="form-control-plaintext" id="programmingLang" readonly name="name" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.programmingLanguage.name">
+                </div>
+                <label for="description" class="col-2 col-form-label">Description</label>
+                <div class="col-10">
+                    <textarea class="form-control-plaintext" id="description" readonly name="description" rows="9" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.description"></textarea>
+                </div>
+                <label for="example" class="col-2 col-form-label">Example</label>
+                <div class="col-10">
+                    <textarea class="form-control-plaintext" id="example" readonly name="example" rows="6" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.example"></textarea>
+                </div>
+                <label for="hint" class="col-2 col-form-label">Hint</label>
+                <div class="col-10">
+                    <input type="text" class="form-control-plaintext" id="hint" readonly name="hint" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.hint">
+                </div>
+                <!-- Add Possibility to add multiple tags to exercise -->
+                <label for="tags" class="col-2 col-form-label">Tags</label> <!-- exercise.exerciseTagList -->
+                <div class="col-10">
+                    <p>
+                        Under Construction
+                    </p>
+                </div>
+            </div>
+        </div>
+        <h5>Test Suit</h5>
+        <div class="container contentSeperator">
+            <div class="from-group row">
+                <label for="programmingLang" class="col-2 col-form-label">Language</label>
+                <div class="col-10">
+                    <input type="text" class="form-control-plaintext" id="programmingLang" readonly name="name" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.programmingLanguage.name">
+                </div>
+                <label for="questionType" class="col-2 col-form-label">Question Type</label>
+                <div class="col-10">
+                    <input type="text" class="form-control-plaintext" id="questionType" readonly name="questionType" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.testSuit.questionType">
+                </div>
+                <label for="prefill" class="col-2 col-form-label">Prefill</label>
+                <div class="col-10">
+                    <textarea class="form-control-plaintext" id="prefill" readonly name="prefill" rows="6" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.testSuit.prefill"></textarea>
+                </div>
+                <label for="solution" class="col-2 col-form-label">Solution</label>
+                <div class="col-10">
+                    <textarea class="form-control-plaintext" id="solution" readonly name="solution" row="5" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.testSuit.solution"></textarea>
+                </div>
+                <label for="complexity" class="col-2 col-form-label">Complexity</label>
+                <div class="col-10">
+                    <input type="number" class="form-control-plaintext" id="complexity" readonly name="complexity" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.testSuit.complexity">
+                </div>
+                <label for="testCases" class="col-2 col-form-label">Test Cases</label> <!-- exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.testSuit.testCaseList[] -->
+                <div class="col-10">
+                    <p>
+                        Under Construction
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="text-right">
+            <input type="button" class="btn btn-primary next-btn" (click)="saveExercise()" value="Save">
+        </div>
+    </form>
+</div>

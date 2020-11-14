@@ -1,5 +1,5 @@
 export class TestCase {
-    order: number;
+    orderUsed: number;
     description: string;
     standardInput: string;
     expectedOutput: string;
