@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
     [Table("exercise")]
-    public partial class Exercise
+    public partial class Exercise : IEntity
     {
         public Exercise()
         {

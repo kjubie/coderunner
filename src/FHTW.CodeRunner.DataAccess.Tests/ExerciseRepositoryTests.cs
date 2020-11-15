@@ -2,29 +2,38 @@
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using FHTW.CodeRunner.DataAccess.Entities;
+using FHTW.CodeRunner.DataAccess.Interfaces;
 using FHTW.CodeRunner.DataAccess.Sql;
 using NUnit.Framework;
-using System.Linq;
 
 namespace FHTW.CodeRunner.DataAccess.Tests
 {
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Testnames should be explanation enough.")]
+    [TestFixture]
     public class ExerciseRepositoryTests
     {
         private CodeRunnerTestDb testDb;
 
         [SetUp]
-        public void Setup()
-        {
-            this.testDb = new CodeRunnerTestDb();
-        }
+        public void SetupShouldInsertExercise() => this.testDb = new CodeRunnerTestDb(DbTestController.State.SEEDED);
 
         [Test]
-        public void Test1()
+        public void ShouldInsertExercise()
         {
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
-                Assert.IsTrue(true);
+                IExerciseRepository rep = new ExerciseRepository(context);
+
+                Exercise exercise = TestDataBuilder<Exercise>.Single();
+
+                exercise.FkUser = context.Benutzer.FirstOrDefault();
+
+                rep.Insert(exercise);
+
+                Assert.IsTrue(rep.Exists(exercise));
             }
         }
     }

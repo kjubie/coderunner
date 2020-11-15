@@ -33,7 +33,7 @@ namespace FHTW.CodeRunner.BusinessLogic
         /// <inheritdoc/>
         public BlEntities.Exercise GetTestExercise(int id)
         {
-            var dalExercise = this.exerciseRepository.GetExerciseById(id);
+            var dalExercise = this.exerciseRepository.GetById(id);
             var blExercise = this.mapper.Map<BlEntities.Exercise>(dalExercise);
 
             return blExercise;

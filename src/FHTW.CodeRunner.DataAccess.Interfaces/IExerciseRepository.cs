@@ -7,10 +7,8 @@ using FHTW.CodeRunner.DataAccess.Entities;
 
 namespace FHTW.CodeRunner.DataAccess.Interfaces
 {
-    public interface IExerciseRepository
+    public interface IExerciseRepository : ISimpleRepository<Exercise>
     {
-        Exercise GetExerciseById(int id);
 
-        void SaveExercise(Exercise exercise);
     }
 }
