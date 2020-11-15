@@ -9,6 +9,7 @@ import { Exercise } from "src/app/data-objects/exercise";
 export class WrittenLangTabComponent {
 
     @Input() exercise: Exercise;
+    @Input() languages;
     @Output() newTabSelectedEvent = new EventEmitter<string>();
 
     setTab(tab: string) {

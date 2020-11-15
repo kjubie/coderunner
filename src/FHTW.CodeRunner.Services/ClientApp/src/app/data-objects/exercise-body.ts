@@ -1,16 +1,15 @@
-import { Tag } from "./tag";
+import { ProgrammingLanguage } from "./programming-language";
 import { TestSuit } from "./test-suit";
 
 export class ExerciseBody {
     constructor() {
-        this.tags = Tag[0];
+        this.programmingLanguage = new ProgrammingLanguage();
         this.testSuit = new TestSuit();
     }
 
-    programmingLanguage: string;
     description: string;
     example: string;
     hint: string;
-    tags: Tag[];
+    programmingLanguage: ProgrammingLanguage;
     testSuit: TestSuit;
 }

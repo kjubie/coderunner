@@ -1,10 +1,9 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { Exercise } from '../data-objects/exercise';
-
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { AppComponent } from '../app.component';
-import { TestSuitTabComponent } from './tabs/test-suit-tab/test-suit-tab.component';
+import { ExerciseLanguage } from '../data-objects/exercise-language';
+import { ExerciseVersion } from '../data-objects/exercise-version';
+import { Tag } from '../data-objects/tag';
+import { TestCase } from '../data-objects/test-case';
 
 @Component({
   selector: 'app-exercise-create',
@@ -14,14 +13,24 @@ import { TestSuitTabComponent } from './tabs/test-suit-tab/test-suit-tab.compone
 export class ExerciseCreateComponent implements OnInit {
 
   tabSelected: string = "general";
+  writtenLang: string[] = ["English", "German"];
+  programmingLang: string[] = ["C#", "Java", "Python", "C++"];
   @Output() exercise: Exercise;
   
   setTab(tab: string) {
     this.tabSelected = tab;
   }
 
+  saveExercise(ex: Exercise) {
+    console.log(ex);
+  }
+
   ngOnInit() {
     this.exercise = new Exercise();
     this.exercise.created = new Date();
+    this.exercise.exerciseTagList[0] = new Tag();
+    this.exercise.exerciseVersionList[0] = new ExerciseVersion();
+    this.exercise.exerciseVersionList[0].exerciseLanguageList[0] = new ExerciseLanguage();
+    // this.exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.testSuit.testCaseList[0] = new TestCase();
   }
 }
