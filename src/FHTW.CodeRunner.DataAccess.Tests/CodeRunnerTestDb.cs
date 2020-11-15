@@ -22,10 +22,13 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="CodeRunnerTestDb"/> class.
         /// </summary>
-        public CodeRunnerTestDb()
-            : base(new DbContextOptionsBuilder<CodeRunnerContext>()
+        /// <param name="state">The requestet state of the test db.</param>
+        public CodeRunnerTestDb(State state)
+            : base(
+                  new DbContextOptionsBuilder<CodeRunnerContext>()
                     .UseSqlite(CreateInMemoryDatabase())
-                    .Options)
+                    .Options,
+                  state)
         {
             this.connection = RelationalOptionsExtension.Extract(this.ContextOptions).Connection;
         }
@@ -43,5 +46,7 @@
 
             return connection;
         }
+
+
     }
 }

@@ -4,7 +4,9 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 using FHTW.CodeRunner.DataAccess.Entities;
+using FHTW.CodeRunner.DataAccess.Interfaces;
 using FizzWare.NBuilder;
 
 namespace FHTW.CodeRunner.DataAccess.Tests
@@ -12,20 +14,22 @@ namespace FHTW.CodeRunner.DataAccess.Tests
     /// <summary>
     /// Utility functions that help creating entities for testing.
     /// </summary>
-    public class TestDataBuilder
+    public class TestDataBuilder<TEntity>
+        where TEntity : IEntity
     {
         static TestDataBuilder()
         {
-            BuilderSetup.DisablePropertyNamingFor<User, int>(x => x.Id);
+            PropertyInfo info = typeof(TEntity).GetType().GetProperty("Id");
+            BuilderSetup.DisablePropertyNamingFor<TEntity, int>(x => x.Id);
         }
 
         /// <summary>
         /// Create a new users with generated data.
         /// </summary>
         /// <returns>new user.</returns>
-        public static User Benutzer()
+        public static TEntity Single()
         {
-            return Builder<User>.CreateNew().Build();
+            return Builder<TEntity>.CreateNew().Build();
         }
 
         /// <summary>
@@ -33,10 +37,10 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         /// </summary>
         /// <param name="amount">the amount of users generated.</param>
         /// <returns>list of new users.</returns>
-        public static IList<User> ManyBenutzer(int amount)
+        public static IList<TEntity> Many(int amount)
         {
-            Debug.Assert(amount > 1, "use Benutzer() for creating one User");
-            return Builder<User>.CreateListOfSize(amount).Build();
+            Debug.Assert(amount > 1, "use Single() for creating one entity");
+            return Builder<TEntity>.CreateListOfSize(amount).Build();
         }
     }
 }

@@ -36,7 +36,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
                 }));
 
             var repoMock = new Mock<IExerciseRepository>();
-            repoMock.Setup(p => p.SaveExercise(It.IsAny<DalEntities.Exercise>()));
+            repoMock.Setup(p => p.Insert(It.IsAny<DalEntities.Exercise>()));
 
             IExerciseRepository repo = repoMock.Object;
 
@@ -65,7 +65,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
                 }));
 
             var repoMock = new Mock<IExerciseRepository>();
-            repoMock.Setup(p => p.SaveExercise(It.IsAny<DalEntities.Exercise>()));
+            repoMock.Setup(p => p.Insert(It.IsAny<DalEntities.Exercise>()));
 
             IExerciseRepository repo = repoMock.Object;
 

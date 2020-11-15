@@ -33,7 +33,7 @@ namespace FHTW.CodeRunner.BusinessLogic
         /// <inheritdoc/>
         public BlEntities.Exercise GetTestExercise(int id)
         {
-            var dalExercise = this.exerciseRepository.GetExerciseById(id);
+            var dalExercise = this.exerciseRepository.GetById(id);
             var blExercise = this.mapper.Map<BlEntities.Exercise>(dalExercise);
 
             return blExercise;
@@ -48,7 +48,7 @@ namespace FHTW.CodeRunner.BusinessLogic
             if (validationResult.IsValid)
             {
                 var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
-                // this.exerciseRepository.SaveExercise(dalExercise);
+                this.exerciseRepository.Insert(dalExercise);
                 this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
             }
             else

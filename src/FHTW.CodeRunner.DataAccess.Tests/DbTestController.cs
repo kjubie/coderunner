@@ -3,7 +3,8 @@
 // </copyright>
 
 ﻿using System;
-﻿using FHTW.CodeRunner.DataAccess.Entities;
+using System.Diagnostics;
+using FHTW.CodeRunner.DataAccess.Entities;
 ﻿using FHTW.CodeRunner.DataAccess.Sql;
 ﻿using Microsoft.EntityFrameworkCore;
 
@@ -14,31 +15,68 @@
     /// </summary>
     public class DbTestController
     {
-        public readonly DbContextOptions<CodeRunnerContext> contextOptions;
+        private readonly DbContextOptions<CodeRunnerContext> contextOptions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DbTestController"/> class.
         /// </summary>
         /// <param name="options">options for the test db.</param>
-        protected DbTestController(DbContextOptions<CodeRunnerContext> options)
+        /// <param name="state">The requestet state of the test db.</param>
+        protected DbTestController(DbContextOptions<CodeRunnerContext> options, State state)
         {
-            this.ContextOptions = options;
+            this.contextOptions = options;
 
-            this.Seed();
+            using var context = new CodeRunnerContext(this.ContextOptions);
+
+            this.CreateDb(context);
+
+            if (state == State.SEEDED)
+            {
+                this.Seed(context);
+            }
+        }
+
+        /// <summary>
+        /// The requestet state of the test db.
+        /// </summary>
+        public enum State
+        {
+            /// <summary>
+            /// Test db should only contain the empty tables.
+            /// </summary>
+            EMPTY,
+
+            /// <summary>
+            /// Test db should contain test data.
+            /// </summary>
+            SEEDED,
         }
 
         /// <summary>
         /// Gets the db options used for the test db.
         /// </summary>
-        public DbContextOptions<CodeRunnerContext> ContextOptions { get; }
-
-        private void Seed()
+        public DbContextOptions<CodeRunnerContext> ContextOptions
         {
-            using var context = new CodeRunnerContext(this.ContextOptions);
+            get
+            {
+                return this.contextOptions;
+            }
+        }
+
+        private void CreateDb(CodeRunnerContext context)
+        {
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
+            context.SaveChanges(); // necessarry ?
+        }
 
-            var user = TestDataBuilder.Benutzer();
+        private void Seed(CodeRunnerContext context)
+        {
+            Debug.Assert(!context.Database.EnsureCreated(), "Seed() should be called after CreateDb()");
+
+            var user = TestDataBuilder<User>.Single();
+
+            context.Add(user);
 
             context.SaveChanges();
         }
