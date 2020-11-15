@@ -1,7 +1,5 @@
 # ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+# Build and test ASP.NET projects targeting .NET 5.
 
 trigger:
 - master
@@ -22,7 +20,7 @@ steps:
     command: 'restore'
     projects: '**/*.csproj'
     feedsToUse: 'select'
-    vstsFeed: 'my-vsts-feed' # A series of numbers and letters
+    vstsFeed: '941f527e-f8c9-4c9c-b727-d6f446b5fee9'
 
 - task: DotNetCoreCLI@2
   inputs:
