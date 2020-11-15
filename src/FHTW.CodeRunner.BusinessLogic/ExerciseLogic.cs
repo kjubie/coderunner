@@ -48,7 +48,7 @@ namespace FHTW.CodeRunner.BusinessLogic
             if (validationResult.IsValid)
             {
                 var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
-                // this.exerciseRepository.SaveExercise(dalExercise);
+                this.exerciseRepository.Insert(dalExercise);
                 this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
             }
             else
