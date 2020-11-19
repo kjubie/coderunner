@@ -9,6 +9,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
     public class CollectionLanguage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CollectionLanguage"/> class.
+        /// </summary>
         public CollectionLanguage()
         {
             this.CollectionExercise = new HashSet<CollectionExercise>();

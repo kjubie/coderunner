@@ -11,6 +11,9 @@ namespace FHTW.CodeRunner.Services.DTOs
     [DataContract]
     public class CollectionLanguage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CollectionLanguage"/> class.
+        /// </summary>
         public CollectionLanguage()
         {
             this.CollectionExercise = new HashSet<CollectionExercise>();

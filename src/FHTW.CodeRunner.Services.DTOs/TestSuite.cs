@@ -11,6 +11,9 @@ namespace FHTW.CodeRunner.Services.DTOs
     [DataContract]
     public class TestSuite
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestSuite"/> class.
+        /// </summary>
         public TestSuite()
         {
             this.TestCase = new HashSet<TestCase>();

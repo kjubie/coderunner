@@ -8,6 +8,7 @@ using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using FHTW.CodeRunner.DataAccess.Entities;
 using FHTW.CodeRunner.DataAccess.Interfaces;
 using FHTW.CodeRunner.DataAccess.Sql;
+using FHTW.CodeRunner.Services.Helpers;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +26,10 @@ namespace FHTW.CodeRunner.Services
 {
     public class Startup
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
@@ -65,7 +70,15 @@ namespace FHTW.CodeRunner.Services
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            services.AddCors();
+            services.AddControllers();
+
+            // configure basic authentication 
+            services.AddAuthentication("BasicAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
             services.AddTransient<IExerciseLogic, ExerciseLogic>();
+            services.AddTransient<IUserLogic, UserLogic>();
             services.AddTransient<IExerciseRepository, ExerciseRepository>();
 
             services.AddLogging(configuration =>
@@ -105,6 +118,14 @@ namespace FHTW.CodeRunner.Services
             }
 
             app.UseRouting();
+
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

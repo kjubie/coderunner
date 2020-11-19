@@ -23,6 +23,12 @@ namespace FHTW.CodeRunner.BusinessLogic
         private readonly IMapper mapper;
         private readonly IExerciseRepository exerciseRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExerciseLogic"/> class.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="mapper"></param>
+        /// <param name="exerciseRepository"></param>
         public ExerciseLogic(ILogger<IExerciseLogic> logger, IMapper mapper, IExerciseRepository exerciseRepository)
         {
             this.logger = logger;

@@ -9,6 +9,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
     public class ProgrammingLanguage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProgrammingLanguage"/> class.
+        /// </summary>
         public ProgrammingLanguage()
         {
         }

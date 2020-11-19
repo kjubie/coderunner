@@ -11,6 +11,9 @@ namespace FHTW.CodeRunner.Services.DTOs
     [DataContract]
     public class WrittenLanguage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WrittenLanguage"/> class.
+        /// </summary>
         public WrittenLanguage()
         {
         }

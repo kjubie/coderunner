@@ -11,6 +11,9 @@ namespace FHTW.CodeRunner.Services.DTOs
     [DataContract]
     public class ProgrammingLanguage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProgrammingLanguage"/> class.
+        /// </summary>
         public ProgrammingLanguage()
         {
         }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
@@ -15,6 +16,7 @@ using SvcEntities = FHTW.CodeRunner.Services.DTOs;
 
 namespace FHTW.CodeRunner.Services.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api")]
     public class ExerciseApiController : ControllerBase
@@ -23,6 +25,12 @@ namespace FHTW.CodeRunner.Services.Controllers
         private readonly IMapper mapper;
         private readonly IExerciseLogic exerciseLogic;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExerciseApiController"/> class.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="mapper"></param>
+        /// <param name="exerciseLogic"></param>
         public ExerciseApiController(ILogger<ExerciseApiController> logger, IMapper mapper, IExerciseLogic exerciseLogic)
         {
             this.logger = logger;

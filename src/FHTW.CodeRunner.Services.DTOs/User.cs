@@ -11,10 +11,6 @@ namespace FHTW.CodeRunner.Services.DTOs
     [DataContract]
     public class User
     {
-        public User()
-        {
-        }
-
         [DataMember(Name = "id")]
         public int Id { get; set; }
 

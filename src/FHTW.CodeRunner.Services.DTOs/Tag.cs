@@ -11,6 +11,9 @@ namespace FHTW.CodeRunner.Services.DTOs
     [DataContract]
     public class Tag
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Tag"/> class.
+        /// </summary>
         public Tag()
         {
         }

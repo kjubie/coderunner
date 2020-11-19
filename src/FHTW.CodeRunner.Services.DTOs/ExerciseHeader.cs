@@ -11,6 +11,9 @@ namespace FHTW.CodeRunner.Services.DTOs
     [DataContract]
     public class ExerciseHeader
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExerciseHeader"/> class.
+        /// </summary>
         public ExerciseHeader()
         {
         }

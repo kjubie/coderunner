@@ -12,6 +12,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     [Table("collection_language")]
     public partial class CollectionLanguage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CollectionLanguage"/> class.
+        /// </summary>
         public CollectionLanguage()
         {
             this.CollectionExercise = new HashSet<CollectionExercise>();

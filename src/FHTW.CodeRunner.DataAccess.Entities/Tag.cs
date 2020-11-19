@@ -12,6 +12,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     [Table("tag")]
     public partial class Tag
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Tag"/> class.
+        /// </summary>
         public Tag()
         {
             this.CollectionTag = new HashSet<CollectionTag>();

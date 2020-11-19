@@ -11,10 +11,17 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 {
     public partial class CodeRunnerContext : DbContext
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CodeRunnerContext"/> class.
+        /// </summary>
         public CodeRunnerContext()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CodeRunnerContext"/> class.
+        /// </summary>
+        /// <param name="options"></param>
         public CodeRunnerContext(DbContextOptions<CodeRunnerContext> options)
             : base(options)
         {

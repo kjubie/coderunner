@@ -11,6 +11,9 @@ namespace FHTW.CodeRunner.Services.DTOs
     [DataContract]
     public class Exercise
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Exercise"/> class.
+        /// </summary>
         public Exercise()
         {
             this.ExerciseTag = new HashSet<ExerciseTag>();

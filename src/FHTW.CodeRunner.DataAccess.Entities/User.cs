@@ -12,6 +12,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     [Table("benutzer")]
     public partial class User : IEntity
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="User"/> class.
+        /// </summary>
         public User()
         {
             this.Collection = new HashSet<Collection>();
@@ -22,6 +25,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
             this.Rating = new HashSet<Rating>();
         }
 
+        /// <inheritdoc/>
         [Key]
         [Column("id")]
         public int Id { get; set; }

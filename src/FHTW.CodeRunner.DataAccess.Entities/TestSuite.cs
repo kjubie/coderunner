@@ -12,6 +12,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     [Table("test_suite")]
     public partial class TestSuite
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestSuite"/> class.
+        /// </summary>
         public TestSuite()
         {
             this.ExerciseBody = new HashSet<ExerciseBody>();

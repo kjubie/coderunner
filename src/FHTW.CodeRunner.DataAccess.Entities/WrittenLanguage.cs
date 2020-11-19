@@ -12,6 +12,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     [Table("written_language")]
     public partial class WrittenLanguage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WrittenLanguage"/> class.
+        /// </summary>
         public WrittenLanguage()
         {
             this.CollectionExercise = new HashSet<CollectionExercise>();

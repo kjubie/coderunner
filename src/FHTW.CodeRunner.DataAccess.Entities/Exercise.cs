@@ -12,6 +12,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     [Table("exercise")]
     public partial class Exercise : IEntity
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Exercise"/> class.
+        /// </summary>
         public Exercise()
         {
             this.CollectionExercise = new HashSet<CollectionExercise>();
@@ -22,6 +25,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
             this.Rating = new HashSet<Rating>();
         }
 
+        /// <inheritdoc/>
         [Key]
         [Column("id")]
         public int Id { get; set; }

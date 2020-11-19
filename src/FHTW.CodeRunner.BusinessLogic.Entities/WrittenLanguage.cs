@@ -9,6 +9,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
     public class WrittenLanguage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WrittenLanguage"/> class.
+        /// </summary>
         public WrittenLanguage()
         {
         }

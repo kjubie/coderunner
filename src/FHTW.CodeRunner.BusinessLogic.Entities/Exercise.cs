@@ -9,6 +9,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
     public class Exercise
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Exercise"/> class.
+        /// </summary>
         public Exercise()
         {
             this.CollectionExercise = new HashSet<CollectionExercise>();

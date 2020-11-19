@@ -12,6 +12,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     [Table("exercise_header")]
     public partial class ExerciseHeader
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExerciseHeader"/> class.
+        /// </summary>
         public ExerciseHeader()
         {
             this.ExerciseLanguage = new HashSet<ExerciseLanguage>();

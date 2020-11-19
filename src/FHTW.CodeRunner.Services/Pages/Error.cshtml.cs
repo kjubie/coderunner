@@ -18,6 +18,10 @@ namespace FHTW.CodeRunner.Services.Pages
     {
         private readonly ILogger<ErrorModel> logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ErrorModel"/> class.
+        /// </summary>
+        /// <param name="logger"></param>
         public ErrorModel(ILogger<ErrorModel> logger)
         {
             this.logger = logger;

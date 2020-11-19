@@ -9,6 +9,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Validators
 {
     public class UserValidator : AbstractValidator<User>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserValidator"/> class.
+        /// </summary>
         public UserValidator()
         {
             this.RuleFor(b => b.Name)

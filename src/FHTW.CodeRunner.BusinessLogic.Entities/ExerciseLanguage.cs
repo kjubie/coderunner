@@ -9,6 +9,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
     public class ExerciseLanguage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExerciseLanguage"/> class.
+        /// </summary>
         public ExerciseLanguage()
         {
             this.ExerciseBody = new HashSet<ExerciseBody>();
