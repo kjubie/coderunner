@@ -25,6 +25,8 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 
         /// <summary>
         /// Create a new users with generated data.
+        /// Will always generate the entity with the same data.
+        /// Example: Name Property will be named Name1.
         /// </summary>
         /// <returns>new user.</returns>
         public static TEntity Single()
@@ -34,6 +36,10 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 
         /// <summary>
         /// Create a list of new users with generated data.
+        /// Property values will be generated the same way as in Single() method, but will be automatically incremented.
+        /// Name = Name1.
+        /// Name = Name2.
+        /// ...
         /// </summary>
         /// <param name="amount">the amount of users generated.</param>
         /// <returns>list of new users.</returns>

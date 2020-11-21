@@ -53,6 +53,7 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
 
         /// <summary>
         /// Checks if an entity exists.
+        /// Does a field wise comparison.
         /// </summary>
         /// <param name="entity">The entity that should or shouldn't exist.</param>
         /// <returns>True if the entity exists.</returns>
