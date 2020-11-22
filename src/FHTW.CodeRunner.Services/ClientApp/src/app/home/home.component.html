@@ -6,27 +6,42 @@
   </div>
 </div>
 
-<!-- Filter options (ToDo: get data from DB, Improve Toggle function!) -->
-<div class="btn-group">
-  <button type="button" class="btn btn-secondary btn-md dropdown-toggle btn-dropdown blue" data-toggle="dropdown" (click)="languageDropdown()">
-    Language
-  </button>
-  <div class="dropdown-menu" id="languageDropdown">
-    <a class="dropdown-item" *ngFor="let lang of languages">{{ lang }}</a>
-  </div>
-</div>
+<div class="clearfix">
+  <!-- Filter options (ToDo: get data from DB, Improve Toggle function!) -->
+  <div class="float-left">
+    <div class="btn-group">
+      <button type="button" class="btn btn-secondary btn-md dropdown-toggle btn-dropdown blue" data-toggle="dropdown" (click)="languageDropdown()">
+        Language
+      </button>
+      <div class="dropdown-menu" id="languageDropdown">
+        <a class="dropdown-item" *ngFor="let lang of languages">{{ lang }}</a>
+      </div>
+    </div>
 
-<div class="btn-group">
-  <button type="button" class="btn btn-secondary btn-md dropdown-toggle btn-dropdown blue" data-toggle="dropdown" (click)="programmingDropdown()">
-    Programming Language
-  </button>
-  <div class="dropdown-menu" id="programmingDropdown">
-    <a class="dropdown-item" *ngFor="let lang of programmingLangs">{{ lang }}</a>
+    <div class="btn-group">
+      <button type="button" class="btn btn-secondary btn-md dropdown-toggle btn-dropdown blue" data-toggle="dropdown" (click)="programmingDropdown()">
+        Programming Language
+      </button>
+      <div class="dropdown-menu" id="programmingDropdown">
+        <a class="dropdown-item" *ngFor="let lang of programmingLangs">{{ lang }}</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ToDo: images for buttons -->
+  <div class="float-right">
+    <div class="btn-group" id="views">
+      <button type="button" class="btn btn-secondary blue" [ngClass]="{'activeView' : viewSelected == 'list'}" (click)="selectView('list')"><img src="../../assets/img/list_view.png" alt="list_view"></button>
+      <button type="button" class="btn btn-secondary blue" [ngClass]="{'activeView' : viewSelected == 'grid_big'}" (click)="selectView('grid_big')"><img src="../../assets/img/grid_view_big.png" alt="grid_big"></button>
+      <button type="button" class="btn btn-secondary blue" [ngClass]="{'activeView' : viewSelected == 'grid_small'}" (click)="selectView('grid_small')"><img src="../../assets/img/grid_view_small.png" alt="grid_small"></button>
+    </div>
   </div>
 </div>
 
 <!-- ToDo: get data from db, implement filters, different display options -->
-<h2>Exercise-List</h2>
 <div class="container">
-  <p style="text-align: center; font-size: larger;"><i>Under construction</i></p>
+  <h2>Exercises</h2>
+  <list-view *ngIf="viewSelected == 'list'" [exerciseList]="exerciseList"></list-view>
+  <grid-big-view *ngIf="viewSelected == 'grid_big'"></grid-big-view>
+  <grid-small-view *ngIf="viewSelected == 'grid_small'"></grid-small-view>
 </div>

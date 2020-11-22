@@ -15,6 +15,10 @@ import { TestSuitTabComponent } from './exercise-create/tabs/test-suit-tab/test-
 import { ProgrammingTabComponent } from './exercise-create/tabs/programming-tab/programming-tab.component';
 import { WrittenLangTabComponent } from './exercise-create/tabs/written-lang-tab/written-lang-tab.component';
 import { GeneralTabComponent } from './exercise-create/tabs/general-tab/general-tab.component';
+import { ListViewComponent } from './home/layouts/list/list-view.component';
+import { GridBigViewComponent } from './home/layouts/grid-big/grid-big-view.component';
+import { GridSmallViewComponent } from './home/layouts/grid-small/grid-small-view.component';
+import { StarRatingComponent } from './home/rating/star-rating.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,10 @@ import { GeneralTabComponent } from './exercise-create/tabs/general-tab/general-
     NavMenuComponent,
     LoginComponent,
     HomeComponent,
+    StarRatingComponent,
+    ListViewComponent,
+    GridBigViewComponent,
+    GridSmallViewComponent,
     ExerciseCreateComponent,
     ExerciseCollectionComponent,
     GeneralTabComponent,

@@ -18,10 +18,64 @@ div.btn-group {
     margin: 20px 0;
 }
 
-.btn-dropdown {
+.blue {
+    background-color: rgb(53, 171, 240);
+}
+
+.float-left button {
     margin: 0 10px 0 0;
 }
 
-.blue {
+#views button:hover {
+    background-color: rgb(125, 202, 247);
+    cursor: pointer;
+}
+
+.activeView {
+    background-color: rgb(125, 202, 247);
+}
+
+.list-group {
+    margin-top: 20px;
+}
+
+.list-group-item {
+    margin-top: 15px;
+}
+
+.tag {
     background-color: rgb(53, 171, 240);
+    margin: 0 5px 0 5px;
+}
+
+li.blackLine {
+    margin-right: 5px;
+    border-left: black 12.5px solid;
+}
+
+.ratings {
+    margin-top: 5px;
+}
+
+.btn-alignment {
+    vertical-align: middle;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-outline-primary {
+    width: 26px;
+    padding: 0;
+    margin: 5px;
+    border:  rgb(53, 171, 240) solid 1px;
+    color: rgb(53, 171, 240);
+    font-weight: bolder;
+    text-align: center;   
+}
+
+.btn-outline-primary:hover {
+    color: white;
+    background-color:  rgb(125, 202, 247);
 }

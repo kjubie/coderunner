@@ -1,0 +1,19 @@
+<ul class="list-group">
+    <li *ngFor="let exercise of exerciseList; index as i" class="list-group-item d-flex justify-content-between align-items-center blackLine">
+        <div class="container">
+            <div class="row">
+                <div class="col-7">
+                    <h4><strong>{{ exercise.title }}</strong></h4>
+                    <div class="colour-blue">By {{ exercise.user.name }}</div>
+                </div>
+                <div class="col-4 text-right">
+                    <span *ngFor="let tag of exerciseList[i].exerciseTagList" class="badge badge-pill tag">{{ tag.name }}</span>
+                    <div class="ratings">Ratings, etc.</div>
+                </div>
+                <div class="col-1 btn-alignment">
+                    <button type="button" class="btn btn-outline-primary">+</button>
+                </div>
+            </div>
+        </div>
+    </li>
+  </ul>
