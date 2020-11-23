@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import {catchError, tap} from "rxjs/operators";
-import { Exercise } from './exercise';
+import { Exercise } from '../data-objects/create-exercise/exercise';
 
 
 @Injectable({ providedIn: 'root' })
 export class CreateExerciseService {
 
-  private createExerciseUrl = "https://localhost:44382/api/exercise";
+  private createExerciseUrl = "https://localhost:5001/api/exercise";
 
   constructor(
     private http: HttpClient,

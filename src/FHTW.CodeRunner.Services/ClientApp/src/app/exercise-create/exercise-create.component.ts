@@ -1,11 +1,9 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Exercise } from '../data-objects/exercise';
-import { ExerciseLanguage } from '../data-objects/exercise-language';
-import { ExerciseVersion } from '../data-objects/exercise-version';
-import { CreateExerciseService } from '../data-objects/exercise.service';
+import { Exercise } from '../data-objects/create-exercise/exercise';
+import { ExerciseLanguage } from '../data-objects/create-exercise/exercise-language';
+import { ExerciseVersion } from '../data-objects/create-exercise/exercise-version';
+import { CreateExerciseService } from '../services/create-exercise.service';
 import { Tag } from '../data-objects/tag';
-import { TestCase } from '../data-objects/test-case';
 
 @Component({
   selector: 'app-exercise-create',

@@ -2,11 +2,11 @@
 <div *ngIf="success == false" class="alert alert-danger" role="alert">Login Failed Wrong Credentials</div>
 <form #credentials = "ngForm">
   <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" required [(ngModel)]="username">
+    <label for="name"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="name" required [(ngModel)]="name">
 
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" required ngModel>
-    <button type="button" (click)="login()">Login</button>
+    <button type="button" (click)="passBack(credentials.value)">Login</button>
   </div>
 </form>

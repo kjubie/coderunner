@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Author } from '../data-objects/author';
-import { Exercise } from '../data-objects/exercise';
-import { ExerciseBody } from '../data-objects/exercise-body';
-import { ExerciseHeader } from '../data-objects/exercise-header';
-import { ExerciseLanguage } from '../data-objects/exercise-language';
-import { ExerciseVersion } from '../data-objects/exercise-version';
 import { ProgrammingLanguage } from '../data-objects/programming-language';
 import { Tag } from '../data-objects/tag';
-import { TestCase } from '../data-objects/test-case';
-import { TestSuit } from '../data-objects/test-suit';
+import { TestSuit } from '../data-objects/create-exercise/test-suit';
 import { WrittenLanguage } from '../data-objects/written-language';
+import { Exercise } from '../data-objects/create-exercise/exercise';
+import { ExerciseVersion } from '../data-objects/create-exercise/exercise-version';
+import { ExerciseLanguage } from '../data-objects/create-exercise/exercise-language';
+import { ExerciseHeader } from '../data-objects/create-exercise/exercise-header';
+import { ExerciseBody } from '../data-objects/create-exercise/exercise-body';
+import { TestCase } from '../data-objects/create-exercise/test-case';
 
 @Component({
   selector: 'app-home',

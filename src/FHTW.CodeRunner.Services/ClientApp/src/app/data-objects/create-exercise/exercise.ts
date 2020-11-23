@@ -1,7 +1,7 @@
 import { User } from "oidc-client";
 import { ExerciseHeader } from "./exercise-header";
-import { Author } from "./author";
-import { Tag } from "./tag";
+import { Author } from "../author";
+import { Tag } from "../tag";
 import { ExerciseVersion } from "./exercise-version";
 
 export class Exercise {

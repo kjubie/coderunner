@@ -25,3 +25,7 @@ html {
 .text-nav {
   color: white!important;
 }
+
+a {
+  cursor: pointer;
+}

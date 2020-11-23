@@ -1,6 +1,6 @@
 import { ExerciseBody } from "./exercise-body";
 import { ExerciseHeader } from "./exercise-header";
-import { WrittenLanguage } from "./written-language";
+import { WrittenLanguage } from "../written-language";
 
 export class ExerciseLanguage {
     constructor() {

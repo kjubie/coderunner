@@ -1,7 +1,9 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit, Input, NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from '../app.component';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +18,11 @@ import { AppComponent } from '../app.component';
   bootstrap: []
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router, private appComponent: AppComponent) { }
+
+  constructor(private loginService: LoginService, private router: Router, private appComponent: AppComponent) { }
+
   @Input() public success: boolean;
-  @Input() public username: string;
+  @Input() public name: string;
 
 
   ngOnInit() {
@@ -27,24 +31,29 @@ export class LoginComponent implements OnInit {
   // Create observer object
   myObserver = {
     next: x => {
-      if (x.status == "success") {
+      if (x.status == 200) {
         this.success = true;
       }
     },
     error: err => { this.success = false },
     complete: () => {
       if (this.success) {
-        // this.appComponent.username = this.username; 
-        this.router.navigate(['/menu']);
+        this.appComponent.username = this.name; 
+        this.router.navigate(['/']);
 
       } else {
         console.log("no username")
-        //this.appComponent.username = "";
+        this.appComponent.username = "";
       }
     }
   };
 
   login() {
     console.log("ToDo: save credentials / check with data in db...");
+  }
+
+  passBack(credentials) {
+    this.loginService.login(credentials.name, credentials.password)
+    .subscribe(this.myObserver);
   }
 }

@@ -19,6 +19,10 @@ import { ListViewComponent } from './home/layouts/list/list-view.component';
 import { GridBigViewComponent } from './home/layouts/grid-big/grid-big-view.component';
 import { GridSmallViewComponent } from './home/layouts/grid-small/grid-small-view.component';
 import { StarRatingComponent } from './home/rating/star-rating.component';
+import { AuthGuardService } from './auth/authgard.service';
+import { TokenInterceptor } from './auth/toke.interceptor';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -39,17 +43,27 @@ import { StarRatingComponent } from './home/rating/star-rating.component';
     SaveTabComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: 'login', component: LoginComponent},
-      { path: 'exercise-collection', component: ExerciseCollectionComponent },
-      { path: 'exercise-create', component: ExerciseCreateComponent },
-      { path: '', component: HomeComponent, pathMatch: 'full' }
-    ])
+    AppRoutingModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function tokenGetter() {
+          return localStorage.getItem('access_token');
+        }
+      }
+    })
   ],
-  providers: [],
+  providers: [
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    AppComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

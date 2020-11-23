@@ -1,4 +1,4 @@
-import { ProgrammingLanguage } from "./programming-language";
+import { ProgrammingLanguage } from "../programming-language";
 import { TestSuit } from "./test-suit";
 
 export class ExerciseBody {

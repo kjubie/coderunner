@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, forwardRef, Inject, Input, OnInit } from '@angular/core';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,6 +8,9 @@ import { Component } from '@angular/core';
 })
 export class NavMenuComponent {
   isExpanded = false;
+  @Input() username: string;
+
+  constructor(private appComponent: AppComponent) { }
 
   collapse() {
     this.isExpanded = false;
@@ -14,5 +18,9 @@ export class NavMenuComponent {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  logout(){
+    this.appComponent.logout();
   }
 }
