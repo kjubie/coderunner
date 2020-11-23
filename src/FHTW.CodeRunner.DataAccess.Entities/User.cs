@@ -35,6 +35,12 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         [StringLength(30)]
         public string Name { get; set; }
 
+        //TODO restrict length. has to be done in entity and sql create statements
+        
+        [Required]
+        [Column("password")]
+        public string Password { get; set; }
+
         [InverseProperty("FkUser")]
         public virtual ICollection<Collection> Collection { get; set; }
 
