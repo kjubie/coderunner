@@ -29,7 +29,7 @@ namespace FHTW.CodeRunner.BusinessLogic
         /// <param name="logger"></param>
         /// <param name="mapper"></param>
         /// <param name="exerciseRepository"></param>
-        public ExerciseLogic(ILogger<IExerciseLogic> logger, IMapper mapper, IExerciseRepository exerciseRepository)
+        public ExerciseLogic(ILogger<ExerciseLogic> logger, IMapper mapper, IExerciseRepository exerciseRepository)
         {
             this.logger = logger;
             this.mapper = mapper;
