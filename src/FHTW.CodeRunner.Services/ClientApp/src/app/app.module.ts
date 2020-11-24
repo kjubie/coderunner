@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -21,8 +20,8 @@ import { GridSmallViewComponent } from './home/layouts/grid-small/grid-small-vie
 import { StarRatingComponent } from './home/rating/star-rating.component';
 import { AuthGuardService } from './auth/authgard.service';
 import { TokenInterceptor } from './auth/toke.interceptor';
-import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './AuthModule';
 
 @NgModule({
   declarations: [
@@ -47,13 +46,7 @@ import { AppRoutingModule } from './app-routing.module';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: function tokenGetter() {
-          return localStorage.getItem('access_token');
-        }
-      }
-    })
+    AuthModule
   ],
   providers: [
     AuthGuardService,
