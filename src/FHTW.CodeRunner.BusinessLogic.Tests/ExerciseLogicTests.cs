@@ -26,7 +26,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
         public void SaveExercise_ValidExercise_NoException()
         {
             // Arrange
-            var logger = Mock.Of<ILogger<IExerciseLogic>>();
+            var logger = Mock.Of<ILogger<ExerciseLogic>>();
 
             IMapper mapper = new Mapper(
                 new MapperConfiguration(cfg =>
@@ -56,7 +56,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
         public void SaveExercise_InvalidExercise_ValidationException()
         {
             // Arrange
-            var logger = Mock.Of<ILogger<IExerciseLogic>>();
+            var logger = Mock.Of<ILogger<ExerciseLogic>>();
 
             IMapper mapper = new Mapper(
                 new MapperConfiguration(cfg =>

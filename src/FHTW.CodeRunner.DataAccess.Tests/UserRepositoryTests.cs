@@ -17,7 +17,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
     {
         private CodeRunnerTestDb testDb;
 
-        [SetUp]
+        /*[SetUp]
         public void SetupShouldInsertUser() => this.testDb = new CodeRunnerTestDb(DbTestController.State.EMPTY);
 
         [Test]
@@ -33,7 +33,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 
                 Assert.IsTrue(rep.Exists(user));
             }
-        }
+        }*/
 
         [SetUp]
         public void SetupShouldAuthenticateUser() => this.testDb = new CodeRunnerTestDb(DbTestController.State.SEEDED);
