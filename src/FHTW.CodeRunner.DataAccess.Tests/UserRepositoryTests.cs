@@ -17,12 +17,13 @@ namespace FHTW.CodeRunner.DataAccess.Tests
     {
         private CodeRunnerTestDb testDb;
 
-        /*[SetUp]
-        public void SetupShouldInsertUser() => this.testDb = new CodeRunnerTestDb(DbTestController.State.EMPTY);
+        [TearDown]
+        public void NullDatabase() => this.testDb = null;
 
         [Test]
         public void ShouldInsertUser()
         {
+            this.SetupDatabaseEmpty();
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
                 IUserRepository rep = new UserRepository(context);
@@ -33,14 +34,12 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 
                 Assert.IsTrue(rep.Exists(user));
             }
-        }*/
-
-        [SetUp]
-        public void SetupShouldAuthenticateUser() => this.testDb = new CodeRunnerTestDb(DbTestController.State.SEEDED);
+        }
 
         [Test]
         public void ShouldAuthenticateUser()
         {
+            this.SetupDatabaseSeeded();
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
                 IUserRepository rep = new UserRepository(context);
@@ -50,5 +49,9 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                 Assert.IsTrue(rep.Authenticate(user));
             }
         }
+
+        private void SetupDatabaseEmpty() => this.testDb = new CodeRunnerTestDb(DbTestController.State.EMPTY);
+
+        private void SetupDatabaseSeeded() => this.testDb = new CodeRunnerTestDb(DbTestController.State.SEEDED);
     }
 }
