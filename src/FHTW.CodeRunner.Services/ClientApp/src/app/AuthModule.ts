@@ -19,7 +19,7 @@ export class AuthModule {
             ngModule: JwtModule.forRoot({
                 config: {
                   tokenGetter: () => {
-                      return localStorage.getItem('access_token');
+                      return localStorage.getItem('name');
                   }
                 }
             })
