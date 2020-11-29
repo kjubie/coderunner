@@ -1,0 +1,37 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" opened="true" class="side-nav-menu"
+               [fixedInViewport]="false" [fixedTopGap]="0"
+               [fixedBottomGap]="0">
+    <div class="blue"><strong>Head</strong></div>
+    <mat-divider class="blue"></mat-divider>
+    <div class="blue">
+      <ul>
+        <li>General</li>
+        <li>German</li>
+        <li>Add Language...</li>
+      </ul>
+    </div>
+    <div class="blue"><strong>Body</strong></div>
+    <mat-divider class="blue"></mat-divider>
+    <div class="blue">
+      <ul>
+        <li>Programming Language</li>
+        <li>
+          <ul class="secondUl">
+            <li>General</li>
+            <li>German</li>
+            <li>Other languages...</li>
+            <li>Test Suit</li>
+            <li>
+              <ul class="thirdUl">
+                <li>Test 1</li>
+                <li>Add Tests</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Add Language...</li>
+      </ul>
+    </div>
+  </mat-sidenav>
+</mat-sidenav-container>

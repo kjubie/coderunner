@@ -1,0 +1,33 @@
+.example-container {
+    position: absolute;
+    top: 57px;
+    bottom: 60px;
+    left: 0;
+}
+  
+.side-nav-menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    background: white;
+    padding: 20px 5px 20px 15px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.secondUl {
+    padding-left: 7.5px;
+}
+
+.thirdUl {
+    padding-left: 15px;
+}
+
+.blue {
+    color: rgb(53, 171, 240);
+    border-color: rgb(53, 171, 240);
+}
