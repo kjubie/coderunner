@@ -41,7 +41,7 @@ namespace FHTW.CodeRunner.Services
         public void ConfigureServices(IServiceCollection services)
         {
             // change "DefaultConnection" to "DockerConnection" when running in docker
-            string connection = this.Configuration.GetConnectionString("DefaultConnection");
+            string connection = this.Configuration.GetConnectionString("DockerConnection");
 
             services.AddDbContext<CodeRunnerContext>(
                 options =>
