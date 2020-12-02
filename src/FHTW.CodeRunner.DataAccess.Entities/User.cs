@@ -9,7 +9,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
-    [Table("benutzer")]
+    /// <summary>
+    /// The User entity.
+    /// reg_user stands for registered user, user is a keyword in postgresql.
+    /// </summary>
+    [Table("reg_user")]
     public partial class User : IEntity
     {
         /// <summary>
@@ -30,32 +34,54 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         [Column("id")]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the username of the user.
+        /// </summary>
         [Required]
         [Column("name")]
         [StringLength(30)]
         public string Name { get; set; }
 
-        //TODO restrict length. has to be done in entity and sql create statements
-        
+        /// <summary>
+        /// Gets or Sets the password hash.
+        /// </summary>
         [Required]
-        [Column("password")]
+        [Column("password")] // TODO restrict length. has to be done in entity and sql create statements.
         public string Password { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the inverse property of <see cref="Entities.Collection"/>.
+        /// </summary>
         [InverseProperty("FkUser")]
         public virtual ICollection<Collection> Collection { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the inverse property of <see cref="Entities.Comment"/>.
+        /// </summary>
         [InverseProperty("FkUser")]
         public virtual ICollection<Comment> Comment { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the inverse property of <see cref="Entities.Difficulty"/>.
+        /// </summary>
         [InverseProperty("FkUser")]
         public virtual ICollection<Difficulty> Difficulty { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the inverse property of <see cref="Entities.Exercise"/>.
+        /// </summary>
         [InverseProperty("FkUser")]
         public virtual ICollection<Exercise> Exercise { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the inverse property of <see cref="Entities.ExerciseVersion"/>.
+        /// </summary>
         [InverseProperty("FkUser")]
         public virtual ICollection<ExerciseVersion> ExerciseVersion { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the inverse property of <see cref="Entities.Rating"/>.
+        /// </summary>
         [InverseProperty("FkUser")]
         public virtual ICollection<Rating> Rating { get; set; }
     }

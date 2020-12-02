@@ -36,9 +36,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         /// </summary>
         public const int MaxRequiredFilesVal = 3;
 
-        /// <summary>
-        /// Gets or Sets the internal entity id.
-        /// </summary>
+        /// <inheritdoc/>
         [Key]
         [Column("id")]
         public int Id { get; set; }
