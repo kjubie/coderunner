@@ -7,6 +7,7 @@ using System.Linq;
 using FHTW.CodeRunner.DataAccess.Entities;
 using FHTW.CodeRunner.DataAccess.Interfaces;
 using FHTW.CodeRunner.DataAccess.Sql;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
 namespace FHTW.CodeRunner.DataAccess.Tests
