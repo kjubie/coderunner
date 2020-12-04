@@ -26,6 +26,7 @@ import { AuthModule } from './AuthModule';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { MatAutocompleteModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
+import { ProgrammingLanguageElementComponent } from './side-menu/menu-elements/programming-language/programming-language-element.component';
 
 @NgModule({
   exports: [
@@ -82,7 +83,8 @@ export class MaterialModule {}
     ProgrammingTabComponent,
     TestSuitTabComponent,
     SaveTabComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    ProgrammingLanguageElementComponent
   ],
   imports: [
     BrowserModule,

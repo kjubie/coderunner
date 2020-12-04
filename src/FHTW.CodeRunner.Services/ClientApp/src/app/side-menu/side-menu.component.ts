@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
 
 @Component({
     selector: 'side-menu',
@@ -7,5 +6,19 @@ import { FormBuilder, FormGroup } from "@angular/forms";
     styleUrls: ['./side-menu.component.css']
 })
 export class SideMenuComponent {
-    
+    writtenLang = ["German"];
+    programmingLang = [];
+    testCases = ["Test"]
+
+    addLanguage(lang: string) {
+        this.writtenLang.push(lang);
+    }
+
+    addProgrammingLanguage(lang: string) {
+        this.programmingLang.push(lang);
+    }
+
+    addTestCase() {
+        this.testCases.push("Test");
+    }
 }

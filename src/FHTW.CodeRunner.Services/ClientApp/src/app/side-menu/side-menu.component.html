@@ -7,30 +7,34 @@
     <div class="blue">
       <ul>
         <li>General</li>
-        <li>German</li>
-        <li>Add Language...</li>
+        <li *ngFor="let lang of writtenLang">{{ lang }}</li>
+        <li (click)="addLanguage('English')"><img src="../../assets/img/plus.png"/> Language</li>
       </ul>
     </div>
     <div class="blue"><strong>Body</strong></div>
     <mat-divider class="blue"></mat-divider>
     <div class="blue">
-      <ul>
-        <li>Programming Language</li>
+      <!-- <ul *ngFor="let lang of programminglang">
+        <li>{{ lang }}</li>
         <li>
           <ul class="secondUl">
             <li>General</li>
-            <li>German</li>
-            <li>Other languages...</li>
+            <li *ngFor="let l of writtenLang">{{ l }}</li>
             <li>Test Suit</li>
             <li>
               <ul class="thirdUl">
-                <li>Test 1</li>
-                <li>Add Tests</li>
+                <li *ngFor="let test of testCases; let idx = index">{{ test + ' ' + (idx+1) }}</li>
+                <li (click)="addTestCase()"><img src="../../assets/img/plus.png"/> Add Test Case</li>
               </ul>
             </li>
           </ul>
         </li>
-        <li>Add Language...</li>
+      </ul> -->
+      <ul *ngFor="let lang of programmingLang">
+        <programming-language-element [lang]="lang" [writtenLang]="writtenLang"></programming-language-element>
+      </ul>
+      <ul>
+        <li (click)="addProgrammingLanguage('C#')"><img src="../../assets/img/plus.png"/> Programming Language</li>
       </ul>
     </div>
   </mat-sidenav>
