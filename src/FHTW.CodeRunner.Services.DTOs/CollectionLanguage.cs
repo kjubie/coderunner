@@ -19,9 +19,6 @@ namespace FHTW.CodeRunner.Services.DTOs
             this.CollectionExercise = new HashSet<CollectionExercise>();
         }
 
-        [DataMember(Name = "id")]
-        public int Id { get; set; }
-
         [DataMember(Name = "fullTitle")]
         public string FullTitle { get; set; }
 

@@ -19,20 +19,54 @@ namespace FHTW.CodeRunner.Services.DTOs
             this.TestCase = new HashSet<TestCase>();
         }
 
-        [DataMember(Name = "id")]
-        public int Id { get; set; }
-
+        /// <summary>
+        /// Gets or Sets the question type.
+        /// </summary>
         [DataMember(Name = "questionType")]
         public string QuestionType { get; set; }
 
-        [DataMember(Name = "prefill")]
-        public string Prefill { get; set; }
+        /// <summary>
+        /// Gets or Sets a value indicating whether the from the template generated program should be displayed.
+        /// </summary>
+        [DataMember(Name = "templateDebugFlag")]
+        public bool TemplateDebugFlag { get; set; }
 
-        [DataMember(Name = "solution")]
-        public string Solution { get; set; }
+        /// <summary>
+        /// Gets or Sets a value indicating whether the test cases should be tested on save.
+        /// Not part of FHTW-CodeRunner, but of moodle.
+        /// </summary>
+        [DataMember(Name = "testOnSaveFlag")]
+        public bool TestOnSaveFlag { get; set; }
 
-        [DataMember(Name = "complexity")]
-        public int? Complexity { get; set; }
+        /// <summary>
+        /// Gets or Sets the global extra that is available in each test case.
+        /// </summary>
+        [DataMember(Name = "globalExtraParam")]
+        public string GlobalExtraParam { get; set; }
+
+        /// <summary>
+        /// Gets or Sets runtime data.
+        /// </summary>
+        [DataMember(Name = "runtimeData")]
+        public string RuntimeData { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the template parameter for the exercise.
+        /// </summary>
+        [DataMember(Name = "templateParam")]
+        public string TemplateParam { get; set; }
+
+        /// <summary>
+        /// Gets or Sets a value indicatíng whether the template parameter namespace can be omitted.
+        /// </summary>
+        [DataMember(Name = "templateParamLiftFlag")]
+        public bool TemplateParamLiftFlag { get; set; }
+
+        /// <summary>
+        /// Gets or Sets a value indicating whether twig should be used for every field.
+        /// </summary>
+        [DataMember(Name = "twigAllFlag")]
+        public bool TwigAllFlag { get; set; }
 
         [DataMember(Name = "testCaseList")]
         public ICollection<TestCase> TestCase { get; set; }

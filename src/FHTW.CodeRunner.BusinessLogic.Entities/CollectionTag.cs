@@ -9,8 +9,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
     public class CollectionTag
     {
-        public int Id { get; set; }
-
         public Collection FkCollection { get; set; }
 
         public Tag FkTag { get; set; }

@@ -9,8 +9,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
     public class CollectionExercise
     {
-        public int Id { get; set; }
-
         public int VersionNumber { get; set; }
 
         public CollectionLanguage FkCollectionLanguage { get; set; }

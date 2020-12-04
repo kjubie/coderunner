@@ -18,14 +18,8 @@ namespace FHTW.CodeRunner.Services.DTOs
         {
         }
 
-        [DataMember(Name = "id")]
-        public int Id { get; set; }
-
         [DataMember(Name = "fullTitle")]
         public string FullTitle { get; set; }
-
-        [DataMember(Name = "shortTitle")]
-        public string ShortTitle { get; set; }
 
         [DataMember(Name = "introduction")]
         public string Introduction { get; set; }
