@@ -29,11 +29,6 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         [StringLength(255)]
         public string FullTitle { get; set; }
 
-        [Required]
-        [Column("short_title")]
-        [StringLength(255)]
-        public string ShortTitle { get; set; }
-
         [Column("introduction")]
         public string Introduction { get; set; }
 

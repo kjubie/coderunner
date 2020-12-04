@@ -1,22 +1,17 @@
-.tab {
-    font-size: larger;
-    margin: 50px 35px 60px 0px;
-    color: rgb(53, 171, 240);
+ .breadcrumb {
+   font-weight: bold;
+   background: none;
+   padding-left: 0;
+   color:  rgb(53, 171, 240);
+ }
+ 
+ .breadcrumb li+li::before {
+   color:  rgb(53, 171, 240);
+   content: ">";
  }
 
- .tab:hover {
-    color: black;
-    border-color: black;
-    cursor: pointer;
- }
-
- .activeTab {
-     font-weight: bolder;
-     border-bottom: rgb(53, 171, 240) solid 2px;
- }
-
- .tabContent {
-     margin-top: 40px;
+ .active {
+   border-bottom: rgb(53, 171, 240) solid 2px;
  }
 
  .tabHeading {
@@ -31,6 +26,10 @@
  .contentSeperator {
     border-top: rgb(53, 171, 240) solid 3px;
     padding-top: 20px;
+ }
+
+ .contentBottom {
+   margin-top: 400px;
  }
 
  label {
@@ -53,3 +52,16 @@
     margin-top: 25px;
     width: 15%;
  }
+
+.content {
+   margin-left: 270px;
+   margin-right: 25px;
+}
+
+.text-right {
+   margin-right: 25px;
+}
+
+.text-right input[type=button] {
+   margin-left: 10px;
+}

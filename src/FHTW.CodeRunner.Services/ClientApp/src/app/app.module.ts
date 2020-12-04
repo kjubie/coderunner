@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -22,6 +23,48 @@ import { AuthGuardService } from './auth/authgard.service';
 import { TokenInterceptor } from './auth/toke.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './AuthModule';
+import { SideMenuComponent } from './side-menu/side-menu.component';
+import { MatAutocompleteModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
+import { CdkTableModule } from '@angular/cdk/table';
+import { ProgrammingLanguageElementComponent } from './side-menu/menu-elements/programming-language/programming-language-element.component';
+
+@NgModule({
+  exports: [
+    CdkTableModule,
+    MatAutocompleteModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    // MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    // MatRippleModulee,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+  ]
+})
+export class MaterialModule {}
 
 @NgModule({
   declarations: [
@@ -39,14 +82,19 @@ import { AuthModule } from './AuthModule';
     WrittenLangTabComponent,
     ProgrammingTabComponent,
     TestSuitTabComponent,
-    SaveTabComponent
+    SaveTabComponent,
+    SideMenuComponent,
+    ProgrammingLanguageElementComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    MaterialModule
   ],
   providers: [
     AuthGuardService,

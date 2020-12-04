@@ -1,6 +1,13 @@
+<nav aria-label="breadcrumb" class="blue">
+    <ol class="breadcrumb blue">
+        <li class="breadcrumb-item">Head</li>
+        <li class="breadcrumb-item" aria-current="page"><span class="active">General</span></li>
+    </ol>
+</nav>
+
 <h4 class="tabHeading">General</h4>
 <h6 class="description">General Cross-Example Information</h6>
-<div class="container contentSeperator">
+<div class="contentSeperator">
     <form>
         <div class="from-group row">
             <label for="title" class="col-2 col-form-label">Title</label>
@@ -13,8 +20,14 @@
                 <input type="text" class="form-control-plaintext" id="user" name="user" placeholder="Username" [(ngModel)]="exercise.user.name">
             </div>
         </div>
-        <div class="text-right">
-            <input type="button" class="btn btn-primary next-btn" (click)="setTab('writtenLang')" value="Next">
-        </div>
     </form>
+</div>
+
+<div class="contentBottom contentSeperator">
+    <nav aria-label="breadcrumb" class="blue float-left">
+        <ol class="breadcrumb blue">
+            <li class="breadcrumb-item">Head</li>
+            <li class="breadcrumb-item" aria-current="page"><span class="active">General</span></li>
+        </ol>
+    </nav>
 </div>

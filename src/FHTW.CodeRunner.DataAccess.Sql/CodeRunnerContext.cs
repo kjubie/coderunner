@@ -207,6 +207,14 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                     .HasForeignKey(d => d.FkTestSuiteId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("exercise_body_fk_test_suite_id_fkey");
+
+                entity.HasCheckConstraint(
+                    "value_constraint_exercise_allow_files",
+                    $"[allow_files] >= {Entities.ExerciseBody.MinAllowedFilesVal} AND [allow_files] <= {Entities.ExerciseBody.MaxAllowedFilesVal}");
+
+                entity.HasCheckConstraint(
+                    "value_constraint_exercise_files_required",
+                    $"[files_required] >= {Entities.ExerciseBody.MinRequiredFilesVal} AND [files_required] <= {Entities.ExerciseBody.MaxRequiredFilesVal}");
             });
 
             modelBuilder.Entity<ExerciseHeader>(entity =>

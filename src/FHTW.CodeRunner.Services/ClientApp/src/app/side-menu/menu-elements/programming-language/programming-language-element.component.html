@@ -1,0 +1,16 @@
+<li id="programmingLangHeader">
+    {{ lang }}
+</li>
+<li>
+    <ul class="secondUl">
+        <li>General</li>
+        <li *ngFor="let l of writtenLang">{{ l }}</li>
+        <li>Test Suit</li>
+        <li>
+            <ul class="thirdUl">
+                <li *ngFor="let test of testCases; let idx = index">{{ test + ' ' + (idx+1) }}</li>
+                <li (click)="addTestCase()"><img src="../../assets/img/plus.png"/> Add Test Case</li>
+            </ul>
+        </li>
+    </ul>
+</li>

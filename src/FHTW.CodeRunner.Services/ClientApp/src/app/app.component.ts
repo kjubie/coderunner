@@ -10,8 +10,9 @@ import { LoginService } from './services/login.service';
 export class AppComponent {
 
   title = 'app';
-  public username : string;
-  isCollapsed : Boolean = true;
+  public username: string;
+  isCollapsed: Boolean = true;
+  createExercise: Boolean = true;
 
   constructor(private location: Location, private loginService : LoginService, private router: Router) { }
 
