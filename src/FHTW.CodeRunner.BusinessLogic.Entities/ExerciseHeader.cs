@@ -16,11 +16,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         {
         }
 
-        public int Id { get; set; }
-
         public string FullTitle { get; set; }
-
-        public string ShortTitle { get; set; }
 
         public string Introduction { get; set; }
     }
