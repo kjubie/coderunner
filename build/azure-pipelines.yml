@@ -107,7 +107,8 @@ stages:
         azureContainerRegistry: '$(acrHostName)'
         imageName: '$(imageName):$(Build.BuildId)'
         useDefaultContext: false
-        buildContext: '$(System.DefaultWorkingDirectory)/PublishedWebApp'
+        buildContext: '$(Build.Repository.LocalPath)'
+        # buildContext: '$(System.DefaultWorkingDirectory)/PublishedWebApp'
 
     # Push container image
     - task: Docker@1
@@ -163,7 +164,7 @@ stages:
         DockerNamespace: $(acrHostName)
         DockerRepository: $(webAppName)
         DockerImageTag: '$(Build.BuildId)'
-        WebAppUri: webAppUrl
+        WebAppUri: 'test-coderunner'
         TakeAppOfflineFlag: true
         UseWebDeploy: true
         RenameFilesFlag: true
