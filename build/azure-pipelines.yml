@@ -2,85 +2,178 @@
 # Build and test ASP.NET projects targeting .NET 5.
 
 trigger:
-- master
-
-pool:
-  vmImage: 'ubuntu-latest'
-
+  branches:
+    include: 
+    - master
 variables:
   buildConfiguration: 'Release'
+  location: 'West Europe'
+  acrHostName: 'alps-coderunner.azurecr.io'
+  acrName: 'alps-coderunner'
+  rgName: 'alps-coderunner-rg'
+  imageName: 'alps-coderunner'
+  webAppName: 'alps-coderunner'
 
-steps:
-- task: UseDotNet@2
-  inputs:
-    version: '5.0.x'
-  displayName: 'Use .NET 5.0'
+stages:
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
-    feedsToUse: 'select'
-    vstsFeed: '941f527e-f8c9-4c9c-b727-d6f446b5fee9'
-  displayName: 'Restore'
+# Build Stage
+- stage: BuildAndTest
+  jobs:
+  - job: BuildAndTest
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
-  displayName: 'Build'
+    # Create or update the ACR resource
+    - task: AzureResourceGroupDeployment@2
+      displayName: 'Azure Deployment:Create Azure Container Registry'
+      inputs:
+        azureSubscription: 'Azure for Students'
+        resourceGroupName: '$(rgName)'
+        location: $(location)
+        csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
+        overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Run tests for the Service Layer'
-  inputs:
-    command: 'test'
-    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
-    projects: '**/*Services.Tests*.csproj'
-    testRunTitle: 'Service Unit Tests'
-   
-- task: DotNetCoreCLI@2
-  displayName: 'Run tests for the Business Layer'
-  inputs:
-    command: 'test'
-    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
-    projects: '**/*BusinessLogic.Tests*.csproj'
-    testRunTitle: 'BusinessLogic Unit Tests'
+    - task: UseDotNet@2
+      inputs:
+        version: '5.0.x'
+      displayName: 'Use .NET 5.0'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Run tests for the Data Access Layer'
-  inputs:
-    command: 'test'
-    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
-    projects: '**/*DataAccess.Tests*.csproj'
-    testRunTitle: 'DataAccess Unit Tests'
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'restore'
+        projects: '**/*.csproj'
+        feedsToUse: 'select'
+        vstsFeed: '941f527e-f8c9-4c9c-b727-d6f446b5fee9'
+      displayName: 'Restore'
 
-- task: reportgenerator@4
-  inputs:
-    reports: '$(Build.SourcesDirectory)/**/*.cobertura.xml'
-    targetdir: '$(Build.SourcesDirectory)/CoverageResults'
-  displayName: 'Call Report Generator'
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'build'
+        projects: '**/*.csproj'
+        arguments: '--configuration $(buildConfiguration)'
+      displayName: 'Build'
 
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish Code Coverage'
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '$(Build.SourcesDirectory)/CoverageResults/Cobertura.xml'
+    - task: DotNetCoreCLI@2
+      displayName: 'Run tests for the Service Layer'
+      inputs:
+        command: 'test'
+        arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+        projects: '**/*Services.Tests*.csproj'
+        testRunTitle: 'Service Unit Tests'
+      
+    - task: DotNetCoreCLI@2
+      displayName: 'Run tests for the Business Layer'
+      inputs:
+        command: 'test'
+        arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+        projects: '**/*BusinessLogic.Tests*.csproj'
+        testRunTitle: 'BusinessLogic Unit Tests'
 
-# do this after you've built your app, near the end of your pipeline in most cases
-# for example, you do this before you deploy to an Azure web app on Windows
-- task: DotNetCoreCLI@2
-  inputs:
-    command: publish
-    publishWebProjects: True
-    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: True
-  displayName: 'Publish'
+    - task: DotNetCoreCLI@2
+      displayName: 'Run tests for the Data Access Layer'
+      inputs:
+        command: 'test'
+        arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+        projects: '**/*DataAccess.Tests*.csproj'
+        testRunTitle: 'DataAccess Unit Tests'
+
+    - task: reportgenerator@4
+      inputs:
+        reports: '$(Build.SourcesDirectory)/**/*.cobertura.xml'
+        targetdir: '$(Build.SourcesDirectory)/CoverageResults'
+      displayName: 'Call Report Generator'
+
+    - task: PublishCodeCoverageResults@1
+      displayName: 'Publish Code Coverage'
+      inputs:
+        codeCoverageTool: Cobertura
+        summaryFileLocation: '$(Build.SourcesDirectory)/CoverageResults/Cobertura.xml'
+
+    # Publish the app
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet publish'
+      inputs:
+        command: publish
+        publishWebProjects: True
+        arguments: '--configuration $(BuildConfiguration) --output $(System.DefaultWorkingDirectory)/PublishedWebApp'
+        zipAfterPublish: false
+
+    # Build container image
+    - task: Docker@1
+      displayName: 'Build container image'
+      inputs:
+        azureSubscriptionEndpoint: 'Azure for Students'
+        azureContainerRegistry: '$(acrHostName)'
+        imageName: '$(imageName):$(Build.BuildId)'
+        useDefaultContext: false
+        buildContext: '$(System.DefaultWorkingDirectory)/PublishedWebApp'
+
+    # Push container image
+    - task: Docker@1
+      displayName: 'Push container image'
+      inputs:
+        azureSubscriptionEndpoint: 'Azure for Students'
+        azureContainerRegistry: '$(acrHostName)'
+        command: 'Push an image'
+        imageName: '$(imageName):$(Build.BuildId)'
+
+    # Copy ARM templates
+    - task: CopyFiles@2
+      displayName: 'Copy ARM templates'
+      inputs:
+        SourceFolder: ArmTemplates
+        TargetFolder: '$(build.artifactstagingdirectory)'
+
+    # Publish the app as an artifact
+    - publish: $(Build.StagingDirectory)
+      artifact: app
+
+# Staging release
+- stage: Staging
+  jobs:
+  - job: Release
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    # Don't clone the repo
+    - checkout: none
+
+    # Download the published application artifact
+    - download: current
+      artifact: app
+
+    # Create or update Azure App Service
+    - task: AzureResourceGroupDeployment@2
+      displayName: 'Azure Deployment:Create Azure App Service'
+      inputs:
+        azureSubscription: 'Azure for Students'
+        resourceGroupName: '$(rgName)'
+        location: '$(location)'
+        csmFile: '$(Pipeline.Workspace)/**/container-webapp-template.json'
+        overrideParameters: '-webAppName $(webAppName) -hostingPlanName $(webAppName) -appInsightsLocation "$(location)" -sku "S1 Standard" -registryName $(acrName) -registryLocation "$(location)" -registrySku standard -imageName $(imageName):$(Build.BuildId)'
+
+    # Deploy App Service
+    - task: AzureRmWebAppDeployment@3
+      displayName: 'Deploy Azure App Service'
+      inputs:
+        azureSubscription: 'Azure for Students'
+        appType: applinux
+        WebAppName: $(webAppName)
+        DockerNamespace: $(acrHostName)
+        DockerRepository: $(webAppName)
+        DockerImageTag: '$(Build.BuildId)'
+        WebAppUri: webAppUrl
+        TakeAppOfflineFlag: true
+        UseWebDeploy: true
+        RenameFilesFlag: true
+
+
 
 # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: 'iPacksNet'
-  displayName: 'Upload as an Artifact'
+#- task: PublishBuildArtifacts@1
+#  inputs:
+#    pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+#    artifactName: 'iPacksNet'
+#  displayName: 'Upload as an Artifact'
 
