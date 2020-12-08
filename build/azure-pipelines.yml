@@ -8,11 +8,11 @@ trigger:
 variables:
   buildConfiguration: 'Release'
   location: 'West Europe'
-  acrHostName: 'alps-coderunner.azurecr.io'
-  acrName: 'alps-coderunner'
-  rgName: 'alps-coderunner-rg'
-  imageName: 'alps-coderunner'
-  webAppName: 'alps-coderunner'
+  acrHostName: 'alpscoderunner.azurecr.io'
+  acrName: 'alpscoderunner'
+  rgName: 'alpscoderunner-rg'
+  imageName: 'alpscoderunner'
+  webAppName: 'alpscoderunner'
 
 stages:
 
