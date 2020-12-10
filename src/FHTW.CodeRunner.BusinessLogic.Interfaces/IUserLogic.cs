@@ -5,11 +5,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using FHTW.CodeRunner.BusinessLogic.Entities;
 
 namespace FHTW.CodeRunner.BusinessLogic.Interfaces
 {
     public interface IUserLogic
     {
-        bool AuthenticateUser(string name, string password);
+        bool AuthenticateUser(User user);
     }
 }

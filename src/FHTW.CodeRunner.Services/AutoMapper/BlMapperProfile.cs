@@ -80,6 +80,8 @@ namespace FHTW.CodeRunner.Services.AutoMapper
 
             this.CreateMap<SvcEntities.WrittenLanguage, BlEntities.WrittenLanguage>()
                 .ReverseMap();
+
+            this.CreateMap<SvcEntities.UserAuthentication, BlEntities.User>();
         }
     }
 }

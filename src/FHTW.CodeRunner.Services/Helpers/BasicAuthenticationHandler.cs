@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
 
 namespace FHTW.CodeRunner.Services.Helpers
 {
@@ -67,7 +68,12 @@ namespace FHTW.CodeRunner.Services.Helpers
                 var credentials = Encoding.UTF8.GetString(credentialBytes).Split(new[] { ':' }, 2);
                 var username = credentials[0];
                 var password = credentials[1];
-                result = this.userLogic.AuthenticateUser(username, password); // TODO: Make Async
+                BlEntities.User user = new BlEntities.User
+                {
+                    Name = username,
+                    Password = password,
+                };
+                result = this.userLogic.AuthenticateUser(user); // TODO: Make Async
             }
             catch
             {

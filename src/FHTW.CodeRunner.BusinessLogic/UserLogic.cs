@@ -9,6 +9,8 @@ using AutoMapper;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using FHTW.CodeRunner.DataAccess.Interfaces;
 using Microsoft.Extensions.Logging;
+using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
+using DalEntities = FHTW.CodeRunner.DataAccess.Entities;
 
 namespace FHTW.CodeRunner.BusinessLogic
 {
@@ -26,10 +28,12 @@ namespace FHTW.CodeRunner.BusinessLogic
         }
 
         /// <inheritdoc/>
-        public bool AuthenticateUser(string name, string password)
+        public bool AuthenticateUser(BlEntities.User user)
         {
-            this.userRepository.Authenticate(null);
-            if (name == "root" && password == "toor")
+            var dalUser = this.mapper.Map<DalEntities.User>(user);
+            // bool result = this.userRepository.Authenticate(dalUser);
+
+            if (user.Name == "root" && user.Password == "toor")
             {
                 return true;
             }

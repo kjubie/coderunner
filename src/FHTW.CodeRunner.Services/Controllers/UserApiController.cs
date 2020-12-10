@@ -47,10 +47,12 @@ namespace FHTW.CodeRunner.Services.Controllers
             if (body == null)
             {
                 // TODO: Error Model
-                return this.BadRequest("Exercise should not be null");
+                return this.BadRequest("User Authentication should not be null");
             }
 
-            bool result = this.userLogic.AuthenticateUser(body.Name, body.Password);
+            var blUser = this.mapper.Map<BlEntities.User>(body);
+
+            bool result = this.userLogic.AuthenticateUser(blUser);
 
             if (result)
             {
