@@ -4,9 +4,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
+    [ExcludeFromCodeCoverage]
     public class ExerciseVersion
     {
         /// <summary>

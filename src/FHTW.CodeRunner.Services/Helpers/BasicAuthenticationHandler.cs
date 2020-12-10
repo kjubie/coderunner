@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -19,6 +20,7 @@ using Microsoft.Extensions.Options;
 
 namespace FHTW.CodeRunner.Services.Helpers
 {
+    [ExcludeFromCodeCoverage]
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
         private readonly IUserLogic userLogic;

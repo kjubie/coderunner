@@ -2,11 +2,13 @@
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using FHTW.CodeRunner.BusinessLogic.Entities;
 using FluentValidation;
 
 namespace FHTW.CodeRunner.BusinessLogic.Validators
 {
+    [ExcludeFromCodeCoverage]
     public class ExerciseValidator : AbstractValidator<Exercise>
     {
         /// <summary>

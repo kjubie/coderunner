@@ -4,11 +4,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 
 namespace FHTW.CodeRunner.Services.DTOs
 {
     [DataContract]
+    [ExcludeFromCodeCoverage]
     public class Difficulty
     {
         [DataMember(Name = "number")]

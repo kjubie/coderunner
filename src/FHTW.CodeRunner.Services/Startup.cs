@@ -21,9 +21,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.Services
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         /// <summary>

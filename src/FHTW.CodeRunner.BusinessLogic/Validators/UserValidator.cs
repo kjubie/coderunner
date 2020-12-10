@@ -4,9 +4,11 @@
 
 using FHTW.CodeRunner.BusinessLogic.Entities;
 using FluentValidation;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.BusinessLogic.Validators
 {
+    [ExcludeFromCodeCoverage]
     public class UserValidator : AbstractValidator<User>
     {
         /// <summary>
