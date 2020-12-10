@@ -48,7 +48,7 @@ namespace FHTW.CodeRunner.Services
             services.AddDbContext<CodeRunnerContext>(
                 options =>
                 {
-                    options.UseNpgsql(connection);
+                    options.UseNpgsql(connection, b => b.MigrationsAssembly("FHTW.CodeRunner.Migrations"));
                 });
 
             services
@@ -98,8 +98,14 @@ namespace FHTW.CodeRunner.Services
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<CodeRunnerContext>();
-                // context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
+                context.Database.EnsureDeleted();
+                //context.Database.EnsureCreated();
+
+                if (!context.AllMigrationsApplied())
+                {
+                    context.Database.Migrate();
+                    context.EnsureSeeded();
+                }
             }
 
             if (env.IsDevelopment())

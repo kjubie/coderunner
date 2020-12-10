@@ -30,7 +30,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 
                 Exercise exercise = TestDataBuilder<Exercise>.Single();
 
-                exercise.FkUser = context.Benutzer.FirstOrDefault();
+                exercise.FkUser = context.User.FirstOrDefault();
 
                 rep.Insert(exercise);
 

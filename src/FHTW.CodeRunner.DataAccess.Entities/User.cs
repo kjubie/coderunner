@@ -39,14 +39,15 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         /// </summary>
         [Required]
         [Column("name")]
-        [StringLength(30)]
+        [StringLength(32)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets the password hash.
         /// </summary>
         [Required]
-        [Column("password")] // TODO restrict length. has to be done in entity and sql create statements.
+        [Column("password")]
+        [StringLength(128)]
         public string Password { get; set; }
 
         /// <summary>
