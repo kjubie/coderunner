@@ -27,7 +27,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         {
         }
 
-        public virtual DbSet<User> Benutzer { get; set; }
+        public virtual DbSet<User> User { get; set; }
 
         public virtual DbSet<Collection> Collection { get; set; }
 
@@ -70,7 +70,9 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         {
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.HasIndex(e => e.Name).IsUnique();
             });
 
             modelBuilder.Entity<Collection>(entity =>
@@ -210,11 +212,11 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
                 entity.HasCheckConstraint(
                     "value_constraint_exercise_allow_files",
-                    $"[allow_files] >= {Entities.ExerciseBody.MinAllowedFilesVal} AND [allow_files] <= {Entities.ExerciseBody.MaxAllowedFilesVal}");
+                    $"allow_files >= {Entities.ExerciseBody.MinAllowedFilesVal} AND allow_files <= {Entities.ExerciseBody.MaxAllowedFilesVal}");
 
                 entity.HasCheckConstraint(
                     "value_constraint_exercise_files_required",
-                    $"[files_required] >= {Entities.ExerciseBody.MinRequiredFilesVal} AND [files_required] <= {Entities.ExerciseBody.MaxRequiredFilesVal}");
+                    $"files_required >= {Entities.ExerciseBody.MinRequiredFilesVal} AND files_required <= {Entities.ExerciseBody.MaxRequiredFilesVal}");
             });
 
             modelBuilder.Entity<ExerciseHeader>(entity =>

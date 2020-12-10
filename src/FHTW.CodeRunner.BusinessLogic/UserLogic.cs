@@ -31,14 +31,14 @@ namespace FHTW.CodeRunner.BusinessLogic
         public bool AuthenticateUser(BlEntities.User user)
         {
             var dalUser = this.mapper.Map<DalEntities.User>(user);
-            // bool result = this.userRepository.Authenticate(dalUser);
-
+            bool result = this.userRepository.Authenticate(dalUser);
+            /*
             if (user.Name == "root" && user.Password == "toor")
             {
                 return true;
-            }
+            }*/
 
-            return false;
+            return result;
         }
     }
 }

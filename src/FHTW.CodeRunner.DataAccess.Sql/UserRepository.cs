@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using FHTW.CodeRunner.DataAccess.Entities;
 using FHTW.CodeRunner.DataAccess.Interfaces;
 
@@ -27,7 +28,10 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         /// <inheritdoc/>
         public bool Authenticate(User user)
         {
-            return this.Exists(user);
+            return this.Context.User
+                .Where(u => u.Name == user.Name)
+                .Where(u => u.Password == user.Password)
+                .Count() == 1;
         }
     }
 }
