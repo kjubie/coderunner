@@ -1,8 +1,28 @@
 [
-  {
-    "Id": 1,
-    "Name": "fhtw",
-    "Password": "1a998df5fcdda7a891b54846dd8377df64286d3244c17e47dfb37c8d39d4a6469942367715e5c72cf98c0054cb2eb42238cd42b6d46f36fe65d34d7d5a133f95"
-  }
+    {
+        "Id": 1,
+        "Name": "fhtw",
+        "Password": "1a998df5fcdda7a891b54846dd8377df64286d3244c17e47dfb37c8d39d4a6469942367715e5c72cf98c0054cb2eb42238cd42b6d46f36fe65d34d7d5a133f95"
+    },
+    {
+        "Id": 2,
+        "Name": "sabrina",
+        "Password": "auf https://sha512.online/ generieren"
+    },
+    {
+        "Id": 3,
+        "Name": "michi",
+        "Password": "auf https://sha512.online/ generieren"
+    },
+    {
+        "Id": 4,
+        "Name": "jacob",
+        "Password": "auf https://sha512.online/ generieren"
+    },
+    {
+        "Id": 5,
+        "Name": "roman",
+        "Password": "auf https://sha512.online/ generieren"
+    }
 ]
 

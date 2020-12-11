@@ -33,9 +33,14 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
         public static void EnsureSeeded(this CodeRunnerContext context)
         {
+            var options = new JsonSerializerOptions()
+            {
+                ReadCommentHandling = JsonCommentHandling.Skip,
+            };
+
             if (!context.User.Any())
             {
-                var users = JsonSerializer.Deserialize<List<User>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "user.json"));
+                var users = JsonSerializer.Deserialize<List<User>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "user.json"), options);
                 context.AddRange(users);
                 context.SaveChanges();
             }

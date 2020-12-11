@@ -1,0 +1,20 @@
+[
+    {   // Exercise 1, English, German, C++, C#, V1, V2, V3
+        "Id": 1,
+        "Title": "Title_1",
+        "Created": "2020-04-23T18:25:43.511Z",
+        "FkUserId": 1
+    },
+    {   // Exercise 2, English, German, Python, Java, V1
+        "Id": 2,
+        "Title": "Title_2",
+        "Created": "2019-06-13T17:15:33.3411Z",
+        "FkUserId": 1
+    },
+    {   // Exercise 3, German, C, V1
+        "Id": 3,
+        "Title": "Title_3",
+        "Created": "2018-011-27T10:22:46.511Z",
+        "FkUserId": 3
+    }
+]
