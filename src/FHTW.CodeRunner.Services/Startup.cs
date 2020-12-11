@@ -98,14 +98,15 @@ namespace FHTW.CodeRunner.Services
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<CodeRunnerContext>();
-                context.Database.EnsureDeleted();
+                //context.Database.EnsureDeleted();
                 //context.Database.EnsureCreated();
 
                 if (!context.AllMigrationsApplied())
                 {
                     context.Database.Migrate();
-                    context.EnsureSeeded();
                 }
+
+                context.EnsureSeeded();
             }
 
             if (env.IsDevelopment())

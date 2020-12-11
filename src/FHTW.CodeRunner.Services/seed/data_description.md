@@ -31,7 +31,7 @@ In the next paragraphs the composition of certain exercises is explain. It is in
 
 The structure is portrait as a tree. The exercise number corresponds to the id.
 
-- Exercise 1 (V. 1, 2, 3)
+- Exercise 1 (V. 1, 2, 3) (testcases 2 per language)
   - English
     - C++
     - C#
@@ -39,7 +39,7 @@ The structure is portrait as a tree. The exercise number corresponds to the id.
     - C++
     - C#
 
-- Exercise 2 (V. 1)
+- Exercise 2 (V. 1) (testcases 1 per language)
   - English
     - Python
     - Java
@@ -47,7 +47,7 @@ The structure is portrait as a tree. The exercise number corresponds to the id.
     - Python
     - Java
 
-- Exercise 3 (V. 1)
+- Exercise 3 (V. 1) (testcases 1 per language)
   - German
     - C
 

@@ -38,12 +38,52 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 ReadCommentHandling = JsonCommentHandling.Skip,
             };
 
-            if (!context.User.Any())
+            using var transaction = context.Database.BeginTransaction();
+
+            try
             {
-                var users = JsonSerializer.Deserialize<List<User>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "user.json"), options);
-                context.AddRange(users);
-                context.SaveChanges();
+                UpdateOrAdd<User>(context, "user", options);
+                UpdateOrAdd<Exercise>(context, "exercise", options);
+                UpdateOrAdd<ExerciseVersion>(context, "exercise_version", options);
+                UpdateOrAdd<Comment>(context, "comment", options);
+                UpdateOrAdd<Difficulty>(context, "difficulty", options);
+                UpdateOrAdd<ExerciseHeader>(context, "exercise_header", options);
+                UpdateOrAdd<Tag>(context, "tag", options);
+                UpdateOrAdd<ExerciseTag>(context, "exercise_tag", options);
+                UpdateOrAdd<WrittenLanguage>(context, "written_language", options);
+                UpdateOrAdd<ProgrammingLanguage>(context, "programming_language", options);
+                UpdateOrAdd<TestSuite>(context, "testsuite", options);
+                UpdateOrAdd<TestCase>(context, "testcase", options);
+                UpdateOrAdd<ExerciseLanguage>(context, "exercise_language", options);
+                UpdateOrAdd<ExerciseBody>(context, "exercise_body", options);
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            transaction.Commit();
+        }
+
+        private static void UpdateOrAdd<T>(CodeRunnerContext context, string name, JsonSerializerOptions options)
+            where T : class
+        {
+            var list = JsonSerializer.Deserialize<List<User>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + name + ".json"), options);
+            var table = context.Set<T>();
+
+            list.ForEach(o =>
+            {
+                if (!context.Set<T>().Any(e => e == o))
+                {
+                    context.Add(o);
+                }
+                else
+                {
+                    context.Update(o);
+                }
+
+                context.SaveChanges();
+            });
         }
     }
 }
