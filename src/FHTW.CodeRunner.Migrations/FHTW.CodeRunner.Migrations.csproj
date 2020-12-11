@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\FHTW.CodeRunner.DataAccess.Sql\FHTW.CodeRunner.DataAccess.Sql.csproj" />
+    <ProjectReference Include="..\FHTW.CodeRunner.DataAccess.Sql\FHTW.CodeRunner.DataAccess.Sql.csproj" />
   </ItemGroup>
 
 </Project>

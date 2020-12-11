@@ -34,7 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{B9775BC0-E054-4B81-872E-A6447E61B982}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FHTW.CodeRunner.Migrations", "..\FHTW.CodeRunner.Migrations\FHTW.CodeRunner.Migrations.csproj", "{3EA81918-BEEC-41FC-9E24-E9A03CFE1778}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.Migrations", "FHTW.CodeRunner.Migrations\FHTW.CodeRunner.Migrations.csproj", "{2889C8A1-DDCC-4B6D-9A57-0397245DF4AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,10 +94,10 @@ Global
 		{B9775BC0-E054-4B81-872E-A6447E61B982}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9775BC0-E054-4B81-872E-A6447E61B982}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9775BC0-E054-4B81-872E-A6447E61B982}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3EA81918-BEEC-41FC-9E24-E9A03CFE1778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3EA81918-BEEC-41FC-9E24-E9A03CFE1778}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3EA81918-BEEC-41FC-9E24-E9A03CFE1778}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3EA81918-BEEC-41FC-9E24-E9A03CFE1778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2889C8A1-DDCC-4B6D-9A57-0397245DF4AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2889C8A1-DDCC-4B6D-9A57-0397245DF4AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2889C8A1-DDCC-4B6D-9A57-0397245DF4AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2889C8A1-DDCC-4B6D-9A57-0397245DF4AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
