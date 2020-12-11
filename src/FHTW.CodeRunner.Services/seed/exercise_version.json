@@ -4,7 +4,7 @@
         "VersionNumber": 1,
         "CreatorRating": 3,
         "CreatorDifficulty": 4,
-        "LastModified": "2020-04-23T18:28:43.511Z",
+        "LastModified": "2020-04-23T18:28:43.51",
         "FkUserId": 1,
         "FkExerciseId": 1
     },
@@ -13,7 +13,7 @@
         "VersionNumber": 2,
         "CreatorRating": 4,
         "CreatorDifficulty": 5,
-        "LastModified": "2020-05-14T18:28:43.511Z",
+        "LastModified": "2020-05-14T18:28:43.51",
         "FkUserId": 1,
         "FkExerciseId": 1
     },
@@ -22,7 +22,7 @@
         "VersionNumber": 3,
         "CreatorRating": 5,
         "CreatorDifficulty": 5,
-        "LastModified": "2020-06-17T18:28:43.511Z",
+        "LastModified": "2020-06-17T18:28:43.51",
         "FkUserId": 1,
         "FkExerciseId": 1
     },
@@ -31,7 +31,7 @@
         "VersionNumber": 1,
         "CreatorRating": 2,
         "CreatorDifficulty": 3,
-        "LastModified": "2020-09-23T18:28:43.511Z",
+        "LastModified": "2020-09-23T18:28:43.51",
         "FkUserId": 1,
         "FkExerciseId": 2
     },
@@ -40,7 +40,7 @@
         "VersionNumber": 1,
         "CreatorRating": 5,
         "CreatorDifficulty": 5,
-        "LastModified": "2020-02-23T18:28:43.511Z",
+        "LastModified": "2020-02-23T18:28:43.51",
         "FkUserId": 3,
         "FkExerciseId": 3
     }

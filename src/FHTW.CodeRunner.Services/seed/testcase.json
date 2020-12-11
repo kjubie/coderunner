@@ -182,7 +182,7 @@
         "DisplayType": "HIDE"
     },
     {   // Exercise 3, Testcase 1, C, V1
-        "Id": 14,
+        "Id": 15,
         "OrderUsed": 1,
         "TestCode": "test_code_1_c_V1",
         "StandardInput": "standard_input_1_c_V1",

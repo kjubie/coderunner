@@ -60,6 +60,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                throw e;
             }
 
             transaction.Commit();
@@ -68,7 +69,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         private static void UpdateOrAdd<T>(CodeRunnerContext context, string name, JsonSerializerOptions options)
             where T : class
         {
-            var list = JsonSerializer.Deserialize<List<User>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + name + ".json"), options);
+            var list = JsonSerializer.Deserialize<List<T>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + name + ".json"), options);
             var table = context.Set<T>();
 
             list.ForEach(o =>

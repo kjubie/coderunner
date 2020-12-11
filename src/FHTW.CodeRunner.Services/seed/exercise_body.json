@@ -167,7 +167,6 @@
         "FilesDescription": "n_FilesDescription_c#_V2",
         "FilesSize": 4000
     },
-    ,
     {   // Exercise 1, English, C++, V3
         "Id": 9,
         "FkProgrammingLanguageId": 1,
