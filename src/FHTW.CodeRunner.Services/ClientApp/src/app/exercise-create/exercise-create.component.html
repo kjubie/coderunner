@@ -1,7 +1,10 @@
-<side-menu></side-menu>
+<side-menu [selectedElement]="selectedElement" (selectElementEvent)="setSelectedElement($event)" (addWrittenLangEvent)="addWrittenLang($event)"></side-menu>
 
 <div class="content">
-    <general-tab [exercise]="exercise"></general-tab>
+    <general-tab *ngIf="selectedElement == 'General'" [exercise]="exercise"></general-tab>
+    <written-lang-tab *ngIf="selectedElement.includes('WrittenLang')" [exercise]="exercise"></written-lang-tab>
+    <programming-tab *ngIf="selectedElement.includes('Programming')" [exercise]="exercise"></programming-tab>
+    <test-suit-tab *ngIf="selectedElement.includes('Test')" [exercise]="exercise"></test-suit-tab>
 </div>
 
 <div class="text-right">

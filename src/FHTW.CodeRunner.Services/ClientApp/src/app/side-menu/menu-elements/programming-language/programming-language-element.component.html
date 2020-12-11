@@ -1,15 +1,21 @@
-<li id="programmingLangHeader">
-    {{ lang }}
+<li id="programmingLangHeader" (click)="collapseList('programmingList', idx)">
+    <i class="arrow down" [attr.id]="'arrowProgrammingList' + idx"></i> {{ lang }}
 </li>
-<li>
+<li *ngIf="showProgrammingList">
     <ul class="secondUl">
-        <li>General</li>
-        <li *ngFor="let l of writtenLang">{{ l }}</li>
-        <li>Test Suit</li>
-        <li>
+        <li (click)="setSelectedElement('ProgrammingGeneral')">
+            <a [ngClass]="{'active' : selectedElement == ('ProgrammingGeneral')}">General</a>
+        </li>
+        <li *ngFor="let l of writtenLang; let i = index" (click)="setSelectedElement('ProgrammingLang' + i)">
+            <a [ngClass]="{'active' : selectedElement == ('ProgrammingLang'+i)}">{{ l }}</a>
+        </li>
+        <li (click)="collapseList('testSuitList', idx)"><i class="arrow down" [attr.id]="'arrowTestSuitList' + idx"></i> Test Suit</li>
+        <li *ngIf="showTestSuitList">
             <ul class="thirdUl">
-                <li *ngFor="let test of testCases; let idx = index">{{ test + ' ' + (idx+1) }}</li>
-                <li (click)="addTestCase()"><img src="../../assets/img/plus.png"/> Add Test Case</li>
+                <li *ngFor="let test of testCases; let idx = index" (click)="setSelectedElement('Test'+idx)">
+                    <a [ngClass]="{'active' : selectedElement == ('Test'+idx)}">{{ test + ' ' + (idx+1) }}</a>
+                </li>
+                <li (click)="addTestCase()"><img src="../../assets/img/plus.png"/> Test Case</li>
             </ul>
         </li>
     </ul>

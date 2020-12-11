@@ -32,7 +32,7 @@ ul {
     border-color: rgb(53, 171, 240);
 }
 
-li {
+mat-sidenav, li {
     cursor: pointer;
 }
 
@@ -40,4 +40,27 @@ li img {
     width: 15px;
     height: 15px;
     margin-bottom: 2.5px;
+}
+
+.arrow {
+    border: solid rgb(53, 171, 240);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    margin: 0 4px 1.5px 3px;
+}
+  
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+  
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.active {
+    border-bottom: rgb(53, 171, 240) solid 2px;
+    font-weight: 500;
 }
