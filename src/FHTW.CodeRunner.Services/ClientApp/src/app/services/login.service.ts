@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
+import { sha512 } from 'js-sha512';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient) { }
 
-  login(name: string, password: string) {
+  login(name: string, pwd: string) {
+    let password = sha512(pwd);
     // { auth_token: string, status: string, message: string }
     return this.httpClient
         .post<any>(this.loginUrl, { name, password }, {observe: 'response' as 'body'})
