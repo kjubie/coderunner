@@ -8,7 +8,7 @@ services:
 
   db:
     image: postgres:13
-    container_name: postgresql-container
+    container_name: postgresql-container-local
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -16,5 +16,5 @@ services:
       POSTGRES_DB: coderunnerdb
     ports: 
         - 5432:5432 
-    volumes: 
-      - ./init:/docker-entrypoint-initdb.d
+    #volumes: 
+      #- ./init:/docker-entrypoint-initdb.d
