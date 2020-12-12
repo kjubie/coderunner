@@ -2,6 +2,7 @@
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
 using FHTW.CodeRunner.BusinessLogic;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
@@ -21,7 +22,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.Services
 {
@@ -31,7 +31,7 @@ namespace FHTW.CodeRunner.Services
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
-        /// <param name="configuration"></param>
+        /// <param name="configuration">th configuration.</param>
         public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
@@ -98,9 +98,10 @@ namespace FHTW.CodeRunner.Services
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<CodeRunnerContext>();
-                //context.Database.EnsureDeleted();
-                //context.Database.EnsureCreated();
 
+                // context.Database.EnsureDeleted();
+
+                // context.Database.EnsureCreated();
                 if (!context.AllMigrationsApplied())
                 {
                     context.Database.Migrate();

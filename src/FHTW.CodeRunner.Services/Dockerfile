@@ -4,11 +4,10 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
-RUN apt-get update
-RUN apt-get -y install curl gnupg
-RUN curl -sL https://deb.nodesource.com/setup_10.x  | bash -
-RUN apt-get -y install nodejs
-RUN npm install
+RUN apt-get update \
+	&& apt-get -y install curl gnupg \
+	&& curl -sL https://deb.nodesource.com/setup_10.x  | bash - \
+	&& apt-get -y install nodejs
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
@@ -18,6 +17,7 @@ COPY ["FHTW.CodeRunner.BusinessLogic.Interfaces/FHTW.CodeRunner.BusinessLogic.In
 COPY ["FHTW.CodeRunner.BusinessLogic.Entities/FHTW.CodeRunner.BusinessLogic.Entities.csproj", "FHTW.CodeRunner.BusinessLogic.Entities/"]
 COPY ["FHTW.CodeRunner.Services.Interfaces/FHTW.CodeRunner.Services.Interfaces.csproj", "FHTW.CodeRunner.Services.Interfaces/"]
 COPY ["FHTW.CodeRunner.BusinessLogic/FHTW.CodeRunner.BusinessLogic.csproj", "FHTW.CodeRunner.BusinessLogic/"]
+COPY ["FHTW.CodeRunner.Migrations/FHTW.CodeRunner.Migrations.csproj", "FHTW.CodeRunner.Migrations/"]
 COPY ["FHTW.CodeRunner.DataAccess.Sql/FHTW.CodeRunner.DataAccess.Sql.csproj", "FHTW.CodeRunner.DataAccess.Sql/"]
 COPY ["FHTW.CodeRunner.DataAccess.Entities/FHTW.CodeRunner.DataAccess.Entities.csproj", "FHTW.CodeRunner.DataAccess.Entities/"]
 COPY ["FHTW.CodeRunner.DataAccess.Interfaces/FHTW.CodeRunner.DataAccess.Interfaces.csproj", "FHTW.CodeRunner.DataAccess.Interfaces/"]
