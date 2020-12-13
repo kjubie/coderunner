@@ -8,6 +8,7 @@ using System.Text;
 using System.Linq;
 using FHTW.CodeRunner.DataAccess.Entities;
 using FHTW.CodeRunner.DataAccess.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace FHTW.CodeRunner.DataAccess.Sql
 {
@@ -20,8 +21,8 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         /// Initializes a new instance of the <see cref="UserRepository"/> class.
         /// </summary>
         /// <param name="dbcontext">The dbcontext to be used for the repository.</param>
-        public UserRepository(CodeRunnerContext dbcontext)
-            : base(dbcontext)
+        public UserRepository(CodeRunnerContext dbcontext, ILogger<UserRepository> logger)
+            : base(dbcontext, logger)
         {
         }
 

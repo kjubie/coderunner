@@ -7,6 +7,8 @@ using System.Linq;
 using FHTW.CodeRunner.DataAccess.Entities;
 using FHTW.CodeRunner.DataAccess.Interfaces;
 using FHTW.CodeRunner.DataAccess.Sql;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 
 namespace FHTW.CodeRunner.DataAccess.Tests
@@ -16,6 +18,19 @@ namespace FHTW.CodeRunner.DataAccess.Tests
     public class UserRepositoryTests
     {
         private CodeRunnerTestDb testDb;
+        private ILogger<UserRepository> userLogger;
+
+        [OneTimeSetUp]
+        public void Setup()
+        {
+            var serviceProvider = new ServiceCollection()
+                .AddLogging()
+                .BuildServiceProvider();
+
+            var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+
+            this.userLogger = loggerFactory.CreateLogger<UserRepository>();
+        }
 
         [TearDown]
         public void NullDatabase() => this.testDb = null;
@@ -26,7 +41,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             this.SetupDatabaseEmpty();
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
-                IUserRepository rep = new UserRepository(context);
+                IUserRepository rep = new UserRepository(context, this.userLogger);
 
                 User user = TestDataBuilder<User>.Single();
 
@@ -42,7 +57,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             this.SetupDatabaseSeeded();
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
-                IUserRepository rep = new UserRepository(context);
+                IUserRepository rep = new UserRepository(context, this.userLogger);
 
                 User user = TestDataBuilder<User>.Single();
 

@@ -36,6 +36,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         [Column("last_modified")]
         public DateTime LastModified { get; set; }
 
+        [Column("valid_flag")]
+        public bool ValidFlag { get; set; }
+
         [Column("fk_user_id")]
         public int FkUserId { get; set; }
 
