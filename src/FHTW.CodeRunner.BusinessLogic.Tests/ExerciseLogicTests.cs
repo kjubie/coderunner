@@ -4,6 +4,7 @@
 
 using AutoMapper;
 using FHTW.CodeRunner.BusinessLogic;
+using FHTW.CodeRunner.BusinessLogic.Exceptions;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using FHTW.CodeRunner.DataAccess.Interfaces;
 using FizzWare.NBuilder;
@@ -53,7 +54,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
         }
 
         [Test]
-        public void SaveExercise_InvalidExercise_ValidationException()
+        public void SaveExercise_NullExercise_ValidationException()
         {
             // Arrange
             var logger = Mock.Of<ILogger<ExerciseLogic>>();
@@ -71,13 +72,67 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
 
             IExerciseLogic logic = new ExerciseLogic(logger, mapper, repo);
 
+            BlEntities.Exercise nullExercise = null;
+
+            // Act
+            // Assert
+            Assert.Throws<BlValidationException>(() => logic.SaveExercise(nullExercise));
+        }
+
+        [Test]
+        public void ValidateExercise_ValidExercise_NoException()
+        {
+            // Arrange
+            var logger = Mock.Of<ILogger<ExerciseLogic>>();
+
+            IMapper mapper = new Mapper(
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<BlEntities.Exercise, DalEntities.Exercise>().ReverseMap();
+                    cfg.CreateMap<BlEntities.User, DalEntities.User>().ReverseMap();
+                }));
+
+            var repoMock = new Mock<IExerciseRepository>();
+            repoMock.Setup(p => p.Insert(It.IsAny<DalEntities.Exercise>()));
+
+            IExerciseRepository repo = repoMock.Object;
+
+            IExerciseLogic logic = new ExerciseLogic(logger, mapper, repo);
+
             var validExercise = Builder<BlEntities.Exercise>
                 .CreateNew()
+                .With(e => e.FkUser = new BlEntities.User() { Name = "Hans" })
                 .Build();
 
             // Act
             // Assert
-            Assert.Throws<FluentValidation.ValidationException>(() => logic.SaveExercise(validExercise));
+            Assert.DoesNotThrow(() => logic.SaveExercise(validExercise));
+        }
+
+        [Test]
+        public void ValidateExercise_NullExercise_ValidationException()
+        {
+            // Arrange
+            var logger = Mock.Of<ILogger<ExerciseLogic>>();
+
+            IMapper mapper = new Mapper(
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<BlEntities.Exercise, DalEntities.Exercise>().ReverseMap();
+                }));
+
+            var repoMock = new Mock<IExerciseRepository>();
+            repoMock.Setup(p => p.Insert(It.IsAny<DalEntities.Exercise>()));
+
+            IExerciseRepository repo = repoMock.Object;
+
+            IExerciseLogic logic = new ExerciseLogic(logger, mapper, repo);
+
+            BlEntities.Exercise nullExercise = null;
+
+            // Act
+            // Assert
+            Assert.Throws<BlValidationException>(() => logic.SaveExercise(nullExercise));
         }
     }
 }

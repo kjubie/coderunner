@@ -32,11 +32,6 @@ namespace FHTW.CodeRunner.BusinessLogic
         {
             var dalUser = this.mapper.Map<DalEntities.User>(user);
             bool result = this.userRepository.Authenticate(dalUser);
-            /*
-            if (user.Name == "root" && user.Password == "toor")
-            {
-                return true;
-            }*/
 
             return result;
         }

@@ -63,5 +63,21 @@ namespace FHTW.CodeRunner.Services.Controllers
             this.exerciseLogic.SaveExercise(blExercise);
             return this.Ok();
         }
+
+        [HttpPost]
+        [Route("exercise/validate")]
+        public virtual IActionResult ValidateExercise([FromBody] SvcEntities.Exercise body)
+        {
+            if (body == null)
+            {
+                // TODO: Error Model
+                return this.BadRequest("Exercise should not be null");
+            }
+
+            var blExercise = this.mapper.Map<BlEntities.Exercise>(body);
+
+            this.exerciseLogic.ValidateExercise(blExercise);
+            return this.Ok();
+        }
     }
 }
