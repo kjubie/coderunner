@@ -17,6 +17,13 @@ namespace FHTW.CodeRunner.BusinessLogic.Validators
         /// </summary>
         public ExerciseBodyValidator()
         {
+            this.RuleFor(eb => eb.FkProgrammingLanguage)
+                .NotNull()
+                .SetValidator(new ProgrammingLanguageValidator());
+
+            this.RuleFor(eb => eb.FkTestSuite)
+                .NotNull()
+                .SetValidator(new TestSuiteValidator());
         }
     }
 }

@@ -26,6 +26,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Validators
                 .SetValidator(new WrittenLanguageValidator());
 
             this.RuleForEach(ev => ev.ExerciseBody)
+                .NotNull()
                 .SetValidator(new ExerciseBodyValidator());
         }
     }

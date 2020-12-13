@@ -17,6 +17,11 @@ namespace FHTW.CodeRunner.BusinessLogic.Validators
         /// </summary>
         public ExerciseHeaderValidator()
         {
+            this.RuleFor(eh => eh.FullTitle)
+                .NotEmpty();
+
+            this.RuleFor(eh => eh.Introduction)
+                .NotEmpty();
         }
     }
 }
