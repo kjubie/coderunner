@@ -20,6 +20,12 @@ namespace FHTW.CodeRunner.BusinessLogic
         private readonly IMapper mapper;
         private readonly IUserRepository userRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserLogic"/> class.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="mapper"></param>
+        /// <param name="userRepository"></param>
         public UserLogic(ILogger<UserLogic> logger, IMapper mapper, IUserRepository userRepository)
         {
             this.logger = logger;

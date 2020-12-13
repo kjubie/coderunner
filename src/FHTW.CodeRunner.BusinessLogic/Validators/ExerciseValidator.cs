@@ -19,12 +19,16 @@ namespace FHTW.CodeRunner.BusinessLogic.Validators
             this.RuleFor(e => e.Title)
                 .NotNull();
 
-            this.RuleFor(e => e.Created)
-                .NotNull();
-
             this.RuleFor(e => e.FkUser)
                 .NotNull()
                 .SetValidator(new UserValidator());
+
+            this.RuleForEach(e => e.ExerciseTag)
+                .SetValidator(new ExerciseTagValidator());
+
+            this.RuleForEach(e => e.ExerciseVersion)
+                .NotNull()
+                .SetValidator(new ExerciseVersionValidator());
         }
     }
 }

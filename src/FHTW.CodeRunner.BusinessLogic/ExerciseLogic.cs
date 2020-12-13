@@ -64,19 +64,27 @@ namespace FHTW.CodeRunner.BusinessLogic
 
         public void ValidateExercise(BlEntities.Exercise exercise)
         {
-            IValidator<BlEntities.Exercise> validator = new ExerciseValidator();
-            var validationResult = validator.Validate(exercise);
-
-            if (validationResult.IsValid)
+            if (exercise == null)
             {
-                var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
-                this.exerciseRepository.Insert(dalExercise);
-                this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
+                this.logger.LogError("Exercise is null");
+                throw new BlValidationException("Exercise is null", null);
             }
             else
             {
-                this.logger.LogError("BL received invalid Exercise in SaveExercise with Title: " + exercise.Title);
-                throw new ValidationException("exercise " + validationResult.Errors.Select(err => err.ErrorMessage).ToString());
+                IValidator<BlEntities.Exercise> validator = new ExerciseValidator();
+                var validationResult = validator.Validate(exercise);
+
+                if (validationResult.IsValid)
+                {
+                    var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
+                    this.exerciseRepository.Insert(dalExercise);
+                    this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
+                }
+                else
+                {
+                    this.logger.LogError("BL received invalid Exercise in SaveExercise with Title: " + exercise.Title);
+                    throw new ValidationException("exercise " + validationResult.Errors.Select(err => err.ErrorMessage).ToString());
+                }
             }
         }
     }

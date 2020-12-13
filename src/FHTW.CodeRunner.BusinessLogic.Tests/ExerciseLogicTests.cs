@@ -106,7 +106,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
 
             // Act
             // Assert
-            Assert.DoesNotThrow(() => logic.SaveExercise(validExercise));
+            Assert.DoesNotThrow(() => logic.ValidateExercise(validExercise));
         }
 
         [Test]
@@ -132,7 +132,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
 
             // Act
             // Assert
-            Assert.Throws<BlValidationException>(() => logic.SaveExercise(nullExercise));
+            Assert.Throws<BlValidationException>(() => logic.ValidateExercise(nullExercise));
         }
     }
 }
