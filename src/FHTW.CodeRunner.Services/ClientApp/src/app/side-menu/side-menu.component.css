@@ -36,7 +36,7 @@ mat-sidenav, li {
     cursor: pointer;
 }
 
-li img {
+img {
     width: 15px;
     height: 15px;
     margin-bottom: 2.5px;
@@ -63,4 +63,13 @@ li img {
 .active {
     border-bottom: rgb(53, 171, 240) solid 2px;
     font-weight: 500;
+}
+
+#addLangBtn {
+    color: rgb(53, 171, 240);
+    padding: 0;
+}
+
+.dropdown-toggle::after {
+    display: none;
 }

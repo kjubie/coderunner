@@ -12,13 +12,22 @@ export class SideMenuComponent {
     @Output() addProgrammingLangEvent = new EventEmitter<string>();
     writtenLang = ["German"];
     programmingLang = [];
-    testCases = ["Test"]
+    testCases = ["Test"];
     showHeadList = true;
     showBodyList = true;
+    availableLangs = ["English", "French", "Spanish"];
+    isLangAvailable = true;
 
     addLanguage(lang: string) {
-        this.writtenLang.push(lang);
-        this.addWrittenLangEvent.emit(lang);
+        if (this.availableLangs.indexOf(lang) != -1) {
+            let idx = this.availableLangs.indexOf(lang);
+            this.availableLangs.splice(idx, 1);
+            if (this.availableLangs.length == 0) {
+                this.isLangAvailable = false;
+            }
+            this.writtenLang.push(lang);
+            this.addWrittenLangEvent.emit(lang);
+        }
     }
 
     addProgrammingLanguage(lang: string) {

@@ -3,14 +3,14 @@
 <div class="container contentSeperator">
     <form>
         <div class="from-group row">
-            <label for="programmingLang" class="col-2 col-form-label">Language</label>
+            <!-- <label for="programmingLang" class="col-2 col-form-label">Language</label>
             <div class="col-10">
-                <!-- ToDo: read from Database -->
-                <!-- Possibility to add new Language here? -->
+                ToDo: read from Database
+                Possibility to add new Language here?
                 <select class="form-control" id="programmingLang" name="name" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.programmingLanguage.name">
                     <option *ngFor="let lang of languages" [ngValue]="lang">{{ lang }}</option>
                 </select>
-            </div>
+            </div> -->
             <label for="description" class="col-2 col-form-label">Description</label>
             <div class="col-10">
                 <textarea class="form-control-plaintext" id="description" name="description" rows="9" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.description"></textarea>

@@ -12,6 +12,11 @@ namespace FHTW.CodeRunner.BusinessLogic.Exceptions
     [ExcludeFromCodeCoverage]
     public class BlValidationException : BlException
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BlValidationException"/> class.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="inner"></param>
         public BlValidationException(string message, Exception inner)
             : base(message, inner)
         {

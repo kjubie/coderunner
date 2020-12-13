@@ -20,6 +20,12 @@ namespace FHTW.CodeRunner.BusinessLogic
         private readonly IMapper mapper;
         private readonly IUserRepository userRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserLogic"/> class.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="mapper"></param>
+        /// <param name="userRepository"></param>
         public UserLogic(ILogger<UserLogic> logger, IMapper mapper, IUserRepository userRepository)
         {
             this.logger = logger;
@@ -32,11 +38,6 @@ namespace FHTW.CodeRunner.BusinessLogic
         {
             var dalUser = this.mapper.Map<DalEntities.User>(user);
             bool result = this.userRepository.Authenticate(dalUser);
-            /*
-            if (user.Name == "root" && user.Password == "toor")
-            {
-                return true;
-            }*/
 
             return result;
         }

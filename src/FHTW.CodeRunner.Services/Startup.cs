@@ -2,6 +2,8 @@
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
+using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
 using FHTW.CodeRunner.BusinessLogic;
@@ -42,8 +44,18 @@ namespace FHTW.CodeRunner.Services
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // change "DefaultConnection" to "DockerConnection" when running in docker
-            string connection = this.Configuration.GetConnectionString("DockerConnection");
+            string connection;
+
+            if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
+            {
+                Debug.WriteLine("Running inside of Docker");
+                connection = this.Configuration.GetConnectionString("DockerConnection");
+            }
+            else
+            {
+                Debug.WriteLine("Running outside of Docker");
+                connection = this.Configuration.GetConnectionString("DefaultConnection");
+            }
 
             services.AddDbContext<CodeRunnerContext>(
                 options =>

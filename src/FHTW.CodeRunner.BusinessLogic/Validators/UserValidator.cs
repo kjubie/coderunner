@@ -2,9 +2,9 @@
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using FHTW.CodeRunner.BusinessLogic.Entities;
 using FluentValidation;
-using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.BusinessLogic.Validators
 {
@@ -17,7 +17,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Validators
         public UserValidator()
         {
             this.RuleFor(b => b.Name)
-                .NotNull();
+                .NotEmpty();
         }
     }
 }

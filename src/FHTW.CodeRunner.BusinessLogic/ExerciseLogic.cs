@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoMapper;
+using FHTW.CodeRunner.BusinessLogic.Exceptions;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using FHTW.CodeRunner.BusinessLogic.Validators;
 using FHTW.CodeRunner.DataAccess.Interfaces;
@@ -48,19 +49,42 @@ namespace FHTW.CodeRunner.BusinessLogic
         /// <inheritdoc/>
         public void SaveExercise(BlEntities.Exercise exercise)
         {
-            IValidator<BlEntities.Exercise> validator = new ExerciseValidator();
-            var validationResult = validator.Validate(exercise);
-
-            if (validationResult.IsValid)
+            if (exercise == null)
+            {
+                this.logger.LogError("Exercise is null");
+                throw new BlValidationException("Exercise is null", null);
+            }
+            else
             {
                 var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
                 this.exerciseRepository.Insert(dalExercise);
                 this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
             }
+        }
+
+        public void ValidateExercise(BlEntities.Exercise exercise)
+        {
+            if (exercise == null)
+            {
+                this.logger.LogError("Exercise is null");
+                throw new BlValidationException("Exercise is null", null);
+            }
             else
             {
-                this.logger.LogError("BL received invalid Exercise in SaveExercise with Title: " + exercise.Title);
-                throw new ValidationException("exercise " + validationResult.Errors.Select(err => err.ErrorMessage).ToString());
+                IValidator<BlEntities.Exercise> validator = new ExerciseValidator();
+                var validationResult = validator.Validate(exercise);
+
+                if (validationResult.IsValid)
+                {
+                    var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
+                    this.exerciseRepository.Insert(dalExercise);
+                    this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
+                }
+                else
+                {
+                    this.logger.LogError("BL received invalid Exercise in SaveExercise with Title: " + exercise.Title);
+                    throw new ValidationException("exercise " + validationResult.Errors.Select(err => err.ErrorMessage).ToString());
+                }
             }
         }
     }

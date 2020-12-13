@@ -12,6 +12,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
     public interface IExerciseLogic
     {
         Exercise GetTestExercise(int id);
+
         public void SaveExercise(Exercise exercise);
+
+        public void ValidateExercise(Exercise exercise);
     }
 }

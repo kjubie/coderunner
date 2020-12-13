@@ -23,6 +23,9 @@ export class ExerciseCreateComponent implements OnInit {
   @Output() exercise: Exercise;
   savedExercise: Exercise;
   selectedElement = 'General';
+  writtenLangIdx: number;
+  programmingLangIdx: number;
+  testIdx: number;
 
   constructor(private createExerciseService: CreateExerciseService) {}
   
@@ -30,10 +33,10 @@ export class ExerciseCreateComponent implements OnInit {
     this.tabSelected = tab;
   }
 
-  saveExercise(ex: Exercise) {
-    console.log(ex);
-    this.createExerciseService.saveExercise(ex).subscribe(this.createExerciseObserver);
-  }
+  // saveExercise(ex: Exercise) {
+  //   console.log(ex);
+  //   this.createExerciseService.saveExercise(ex).subscribe(this.createExerciseObserver);
+  // }
 
   createExerciseObserver = {
     next: x => { this.saveExercise = x },
@@ -58,6 +61,23 @@ export class ExerciseCreateComponent implements OnInit {
 
   setSelectedElement(element: string) {
     this.selectedElement = element;
+    console.log(this.selectedElement);
+
+    let split = [];
+
+    if (this.selectedElement.includes('WrittenLang')) {
+      split = this.selectedElement.split('WrittenLang');
+      this.writtenLangIdx = parseInt(split[1]);
+    }
+    else if (this.selectedElement.includes('Programming')) {
+      split = this.selectedElement.split('Programming');
+      split = split[1].split('_');
+      this.programmingLangIdx = parseInt(split[0]);
+    }
+    else if (this.selectedElement.includes('Test')) {
+      split = this.selectedElement.split('Test');
+      this.testIdx = parseInt(split[1]);
+    }
   }
 
   addWrittenLang(lang: string) {
@@ -65,7 +85,7 @@ export class ExerciseCreateComponent implements OnInit {
     exerciseLang.writtenLanguage = new WrittenLanguage();
     exerciseLang.writtenLanguage.name = lang;
     this.exercise.exerciseVersionList[0].exerciseLanguageList.push(exerciseLang);
-    console.log(this.exercise.exerciseVersionList[0].exerciseLanguageList);
+    // console.log(this.exercise.exerciseVersionList[0].exerciseLanguageList);
   }
 
   addProgrammingLang(lang: string) {
@@ -74,5 +94,10 @@ export class ExerciseCreateComponent implements OnInit {
     exerciseBody.programmingLanguage.name = lang;
 
     this.exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody = exerciseBody;
+  }
+
+  saveExercise() {
+    console.log(this.exercise);
+    this.createExerciseService.saveExercise(this.exercise).subscribe(this.createExerciseObserver);
   }
 }
