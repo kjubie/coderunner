@@ -1,4 +1,4 @@
-﻿// <copyright file="WrittenLanguageValidator.cs" company="FHTW CodeRunner">
+﻿// <copyright file="ProgrammingLanguageValidator.cs" company="FHTW CodeRunner">
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
@@ -10,14 +10,14 @@ using FluentValidation;
 
 namespace FHTW.CodeRunner.BusinessLogic.Validators
 {
-    public class WrittenLanguageValidator : AbstractValidator<WrittenLanguage>
+    public class ProgrammingLanguageValidator : AbstractValidator<ProgrammingLanguage>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WrittenLanguageValidator"/> class.
+        /// Initializes a new instance of the <see cref="ProgrammingLanguageValidator"/> class.
         /// </summary>
-        public WrittenLanguageValidator()
+        public ProgrammingLanguageValidator()
         {
-            this.RuleFor(wl => wl.Name)
+            this.RuleFor(pl => pl.Name)
                 .NotEmpty();
         }
     }
