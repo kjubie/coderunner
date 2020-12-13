@@ -85,7 +85,7 @@ export class ExerciseCreateComponent implements OnInit {
     exerciseLang.writtenLanguage = new WrittenLanguage();
     exerciseLang.writtenLanguage.name = lang;
     this.exercise.exerciseVersionList[0].exerciseLanguageList.push(exerciseLang);
-    console.log(this.exercise.exerciseVersionList[0].exerciseLanguageList);
+    // console.log(this.exercise.exerciseVersionList[0].exerciseLanguageList);
   }
 
   addProgrammingLang(lang: string) {
