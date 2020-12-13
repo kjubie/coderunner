@@ -75,8 +75,16 @@ using FHTW.CodeRunner.DataAccess.Entities;
             Debug.Assert(!context.Database.EnsureCreated(), "Seed() should be called after CreateDb()");
 
             var user = TestDataBuilder<User>.Single();
-
             context.Add(user);
+
+            var language = TestDataBuilder<WrittenLanguage>.Many(3);
+            context.AddRange(language);
+
+            var programmingLanguage = TestDataBuilder<ProgrammingLanguage>.Many(3);
+            context.AddRange(programmingLanguage);
+
+            var tags= TestDataBuilder<Tag>.Many(10);
+            context.AddRange(tags);
 
             context.SaveChanges();
         }

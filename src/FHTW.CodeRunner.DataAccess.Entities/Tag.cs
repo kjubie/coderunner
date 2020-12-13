@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
     [Table("tag")]
-    public partial class Tag
+    public partial class Tag : IEntity
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Tag"/> class.

@@ -35,9 +35,11 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         [StringLength(255)]
         public string Title { get; set; }
 
+        [Required]
         [Column("created")]
         public DateTime Created { get; set; }
 
+        [Required]
         [Column("fk_user_id")]
         public int FkUserId { get; set; }
 

@@ -77,7 +77,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             modelBuilder.Entity<Collection>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.FkUser)
                     .WithMany(p => p.Collection)
@@ -88,7 +88,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             modelBuilder.Entity<CollectionExercise>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.FkCollectionLanguage)
                     .WithMany(p => p.CollectionExercise)
@@ -117,7 +117,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             modelBuilder.Entity<CollectionLanguage>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.FkCollection)
                     .WithMany(p => p.CollectionLanguage)
@@ -128,7 +128,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             modelBuilder.Entity<CollectionTag>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.FkCollection)
                     .WithMany(p => p.CollectionTag)
@@ -145,7 +145,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             modelBuilder.Entity<Comment>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.FkExercise)
                     .WithMany(p => p.Comment)
@@ -162,7 +162,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             modelBuilder.Entity<Difficulty>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.FkExercise)
                     .WithMany(p => p.Difficulty)
@@ -179,7 +179,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             modelBuilder.Entity<Exercise>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.FkUser)
                     .WithMany(p => p.Exercise)
@@ -190,7 +190,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             modelBuilder.Entity<ExerciseBody>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.FkExerciseLanguage)
                     .WithMany(p => p.ExerciseBody)
@@ -221,12 +221,12 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             modelBuilder.Entity<ExerciseHeader>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<ExerciseLanguage>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.FkExerciseHeader)
                     .WithMany(p => p.ExerciseLanguage)
@@ -249,7 +249,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             modelBuilder.Entity<ExerciseTag>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.FkExercise)
                     .WithMany(p => p.ExerciseTag)
@@ -266,7 +266,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             modelBuilder.Entity<ExerciseVersion>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.FkExercise)
                     .WithMany(p => p.ExerciseVersion)
@@ -279,16 +279,19 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                     .HasForeignKey(d => d.FkUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("exercise_version_fk_user_id_fkey");
+
+                entity.HasIndex(d => new { d.FkExerciseId, d.VersionNumber })
+                    .IsUnique();
             });
 
             modelBuilder.Entity<ProgrammingLanguage>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<Rating>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.FkExercise)
                     .WithMany(p => p.Rating)
@@ -305,12 +308,12 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             modelBuilder.Entity<Tag>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<TestCase>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.FkTestSuite)
                     .WithMany(p => p.TestCase)
@@ -321,12 +324,12 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             modelBuilder.Entity<TestSuite>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<WrittenLanguage>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
             });
 
             this.OnModelCreatingPartial(modelBuilder);

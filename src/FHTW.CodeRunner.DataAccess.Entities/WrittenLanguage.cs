@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
     [Table("written_language")]
-    public partial class WrittenLanguage
+    public partial class WrittenLanguage : IEntity
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="WrittenLanguage"/> class.

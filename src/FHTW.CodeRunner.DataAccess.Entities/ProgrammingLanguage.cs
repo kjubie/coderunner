@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
     [Table("programming_language")]
-    public partial class ProgrammingLanguage
+    public partial class ProgrammingLanguage : IEntity
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ProgrammingLanguage"/> class.

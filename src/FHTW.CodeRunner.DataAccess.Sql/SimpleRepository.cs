@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using FHTW.CodeRunner.DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace FHTW.CodeRunner.DataAccess.Sql
 {
@@ -20,6 +21,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         where TEntity : class, new()
         where TContext : DbContext, new()
     {
+        private readonly ILogger logger;
         private readonly TContext context = null;
         private readonly DbSet<TEntity> table = null;
 
@@ -39,10 +41,11 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         /// Initializes a new instance of the <see cref="SimpleRepository{TEntity, TContext}"/> class.
         /// </summary>
         /// <param name="context">The context to be injected.</param>
-        public SimpleRepository(TContext context)
+        public SimpleRepository(TContext context, ILogger logger)
         {
             this.context = context;
             this.table = this.context.Set<TEntity>();
+            this.logger = logger;
         }
 
         /// <summary>
@@ -53,6 +56,17 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             get
             {
                 return this.context;
+            }
+        }
+
+        /// <summary>
+        /// Gets the logger of the child class.
+        /// </summary>
+        protected ILogger Logger
+        {
+            get
+            {
+                return this.logger;
             }
         }
 
