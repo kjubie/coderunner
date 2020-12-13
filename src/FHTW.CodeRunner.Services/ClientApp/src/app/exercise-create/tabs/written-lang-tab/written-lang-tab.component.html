@@ -4,27 +4,24 @@
     <form>
         <div class="from-group row">
             <!-- ToDo: add new language and set details for every language -->
-            <label for="writtenLang" class="col-2 col-form-label">Written Language</label>
+            <!-- <label for="writtenLang" class="col-2 col-form-label">Written Language</label>
             <div class="col-10">
                 <select class="form-control" id="writtenLang" name="name" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].writtenLanguage.name">
                     <option *ngFor="let lang of languages" [ngValue]="lang">{{ lang }}</option>
                 </select>
-            </div>
+            </div> -->
             <label for="fullTitle" class="col-2 col-form-label">Exercise Title</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext" id="fullTitle" name="fullTitle" placeholder="Full Title" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.fullTitle">
+                <input type="text" class="form-control-plaintext" id="fullTitle" name="fullTitle" placeholder="Full Title" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[idx].exerciseHeader.fullTitle">
             </div>
             <label for="shortTitle" class="col-2 col-form-label">Short Title</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext" id="shortTitle" name="shortTitle" placeholder="Short Title" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.shortTitle">
+                <input type="text" class="form-control-plaintext" id="shortTitle" name="shortTitle" placeholder="Short Title" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[idx].exerciseHeader.shortTitle">
             </div>
             <label for="introduction" class="col-2 col-form-label">Exercise Introduction</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="introduction" name="introduction" rows="4" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.introduction"></textarea>
+                <textarea class="form-control-plaintext" id="introduction" name="introduction" rows="4" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[idx].exerciseHeader.introduction"></textarea>
             </div>
-        </div>
-        <div class="text-right">
-            <input type="button" class="btn btn-primary next-btn" (click)="setTab('programming')" value="Next">
         </div>
     </form>
 </div>

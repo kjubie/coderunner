@@ -2,12 +2,12 @@
 
 <div class="content">
     <general-tab *ngIf="selectedElement == 'General'" [exercise]="exercise"></general-tab>
-    <written-lang-tab *ngIf="selectedElement.includes('WrittenLang')" [exercise]="exercise"></written-lang-tab>
+    <written-lang-tab *ngIf="selectedElement.includes('WrittenLang')" [exercise]="exercise" [idx]="writtenLangIdx"></written-lang-tab>
     <programming-tab *ngIf="selectedElement.includes('Programming')" [exercise]="exercise"></programming-tab>
     <test-suit-tab *ngIf="selectedElement.includes('Test')" [exercise]="exercise"></test-suit-tab>
 </div>
 
 <div class="text-right">
-    <input type="button" class="btn btn-primary next-btn" value="Save">
+    <input type="button" class="btn btn-primary next-btn" value="Save" (click)="saveExercise()">
     <input type="button" class="btn btn-primary next-btn" value="Summary">
 </div>
