@@ -82,6 +82,8 @@ namespace FHTW.CodeRunner.Services.AutoMapper
                 .ReverseMap();
 
             this.CreateMap<SvcEntities.UserAuthentication, BlEntities.User>();
+
+            this.CreateMap<BlEntities.ExerciseCreatePreparation, SvcEntities.ExerciseCreatePreparation>();
         }
     }
 }

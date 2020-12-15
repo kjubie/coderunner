@@ -37,6 +37,18 @@ namespace FHTW.CodeRunner.BusinessLogic
             this.exerciseRepository = exerciseRepository;
         }
 
+        public BlEntities.ExerciseCreatePreparation GetExerciseCreatePreparation()
+        {
+            BlEntities.ExerciseCreatePreparation exerciseCreatePreparation = new BlEntities.ExerciseCreatePreparation();
+
+            // TODO: Call dal functions
+            exerciseCreatePreparation.ProgrammingLanguages = null;
+            exerciseCreatePreparation.WrittenLanguages = null;
+            exerciseCreatePreparation.QuestionTypes = null;
+
+            return exerciseCreatePreparation;
+        }
+
         /// <inheritdoc/>
         public BlEntities.Exercise GetTestExercise(int id)
         {

@@ -25,6 +25,36 @@ namespace FHTW.CodeRunner.Services.Tests
         }
 
         [Test]
+        public void GetExerciseCreatePreparation_Ok()
+        {
+            // Arrange
+            var logger = Mock.Of<ILogger<ExerciseApiController>>();
+
+            IMapper mapper = new Mapper(
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<BlEntities.ExerciseCreatePreparation, SvcEntities.ExerciseCreatePreparation>();
+                }));
+
+            var logicMock = new Mock<IExerciseLogic>();
+
+            var exerciseCreatePreparation = Builder<BlEntities.ExerciseCreatePreparation>
+                .CreateNew()
+                .Build();
+
+            logicMock.Setup(p => p.GetExerciseCreatePreparation()).Returns(exerciseCreatePreparation);
+
+            IExerciseLogic logic = logicMock.Object;
+            ExerciseApiController controller = new ExerciseApiController(logger, mapper, logic);
+
+            // Act
+            var response = controller.GetExerciseCreatePreparation();
+
+            // Assert
+            Assert.IsInstanceOf<OkObjectResult>(response);
+        }
+
+        [Test]
         public void SaveExercise_ValidExercise_Ok()
         {
             // Arrange

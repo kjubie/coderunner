@@ -54,8 +54,10 @@ namespace FHTW.CodeRunner.Services.Controllers
         {
             if (body == null)
             {
-                // TODO: Error Model
-                return this.BadRequest("Exercise should not be null");
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = "Exercise should not be null",
+                });
             }
 
             var blExercise = this.mapper.Map<BlEntities.Exercise>(body);
@@ -70,14 +72,26 @@ namespace FHTW.CodeRunner.Services.Controllers
         {
             if (body == null)
             {
-                // TODO: Error Model
-                return this.BadRequest("Exercise should not be null");
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = "Exercise should not be null",
+                });
             }
 
             var blExercise = this.mapper.Map<BlEntities.Exercise>(body);
 
             this.exerciseLogic.ValidateExercise(blExercise);
             return this.Ok();
+        }
+
+        [HttpGet]
+        [Route("exercise/prepare")]
+        public virtual IActionResult GetExerciseCreatePreparation()
+        {
+            BlEntities.ExerciseCreatePreparation blExerciseCreatePreparation = this.exerciseLogic.GetExerciseCreatePreparation();
+            var svcExerciseCreatePreparation = this.mapper.Map<SvcEntities.ExerciseCreatePreparation>(blExerciseCreatePreparation);
+
+            return this.Ok(svcExerciseCreatePreparation);
         }
     }
 }
