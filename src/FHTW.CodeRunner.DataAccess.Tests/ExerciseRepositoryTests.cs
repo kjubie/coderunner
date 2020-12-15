@@ -2,16 +2,16 @@
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using FHTW.CodeRunner.DataAccess.Entities;
 using FHTW.CodeRunner.DataAccess.Interfaces;
 using FHTW.CodeRunner.DataAccess.Sql;
 using Microsoft.EntityFrameworkCore;
-using NUnit.Framework;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+using NUnit.Framework;
 
 namespace FHTW.CodeRunner.DataAccess.Tests
 {

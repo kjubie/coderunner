@@ -94,6 +94,8 @@ namespace FHTW.CodeRunner.Services
 
             services.AddTransient<IExerciseLogic, ExerciseLogic>();
             services.AddTransient<IUserLogic, UserLogic>();
+            services.AddTransient<IExportLogic, ExportLogic>();
+
             services.AddTransient<IExerciseRepository, ExerciseRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
 

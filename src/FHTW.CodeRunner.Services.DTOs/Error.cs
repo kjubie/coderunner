@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="Error.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
