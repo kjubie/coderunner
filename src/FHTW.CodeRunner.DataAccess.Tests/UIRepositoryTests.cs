@@ -68,6 +68,21 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             }
         }
 
+        [Test]
+        public void ShouldGetQuestionTypes()
+        {
+            this.SetupDatabaseSeeded();
+            using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
+            {
+                IUIRepository rep = new UIRepository(context, this.logger);
+
+                var questionTypes = rep.GetQuestionTypes();
+
+                Assert.IsNotNull(questionTypes);
+                Assert.IsTrue(questionTypes.Count == CodeRunnerTestDb.QUESTIONTYPESCOUNT);
+            }
+        }
+
         private void SetupDatabaseEmpty() => this.testDb = new CodeRunnerTestDb(DbTestController.State.EMPTY);
 
         private void SetupDatabaseSeeded() => this.testDb = new CodeRunnerTestDb(DbTestController.State.SEEDED);

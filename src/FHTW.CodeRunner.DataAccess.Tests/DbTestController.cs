@@ -25,6 +25,11 @@
         /// </summary>
         public static readonly int WRITTENLANUGAGESCOUNT = 3;
 
+        /// <summary>
+        /// The ammount of questiontypes in the test database.
+        /// </summary>
+        public static readonly int QUESTIONTYPESCOUNT = 3;
+
         private readonly DbContextOptions<CodeRunnerContext> contextOptions;
 
         /// <summary>
@@ -93,8 +98,11 @@
             var programmingLanguage = TestDataBuilder<ProgrammingLanguage>.Many(PROGRAMMINGLANUGAGESCOUNT);
             context.AddRange(programmingLanguage);
 
-            var tags= TestDataBuilder<Tag>.Many(10);
+            var tags = TestDataBuilder<Tag>.Many(10);
             context.AddRange(tags);
+
+            var questionTypes = TestDataBuilder<QuestionType>.Many(QUESTIONTYPESCOUNT);
+            context.AddRange(questionTypes);
 
             context.SaveChanges();
         }

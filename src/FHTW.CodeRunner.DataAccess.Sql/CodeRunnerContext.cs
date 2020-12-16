@@ -65,6 +65,8 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
         public virtual DbSet<WrittenLanguage> WrittenLanguage { get; set; }
 
+        public virtual DbSet<QuestionType> QuestionType { get; set; }
+
         /// <inheritdoc/>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -328,6 +330,11 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             });
 
             modelBuilder.Entity<WrittenLanguage>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            });
+
+            modelBuilder.Entity<QuestionType>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
             });

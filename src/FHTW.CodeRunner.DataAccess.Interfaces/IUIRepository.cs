@@ -25,5 +25,11 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// </summary>
         /// <returns>returns a list containing all written languages.</returns>
         List<WrittenLanguage> GetWrittenLanguages();
+
+        /// <summary>
+        /// Gets a list with all questiontypes.
+        /// </summary>
+        /// <returns>returns a list containing all questiontypes.</returns>
+        List<QuestionType> GetQuestionTypes();
     }
 }

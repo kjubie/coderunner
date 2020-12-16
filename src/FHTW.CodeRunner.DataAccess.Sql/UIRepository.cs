@@ -59,5 +59,19 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 throw new DalException(e.Message, e);
             }
         }
+
+        /// <inheritdoc/>
+        public List<QuestionType> GetQuestionTypes()
+        {
+            try
+            {
+                return this.context.QuestionType.ToList();
+            }
+            catch (Exception e)
+            {
+                this.logger.LogError("Error in QuestionType()", e);
+                throw new DalException(e.Message, e);
+            }
+        }
     }
 }

@@ -35,9 +35,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         /// Gets or Sets the question type.
         /// </summary>
         [Required]
-        [Column("question_type")]
+        [Column("fk_question_type_id")]
         [StringLength(255)]
-        public string QuestionType { get; set; }
+        public int FkQuestionTypeId { get; set; }
 
         /// <summary>
         /// Gets or Sets a value indicating whether the from the template generated program should be displayed.
@@ -93,5 +93,11 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         /// </summary>
         [InverseProperty("FkTestSuite")]
         public virtual ICollection<TestCase> TestCase { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the questiontype foreign property.
+        /// </summary>
+        [ForeignKey(nameof(FkQuestionTypeId))]
+        public QuestionType FkQuestionType { get; set; }
     }
 }
