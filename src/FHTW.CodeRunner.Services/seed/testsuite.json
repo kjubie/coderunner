@@ -1,7 +1,7 @@
 [
     {   // Exercise 1, C++, V1
         "Id": 1,
-        "QuestionType": "question_type_c++_V1",
+        "FkQuestionTypeId": 1,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
         "GlobalExtraParam": "global_extra_param_c++_V1",
@@ -12,7 +12,7 @@
     },
     {   // Exercise 1, C#, V1
         "Id": 2,
-        "QuestionType": "question_type_c#_V1",
+        "FkQuestionTypeId": 2,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
         "GlobalExtraParam": "global_extra_param_c#_V1",
@@ -23,7 +23,7 @@
     },
     {   // Exercise 1, C++, V2
         "Id": 3,
-        "QuestionType": "question_type_c++_V2",
+        "FkQuestionTypeId": 1,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
         "GlobalExtraParam": "global_extra_param_c++_V2",
@@ -34,7 +34,7 @@
     },
     {   // Exercise 1, C#, V2
         "Id": 4,
-        "QuestionType": "question_type_c#_V12",
+        "FkQuestionTypeId": 2,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
         "GlobalExtraParam": "global_extra_param_c#_V2",
@@ -45,7 +45,7 @@
     },
     {   // Exercise 1, C++, V3
         "Id": 5,
-        "QuestionType": "question_type_c++_V3",
+        "FkQuestionTypeId": 1,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
         "GlobalExtraParam": "global_extra_param_c++_V3",
@@ -56,7 +56,7 @@
     },
     {   // Exercise 1, C#, V3
         "Id": 6,
-        "QuestionType": "question_type_c#_V3",
+        "FkQuestionTypeId": 2,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
         "GlobalExtraParam": "global_extra_param_c#_V3",
@@ -67,7 +67,7 @@
     },
     {   // Exercise 2, Python, V1
         "Id": 7,
-        "QuestionType": "question_type_py_V1",
+        "FkQuestionTypeId": 3,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
         "GlobalExtraParam": "global_extra_param_py_V1",
@@ -78,7 +78,7 @@
     },
     {   // Exercise 2, Java, V1
         "Id": 8,
-        "QuestionType": "question_type_java_V1",
+        "FkQuestionTypeId": 4,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
         "GlobalExtraParam": "global_extra_param_java_V1",
@@ -89,7 +89,7 @@
     },
     {   // Exercise 3, C, V1
         "Id": 9,
-        "QuestionType": "question_type_c_V1",
+        "FkQuestionTypeId": 5,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
         "GlobalExtraParam": "global_extra_param_c_V1",

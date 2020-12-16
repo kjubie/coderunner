@@ -34,10 +34,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         /// <summary>
         /// Gets or Sets the question type.
         /// </summary>
-        [Required]
         [Column("fk_question_type_id")]
         [StringLength(255)]
-        public int FkQuestionTypeId { get; set; }
+        public int? FkQuestionTypeId { get; set; }
 
         /// <summary>
         /// Gets or Sets a value indicating whether the from the template generated program should be displayed.
