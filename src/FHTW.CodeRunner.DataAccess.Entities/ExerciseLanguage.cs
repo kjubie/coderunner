@@ -6,9 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
+    [ExcludeFromCodeCoverage]
     [Table("exercise_language")]
     public partial class ExerciseLanguage
     {

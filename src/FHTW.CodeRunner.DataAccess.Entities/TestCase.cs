@@ -6,12 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
     /// <summary>
     /// The TestCase entity.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Table("test_case")]
     public partial class TestCase : IEntity
     {

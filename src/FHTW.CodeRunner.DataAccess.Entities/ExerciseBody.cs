@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
@@ -13,6 +14,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     /// The EcerciseBody entity contains exercise fields that are both programminglanguage
     /// and written language specific.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Table("exercise_body")]
     public partial class ExerciseBody : IEntity
     {

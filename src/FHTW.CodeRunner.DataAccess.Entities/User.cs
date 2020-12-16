@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
@@ -13,6 +14,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     /// The User entity.
     /// reg_user stands for registered user, user is a keyword in postgresql.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Table("reg_user")]
     public partial class User : IEntity
     {
