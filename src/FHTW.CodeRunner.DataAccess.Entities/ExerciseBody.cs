@@ -19,22 +19,22 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         /// <summary>
         /// The minimum value of the allowed_files property.
         /// </summary>
-        public const int MinAllowedFilesVal = 0;
+        public static readonly int MinAllowedFilesVal = 0;
 
         /// <summary>
         /// The maximum value of the allowed_files property.
         /// </summary>
-        public const int MaxAllowedFilesVal = 4;
+        public static readonly int MaxAllowedFilesVal = 4;
 
         /// <summary>
         /// The minimum value of the files_required property.
         /// </summary>
-        public const int MinRequiredFilesVal = 0;
+        public static readonly int MinRequiredFilesVal = 0;
 
         /// <summary>
         /// The maximum value of the files_required.
         /// </summary>
-        public const int MaxRequiredFilesVal = 3;
+        public static readonly int MaxRequiredFilesVal = 3;
 
         /// <inheritdoc/>
         [Key]

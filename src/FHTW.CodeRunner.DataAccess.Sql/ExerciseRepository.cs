@@ -21,6 +21,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         /// Initializes a new instance of the <see cref="ExerciseRepository"/> class.
         /// </summary>
         /// <param name="dbcontext">The dbcontext to be used for the repository.</param>
+        /// <param name="logger">The logger.</param>
         public ExerciseRepository(CodeRunnerContext dbcontext, ILogger<ExerciseRepository> logger)
             : base(dbcontext, logger)
         {

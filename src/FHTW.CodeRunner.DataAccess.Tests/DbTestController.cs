@@ -3,8 +3,8 @@
 // </copyright>
 
 ﻿using System;
-using System.Diagnostics;
-using FHTW.CodeRunner.DataAccess.Entities;
+﻿using System.Diagnostics;
+﻿using FHTW.CodeRunner.DataAccess.Entities;
 ﻿using FHTW.CodeRunner.DataAccess.Sql;
 ﻿using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +15,16 @@ using FHTW.CodeRunner.DataAccess.Entities;
     /// </summary>
     public class DbTestController
     {
+        /// <summary>
+        /// The ammount of programming languages in the test database.
+        /// </summary>
+        public static readonly int PROGRAMMINGLANUGAGESCOUNT = 3;
+
+        /// <summary>
+        /// The ammount of written languages in the test database.
+        /// </summary>
+        public static readonly int WRITTENLANUGAGESCOUNT = 3;
+
         private readonly DbContextOptions<CodeRunnerContext> contextOptions;
 
         /// <summary>
@@ -77,10 +87,10 @@ using FHTW.CodeRunner.DataAccess.Entities;
             var user = TestDataBuilder<User>.Single();
             context.Add(user);
 
-            var language = TestDataBuilder<WrittenLanguage>.Many(3);
+            var language = TestDataBuilder<WrittenLanguage>.Many(WRITTENLANUGAGESCOUNT);
             context.AddRange(language);
 
-            var programmingLanguage = TestDataBuilder<ProgrammingLanguage>.Many(3);
+            var programmingLanguage = TestDataBuilder<ProgrammingLanguage>.Many(PROGRAMMINGLANUGAGESCOUNT);
             context.AddRange(programmingLanguage);
 
             var tags= TestDataBuilder<Tag>.Many(10);
