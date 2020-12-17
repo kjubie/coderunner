@@ -9,6 +9,7 @@ import { ExerciseBody } from '../data-objects/create-exercise/exercise-body';
 import { TestSuit } from '../data-objects/create-exercise/test-suit';
 import { TestCase } from '../data-objects/create-exercise/test-case';
 import { ProgrammingLanguage } from '../data-objects/programming-language';
+import { PrepareCreateExercise } from '../data-objects/create-exercise/prepare-create-exercise';
 
 @Component({
   selector: 'app-exercise-create',
@@ -17,6 +18,7 @@ import { ProgrammingLanguage } from '../data-objects/programming-language';
 })
 export class ExerciseCreateComponent implements OnInit {
 
+  dataToCreateExercise: PrepareCreateExercise;
   tabSelected: string = "general";
   writtenLang: string[] = ["English", "German"];
   programmingLang: string[] = ["C#", "Java", "Python", "C++"];
@@ -46,7 +48,17 @@ export class ExerciseCreateComponent implements OnInit {
     }
   }
 
+  prepareExerciseObserver = {
+    next: x => { this.dataToCreateExercise = x},
+    error: err => console.error('Observer got an error: ' + err),
+    complete: () => {
+      console.log(this.dataToCreateExercise);
+    }
+  }
+
   ngOnInit() {
+    this.createExerciseService.prepareExercise().subscribe(this.prepareExerciseObserver);
+
     this.exercise = new Exercise();
     this.exercise.created = new Date();
     this.exercise.exerciseTagList[0] = new Tag();

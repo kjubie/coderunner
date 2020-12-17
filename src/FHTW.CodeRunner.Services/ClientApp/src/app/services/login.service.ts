@@ -22,6 +22,7 @@ export class LoginService {
             if (res.status == 200 && res.statusText == "OK") {
               localStorage.setItem('auth_token', res.auth_token);
               localStorage.setItem('name', name);
+              localStorage.setItem('pwd', password);
             } else {
               console.log("login failed");
             }

@@ -1,4 +1,4 @@
-export class ProgrammingLanguage {
+export class QuestionType {
     constructor() {}
 
     id: number;

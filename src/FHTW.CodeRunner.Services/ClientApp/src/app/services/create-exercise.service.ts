@@ -4,16 +4,26 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import {catchError, tap} from "rxjs/operators";
 import { Exercise } from '../data-objects/create-exercise/exercise';
+import { PrepareCreateExercise } from '../data-objects/create-exercise/prepare-create-exercise';
 
 
 @Injectable({ providedIn: 'root' })
 export class CreateExerciseService {
 
   private createExerciseUrl = "https://localhost:5001/api/exercise";
+  private prepareExerciseUrl = "https://localhost:5001/api/exercise/prepare";
 
   constructor(
     private http: HttpClient,
   ) { }
+
+  // GET Request -> fetch written, programming Lang etc. for create
+  prepareExercise(): Observable<any> {
+    return this.http.get<any>(this.prepareExerciseUrl).pipe(
+      tap(data => console.log(data)),
+      catchError(this.handleError<PrepareCreateExercise>('prepareExercise'))
+    );
+  }
 
   // ToDo:
   // POST Request -> Save new Exercise to DB
