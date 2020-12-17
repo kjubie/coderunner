@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import {catchError, tap} from "rxjs/operators";
@@ -13,16 +13,26 @@ export class CreateExerciseService {
   private createExerciseUrl = "https://localhost:5001/api/exercise";
   private prepareExerciseUrl = "https://localhost:5001/api/exercise/prepare";
 
+  private headerDict = {
+    'Access-Control-Allow-Origin': 'http://localhost:5100'
+  };
+
+  private requestOptions = {
+    headers: new HttpHeaders(this.headerDict)
+  }
+
   constructor(
     private http: HttpClient,
   ) { }
 
   // GET Request -> fetch written, programming Lang etc. for create
-  prepareExercise(): Observable<any> {
-    return this.http.get<any>(this.prepareExerciseUrl).pipe(
+  prepareExercise(): Observable<PrepareCreateExercise> {
+    return this.http.get<PrepareCreateExercise>(this.prepareExerciseUrl, this.requestOptions).pipe(
       tap(data => console.log(data)),
       catchError(this.handleError<PrepareCreateExercise>('prepareExercise'))
     );
+    
+    
   }
 
   // ToDo:
