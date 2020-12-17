@@ -12,7 +12,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
 {
     [ExcludeFromCodeCoverage]
     [Table("exercise_tag")]
-    public partial class ExerciseTag
+    public partial class ExerciseTag : IEntity
     {
         [Key]
         [Column("id")]

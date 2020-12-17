@@ -70,7 +70,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         public string TemplateParam { get; set; }
 
         /// <summary>
-        /// Gets or Sets a value indicatíng whether the template parameter namespace can be omitted.
+        /// Gets or Sets a value indicating whether the template parameter namespace can be omitted.
         /// </summary>
         [Column("template_param_lift_flag")]
         public bool TemplateParamLiftFlag { get; set; }
