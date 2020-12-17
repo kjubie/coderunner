@@ -23,6 +23,7 @@ namespace FHTW.CodeRunner.BusinessLogic
         private readonly ILogger logger;
         private readonly IMapper mapper;
         private readonly IExerciseRepository exerciseRepository;
+        private readonly IUIRepository uiRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExerciseLogic"/> class.
@@ -30,21 +31,27 @@ namespace FHTW.CodeRunner.BusinessLogic
         /// <param name="logger"></param>
         /// <param name="mapper"></param>
         /// <param name="exerciseRepository"></param>
-        public ExerciseLogic(ILogger<ExerciseLogic> logger, IMapper mapper, IExerciseRepository exerciseRepository)
+        public ExerciseLogic(ILogger<ExerciseLogic> logger, IMapper mapper, IExerciseRepository exerciseRepository, IUIRepository uiRepository)
         {
             this.logger = logger;
             this.mapper = mapper;
             this.exerciseRepository = exerciseRepository;
+            this.uiRepository = uiRepository;
         }
 
+        /// <inheritdoc/>
         public BlEntities.ExerciseCreatePreparation GetExerciseCreatePreparation()
         {
             BlEntities.ExerciseCreatePreparation exerciseCreatePreparation = new BlEntities.ExerciseCreatePreparation();
 
-            // TODO: Call dal functions
-            exerciseCreatePreparation.ProgrammingLanguages = null;
-            exerciseCreatePreparation.WrittenLanguages = null;
-            exerciseCreatePreparation.QuestionTypes = null;
+            var dalProgrammingLanguages = this.uiRepository.GetProgrammingLanguages();
+            exerciseCreatePreparation.ProgrammingLanguages = this.mapper.Map<List<BlEntities.ProgrammingLanguage>>(dalProgrammingLanguages);
+
+            var dalWrittenLanguages = this.uiRepository.GetWrittenLanguages();
+            exerciseCreatePreparation.WrittenLanguages = this.mapper.Map<List<BlEntities.WrittenLanguage>>(dalWrittenLanguages);
+
+            var dalQuestionTypes = this.uiRepository.GetQuestionTypes();
+            exerciseCreatePreparation.QuestionTypes = this.mapper.Map<List<BlEntities.QuestionType>>(dalQuestionTypes);
 
             return exerciseCreatePreparation;
         }

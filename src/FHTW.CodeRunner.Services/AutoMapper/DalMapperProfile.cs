@@ -80,6 +80,9 @@ namespace FHTW.CodeRunner.Services.AutoMapper
 
             this.CreateMap<BlEntities.WrittenLanguage, DalEntities.WrittenLanguage>()
                 .ReverseMap();
+
+            this.CreateMap<BlEntities.QuestionType, DalEntities.QuestionType>()
+                .ReverseMap();
         }
     }
 }

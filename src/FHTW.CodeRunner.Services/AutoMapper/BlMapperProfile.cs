@@ -81,6 +81,9 @@ namespace FHTW.CodeRunner.Services.AutoMapper
             this.CreateMap<SvcEntities.WrittenLanguage, BlEntities.WrittenLanguage>()
                 .ReverseMap();
 
+            this.CreateMap<SvcEntities.QuestionType, BlEntities.QuestionType>()
+                .ReverseMap();
+
             this.CreateMap<SvcEntities.UserAuthentication, BlEntities.User>();
 
             this.CreateMap<BlEntities.ExerciseCreatePreparation, SvcEntities.ExerciseCreatePreparation>();

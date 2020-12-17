@@ -98,6 +98,7 @@ namespace FHTW.CodeRunner.Services
 
             services.AddTransient<IExerciseRepository, ExerciseRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUIRepository, UIRepository>();
 
             services.AddLogging(configuration =>
             {

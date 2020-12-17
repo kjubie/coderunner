@@ -41,7 +41,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
 
             IExerciseRepository repo = repoMock.Object;
 
-            IExerciseLogic logic = new ExerciseLogic(logger, mapper, repo);
+            IExerciseLogic logic = new ExerciseLogic(logger, mapper, repo, null);
 
             var validExercise = Builder<BlEntities.Exercise>
                 .CreateNew()
@@ -70,7 +70,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
 
             IExerciseRepository repo = repoMock.Object;
 
-            IExerciseLogic logic = new ExerciseLogic(logger, mapper, repo);
+            IExerciseLogic logic = new ExerciseLogic(logger, mapper, repo, null);
 
             BlEntities.Exercise nullExercise = null;
 
@@ -97,7 +97,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
 
             IExerciseRepository repo = repoMock.Object;
 
-            IExerciseLogic logic = new ExerciseLogic(logger, mapper, repo);
+            IExerciseLogic logic = new ExerciseLogic(logger, mapper, repo, null);
 
             var validExercise = Builder<BlEntities.Exercise>
                 .CreateNew()
@@ -126,7 +126,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
 
             IExerciseRepository repo = repoMock.Object;
 
-            IExerciseLogic logic = new ExerciseLogic(logger, mapper, repo);
+            IExerciseLogic logic = new ExerciseLogic(logger, mapper, repo, null);
 
             BlEntities.Exercise nullExercise = null;
 
