@@ -17,7 +17,7 @@ export class TokenInterceptor implements HttpInterceptor {
     let pwd = localStorage.getItem('pwd') == null ? request.body.password : localStorage.getItem('pwd');
     request = request.clone({
       setHeaders: {
-        Authorization: `{name: ${user}, password: ${pwd}}`
+        Authorization: `Basic ${btoa(`${user}:${pwd}`)}`
       }
     });
     return next.handle(request);
