@@ -12,7 +12,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
 {
     [ExcludeFromCodeCoverage]
     [Table("exercise_version")]
-    public partial class ExerciseVersion
+    public partial class ExerciseVersion : IEntity
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ExerciseVersion"/> class.

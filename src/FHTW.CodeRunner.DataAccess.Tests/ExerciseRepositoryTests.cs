@@ -57,7 +57,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                     FkUserId = user.Id,
                 };
 
-                var created_exercise = rep.Create(exercise);
+                rep.Create(exercise);
 
                 Assert.IsTrue(rep.Exists(exercise));
 
@@ -74,7 +74,6 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                 Assert.IsTrue(version.VersionNumber == 0);
                 Assert.IsNull(version.CreatorDifficulty);
                 Assert.IsNull(version.CreatorRating);
-                Assert.IsTrue(exercise == created_exercise);
             }
         }
 
@@ -98,8 +97,12 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                     FkUserId = user.Id,
                 };
 
-                var created_exercise = rep.Create(exercise);
-                var version = created_exercise.ExerciseVersion.First();
+                rep.Create(exercise);
+
+                var version = exercise.ExerciseVersion.First();
+
+                context.Entry(exercise).State = EntityState.Detached;
+                context.Entry(version).State = EntityState.Detached;
 
                 // update exercise
                 var body = TestDataBuilder<ExerciseBody>.Single();
@@ -114,12 +117,11 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                     testcase,
                 };
 
-
                 Exercise updatedExercise = new Exercise
                 {
-                    Id = created_exercise.Id,
-                    Title = created_exercise.Title,
-                    Created = created_exercise.Created,
+                    Id = exercise.Id,
+                    Title = exercise.Title,
+                    Created = exercise.Created,
                     FkUserId = user.Id,
                     ExerciseVersion = new List<ExerciseVersion>
                     {

@@ -18,6 +18,9 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
 
         /// <summary>
         /// Updates an already existing exercise.
+        /// Requires:
+        ///     - only one ExerciseVersion should be present.
+        ///     - exercise Id and exercise userId should be set.
         /// </summary>
         /// <param name="exercise">the exercise with correct id.</param>
         /// <returns>returns the updated exercise.</returns>
