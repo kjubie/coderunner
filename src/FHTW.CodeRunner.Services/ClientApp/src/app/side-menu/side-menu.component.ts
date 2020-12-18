@@ -14,10 +14,11 @@ export class SideMenuComponent {
     @Output() selectElementEvent = new EventEmitter<string>();
     @Output() addWrittenLangEvent = new EventEmitter<string>();
     @Output() addProgrammingLangEvent = new EventEmitter<string>();
-    writtenLang = ["English"];
-    programmingLang = [];
+    writtenLang = [{id: 1, name: "Engish"}];
+    programmingLang: ProgrammingLanguage[] = [];
     testCases = ["Test"];
     showHeadList = true;
+    showLanguageList = true;
     showBodyList = true;
     isLangAvailable = true;
     isProgrammingLangAvailable = true;
@@ -29,7 +30,7 @@ export class SideMenuComponent {
             if (this.availableLangsW.length == 0) {
                 this.isLangAvailable = false;
             }
-            this.writtenLang.push(lang.name);
+            this.writtenLang.push(lang);
             this.addWrittenLangEvent.emit(lang.name);
         }
     }
@@ -41,7 +42,7 @@ export class SideMenuComponent {
             if (this.availableLangsP.length == 0) {
                 this.isProgrammingLangAvailable = false;
             }
-            this.programmingLang.push(lang.name);
+            this.programmingLang.push(lang);
             this.addProgrammingLangEvent.emit(lang.name);
         }
     }
@@ -62,6 +63,17 @@ export class SideMenuComponent {
                 document.getElementById('arrowHeadList').classList.add("right");
             }
         }
+        else if (listName === 'languageList') {
+            this.showLanguageList = !this.showLanguageList;
+            if (this.showLanguageList) {
+                document.getElementById('arrowLanguageList').classList.remove("right");
+                document.getElementById('arrowLanguageList').classList.add("down");
+            }
+            else {
+                document.getElementById('arrowLanguageList').classList.remove("down");
+                document.getElementById('arrowLanguageList').classList.add("right");
+            }
+        }
         else if (listName === 'bodyList') {
             this.showBodyList = !this.showBodyList;
             if (this.showBodyList) {
@@ -77,5 +89,27 @@ export class SideMenuComponent {
 
     setSelectedElement(element: string) {
         this.selectElementEvent.emit(element);
+    }
+
+    removeWLang(lang: WrittenLanguage) {
+        if (this.writtenLang.indexOf(lang) != -1) {
+            let idx = this.writtenLang.indexOf(lang);
+            this.writtenLang.splice(idx, 1);
+            this.availableLangsW.push(lang);
+            if (!this.isLangAvailable) {
+                this.isLangAvailable = true;
+            }
+        }
+    }
+
+    removePLang(lang: ProgrammingLanguage) {
+        if (this.programmingLang.indexOf(lang) != -1) {
+            let idx = this.programmingLang.indexOf(lang);
+            this.programmingLang.splice(idx, 1);
+            this.availableLangsP.push(lang);
+            if (!this.isProgrammingLangAvailable) {
+                this.isProgrammingLangAvailable = true;
+            }
+        }
     }
 }

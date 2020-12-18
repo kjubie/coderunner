@@ -9,24 +9,29 @@
         <li (click)="setSelectedElement('General')">
           <a [ngClass]="{'active' : selectedElement == 'General'}">General</a>
         </li>
-        <li *ngFor="let lang of writtenLang; let i = index" (click)="setSelectedElement('WrittenLang'+i);">
-          <a [ngClass]="{'active' : selectedElement == ('WrittenLang'+i)}">{{ lang }}</a>
-        </li>
-        <div ngbDropdown class="d-inline-block" *ngIf="isLangAvailable">
-          <button class="btn" id="addLangBtn" ngbDropdownToggle>
-            <img src="../../assets/img/plus.png"/> Language
-          </button>
-          <div ngbDropdownMenu aria-labelledby="addLangBtn">
-            <button ngbDropdownItem *ngFor="let l of availableLangsW" (click)="addLanguage(l)">{{ l.name }}</button>
-          </div>
-        </div>
+        <li (click)="collapseList('languageList')"><i id="arrowLanguageList" class="arrow down"></i> Language</li>
+        <li *ngIf="showLanguageList">
+            <ul class="thirdUl">
+                <li *ngFor="let l of writtenLang; let i = index" (click)="setSelectedElement('WrittenLang'+i)">
+                    <a [ngClass]="{'active' : selectedElement == ('WrittenLang'+i)}">{{ l.name }}</a><a (click)="removeWLang(l)"> (Remove)</a>
+                </li>
+                <div ngbDropdown class="d-inline-block" *ngIf="isLangAvailable">
+                  <button class="btn" id="addLangBtn" ngbDropdownToggle>
+                    <img src="../../assets/img/plus.png"/> Language
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="addLangBtn">
+                    <button ngbDropdownItem *ngFor="let l of availableLangsW" (click)="addLanguage(l)">{{ l.name }}</button>
+                  </div>
+                </div>
+            </ul>
+        </li>        
       </ul>
     </div>
     <div class="blue" (click)="collapseList('bodyList')"><i id="arrowBodyList" class="arrow down"></i><strong>Body</strong></div>
     <mat-divider class="blue"></mat-divider>
     <div class="blue" *ngIf="showBodyList">
       <ul *ngFor="let lang of programmingLang; let idx = index">
-        <programming-language-element [lang]="lang" [writtenLang]="writtenLang" [idx]="idx" [selectedElement]="selectedElement" (selectElementEvent)="setSelectedElement($event)"></programming-language-element>
+        <programming-language-element [lang]="lang" [writtenLang]="writtenLang" [idx]="idx" [selectedElement]="selectedElement" (selectElementEvent)="setSelectedElement($event)" (removePLangEvent)="removePLang($event)"></programming-language-element>
       </ul>
       <div ngbDropdown class="d-inline-block" *ngIf="isProgrammingLangAvailable">
         <button class="btn" id="addProgrammingLangBtn" ngbDropdownToggle>
