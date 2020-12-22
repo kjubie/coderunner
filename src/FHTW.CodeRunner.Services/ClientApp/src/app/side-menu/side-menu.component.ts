@@ -12,9 +12,9 @@ export class SideMenuComponent {
     @Input() availableLangsP: ProgrammingLanguage[];
     @Input() selectedElement: string;
     @Output() selectElementEvent = new EventEmitter<string>();
-    @Output() addWrittenLangEvent = new EventEmitter<string>();
-    @Output() addProgrammingLangEvent = new EventEmitter<string>();
-    writtenLang = [{id: 1, name: "Engish"}];
+    @Output() addWrittenLangEvent = new EventEmitter<WrittenLanguage>();
+    @Output() addProgrammingLangEvent = new EventEmitter<ProgrammingLanguage>();
+    writtenLang = [{id: 1, name: "English"}];
     programmingLang: ProgrammingLanguage[] = [];
     testCases = ["Test"];
     showHeadList = true;
@@ -31,7 +31,7 @@ export class SideMenuComponent {
                 this.isLangAvailable = false;
             }
             this.writtenLang.push(lang);
-            this.addWrittenLangEvent.emit(lang.name);
+            this.addWrittenLangEvent.emit(lang);
         }
     }
 
@@ -43,7 +43,7 @@ export class SideMenuComponent {
                 this.isProgrammingLangAvailable = false;
             }
             this.programmingLang.push(lang);
-            this.addProgrammingLangEvent.emit(lang.name);
+            this.addProgrammingLangEvent.emit(lang);
         }
     }
 

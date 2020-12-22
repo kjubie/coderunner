@@ -6,11 +6,11 @@ import { CreateExerciseService } from '../services/create-exercise.service';
 import { Tag } from '../data-objects/tag';
 import { WrittenLanguage } from '../data-objects/written-language';
 import { ExerciseBody } from '../data-objects/create-exercise/exercise-body';
-import { TestSuit } from '../data-objects/create-exercise/test-suit';
-import { TestCase } from '../data-objects/create-exercise/test-case';
 import { ProgrammingLanguage } from '../data-objects/programming-language';
 import { PrepareCreateExercise } from '../data-objects/create-exercise/prepare-create-exercise';
 import { QuestionType } from '../data-objects/question-type';
+import { TestSuit } from '../data-objects/create-exercise/test-suit';
+import { TestCase } from '../data-objects/create-exercise/test-case';
 
 @Component({
   selector: 'app-exercise-create',
@@ -19,7 +19,6 @@ import { QuestionType } from '../data-objects/question-type';
 })
 export class ExerciseCreateComponent implements OnInit {
 
-  tabSelected: string = "general";
   selectedElement = 'General';
 
   dataToCreateExercise: PrepareCreateExercise;
@@ -29,21 +28,13 @@ export class ExerciseCreateComponent implements OnInit {
   writtenLangIdx: number;
   programmingLangIdx: number;
   testIdx: number;
+  programmingWrittenLangIdx: number;
 
   savedExercise: Exercise;
   @Output() exercise: Exercise;
   
 
   constructor(private createExerciseService: CreateExerciseService) {}
-  
-  setTab(tab: string) {
-    this.tabSelected = tab;
-  }
-
-  // saveExercise(ex: Exercise) {
-  //   console.log(ex);
-  //   this.createExerciseService.saveExercise(ex).subscribe(this.createExerciseObserver);
-  // }
 
   createExerciseObserver = {
     next: x => { this.saveExercise = x },
@@ -79,10 +70,7 @@ export class ExerciseCreateComponent implements OnInit {
     this.exercise.exerciseVersionList[0] = new ExerciseVersion();
     this.exercise.exerciseVersionList[0].exerciseLanguageList[0] = new ExerciseLanguage();
     this.exercise.exerciseVersionList[0].exerciseLanguageList[0].writtenLanguage = new WrittenLanguage();
-    this.exercise.exerciseVersionList[0].exerciseLanguageList[0].writtenLanguage.name = 'German';
-    this.exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody = new ExerciseBody();
-    this.exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.testSuit = new TestSuit();
-    this.exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.testSuit.testCaseList[0] = new TestCase();
+    this.exercise.exerciseVersionList[0].exerciseLanguageList[0].writtenLanguage.name = 'English';
   }
 
   setSelectedElement(element: string) {
@@ -99,27 +87,54 @@ export class ExerciseCreateComponent implements OnInit {
       split = this.selectedElement.split('Programming');
       split = split[1].split('_');
       this.programmingLangIdx = parseInt(split[0]);
-    }
-    else if (this.selectedElement.includes('Test')) {
-      split = this.selectedElement.split('Test');
-      this.testIdx = parseInt(split[1]);
+
+      if (this.selectedElement.includes('TestCase')) {
+        split = this.selectedElement.split('TestCase');
+        this.testIdx = parseInt(split[1]);
+      }
+      else if (this.selectedElement.includes('Lang')) {
+        split = this.selectedElement.split('Lang');
+        this.programmingWrittenLangIdx = parseInt(split[1]);
+      }
     }
   }
 
-  addWrittenLang(lang: string) {
+  addWrittenLang(lang: WrittenLanguage) {
     let exerciseLang = new ExerciseLanguage();
-    exerciseLang.writtenLanguage = new WrittenLanguage();
-    exerciseLang.writtenLanguage.name = lang;
+    exerciseLang.writtenLanguage = lang;
     this.exercise.exerciseVersionList[0].exerciseLanguageList.push(exerciseLang);
-    // console.log(this.exercise.exerciseVersionList[0].exerciseLanguageList);
+
+    // console.log(this.exercise);
   }
 
-  addProgrammingLang(lang: string) {
+  addProgrammingLang(lang: ProgrammingLanguage) {
+    let toBeAdded: ExerciseLanguage[] = [];
     let exerciseBody = new ExerciseBody();
-    exerciseBody.programmingLanguage = new ProgrammingLanguage();
-    exerciseBody.programmingLanguage.name = lang;
+    exerciseBody.testSuit = new TestSuit();
+    exerciseBody.testSuit.testCaseList = [new TestCase()];
+    exerciseBody.programmingLanguage = lang
+    
+    // add programming lang for all written langs
+    for (let i=0; i<this.exercise.exerciseVersionList[0].exerciseLanguageList.length; i++) {
+      // check if a programming lang already exists
+      if (this.exercise.exerciseVersionList[0].exerciseLanguageList[i].exerciseBody.programmingLanguage == undefined) {
+        this.exercise.exerciseVersionList[0].exerciseLanguageList[i].exerciseBody = exerciseBody;
+      }
+      else {
+        // ToDo
+        // let exerciseLang = this.exercise.exerciseVersionList[0].exerciseLanguageList[i];
+        // exerciseLang.exerciseBody = exerciseBody;
 
-    this.exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody = exerciseBody;
+        // toBeAdded.push(exerciseLang);
+      }
+    }
+
+    // add new Programming Langs if needed
+    if (toBeAdded.length > 0) {
+      // ToDo
+    }
+
+    console.log(this.exercise);
   }
 
   saveExercise() {

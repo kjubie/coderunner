@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { Exercise } from "src/app/data-objects/create-exercise/exercise";
+import { Component, Input } from "@angular/core";
+import { ExerciseBody } from "src/app/data-objects/create-exercise/exercise-body";
+import { QuestionType } from "src/app/data-objects/question-type";
 
 @Component({
     selector: 'test-suit-tab',
@@ -8,10 +9,6 @@ import { Exercise } from "src/app/data-objects/create-exercise/exercise";
 })
 export class TestSuitTabComponent {
 
-    @Input() exercise: Exercise;
-    @Output() newTabSelectedEvent = new EventEmitter<string>();
-
-    setTab(tab: string) {
-        this.newTabSelectedEvent.emit(tab);
-    }
+    @Input() exerciseBody: ExerciseBody;
+    @Input() questionTypes: QuestionType[];
 }

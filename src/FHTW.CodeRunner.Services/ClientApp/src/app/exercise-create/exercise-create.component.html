@@ -1,10 +1,12 @@
-<side-menu [availableLangsW]="writtenLangs" [availableLangsP]="programmingLangs" [selectedElement]="selectedElement" (selectElementEvent)="setSelectedElement($event)" (addWrittenLangEvent)="addWrittenLang($event)"></side-menu>
+<side-menu [availableLangsW]="writtenLangs" [availableLangsP]="programmingLangs" [selectedElement]="selectedElement" (selectElementEvent)="setSelectedElement($event)" (addWrittenLangEvent)="addWrittenLang($event)" (addProgrammingLangEvent)="addProgrammingLang($event)"></side-menu>
 
 <div class="content">
     <general-tab *ngIf="selectedElement == 'General'" [exercise]="exercise"></general-tab>
-    <written-lang-tab *ngIf="selectedElement.includes('WrittenLang')" [exercise]="exercise" [idx]="writtenLangIdx"></written-lang-tab>
-    <programming-tab *ngIf="selectedElement.includes('Programming') && selectedElement.includes('Lang')" [exercise]="exercise"></programming-tab>
-    <test-suit-tab *ngIf="selectedElement.includes('TestSuit')" [exercise]="exercise"></test-suit-tab>
+    <written-lang-tab *ngIf="selectedElement.includes('WrittenLang')" [exerciseLanguage]="exercise.exerciseVersionList[0].exerciseLanguageList[writtenLangIdx]"></written-lang-tab>
+    <programming-tab *ngIf="selectedElement.includes('Programming') && selectedElement.includes('General')" [exerciseBody]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody"></programming-tab>
+    <programming-langs-tab *ngIf="selectedElement.includes('Programming') && selectedElement.includes('Lang')" [exerciseBody]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody" [writtenLang]="exercise.exerciseVersionList[0].exerciseLanguageList[programmingWrittenLangIdx].writtenLanguage.name"></programming-langs-tab>
+    <test-suit-tab *ngIf="selectedElement.includes('TestSuit')" [exerciseBody]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody" [questionTypes]="questionTypes"></test-suit-tab>
+    <testcase-tab *ngIf="selectedElement.includes('TestCase')" [exerciseBody]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody" [testCaseIdx]="testIdx" [testCase]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.testSuit.testCaseList[testIdx]"></testcase-tab>
 </div>
 
 <div class="text-right">

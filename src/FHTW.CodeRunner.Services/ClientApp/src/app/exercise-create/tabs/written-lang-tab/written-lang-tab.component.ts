@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { Exercise } from "src/app/data-objects/create-exercise/exercise";
+import { Component, Input } from "@angular/core";
+import { ExerciseLanguage } from "src/app/data-objects/create-exercise/exercise-language";
 
 @Component({
     selector: 'written-lang-tab',
@@ -8,6 +8,5 @@ import { Exercise } from "src/app/data-objects/create-exercise/exercise";
 })
 export class WrittenLangTabComponent {
 
-    @Input() exercise: Exercise;
-    @Input() idx: number;
+    @Input() exerciseLanguage: ExerciseLanguage;
 }

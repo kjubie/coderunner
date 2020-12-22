@@ -10,7 +10,7 @@
 <div class="contentSeperator">
     <form>
         <!-- TODO: Load Language into heading -->
-        <h4>German</h4>
+        <h4>{{ exerciseLanguage.writtenLanguage.name }}</h4>
         <div class="from-group content-group row">
             <!-- ToDo: add new language and set details for every language -->
             <!-- <label for="writtenLang" class="col-2 col-form-label">Written Language</label>
@@ -21,15 +21,15 @@
             </div> -->
             <label for="fullTitle" class="col-2 col-form-label">Exercise Title</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext" id="fullTitle" name="fullTitle" placeholder="Full Title" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[idx].exerciseHeader.fullTitle">
+                <input type="text" class="form-control-plaintext" id="fullTitle" name="fullTitle" placeholder="Full Title" [(ngModel)]="exerciseLanguage.exerciseHeader.fullTitle">
             </div>
             <label for="shortTitle" class="col-2 col-form-label">Short Title</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext" id="shortTitle" name="shortTitle" placeholder="Short Title" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[idx].exerciseHeader.shortTitle">
+                <input type="text" class="form-control-plaintext" id="shortTitle" name="shortTitle" placeholder="Short Title" [(ngModel)]="exerciseLanguage.exerciseHeader.shortTitle">
             </div>
             <label for="introduction" class="col-2 col-form-label">Exercise Introduction</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="introduction" name="introduction" rows="4" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[idx].exerciseHeader.introduction"></textarea>
+                <textarea class="form-control-plaintext" id="introduction" name="introduction" rows="4" [(ngModel)]="exerciseLanguage.exerciseHeader.introduction"></textarea>
             </div>
         </div>
     </form>

@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb" class="blue">
     <ol class="breadcrumb blue">
         <li class="breadcrumb-item">Body</li>
-        <li class="breadcrumb-item">C#</li>
+        <li class="breadcrumb-item">{{ exerciseBody.programmingLanguage.name }}</li>
         <li class="breadcrumb-item">Test Suite</li>
         <li class="breadcrumb-item" aria-current="page"><span class="active">Test</span></li>
     </ol>
@@ -14,22 +14,22 @@
         <div class="from-group content-group row">
             <label for="testcase" class="col-2 col-form-label">Testfall</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="testcase" name="testcase" rows="5"></textarea>
+                <textarea class="form-control-plaintext" id="testcase" name="testcase" rows="5" [(ngModel)]="testCase.testCode"></textarea>
             </div>
 
             <label for="stdin" class="col-2 col-form-label">Standardeingabe</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="stdin" name="stdin" rows="5"></textarea>
+                <textarea class="form-control-plaintext" id="stdin" name="stdin" rows="5" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].standardInput"></textarea>
             </div>
 
             <label for="output" class="col-2 col-form-label">Erwartete Ausgabe</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="output" name="output" rows="5"></textarea>
+                <textarea class="form-control-plaintext" id="output" name="output" rows="5" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].expectedOutput"></textarea>
             </div>
 
             <label for="additionalData" class="col-2 col-form-label">Zusätzliche Vorlagedaten</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="additionalData" name="additionalData" rows="5"></textarea>
+                <textarea class="form-control-plaintext" id="additionalData" name="additionalData" rows="5" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].additionalData"></textarea>
             </div>
 
             <label for="show" class="col-2 col-form-label">Anzeige</label>
@@ -41,17 +41,17 @@
 
             <label for="useAsExample" class="col-2 col-form-label">Als Beispiel verwenden</label>
             <div class="col-10">
-                <input type="checkbox" id="useAsExample" name="useAsExample">
+                <input type="checkbox" id="useAsExample" name="useAsExample" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].useAsExampleFlag">
             </div>
 
             <label for="hideOnFail" class="col-2 col-form-label">Rest ausblenden bei Fehler</label>
             <div class="col-10">
-                <input type="checkbox" id="hideOnFail" name="hideOnFail">
+                <input type="checkbox" id="hideOnFail" name="hideOnFail" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].hideOnFailFlag">
             </div>
 
             <label for="points" class="col-2 col-form-label">Punkte</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-2" id="points" name="points">
+                <input type="text" class="form-control-plaintext col-2" id="points" name="points" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].points">
             </div>
         </div>
     </form>
@@ -61,7 +61,7 @@
     <nav aria-label="breadcrumb" class="blue float-left">
         <ol class="breadcrumb blue">
             <li class="breadcrumb-item">Body</li>
-            <li class="breadcrumb-item">C#</li>
+            <li class="breadcrumb-item">{{ exerciseBody.programmingLanguage.name }}</li>
             <li class="breadcrumb-item">Test Suite</li>
             <li class="breadcrumb-item" aria-current="page"><span class="active">Test</span></li>
         </ol>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { Exercise } from "src/app/data-objects/create-exercise/exercise";
 
 @Component({
@@ -6,11 +6,7 @@ import { Exercise } from "src/app/data-objects/create-exercise/exercise";
     templateUrl: './general-tab.component.html',
     styleUrls: ['../../exercise-create.component.css']
 })
-export class GeneralTabComponent implements OnInit {
+export class GeneralTabComponent {
 
     @Input() exercise: Exercise;
-
-    ngOnInit() {
-        this.exercise.user.name = localStorage.getItem('name');
-    }
 }

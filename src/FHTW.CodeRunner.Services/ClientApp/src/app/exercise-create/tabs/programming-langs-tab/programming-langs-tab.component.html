@@ -2,7 +2,7 @@
     <ol class="breadcrumb blue">
         <!-- TODO: Load Language into Breadcrumb -->
         <li class="breadcrumb-item">Body</li>
-        <li class="breadcrumb-item" aria-current="page">C#</li>
+        <li class="breadcrumb-item" aria-current="page">{{ exerciseBody.programmingLanguage.name }}</li>
         <li class="breadcrumb-item" aria-current="page"><span class="active">Languages</span></li>
     </ol>
 </nav>
@@ -12,11 +12,11 @@
 <div class="contentSeperator">
     <form>
         <!-- TODO: Load Language into heading -->
-        <h4>German</h4>
+        <h4>{{ writtenLang }}</h4>
         <div class="from-group content-group row">
             <label for="genFeedback" class="col-2 col-form-label">General Feedback</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="genFeedback" name="genFeedback" rows="9"></textarea>
+                <textarea class="form-control-plaintext" id="genFeedback" name="genFeedback" rows="9" [(ngModel)]="exerciseBody.feedback"></textarea>
             </div>
         </div>
     </form>
@@ -26,7 +26,7 @@
     <nav aria-label="breadcrumb" class="blue float-left">
         <ol class="breadcrumb blue">
             <li class="breadcrumb-item">Body</li>
-            <li class="breadcrumb-item" aria-current="page">C#</li>
+            <li class="breadcrumb-item" aria-current="page">{{ exerciseBody.programmingLanguage.name }}</li>
             <li class="breadcrumb-item" aria-current="page"><span class="active">Languages</span></li>
         </ol>
     </nav>

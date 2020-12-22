@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb" class="blue">
     <ol class="breadcrumb blue">
         <li class="breadcrumb-item">Body</li>
-        <li class="breadcrumb-item">C#</li>
+        <li class="breadcrumb-item">{{ exerciseBody.programmingLanguage.name }}</li>
         <li class="breadcrumb-item" aria-current="page"><span class="active">General</span></li>
     </ol>
 </nav>
@@ -19,39 +19,39 @@
                     <option *ngFor="let lang of languages" [ngValue]="lang">{{ lang }}</option>
                 </select>
             </div> -->
-            <label for="description" class="col-2 col-form-label">Antwortfeld Zeilen</label>
+            <label for="fieldLines" class="col-2 col-form-label">Antwortfeld Zeilen</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-1" id="description" name="description" placeholder="20" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.description">
+                <input type="text" class="form-control-plaintext col-1" id="fieldLines" name="fieldLines" placeholder="20" [(ngModel)]="exerciseBody.fieldLines">
             </div>
 
-            <label for="example" class="col-2 col-form-label">Abzugsystem</label>
+            <label for="subSystem" class="col-2 col-form-label">Abzugsystem</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-3" id="example" name="example" placeholder="10, 20, ..." [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.example">
+                <input type="text" class="form-control-plaintext col-3" id="subSystem" name="subSystem" placeholder="10, 20, ..." [(ngModel)]="exerciseBody.subtractSystem">
             </div>
 
             <label for="points" class="col-2 col-form-label">Ereichbare Punkte</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-1" id="points" name="points" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.example">
+                <input type="text" class="form-control-plaintext col-1" id="points" name="points" [(ngModel)]="exerciseBody.optainablePoints">
             </div>
 
             <label for="idNum" class="col-2 col-form-label">ID-Nummer</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-1" id="idNum" name="idNum" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.example">
+                <input type="text" class="form-control-plaintext col-1" id="idNum" name="idNum" [(ngModel)]="exerciseBody.idNum">
             </div>
 
             <label for="hint" class="col-2 col-form-label">Vorlagen-Parameter heben</label>
             <div class="col-10">
-                <input type="checkbox" class="form-check" id="hint" name="hint" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.hint">
+                <input type="checkbox" class="form-check" id="hint" name="hint" [(ngModel)]="exerciseBody.hint">
             </div>
 
             <label for="answer" class="col-2 col-form-label">Antwort</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="answer" name="answer" rows="4"></textarea>
+                <textarea class="form-control-plaintext" id="answer" name="answer" rows="4" [(ngModel)]="exerciseBody.solution"></textarea>
             </div>
 
             <label for="prefillAnswer" class="col-2 col-form-label">Vorbelgung des Antwortfeldes</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="prefillAnswer" name="prefillAnswer" rows="4"></textarea>
+                <textarea class="form-control-plaintext" id="prefillAnswer" name="prefillAnswer" rows="4" [(ngModel)]="exerciseBody.prefill"></textarea>
             </div>
         </div>
 
@@ -60,32 +60,32 @@
 
             <label for="allowAttachments" class="col-2 col-form-label">Anhänge erlauben</label>
             <div class="col-10">
-                <select class="form-control col-3" name="allowAttachments" id="allowAttachments">
-                    <option value="0">Nein</option>
+                <select class="form-control col-3" name="allowAttachments" id="allowAttachments" [(ngModel)]="exerciseBody.allowFiles">
+                    <option value="0" [ngValue]="0">Nein</option>
                 </select>
             </div>
 
             <label for="neededAttachments" class="col-2 col-form-label">Anhänge erforderlich</label>
             <div class="col-10">
-                <select class="form-control col-3" name="neededAttachments" id="neededAttachments">
-                    <option value="0">Anhänge sind optional</option>
+                <select class="form-control col-3" name="neededAttachments" id="neededAttachments" [(ngModel)]="exerciseBody.filesRequired">
+                    <option value="0" [ngValue]="0">Anhänge sind optional</option>
                 </select>
             </div>
 
             <label for="regex" class="col-2 col-form-label">Regulärer Ausdruck</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-3" name="regex" id="regex">
+                <input type="text" class="form-control-plaintext col-3" name="regex" id="regex" [(ngModel)]="exerciseBody.filesRegex">
             </div>
 
             <label for="regexDescription" class="col-2 col-form-label">Beschreibung</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-3" name="regexDescription" id="regexDescription">
+                <input type="text" class="form-control-plaintext col-3" name="regexDescription" id="regexDescription" [(ngModel)]="exerciseBody.filesDescription">
             </div>
 
             <label for="maxDataSize" class="col-2 col-form-label">Max. zulässige Dateigröße</label>
             <div class="col-10">
-                <select class="form-control col-3" name="maxDataSize" id="maxDataSize">
-                    <option value="0">10kB</option>
+                <select class="form-control col-3" name="maxDataSize" id="maxDataSize" [(ngModel)]="exerciseBody.maxAllowedFiles">
+                    <option value="0" [ngValue]="0">10kB</option>
                 </select>
             </div>
         </div>
@@ -96,7 +96,7 @@
     <nav aria-label="breadcrumb" class="blue float-left">
         <ol class="breadcrumb blue">
             <li class="breadcrumb-item">Body</li>
-            <li class="breadcrumb-item">C#</li>
+            <li class="breadcrumb-item">{{ exerciseBody.programmingLanguage.name }}</li>
             <li class="breadcrumb-item" aria-current="page"><span class="active">General</span></li>
         </ol>
     </nav>

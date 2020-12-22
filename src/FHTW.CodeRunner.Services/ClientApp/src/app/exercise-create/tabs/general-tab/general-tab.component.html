@@ -40,8 +40,8 @@
 
             <label for="tagSelect" class="col-2 col-form-label">Tags</label>
             <div class="col-10">
-                <select class="form-control" id="tagSelect" name="tagSelect">
-                    <option>placeholder</option>
+                <select class="form-control" id="tagSelect" name="tagSelect" [(ngModel)]="exercise.exerciseTagList[0].name">
+                    <option [ngValue]="placeholder">placeholder</option>
                 </select>
             </div>
         </div>
