@@ -7,6 +7,7 @@ export class ExerciseBody {
         this.testSuit = new TestSuit();
     }
 
+    id: number;
     description: string;
     hint: string;
     fieldLines: number;
