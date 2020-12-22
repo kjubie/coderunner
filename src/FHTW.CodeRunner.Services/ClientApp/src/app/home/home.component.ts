@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit {
     let exerciseVersion = new ExerciseVersion();
     exerciseVersion.creatorDifficulty = 2;
     exerciseVersion.creatorRating = 4;
-    exerciseVersion.lasModified = new Date();
+    exerciseVersion.lastModified = new Date();
     exerciseVersion.versionNumber = 1;
     exerciseVersion.exerciseLanguageList = [];
 
@@ -113,7 +113,7 @@ export class HomeComponent implements OnInit {
     for (let i = 0; i < 5; i++) {
       let testCase = new TestCase();
       testCase.additionalData = "This is some additional Data for this specific Test Case";
-      testCase.description = "This is the description for this specific Test Case";
+      testCase.testCode = "This is the description for this specific Test Case";
       testCase.expectedOutput = "Here should be your expected Output for this Test Case";
       testCase.points = 2;
       testCase.standardInput = "Here should be the standard Input for this Test Case";

@@ -12,7 +12,9 @@ import { ExerciseCollectionComponent } from './exercise-collection/exercise-coll
 import { ExerciseCreateComponent } from './exercise-create/exercise-create.component';
 import { SaveTabComponent } from './exercise-create/tabs/save-tab/save-tab.component';
 import { TestSuitTabComponent } from './exercise-create/tabs/test-suit-tab/test-suit-tab.component';
+import { TestCaseTabComponent } from './exercise-create/tabs/testcase-tab/testcase-tab.component';
 import { ProgrammingTabComponent } from './exercise-create/tabs/programming-tab/programming-tab.component';
+import { ProgrammingLangsTabComponent } from './exercise-create/tabs/programming-langs-tab/programming-langs-tab.component';
 import { WrittenLangTabComponent } from './exercise-create/tabs/written-lang-tab/written-lang-tab.component';
 import { GeneralTabComponent } from './exercise-create/tabs/general-tab/general-tab.component';
 import { ListViewComponent } from './home/layouts/list/list-view.component';
@@ -82,7 +84,9 @@ export class MaterialModule {}
     GeneralTabComponent,
     WrittenLangTabComponent,
     ProgrammingTabComponent,
+    ProgrammingLangsTabComponent,
     TestSuitTabComponent,
+    TestCaseTabComponent,
     SaveTabComponent,
     SideMenuComponent,
     ProgrammingLanguageElementComponent
