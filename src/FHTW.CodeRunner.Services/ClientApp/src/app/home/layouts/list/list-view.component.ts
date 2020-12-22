@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { Exercise } from "src/app/data-objects/create-exercise/exercise";
+import { ExerciseHome } from "src/app/data-objects/exercise-home";
 
 @Component({
     selector: 'list-view',
@@ -8,5 +8,5 @@ import { Exercise } from "src/app/data-objects/create-exercise/exercise";
 })
 export class ListViewComponent {
 
-    @Input() exerciseList: Exercise[];
+    @Input() exerciseList: ExerciseHome[];
 }
