@@ -1,0 +1,101 @@
+[
+    {   // Exercise 1, C++, V1
+        "Id": 1,
+        "FkQuestionTypeId": 1,
+        "TemplateDebugFlag": true,
+        "TestOnSaveFlag": false,
+        "GlobalExtraParam": "global_extra_param_c++_V1",
+        "RuntimeData": "runtime_data_c++_V1",
+        "TemplateParam": "template_param_c++_V1",
+        "TemplateParamLiftFlag": false,
+        "TwigAllFlag": true
+    },
+    {   // Exercise 1, C#, V1
+        "Id": 2,
+        "FkQuestionTypeId": 2,
+        "TemplateDebugFlag": true,
+        "TestOnSaveFlag": false,
+        "GlobalExtraParam": "global_extra_param_c#_V1",
+        "RuntimeData": "runtime_data_c#_V1",
+        "TemplateParam": "template_param_c#_V1",
+        "TemplateParamLiftFlag": false,
+        "TwigAllFlag": true
+    },
+    {   // Exercise 1, C++, V2
+        "Id": 3,
+        "FkQuestionTypeId": 1,
+        "TemplateDebugFlag": true,
+        "TestOnSaveFlag": false,
+        "GlobalExtraParam": "global_extra_param_c++_V2",
+        "RuntimeData": "runtime_data_c++_V2",
+        "TemplateParam": "template_param_c++_V2",
+        "TemplateParamLiftFlag": false,
+        "TwigAllFlag": true
+    },
+    {   // Exercise 1, C#, V2
+        "Id": 4,
+        "FkQuestionTypeId": 2,
+        "TemplateDebugFlag": true,
+        "TestOnSaveFlag": false,
+        "GlobalExtraParam": "global_extra_param_c#_V2",
+        "RuntimeData": "runtime_data_c#_V2",
+        "TemplateParam": "template_param_c#_V2",
+        "TemplateParamLiftFlag": false,
+        "TwigAllFlag": true
+    },
+    {   // Exercise 1, C++, V3
+        "Id": 5,
+        "FkQuestionTypeId": 1,
+        "TemplateDebugFlag": true,
+        "TestOnSaveFlag": false,
+        "GlobalExtraParam": "global_extra_param_c++_V3",
+        "RuntimeData": "runtime_data_c++_V3",
+        "TemplateParam": "template_param_c++_V3",
+        "TemplateParamLiftFlag": false,
+        "TwigAllFlag": true
+    },
+    {   // Exercise 1, C#, V3
+        "Id": 6,
+        "FkQuestionTypeId": 2,
+        "TemplateDebugFlag": true,
+        "TestOnSaveFlag": false,
+        "GlobalExtraParam": "global_extra_param_c#_V3",
+        "RuntimeData": "runtime_data_c#_V3",
+        "TemplateParam": "template_param_c#_V3",
+        "TemplateParamLiftFlag": false,
+        "TwigAllFlag": true
+    },
+    {   // Exercise 2, Python, V1
+        "Id": 7,
+        "FkQuestionTypeId": 3,
+        "TemplateDebugFlag": true,
+        "TestOnSaveFlag": false,
+        "GlobalExtraParam": "global_extra_param_py_V1",
+        "RuntimeData": "runtime_data_py_V1",
+        "TemplateParam": "template_param_py_V1",
+        "TemplateParamLiftFlag": false,
+        "TwigAllFlag": true
+    },
+    {   // Exercise 2, Java, V1
+        "Id": 8,
+        "FkQuestionTypeId": 4,
+        "TemplateDebugFlag": true,
+        "TestOnSaveFlag": false,
+        "GlobalExtraParam": "global_extra_param_java_V1",
+        "RuntimeData": "runtime_data_java_V1",
+        "TemplateParam": "template_param_java_V1",
+        "TemplateParamLiftFlag": false,
+        "TwigAllFlag": true
+    },
+    {   // Exercise 3, C, V1
+        "Id": 9,
+        "FkQuestionTypeId": 5,
+        "TemplateDebugFlag": true,
+        "TestOnSaveFlag": false,
+        "GlobalExtraParam": "global_extra_param_c_V1",
+        "RuntimeData": "runtime_data_c_V1",
+        "TemplateParam": "template_param_c_V1",
+        "TemplateParamLiftFlag": false,
+        "TwigAllFlag": true
+    }
+]

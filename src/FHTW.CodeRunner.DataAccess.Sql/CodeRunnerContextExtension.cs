@@ -9,10 +9,13 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using FHTW.CodeRunner.DataAccess.Entities;
+using FHTW.CodeRunner.DataAccess.Interfaces;
 using FHTW.CodeRunner.DataAccess.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace FHTW.CodeRunner.DataAccess.Sql
 {

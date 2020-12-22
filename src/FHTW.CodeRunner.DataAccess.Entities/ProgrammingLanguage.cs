@@ -38,4 +38,34 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         [InverseProperty("FkProgrammingLanguage")]
         public virtual ICollection<ExerciseBody> ExerciseBody { get; set; }
     }
+
+    [NotMapped]
+    public class ProgrammingLanguageComparator : IEqualityComparer<ProgrammingLanguage>
+    {
+        public bool Equals(ProgrammingLanguage x, ProgrammingLanguage y)
+        {
+            if (x == null && y == null)
+            {
+                return true;
+            }
+            else if (x == null || y == null)
+            {
+                return false;
+            }
+            else if (x.Id == y.Id && x.Name == y.Name)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public int GetHashCode(ProgrammingLanguage obj)
+        {
+            int hash = obj.Id ^ obj.Name.GetHashCode();
+            return hash.GetHashCode();
+        }
+    }
 }
