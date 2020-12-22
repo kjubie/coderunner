@@ -23,6 +23,7 @@
     <ProjectReference Include="..\FHTW.CodeRunner.DataAccess.Entities\FHTW.CodeRunner.DataAccess.Entities.csproj" />
     <ProjectReference Include="..\FHTW.CodeRunner.DataAccess.Interfaces\FHTW.CodeRunner.DataAccess.Interfaces.csproj" />
     <ProjectReference Include="..\FHTW.CodeRunner.DataAccess.Sql\FHTW.CodeRunner.DataAccess.Sql.csproj" />
+    <ProjectReference Include="..\FHTW.CodeRunner.ExportService\FHTW.CodeRunner.ExportService.csproj" />
   </ItemGroup>
 
 </Project>

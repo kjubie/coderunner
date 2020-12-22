@@ -2,13 +2,13 @@
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
-﻿using System;
-﻿using System.Diagnostics;
-﻿using FHTW.CodeRunner.DataAccess.Entities;
-﻿using FHTW.CodeRunner.DataAccess.Sql;
-﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Diagnostics;
+using FHTW.CodeRunner.DataAccess.Entities;
+using FHTW.CodeRunner.DataAccess.Sql;
+using Microsoft.EntityFrameworkCore;
 
-﻿namespace FHTW.CodeRunner.DataAccess.Tests
+namespace FHTW.CodeRunner.DataAccess.Tests
 {
     /// <summary>
     /// Test Db Controller that sets up the database.

@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="ExerciseShort.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
@@ -20,7 +24,7 @@ namespace FHTW.CodeRunner.Services.DTOs
         public DateTime Created { get; set; }
 
         [DataMember(Name = "user")]
-        public User User { get; set; }
+        public User FkUser { get; set; }
 
         [DataMember(Name = "tagList")]
         public List<Tag> Tags { get; set; }
