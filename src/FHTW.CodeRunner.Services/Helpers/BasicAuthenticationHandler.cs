@@ -85,7 +85,8 @@ namespace FHTW.CodeRunner.Services.Helpers
                 return AuthenticateResult.Fail("Invalid Username or Password");
             }
 
-            var claims = new[] {
+            var claims = new[]
+            {
                 new Claim(ClaimTypes.NameIdentifier, "testId"), // TODO: Research Claim
                 new Claim(ClaimTypes.Name, "root"), // TODO: Research Claim
             };

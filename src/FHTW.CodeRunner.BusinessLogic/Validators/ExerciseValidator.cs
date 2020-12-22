@@ -17,7 +17,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Validators
         public ExerciseValidator()
         {
             this.RuleFor(e => e.Title)
-                .NotNull();
+                .NotEmpty();
 
             this.RuleFor(e => e.FkUser)
                 .NotNull()

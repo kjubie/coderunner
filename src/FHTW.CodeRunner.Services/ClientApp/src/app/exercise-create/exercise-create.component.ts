@@ -9,6 +9,8 @@ import { ExerciseBody } from '../data-objects/create-exercise/exercise-body';
 import { TestSuit } from '../data-objects/create-exercise/test-suit';
 import { TestCase } from '../data-objects/create-exercise/test-case';
 import { ProgrammingLanguage } from '../data-objects/programming-language';
+import { PrepareCreateExercise } from '../data-objects/create-exercise/prepare-create-exercise';
+import { QuestionType } from '../data-objects/question-type';
 
 @Component({
   selector: 'app-exercise-create',
@@ -18,14 +20,19 @@ import { ProgrammingLanguage } from '../data-objects/programming-language';
 export class ExerciseCreateComponent implements OnInit {
 
   tabSelected: string = "general";
-  writtenLang: string[] = ["English", "German"];
-  programmingLang: string[] = ["C#", "Java", "Python", "C++"];
-  @Output() exercise: Exercise;
-  savedExercise: Exercise;
   selectedElement = 'General';
+
+  dataToCreateExercise: PrepareCreateExercise;
+  writtenLangs: WrittenLanguage[];
+  programmingLangs: ProgrammingLanguage[];
+  questionTypes: QuestionType[];
   writtenLangIdx: number;
   programmingLangIdx: number;
   testIdx: number;
+
+  savedExercise: Exercise;
+  @Output() exercise: Exercise;
+  
 
   constructor(private createExerciseService: CreateExerciseService) {}
   
@@ -46,7 +53,26 @@ export class ExerciseCreateComponent implements OnInit {
     }
   }
 
+  prepareExerciseObserver = {
+    next: x => { this.dataToCreateExercise = x},
+    error: err => console.error('Observer got an error: ' + err),
+    complete: () => {
+      this.writtenLangs = this.dataToCreateExercise.writtenLanguageList;
+      this.programmingLangs = this.dataToCreateExercise.programmingLanguageList;
+      this.questionTypes = this.dataToCreateExercise.questionTypeList;
+
+      for (let i=0; i<this.writtenLangs.length; i++) {
+        // remove default written lang:
+        if (this.writtenLangs[i].name == "English") {
+          this.writtenLangs.splice(i, 1);
+        }
+      }
+    }
+  }
+
   ngOnInit() {
+    this.createExerciseService.prepareExercise().subscribe(this.prepareExerciseObserver);
+
     this.exercise = new Exercise();
     this.exercise.created = new Date();
     this.exercise.exerciseTagList[0] = new Tag();

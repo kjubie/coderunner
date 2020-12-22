@@ -1,4 +1,4 @@
-<side-menu [selectedElement]="selectedElement" (selectElementEvent)="setSelectedElement($event)" (addWrittenLangEvent)="addWrittenLang($event)"></side-menu>
+<side-menu [availableLangsW]="writtenLangs" [availableLangsP]="programmingLangs" [selectedElement]="selectedElement" (selectElementEvent)="setSelectedElement($event)" (addWrittenLangEvent)="addWrittenLang($event)"></side-menu>
 
 <div class="content">
     <general-tab *ngIf="selectedElement == 'General'" [exercise]="exercise"></general-tab>

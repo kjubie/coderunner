@@ -46,8 +46,10 @@ namespace FHTW.CodeRunner.Services.Controllers
         {
             if (body == null)
             {
-                // TODO: Error Model
-                return this.BadRequest("User Authentication should not be null");
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = "User Authentication should not be null",
+                });
             }
 
             var blUser = this.mapper.Map<BlEntities.User>(body);
@@ -60,7 +62,10 @@ namespace FHTW.CodeRunner.Services.Controllers
             }
             else
             {
-                return this.BadRequest(new { message = "Username or password is incorrect" });
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = "Username or password is incorrect",
+                });
             }
         }
     }

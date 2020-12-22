@@ -21,6 +21,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         /// Initializes a new instance of the <see cref="ExerciseRepository"/> class.
         /// </summary>
         /// <param name="dbcontext">The dbcontext to be used for the repository.</param>
+        /// <param name="logger">The logger.</param>
         public ExerciseRepository(CodeRunnerContext dbcontext, ILogger<ExerciseRepository> logger)
             : base(dbcontext, logger)
         {
@@ -79,87 +80,74 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             var version = exercise.ExerciseVersion;
 
+            if (exercise.Id == 0)
+            {
+                throw new DalException("exercise should already exist");
+            }
+
+            if (exercise.FkUserId == 0)
+            {
+                throw new DalException("exercise userid must be set");
+            }
+
+            if (version == null)
+            {
+                throw new DalException("at least one version entity should be present");
+            }
+
             if (version.Count != 1)
             {
-                this.Logger.LogError("more than one version in exercise, on update");
-                throw new DalException("only one version should be present when updating exercise");
+                throw new DalException($"only one version should be present when updating exercise. Count = {version.Count}");
             }
 
             try
             {
                 using var transaction = this.Context.Database.BeginTransaction();
 
+                // set known ids.
                 exercise.ExerciseTag = exercise.ExerciseTag.Select(e =>
                 {
                     e.FkExerciseId = exercise.Id;
-                    this.Context.ExerciseTag.Add(e);
                     return e;
                 }).ToList();
-
-                this.Save();
 
                 exercise.ExerciseVersion = exercise.ExerciseVersion.Select(e =>
                 {
                     e.FkExerciseId = exercise.Id;
                     e.FkUserId = exercise.FkUserId;
-                    e.ExerciseLanguage = e.ExerciseLanguage.Select(l =>
+                    e.ExerciseLanguage = e.ExerciseLanguage.Select(el =>
                     {
-                        l.FkExerciseVersionId = e.Id;
-
-                        // set ExerciseHeader
-                        if (l.FkExerciseHeaderId == 0)
-                        {
-                            this.Context.ExerciseHeader.Add(l.FkExerciseHeader);
-                        }else
-                        {
-                            this.Context.ExerciseHeader.Update(l.FkExerciseHeader);
-                        }
-
-                        this.Save();
-
-                        l.FkExerciseHeaderId = l.FkExerciseHeader.Id;
-
-                        // set ExerciseBody
-                        l.ExerciseBody = l.ExerciseBody.Select(b =>
-                        {
-                            if (b.FkTestSuiteId == 0)
-                            {
-                                this.Context.TestSuite.Add(b.FkTestSuite);
-                            }
-                            else
-                            {
-                                this.Context.TestSuite.Update(b.FkTestSuite);
-                            }
-
-                            this.Save();
-
-                            b.FkTestSuiteId = b.FkTestSuite.Id;
-
-                            b.FkTestSuite.TestCase = b.FkTestSuite.TestCase.Select(tc =>
-                            {
-                                tc.FkTestSuiteId = b.FkTestSuiteId;
-                                if (tc.Id == 0)
-                                {
-                                    this.Context.TestCase.Add(tc);
-                                }else
-                                {
-                                    this.Context.TestCase.Update(tc);
-                                }
-                                return tc;
-                            }).ToList();
-
-                            this.Context.TestSuite.Update(b.FkTestSuite);
-
-                            return b;
-                        }).ToList();
-
-                        return l;
+                        el.FkExerciseVersionId = e.Id;
+                        return el;
                     }).ToList();
+
                     return e;
                 }).ToList();
 
+                // add everything new
+                this.Context.ChangeTracker.TrackGraph(exercise, e =>
+                {
+                    if (e.Entry.IsKeySet)
+                    {
+                        e.Entry.State = EntityState.Unchanged;
+                    }
+                    else
+                    {
+                        e.Entry.State = EntityState.Added;
+                    }
+                });
+
+                // update existing
+                this.Context.ChangeTracker.TrackGraph(exercise, e =>
+                {
+                    if (e.Entry.IsKeySet)
+                    {
+                        e.Entry.State = EntityState.Modified;
+                    }
+                });
 
                 this.Save();
+
                 transaction.Commit();
             }
             catch (Exception e)
@@ -197,6 +185,55 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                             .ThenInclude(eb => eb.FkProgrammingLanguage)
                 .AsEnumerable()
                 .FirstOrDefault(e => e.Id == id);
+        }
+
+        /// <inheritdoc/>
+        public List<MinimalExercise> GetMinimalList()
+        {
+            return this.Context.Exercise
+                .Include(e => e.ExerciseTag)
+                .Include(e => e.FkUser)
+                .Include(e => e.ExerciseVersion
+                    .Where(v => v.VersionNumber == this.GetLatestVersionNumber(v.Id)))
+                    .ThenInclude(v => v.ExerciseLanguage)
+                        .ThenInclude(el => el.FkWrittenLanguage)
+                .Include(e => e.ExerciseVersion
+                    .Where(v => v.VersionNumber == this.GetLatestVersionNumber(v.Id)))
+                    .ThenInclude(v => v.ExerciseLanguage)
+                        .ThenInclude(el => el.ExerciseBody)
+                            .ThenInclude(eb => eb.FkProgrammingLanguage)
+                .Select(m => new MinimalExercise
+                {
+                    Id = m.Id,
+                    Title = m.Title,
+                    Created = m.Created,
+                    Username = m.FkUser.Name,
+                    TagList = m.ExerciseTag.Select(et => new Tag()
+                        {
+                            Id = et.FkTagId,
+                            Name = et.FkTag.Name,
+                        }).ToList(),
+                    writtenLanguageList = m.ExerciseVersion.FirstOrDefault().ExerciseLanguage.Select(el => new WrittenLanguage()
+                        {
+                            Id = el.FkWrittenLanguageId,
+                            Name = el.FkWrittenLanguage.Name,
+                        }).ToList(),
+                    programmingLanguageList = m.ExerciseVersion.FirstOrDefault().ExerciseLanguage.SelectMany(el =>
+                        el.ExerciseBody.Select(eb => new ProgrammingLanguage()
+                            {
+                                Id = eb.FkProgrammingLanguageId,
+                                Name = eb.FkProgrammingLanguage.Name,
+                            })).ToHashSet(new ProgrammingLanguageComparator()).ToList(),
+                })
+                .ToList();
+        }
+
+        /// <inheritdoc/>
+        public int GetLatestVersionNumber(int id)
+        {
+            return this.Context.ExerciseVersion
+                .Where(e => e.FkExerciseId == id)
+                .Max(e => e.VersionNumber);
         }
     }
 }

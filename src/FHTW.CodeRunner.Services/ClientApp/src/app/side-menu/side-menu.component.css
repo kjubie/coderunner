@@ -65,7 +65,7 @@ img {
     font-weight: 500;
 }
 
-#addLangBtn {
+#addLangBtn, #addProgrammingLangBtn {
     color: rgb(53, 171, 240);
     padding: 0;
 }

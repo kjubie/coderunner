@@ -36,6 +36,12 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.Migrations", "FHTW.CodeRunner.Migrations\FHTW.CodeRunner.Migrations.csproj", "{2889C8A1-DDCC-4B6D-9A57-0397245DF4AA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.ExportService", "FHTW.CodeRunner.ExportService\FHTW.CodeRunner.ExportService.csproj", "{9856085C-397F-4556-9FAD-FAE1870F1362}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.ExportService.Entities", "FHTW.CodeRunner.ExportService.Entities\FHTW.CodeRunner.ExportService.Entities.csproj", "{7B4C724C-EFA7-4361-B215-8BB0C70424A7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHTW.CodeRunner.ExportService.Interfaces", "FHTW.CodeRunner.ExportService.Interfaces\FHTW.CodeRunner.ExportService.Interfaces.csproj", "{CFB7405B-C982-48F9-BE65-5ED715B9356E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +104,18 @@ Global
 		{2889C8A1-DDCC-4B6D-9A57-0397245DF4AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2889C8A1-DDCC-4B6D-9A57-0397245DF4AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2889C8A1-DDCC-4B6D-9A57-0397245DF4AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9856085C-397F-4556-9FAD-FAE1870F1362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9856085C-397F-4556-9FAD-FAE1870F1362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9856085C-397F-4556-9FAD-FAE1870F1362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9856085C-397F-4556-9FAD-FAE1870F1362}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B4C724C-EFA7-4361-B215-8BB0C70424A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B4C724C-EFA7-4361-B215-8BB0C70424A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B4C724C-EFA7-4361-B215-8BB0C70424A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B4C724C-EFA7-4361-B215-8BB0C70424A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFB7405B-C982-48F9-BE65-5ED715B9356E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFB7405B-C982-48F9-BE65-5ED715B9356E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFB7405B-C982-48F9-BE65-5ED715B9356E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFB7405B-C982-48F9-BE65-5ED715B9356E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

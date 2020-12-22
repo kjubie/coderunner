@@ -2,19 +2,34 @@
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
-﻿using System;
+using System;
 using System.Diagnostics;
 using FHTW.CodeRunner.DataAccess.Entities;
-﻿using FHTW.CodeRunner.DataAccess.Sql;
-﻿using Microsoft.EntityFrameworkCore;
+using FHTW.CodeRunner.DataAccess.Sql;
+using Microsoft.EntityFrameworkCore;
 
-﻿namespace FHTW.CodeRunner.DataAccess.Tests
+namespace FHTW.CodeRunner.DataAccess.Tests
 {
     /// <summary>
     /// Test Db Controller that sets up the database.
     /// </summary>
     public class DbTestController
     {
+        /// <summary>
+        /// The ammount of programming languages in the test database.
+        /// </summary>
+        public static readonly int PROGRAMMINGLANUGAGESCOUNT = 3;
+
+        /// <summary>
+        /// The ammount of written languages in the test database.
+        /// </summary>
+        public static readonly int WRITTENLANUGAGESCOUNT = 3;
+
+        /// <summary>
+        /// The ammount of questiontypes in the test database.
+        /// </summary>
+        public static readonly int QUESTIONTYPESCOUNT = 3;
+
         private readonly DbContextOptions<CodeRunnerContext> contextOptions;
 
         /// <summary>
@@ -30,9 +45,10 @@ using FHTW.CodeRunner.DataAccess.Entities;
 
             this.CreateDb(context);
 
-            if (state == State.SEEDED)
+            switch (state)
             {
-                this.Seed(context);
+                case State.SEEDED: this.Seed(context); break;
+                case State.SEEDEDJSON: this.SeedJSON(context); break;
             }
         }
 
@@ -50,6 +66,11 @@ using FHTW.CodeRunner.DataAccess.Entities;
             /// Test db should contain test data.
             /// </summary>
             SEEDED,
+
+            /// <summary>
+            /// Test db seeded with data in json seed folder
+            /// </summary>
+            SEEDEDJSON,
         }
 
         /// <summary>
@@ -77,16 +98,24 @@ using FHTW.CodeRunner.DataAccess.Entities;
             var user = TestDataBuilder<User>.Single();
             context.Add(user);
 
-            var language = TestDataBuilder<WrittenLanguage>.Many(3);
+            var language = TestDataBuilder<WrittenLanguage>.Many(WRITTENLANUGAGESCOUNT);
             context.AddRange(language);
 
-            var programmingLanguage = TestDataBuilder<ProgrammingLanguage>.Many(3);
+            var programmingLanguage = TestDataBuilder<ProgrammingLanguage>.Many(PROGRAMMINGLANUGAGESCOUNT);
             context.AddRange(programmingLanguage);
 
-            var tags= TestDataBuilder<Tag>.Many(10);
+            var tags = TestDataBuilder<Tag>.Many(10);
             context.AddRange(tags);
 
+            var questionTypes = TestDataBuilder<QuestionType>.Many(QUESTIONTYPESCOUNT);
+            context.AddRange(questionTypes);
+
             context.SaveChanges();
+        }
+
+        private void SeedJSON(CodeRunnerContext context)
+        {
+            context.EnsureSeeded();
         }
     }
 }

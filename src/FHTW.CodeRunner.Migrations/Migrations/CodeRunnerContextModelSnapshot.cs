@@ -481,6 +481,25 @@ namespace FHTW.CodeRunner.Migrations.Migrations
                     b.ToTable("programming_language");
                 });
 
+            modelBuilder.Entity("FHTW.CodeRunner.DataAccess.Entities.QuestionType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("questiontype");
+                });
+
             modelBuilder.Entity("FHTW.CodeRunner.DataAccess.Entities.Rating", b =>
                 {
                     b.Property<int>("Id")
@@ -593,15 +612,14 @@ namespace FHTW.CodeRunner.Migrations.Migrations
                         .HasColumnName("id")
                         .UseIdentityByDefaultColumn();
 
+                    b.Property<int?>("FkQuestionTypeId")
+                        .HasMaxLength(255)
+                        .HasColumnType("integer")
+                        .HasColumnName("fk_question_type_id");
+
                     b.Property<string>("GlobalExtraParam")
                         .HasColumnType("text")
                         .HasColumnName("global_extra_param");
-
-                    b.Property<string>("QuestionType")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasColumnName("question_type");
 
                     b.Property<string>("RuntimeData")
                         .HasColumnType("text")
@@ -628,6 +646,8 @@ namespace FHTW.CodeRunner.Migrations.Migrations
                         .HasColumnName("twig_all_flag");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FkQuestionTypeId");
 
                     b.ToTable("test_suite");
                 });
@@ -924,6 +944,15 @@ namespace FHTW.CodeRunner.Migrations.Migrations
                         .IsRequired();
 
                     b.Navigation("FkTestSuite");
+                });
+
+            modelBuilder.Entity("FHTW.CodeRunner.DataAccess.Entities.TestSuite", b =>
+                {
+                    b.HasOne("FHTW.CodeRunner.DataAccess.Entities.QuestionType", "FkQuestionType")
+                        .WithMany()
+                        .HasForeignKey("FkQuestionTypeId");
+
+                    b.Navigation("FkQuestionType");
                 });
 
             modelBuilder.Entity("FHTW.CodeRunner.DataAccess.Entities.Collection", b =>

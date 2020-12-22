@@ -6,9 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
+    [ExcludeFromCodeCoverage]
     [Table("programming_language")]
     public partial class ProgrammingLanguage : IEntity
     {
@@ -35,5 +37,35 @@ namespace FHTW.CodeRunner.DataAccess.Entities
 
         [InverseProperty("FkProgrammingLanguage")]
         public virtual ICollection<ExerciseBody> ExerciseBody { get; set; }
+    }
+
+    [NotMapped]
+    public class ProgrammingLanguageComparator : IEqualityComparer<ProgrammingLanguage>
+    {
+        public bool Equals(ProgrammingLanguage x, ProgrammingLanguage y)
+        {
+            if (x == null && y == null)
+            {
+                return true;
+            }
+            else if (x == null || y == null)
+            {
+                return false;
+            }
+            else if (x.Id == y.Id && x.Name == y.Name)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public int GetHashCode(ProgrammingLanguage obj)
+        {
+            int hash = obj.Id ^ obj.Name.GetHashCode();
+            return hash.GetHashCode();
+        }
     }
 }

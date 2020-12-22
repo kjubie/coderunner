@@ -13,9 +13,11 @@ import { Observable } from 'rxjs';
 export class TokenInterceptor implements HttpInterceptor {
   constructor() {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let user = localStorage.getItem('name') == null ? request.body.name : localStorage.getItem('name');
+    let pwd = localStorage.getItem('pwd') == null ? request.body.password : localStorage.getItem('pwd');
     request = request.clone({
       setHeaders: {
-        Authorization: `{name: ${request.body.name}, password: ${request.body.password}}`
+        Authorization: `Basic ${btoa(`${user}:${pwd}`)}`
       }
     });
     return next.handle(request);

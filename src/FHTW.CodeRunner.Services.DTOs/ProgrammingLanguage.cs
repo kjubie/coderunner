@@ -13,13 +13,6 @@ namespace FHTW.CodeRunner.Services.DTOs
     [ExcludeFromCodeCoverage]
     public class ProgrammingLanguage
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ProgrammingLanguage"/> class.
-        /// </summary>
-        public ProgrammingLanguage()
-        {
-        }
-
         [DataMember(Name = "id")]
         public int Id { get; set; }
 

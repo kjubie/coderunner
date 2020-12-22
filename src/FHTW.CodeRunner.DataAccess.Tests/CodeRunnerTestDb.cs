@@ -2,15 +2,15 @@
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
-﻿using System;
-﻿using System.Data.Common;
-﻿using FHTW.CodeRunner.DataAccess.Entities;
-﻿using FHTW.CodeRunner.DataAccess.Sql;
-﻿using Microsoft.Data.Sqlite;
-﻿using Microsoft.EntityFrameworkCore;
-﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+using System;
+using System.Data.Common;
+using FHTW.CodeRunner.DataAccess.Entities;
+using FHTW.CodeRunner.DataAccess.Sql;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
-﻿namespace FHTW.CodeRunner.DataAccess.Tests
+namespace FHTW.CodeRunner.DataAccess.Tests
 {
     /// <summary>
     /// The in memory database for testing.

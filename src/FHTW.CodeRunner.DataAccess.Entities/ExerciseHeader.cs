@@ -6,11 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
+    [ExcludeFromCodeCoverage]
     [Table("exercise_header")]
-    public partial class ExerciseHeader
+    public partial class ExerciseHeader : IEntity
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ExerciseHeader"/> class.

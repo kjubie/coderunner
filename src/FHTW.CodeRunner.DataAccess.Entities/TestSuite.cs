@@ -6,12 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
     /// <summary>
     /// The TestSuite entity.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Table("test_suite")]
     public partial class TestSuite : IEntity
     {
@@ -32,10 +34,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         /// <summary>
         /// Gets or Sets the question type.
         /// </summary>
-        [Required]
-        [Column("question_type")]
+        [Column("fk_question_type_id")]
         [StringLength(255)]
-        public string QuestionType { get; set; }
+        public int? FkQuestionTypeId { get; set; }
 
         /// <summary>
         /// Gets or Sets a value indicating whether the from the template generated program should be displayed.
@@ -69,7 +70,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         public string TemplateParam { get; set; }
 
         /// <summary>
-        /// Gets or Sets a value indicatíng whether the template parameter namespace can be omitted.
+        /// Gets or Sets a value indicating whether the template parameter namespace can be omitted.
         /// </summary>
         [Column("template_param_lift_flag")]
         public bool TemplateParamLiftFlag { get; set; }
@@ -91,5 +92,11 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         /// </summary>
         [InverseProperty("FkTestSuite")]
         public virtual ICollection<TestCase> TestCase { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the questiontype foreign property.
+        /// </summary>
+        [ForeignKey(nameof(FkQuestionTypeId))]
+        public QuestionType FkQuestionType { get; set; }
     }
 }

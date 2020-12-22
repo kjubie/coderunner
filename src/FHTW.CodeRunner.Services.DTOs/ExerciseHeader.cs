@@ -13,13 +13,6 @@ namespace FHTW.CodeRunner.Services.DTOs
     [ExcludeFromCodeCoverage]
     public class ExerciseHeader
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ExerciseHeader"/> class.
-        /// </summary>
-        public ExerciseHeader()
-        {
-        }
-
         [DataMember(Name = "fullTitle")]
         public string FullTitle { get; set; }
 

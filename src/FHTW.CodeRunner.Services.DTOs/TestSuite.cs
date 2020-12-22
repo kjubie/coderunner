@@ -25,7 +25,7 @@ namespace FHTW.CodeRunner.Services.DTOs
         /// Gets or Sets the question type.
         /// </summary>
         [DataMember(Name = "questionType")]
-        public string QuestionType { get; set; }
+        public QuestionType FkQuestionType { get; set; }
 
         /// <summary>
         /// Gets or Sets a value indicating whether the from the template generated program should be displayed.

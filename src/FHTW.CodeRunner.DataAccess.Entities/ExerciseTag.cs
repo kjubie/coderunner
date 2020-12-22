@@ -6,11 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
+    [ExcludeFromCodeCoverage]
     [Table("exercise_tag")]
-    public partial class ExerciseTag
+    public partial class ExerciseTag : IEntity
     {
         [Key]
         [Column("id")]

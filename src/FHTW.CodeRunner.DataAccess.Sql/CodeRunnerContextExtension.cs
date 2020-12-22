@@ -9,10 +9,13 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using FHTW.CodeRunner.DataAccess.Entities;
+using FHTW.CodeRunner.DataAccess.Interfaces;
 using FHTW.CodeRunner.DataAccess.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace FHTW.CodeRunner.DataAccess.Sql
 {
@@ -52,6 +55,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 UpdateOrAdd<ExerciseTag>(context, "exercise_tag", options);
                 UpdateOrAdd<WrittenLanguage>(context, "written_language", options);
                 UpdateOrAdd<ProgrammingLanguage>(context, "programming_language", options);
+                UpdateOrAdd<QuestionType>(context, "questiontype", options);
                 UpdateOrAdd<TestSuite>(context, "testsuite", options);
                 UpdateOrAdd<TestCase>(context, "testcase", options);
                 UpdateOrAdd<ExerciseLanguage>(context, "exercise_language", options);
@@ -69,7 +73,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         private static void UpdateOrAdd<T>(CodeRunnerContext context, string name, JsonSerializerOptions options)
             where T : class
         {
-            var list = JsonSerializer.Deserialize<List<T>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + name + ".json"), options);
+            var list = JsonSerializer.Deserialize<List<T>>(File.ReadAllText("Seed" + Path.DirectorySeparatorChar + name + ".json"), options);
             var table = context.Set<T>();
 
             list.ForEach(o =>
