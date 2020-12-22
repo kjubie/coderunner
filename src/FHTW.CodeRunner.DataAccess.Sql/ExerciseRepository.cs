@@ -186,5 +186,54 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 .AsEnumerable()
                 .FirstOrDefault(e => e.Id == id);
         }
+
+        /// <inheritdoc/>
+        public List<MinimalExercise> GetMinimalList()
+        {
+            return this.Context.Exercise
+                .Include(e => e.ExerciseTag)
+                .Include(e => e.FkUser)
+                .Include(e => e.ExerciseVersion
+                    .Where(v => v.VersionNumber == this.GetLatestVersionNumber(v.Id)))
+                    .ThenInclude(v => v.ExerciseLanguage)
+                        .ThenInclude(el => el.FkWrittenLanguage)
+                .Include(e => e.ExerciseVersion
+                    .Where(v => v.VersionNumber == this.GetLatestVersionNumber(v.Id)))
+                    .ThenInclude(v => v.ExerciseLanguage)
+                        .ThenInclude(el => el.ExerciseBody)
+                            .ThenInclude(eb => eb.FkProgrammingLanguage)
+                .Select(m => new MinimalExercise
+                {
+                    Id = m.Id,
+                    Title = m.Title,
+                    Created = m.Created,
+                    Username = m.FkUser.Name,
+                    TagList = m.ExerciseTag.Select(et => new Tag()
+                        {
+                            Id = et.FkTagId,
+                            Name = et.FkTag.Name,
+                        }).ToList(),
+                    writtenLanguageList = m.ExerciseVersion.FirstOrDefault().ExerciseLanguage.Select(el => new WrittenLanguage()
+                        {
+                            Id = el.FkWrittenLanguageId,
+                            Name = el.FkWrittenLanguage.Name,
+                        }).ToList(),
+                    programmingLanguageList = m.ExerciseVersion.FirstOrDefault().ExerciseLanguage.SelectMany(el =>
+                        el.ExerciseBody.Select(eb => new ProgrammingLanguage()
+                            {
+                                Id = eb.FkProgrammingLanguageId,
+                                Name = eb.FkProgrammingLanguage.Name,
+                            })).ToHashSet(new ProgrammingLanguageComparator()).ToList(),
+                })
+                .ToList();
+        }
+
+        /// <inheritdoc/>
+        public int GetLatestVersionNumber(int id)
+        {
+            return this.Context.ExerciseVersion
+                .Where(e => e.FkExerciseId == id)
+                .Max(e => e.VersionNumber);
+        }
     }
 }

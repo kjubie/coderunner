@@ -45,9 +45,10 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 
             this.CreateDb(context);
 
-            if (state == State.SEEDED)
+            switch (state)
             {
-                this.Seed(context);
+                case State.SEEDED: this.Seed(context); break;
+                case State.SEEDEDJSON: this.SeedJSON(context); break;
             }
         }
 
@@ -65,6 +66,11 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             /// Test db should contain test data.
             /// </summary>
             SEEDED,
+
+            /// <summary>
+            /// Test db seeded with data in json seed folder
+            /// </summary>
+            SEEDEDJSON,
         }
 
         /// <summary>
@@ -105,6 +111,11 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             context.AddRange(questionTypes);
 
             context.SaveChanges();
+        }
+
+        private void SeedJSON(CodeRunnerContext context)
+        {
+            context.EnsureSeeded();
         }
     }
 }
