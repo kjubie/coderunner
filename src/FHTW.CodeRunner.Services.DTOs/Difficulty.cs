@@ -13,6 +13,9 @@ namespace FHTW.CodeRunner.Services.DTOs
     [ExcludeFromCodeCoverage]
     public class Difficulty
     {
+        [DataMember(Name = "id")]
+        public int Id { get; set; }
+
         [DataMember(Name = "number")]
         public int Number { get; set; }
 

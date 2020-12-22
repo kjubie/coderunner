@@ -13,6 +13,9 @@ namespace FHTW.CodeRunner.Services.DTOs
     [ExcludeFromCodeCoverage]
     public class ExerciseBody
     {
+        [DataMember(Name = "id")]
+        public int Id { get; set; }
+
         /// <summary>
         /// Gets or Sets the question description specific to a programming language.
         /// </summary>

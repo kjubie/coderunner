@@ -13,22 +13,14 @@ export class CreateExerciseService {
   private createExerciseUrl = "https://localhost:5001/api/exercise";
   private prepareExerciseUrl = "https://localhost:5001/api/exercise/prepare";
 
-  private headerDict = {
-    'Access-Control-Allow-Origin': 'http://localhost:5100'
-  };
-
-  private requestOptions = {
-    headers: new HttpHeaders(this.headerDict)
-  }
-
   constructor(
     private http: HttpClient,
   ) { }
 
   // GET Request -> fetch written, programming Lang etc. for create
   prepareExercise(): Observable<PrepareCreateExercise> {
-    return this.http.get<PrepareCreateExercise>(this.prepareExerciseUrl, this.requestOptions).pipe(
-      tap(data => console.log(data)),
+    return this.http.get<PrepareCreateExercise>(this.prepareExerciseUrl/*, this.requestOptions*/).pipe(
+      tap(_ => console.log("languages and question types fetched from db")),
       catchError(this.handleError<PrepareCreateExercise>('prepareExercise'))
     );
     

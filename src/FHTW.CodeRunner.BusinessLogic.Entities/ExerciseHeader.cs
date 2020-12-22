@@ -11,12 +11,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     [ExcludeFromCodeCoverage]
     public class ExerciseHeader
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ExerciseHeader"/> class.
-        /// </summary>
-        public ExerciseHeader()
-        {
-        }
+        public int Id { get; set; }
 
         public string FullTitle { get; set; }
 

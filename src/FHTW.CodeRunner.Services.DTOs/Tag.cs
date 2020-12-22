@@ -13,13 +13,6 @@ namespace FHTW.CodeRunner.Services.DTOs
     [ExcludeFromCodeCoverage]
     public class Tag
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Tag"/> class.
-        /// </summary>
-        public Tag()
-        {
-        }
-
         [DataMember(Name = "id")]
         public int Id { get; set; }
 

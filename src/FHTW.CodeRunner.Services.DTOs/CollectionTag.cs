@@ -13,6 +13,9 @@ namespace FHTW.CodeRunner.Services.DTOs
     [ExcludeFromCodeCoverage]
     public class CollectionTag
     {
+        [DataMember(Name = "id")]
+        public int Id { get; set; }
+
         [DataMember(Name = "collection")]
         public Collection FkCollection { get; set; }
 

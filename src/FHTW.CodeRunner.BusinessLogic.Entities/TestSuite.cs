@@ -19,6 +19,8 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
             this.TestCase = new HashSet<TestCase>();
         }
 
+        public int Id { get; set; }
+
         /// <summary>
         /// Gets or Sets the question type.
         /// </summary>

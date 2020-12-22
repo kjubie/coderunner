@@ -11,6 +11,8 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     [ExcludeFromCodeCoverage]
     public class ExerciseBody
     {
+        public int Id { get; set; }
+
         /// <summary>
         /// Gets or Sets the question description specific to a programming language.
         /// </summary>

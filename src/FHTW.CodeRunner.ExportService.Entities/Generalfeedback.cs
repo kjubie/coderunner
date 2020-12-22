@@ -11,6 +11,7 @@ namespace FHTW.CodeRunner.ExportService.Entities
     {
         [XmlElement(ElementName = "text")]
         public string Text { get; set; }
+
         [XmlAttribute(AttributeName = "format")]
         public string Format { get; set; }
     }

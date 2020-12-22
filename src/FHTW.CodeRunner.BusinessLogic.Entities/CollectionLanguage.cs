@@ -19,6 +19,8 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
             this.CollectionExercise = new HashSet<CollectionExercise>();
         }
 
+        public int Id { get; set; }
+
         public string FullTitle { get; set; }
 
         public string ShortTitle { get; set; }
