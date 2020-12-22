@@ -9,6 +9,7 @@ export class ExerciseLanguage {
         this.exerciseBody = new ExerciseBody();
     }
 
+    id: number;
     exerciseHeader: ExerciseHeader;
     writtenLanguage: WrittenLanguage;
     exerciseBody: ExerciseBody;

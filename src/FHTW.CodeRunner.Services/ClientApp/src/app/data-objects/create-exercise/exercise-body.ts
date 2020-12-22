@@ -7,14 +7,13 @@ export class ExerciseBody {
         this.testSuit = new TestSuit();
     }
 
-    minAllowedFiles: number;
-    maxAllowedFiles: number;
-    minRequiredFiles: number;
-    maxRequiredFiles: number;
+    description: string;
+    hint: string;
     fieldLines: number;
     gradingFlag: boolean;
     subtractSystem: string;
     optainablePoints: number;
+    idNum: number;
     solution: string;
     prefill: string;
     feedback: string;
@@ -23,9 +22,12 @@ export class ExerciseBody {
     filesRegex: string;
     filesDescription: string;
     filesSize: number;
-    description: string;
+    
+    minAllowedFiles: number;
+    maxAllowedFiles: number;
+    minRequiredFiles: number;
+    maxRequiredFiles: number;
     example: string;
-    hint: string;
     programmingLanguage: ProgrammingLanguage;
     testSuit: TestSuit;
 }

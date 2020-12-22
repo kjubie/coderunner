@@ -11,6 +11,7 @@ export class Exercise {
         this.exerciseVersionList = [];
     }
 
+    id: number;
     title: string;
     created: Date;
     user: Author;

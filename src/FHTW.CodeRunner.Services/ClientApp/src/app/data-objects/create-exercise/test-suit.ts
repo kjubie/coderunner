@@ -5,16 +5,18 @@ export class TestSuit {
         this.testCaseList = [];
     }
 
+    id: number;
     questionType: string;
-    prefill: string;
-    solution: string;
-    complexity: number;
     templateDebugFlag: boolean;
     testOnSaveFlag: boolean;
-    globalExtra: string;
+    globalExtraParam: string;
     runtimeData: string;
     templateParam: string;
-    liftParamFlag: boolean;
+    templateParamliftFlag: boolean;
     twigAllFlag: boolean;
     testCaseList: TestCase[];
+    
+    //prefill: string;
+    //solution: string;
+    //complexity: number;
 }

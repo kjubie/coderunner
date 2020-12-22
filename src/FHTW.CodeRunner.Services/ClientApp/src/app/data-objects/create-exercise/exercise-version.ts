@@ -7,6 +7,7 @@ export class ExerciseVersion {
         this.exerciseLanguageList = [];
     }
 
+    id: number;
     versionNumber: number;
     creatorRating: number;
     creatorDifficulty: number;

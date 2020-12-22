@@ -4,6 +4,5 @@ export class ExerciseHeader {
     constructor() {}
 
     fullTitle: string;
-    shortTitle: string;
     introduction: string;
 }

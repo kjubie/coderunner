@@ -1,4 +1,5 @@
 export class TestCase {
+    id: number;
     orderUsed: number;
     testCode: string;
     standardInput: string;
