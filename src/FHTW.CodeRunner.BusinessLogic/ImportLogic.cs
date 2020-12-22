@@ -1,4 +1,4 @@
-﻿// <copyright file="ExportLogic.cs" company="FHTW CodeRunner">
+﻿// <copyright file="ImportLogic.cs" company="FHTW CodeRunner">
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
@@ -13,31 +13,26 @@ using Microsoft.Extensions.Logging;
 
 namespace FHTW.CodeRunner.BusinessLogic
 {
-    public class ExportLogic : IExportLogic
+    public class ImportLogic : IImportLogic
     {
         private readonly ILogger logger;
         private readonly IMapper mapper;
         private readonly IMoodleXmlService moodleXmlService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExportLogic"/> class.
+        /// Initializes a new instance of the <see cref="ImportLogic"/> class.
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="mapper"></param>
         /// <param name="moodleXmlService"></param>
-        public ExportLogic(ILogger<ExportLogic> logger, IMapper mapper, IMoodleXmlService moodleXmlService)
+        public ImportLogic(ILogger<ImportLogic> logger, IMapper mapper, IMoodleXmlService moodleXmlService)
         {
             this.logger = logger;
             this.mapper = mapper;
             this.moodleXmlService = moodleXmlService;
         }
 
-        public void ExportCollection(Collection collection)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ExportExercise(Exercise exercise)
+        public Collection ImportCollection()
         {
             throw new NotImplementedException();
         }

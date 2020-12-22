@@ -11,6 +11,8 @@ using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using FHTW.CodeRunner.DataAccess.Entities;
 using FHTW.CodeRunner.DataAccess.Interfaces;
 using FHTW.CodeRunner.DataAccess.Sql;
+using FHTW.CodeRunner.ExportService;
+using FHTW.CodeRunner.ExportService.Interfaces;
 using FHTW.CodeRunner.Services.Helpers;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -95,10 +97,13 @@ namespace FHTW.CodeRunner.Services
             services.AddTransient<IExerciseLogic, ExerciseLogic>();
             services.AddTransient<IUserLogic, UserLogic>();
             services.AddTransient<IExportLogic, ExportLogic>();
+            services.AddTransient<IImportLogic, ImportLogic>();
 
             services.AddTransient<IExerciseRepository, ExerciseRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUIRepository, UIRepository>();
+
+            services.AddTransient<IMoodleXmlService, MoodleXmlService>();
 
             services.AddLogging(configuration =>
             {
