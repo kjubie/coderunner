@@ -20,7 +20,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
 
         public DateTime Created { get; set; }
 
-        public string Username { get; set; }
+        public User User { get; set; }
 
         public ICollection<Tag> TagList { get; set; }
 
