@@ -21,6 +21,9 @@ namespace FHTW.CodeRunner.Services.DTOs
             this.TestCase = new HashSet<TestCase>();
         }
 
+        [DataMember(Name = "id")]
+        public int Id { get; set; }
+
         /// <summary>
         /// Gets or Sets the question type.
         /// </summary>

@@ -13,6 +13,9 @@ namespace FHTW.CodeRunner.Services.DTOs
     [ExcludeFromCodeCoverage]
     public class TestCase
     {
+        [DataMember(Name = "id")]
+        public int Id { get; set; }
+
         /// <summary>
         /// Gets or Sets at what order the testcase should be called (optional).
         /// </summary>

@@ -13,6 +13,9 @@ namespace FHTW.CodeRunner.Services.DTOs
     [ExcludeFromCodeCoverage]
     public class ExerciseHeader
     {
+        [DataMember(Name = "id")]
+        public int Id { get; set; }
+
         [DataMember(Name = "fullTitle")]
         public string FullTitle { get; set; }
 

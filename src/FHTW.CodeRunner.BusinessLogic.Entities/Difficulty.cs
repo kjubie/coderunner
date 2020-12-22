@@ -11,6 +11,8 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     [ExcludeFromCodeCoverage]
     public class Difficulty
     {
+        public int Id { get; set; }
+
         public int Number { get; set; }
 
         public Exercise FkExercise { get; set; }

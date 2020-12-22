@@ -11,6 +11,8 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     [ExcludeFromCodeCoverage]
     public class TestCase
     {
+        public int Id { get; set; }
+
         /// <summary>
         /// Gets or Sets at what order the testcase should be called (optional).
         /// </summary>
