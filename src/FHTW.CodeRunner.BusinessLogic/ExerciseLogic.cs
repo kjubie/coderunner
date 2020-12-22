@@ -40,6 +40,18 @@ namespace FHTW.CodeRunner.BusinessLogic
         }
 
         /// <inheritdoc/>
+        public List<BlEntities.ExerciseShort> GetExerciseShortList()
+        {
+            var dalExercise = this.exerciseRepository.GetById(1);
+            var blExerciseShort = this.mapper.Map<BlEntities.ExerciseShort>(dalExercise);
+
+            var list = new List<BlEntities.ExerciseShort>();
+            list.Add(blExerciseShort);
+
+            return list;
+        }
+
+        /// <inheritdoc/>
         public BlEntities.ExerciseCreatePreparation GetExerciseCreatePreparation()
         {
             BlEntities.ExerciseCreatePreparation exerciseCreatePreparation = new BlEntities.ExerciseCreatePreparation();

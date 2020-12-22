@@ -93,5 +93,15 @@ namespace FHTW.CodeRunner.Services.Controllers
 
             return this.Ok(svcExerciseCreatePreparation);
         }
+
+        [HttpGet]
+        [Route("exercise/short")]
+        public virtual IActionResult GetExerciseShort()
+        {
+            List<BlEntities.ExerciseShort> blExerciseShort = this.exerciseLogic.GetExerciseShortList();
+            var svcExerciseShort = this.mapper.Map<List<SvcEntities.ExerciseShort>>(blExerciseShort);
+
+            return this.Ok(svcExerciseShort);
+        }
     }
 }

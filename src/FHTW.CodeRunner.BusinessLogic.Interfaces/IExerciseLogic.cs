@@ -15,6 +15,8 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
 
         ExerciseCreatePreparation GetExerciseCreatePreparation();
 
+        List<ExerciseShort> GetExerciseShortList();
+
         public void SaveExercise(Exercise exercise);
 
         public void ValidateExercise(Exercise exercise);

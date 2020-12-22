@@ -83,6 +83,11 @@ namespace FHTW.CodeRunner.Services.AutoMapper
 
             this.CreateMap<BlEntities.QuestionType, DalEntities.QuestionType>()
                 .ReverseMap();
+
+            this.CreateMap<DalEntities.Exercise, BlEntities.ExerciseShort>()
+                .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.ExerciseTag.Select(et => et.FkTag).ToList()))
+                .ForMember(dest => dest.WrittenLanguages, opt => opt.MapFrom(src => src.ExerciseVersion.SelectMany(ev => ev.ExerciseLanguage.Select(el => el.FkWrittenLanguage)).Distinct().ToList()))
+                .ForMember(dest => dest.ProgrammingLanguages, opt => opt.MapFrom(src => src.ExerciseVersion.SelectMany(ev => ev.ExerciseLanguage.SelectMany(el => el.ExerciseBody.Select(eb => eb.FkProgrammingLanguage))).Distinct().ToList()));
         }
     }
 }
