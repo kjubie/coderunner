@@ -24,8 +24,8 @@ namespace FHTW.CodeRunner.DataAccess.Entities
 
         public ICollection<Tag> TagList { get; set; }
 
-        public ICollection<WrittenLanguage> writtenLanguageList { get; set; }
+        public ICollection<WrittenLanguage> WrittenLanguageList { get; set; }
 
-        public ICollection<ProgrammingLanguage> programmingLanguageList { get; set; }
+        public ICollection<ProgrammingLanguage> ProgrammingLanguageList { get; set; }
     }
 }

@@ -216,7 +216,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                             Name = et.FkTag.Name,
                         })
                         .ToList(),
-                    writtenLanguageList = m.ExerciseVersion
+                    WrittenLanguageList = m.ExerciseVersion
                         .Where(v => v.VersionNumber == m.ExerciseVersion.Max(vn => vn.VersionNumber))
                         .FirstOrDefault().ExerciseLanguage
                         .Select(el => new WrittenLanguage()
@@ -225,7 +225,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                             Name = el.FkWrittenLanguage.Name,
                         })
                         .ToList(),
-                    programmingLanguageList = m.ExerciseVersion
+                    ProgrammingLanguageList = m.ExerciseVersion
                         .Where(v => v.VersionNumber == m.ExerciseVersion.Max(vn => vn.VersionNumber))
                         .FirstOrDefault().ExerciseLanguage
                         .SelectMany(el => el.ExerciseBody.Select(eb => new ProgrammingLanguage()
