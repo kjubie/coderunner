@@ -42,5 +42,12 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// <param name="id">The id of the exercise</param>
         /// <returns>The lateset version nummber.</returns>
         public int GetLatestVersionNumber(int id);
+
+        /// <summary>
+        /// test.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ExerciseInstance GetExerciseInstance(int id);
     }
 }

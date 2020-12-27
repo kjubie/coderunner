@@ -191,18 +191,6 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         public List<MinimalExercise> GetMinimalList()
         {
             return this.Context.Exercise
-                /*
-                .Include(e => e.ExerciseTag)
-                .Include(e => e.FkUser)
-                .Include(e => e.ExerciseVersion
-                    .Where(v => v.VersionNumber == this.GetLatestVersionNumber(v.Id)))
-                    .ThenInclude(v => v.ExerciseLanguage)
-                        .ThenInclude(el => el.FkWrittenLanguage)
-                .Include(e => e.ExerciseVersion
-                    .Where(v => v.VersionNumber == this.GetLatestVersionNumber(v.Id)))
-                    .ThenInclude(v => v.ExerciseLanguage)
-                        .ThenInclude(el => el.ExerciseBody)
-                            .ThenInclude(eb => eb.FkProgrammingLanguage)*/
                 .Select(m => new MinimalExercise
                 {
                     Id = m.Id,

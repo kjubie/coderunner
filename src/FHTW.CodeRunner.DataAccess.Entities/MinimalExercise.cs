@@ -20,38 +20,38 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     public class MinimalExercise
     {
         /// <summary>
-        /// Gets or Sets the id of the exercise.
+        /// Gets the id of the exercise.
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; init; }
 
         /// <summary>
-        /// Gets or Sets the title of the exercise.
+        /// Gets the title of the exercise.
         /// </summary>
-        public string Title { get; set; }
+        public string Title { get; init; }
 
         /// <summary>
-        /// Gets or Sets the creation date of the exercise.
+        /// Gets the creation date of the exercise.
         /// </summary>
-        public DateTime Created { get; set; }
+        public DateTime Created { get; init; }
 
         /// <summary>
-        /// Gets or Sets the user that the created/owns the exercise.
+        /// Gets the user that the created/owns the exercise.
         /// </summary>
-        public User User { get; set; }
+        public User User { get; init; }
 
         /// <summary>
-        /// Gets or Sets a collection of tags.
+        /// Gets a collection of tags.
         /// </summary>
-        public ICollection<Tag> TagList { get; set; }
+        public ICollection<Tag> TagList { get; init; }
 
         /// <summary>
-        /// Gets or Sets a collection of written languages, in which the exercise is availbale in.
+        /// Gets a collection of written languages, in which the exercise is availbale in.
         /// </summary>
-        public ICollection<WrittenLanguage> WrittenLanguageList { get; set; }
+        public ICollection<WrittenLanguage> WrittenLanguageList { get; init; }
 
         /// <summary>
-        /// Gets or Sets a collection of programming languages, in which the exercise is availbale in.
+        /// Gets a collection of programming languages, in which the exercise is availbale in.
         /// </summary>
-        public ICollection<ProgrammingLanguage> ProgrammingLanguageList { get; set; }
+        public ICollection<ProgrammingLanguage> ProgrammingLanguageList { get; init; }
     }
 }

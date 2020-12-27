@@ -22,40 +22,47 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     public class ExerciseInstance
     {
         /// <summary>
-        /// Gets or Sets the id of the exercise.
+        /// Gets the id of the exercise.
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; init; }
 
         /// <summary>
-        /// Gets or Sets the title of the exercise.
+        /// Gets the title of the exercise.
         /// </summary>
-        public string Title { get; set; }
+        public string Title { get; init; }
 
         /// <summary>
-        /// Gets or Sets the creation date of the exercise.
+        /// Gets the creation date of the exercise.
         /// </summary>
-        public DateTime Created { get; set; }
+        public DateTime Created { get; init; }
 
         /// <summary>
-        /// Gets or Sets the user that the created/owns the exercise.
+        /// Gets the user that the created/owns the exercise.
         /// </summary>
-        public User User { get; set; }
+        public User User { get; init; }
 
         /// <summary>
-        /// Gets or Sets the written language of the exercise.
+        /// Gets the written language of the exercise.
         /// </summary>
-        public WrittenLanguage WrittenLanguage { get; set; }
+        public string WrittenLanguage { get; init; }
 
         /// <summary>
         /// Gets the programming language of the exercise.
         /// </summary>
-        public ProgrammingLanguage ProgrammingLanguage
+        public string ProgrammingLanguage
         {
             get
             {
                 if (this.Body != null)
                 {
-                    return this.Body.FkProgrammingLanguage;
+                    if (this.Body.FkProgrammingLanguage != null)
+                    {
+                        return this.Body.FkProgrammingLanguage.Name;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
                 else
                 {
@@ -65,19 +72,19 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         }
 
         /// <summary>
-        /// Gets or Sets the version of the exericse.
+        /// Gets the version of the exericse.
         /// </summary>
-        public ExerciseVersion Version { get; set; }
+        public ExerciseVersion Version { get; init; }
 
         /// <summary>
-        /// Gets or Sets the header of the exercise.
+        /// Gets the header of the exercise.
         /// </summary>
-        public ExerciseHeader Header { get; set; }
+        public ExerciseHeader Header { get; init; }
 
         /// <summary>
-        /// Gets or Sets the body of the exercise.
+        /// Gets the body of the exercise.
         /// </summary>
-        public ExerciseBody Body { get; set; }
+        public ExerciseBody Body { get; init; }
 
         /// <summary>
         /// Gets the test suite.
