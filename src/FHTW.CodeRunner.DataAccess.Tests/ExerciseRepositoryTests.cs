@@ -198,6 +198,24 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             Assert.IsTrue(true);
         }
 
+        [Test]
+        public void ShouldGetExercisesInstance()
+        {
+            // NOT TESTABLE WITH SQLITE, BECAUSE APPLY IS NOT SUPPORTED
+            /*
+            this.SetupDatabase(DbTestController.State.SEEDEDJSON);
+            using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
+            {
+                IExerciseRepository rep = new ExerciseRepository(context, this.exerciseLogger);
+
+                var list = rep.GetExerciseInstance(1, 1, "C++", "English");
+
+                Assert.IsNotNull(list);
+            }*/
+
+            Assert.IsTrue(true);
+        }
+
         private void SetupDatabase(DbTestController.State state) => this.testDb = new CodeRunnerTestDb(state);
     }
 }

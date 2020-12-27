@@ -234,5 +234,47 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 .Where(e => e.FkExerciseId == id)
                 .Max(e => e.VersionNumber);
         }
+
+        /// <inheritdoc/>
+        public ExerciseInstance GetExerciseInstance(int id, int version, string programming_language, string written_language)
+        {
+            return this.Context.Exercise.AsNoTracking()
+                .Where(e => e.Id == id)
+                .Include(e => e.ExerciseVersion)
+                    .ThenInclude(v => v.ExerciseLanguage)
+                        .ThenInclude(el => el.ExerciseBody)
+                            .ThenInclude(eb => eb.FkTestSuite)
+                                .ThenInclude(ts => ts.TestCase)
+                .Include(e => e.ExerciseVersion)
+                    .ThenInclude(v => v.ExerciseLanguage)
+                        .ThenInclude(el => el.ExerciseBody)
+                            .ThenInclude(eb => eb.FkProgrammingLanguage)
+                .Select(e => new ExerciseInstance
+                {
+                    Id = e.Id,
+                    Title = e.Title,
+                    Created = e.Created,
+                    User = e.FkUser,
+                    WrittenLanguage = e.ExerciseVersion
+                        .Single(v => v.VersionNumber == version)
+                        .ExerciseLanguage
+                            .Single(el => el.FkWrittenLanguage.Name == written_language)
+                                .FkWrittenLanguage.Name,
+                    Version = e.ExerciseVersion
+                        .Single(v => v.VersionNumber == version),
+                    Header = e.ExerciseVersion
+                        .Single(v => v.VersionNumber == version)
+                        .ExerciseLanguage
+                            .Single(el => el.FkWrittenLanguage.Name == written_language)
+                                .FkExerciseHeader,
+                    Body = e.ExerciseVersion
+                        .Single(v => v.VersionNumber == version)
+                        .ExerciseLanguage
+                            .Single(el => el.FkWrittenLanguage.Name == written_language)
+                                .ExerciseBody
+                                    .Single(eb => eb.FkProgrammingLanguage.Name == programming_language),
+                })
+                .FirstOrDefault();
+        }
     }
 }
