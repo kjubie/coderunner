@@ -12,44 +12,47 @@
 <div class="contentSeperator">
     <form>
         <div class="from-group content-group row">
-            <label for="testcase" class="col-2 col-form-label">Testfall</label>
+            <label for="testcase" class="col-2 col-form-label">Testcase</label>
             <div class="col-10">
                 <textarea class="form-control-plaintext" id="testcase" name="testcase" rows="5" [(ngModel)]="testCase.testCode"></textarea>
             </div>
 
-            <label for="stdin" class="col-2 col-form-label">Standardeingabe</label>
+            <label for="stdin" class="col-2 col-form-label">Standard Input</label>
             <div class="col-10">
                 <textarea class="form-control-plaintext" id="stdin" name="stdin" rows="5" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].standardInput"></textarea>
             </div>
 
-            <label for="output" class="col-2 col-form-label">Erwartete Ausgabe</label>
+            <label for="output" class="col-2 col-form-label">Expected Output</label>
             <div class="col-10">
                 <textarea class="form-control-plaintext" id="output" name="output" rows="5" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].expectedOutput"></textarea>
             </div>
 
-            <label for="additionalData" class="col-2 col-form-label">Zusätzliche Vorlagedaten</label>
+            <label for="additionalData" class="col-2 col-form-label">Extra Data</label>
             <div class="col-10">
                 <textarea class="form-control-plaintext" id="additionalData" name="additionalData" rows="5" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].additionalData"></textarea>
             </div>
 
-            <label for="show" class="col-2 col-form-label">Anzeige</label>
+            <label for="show" class="col-2 col-form-label">Display</label>
             <div class="col-10">
                 <select class="form-control col-2" id="show" name="show">
-                    <option value="0">Anzeigen</option>
+                    <option value="SHOW" [ngValue]="SHOW">Show</option>
+                    <option value="HIDE" [ngValue]="HIDE">Hide</option>
+                    <option value="HIDE_IF_FAIL" [ngValue]="HIDE_IF_FAIL">Hide if fail</option>
+                    <option value="HIDE_IF_SUCCEED" [ngValue]="HIDE_IF_SUCCEED">Hide if succeed</option>
                 </select>
             </div>
 
-            <label for="useAsExample" class="col-2 col-form-label">Als Beispiel verwenden</label>
+            <label for="useAsExample" class="col-2 col-form-label">Use as Example</label>
             <div class="col-10">
                 <input type="checkbox" id="useAsExample" name="useAsExample" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].useAsExampleFlag">
             </div>
 
-            <label for="hideOnFail" class="col-2 col-form-label">Rest ausblenden bei Fehler</label>
+            <label for="hideOnFail" class="col-2 col-form-label">Hide Rest if Fail</label>
             <div class="col-10">
                 <input type="checkbox" id="hideOnFail" name="hideOnFail" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].hideOnFailFlag">
             </div>
 
-            <label for="points" class="col-2 col-form-label">Punkte</label>
+            <label for="points" class="col-2 col-form-label">Points</label>
             <div class="col-10">
                 <input type="text" class="form-control-plaintext col-2" id="points" name="points" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].points">
             </div>
