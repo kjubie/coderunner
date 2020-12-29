@@ -6,10 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
-using FHTW.CodeRunner.BusinessLogic.Entities;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
+using FHTW.CodeRunner.DataAccess.Interfaces;
 using FHTW.CodeRunner.ExportService.Interfaces;
 using Microsoft.Extensions.Logging;
+using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
+using DalEntities = FHTW.CodeRunner.DataAccess.Entities;
 
 namespace FHTW.CodeRunner.BusinessLogic
 {
@@ -17,6 +19,7 @@ namespace FHTW.CodeRunner.BusinessLogic
     {
         private readonly ILogger logger;
         private readonly IMapper mapper;
+        private readonly IExerciseRepository exerciseRepository;
         private readonly IMoodleXmlService moodleXmlService;
 
         /// <summary>
@@ -25,21 +28,25 @@ namespace FHTW.CodeRunner.BusinessLogic
         /// <param name="logger"></param>
         /// <param name="mapper"></param>
         /// <param name="moodleXmlService"></param>
-        public ExportLogic(ILogger<ExportLogic> logger, IMapper mapper, IMoodleXmlService moodleXmlService)
+        public ExportLogic(ILogger<ExportLogic> logger, IMapper mapper, IExerciseRepository exerciseRepository, IMoodleXmlService moodleXmlService)
         {
             this.logger = logger;
             this.mapper = mapper;
+            this.exerciseRepository = exerciseRepository;
             this.moodleXmlService = moodleXmlService;
         }
 
-        public void ExportCollection(Collection collection)
+        public void ExportCollection(BlEntities.Collection collection)
         {
             throw new NotImplementedException();
         }
 
-        public void ExportExercise(Exercise exercise)
+        public void ExportExercise(BlEntities.ExportExercise exportExercise)
         {
-            throw new NotImplementedException();
+            var dalExerciseInstance = this.exerciseRepository.GetExerciseInstance(exportExercise.Id, exportExercise.Version, exportExercise.ProgrammingLanguage, exportExercise.WrittenLanguage);
+            var blExerciseInstance = this.mapper.Map<BlEntities.ExerciseInstance>(dalExerciseInstance);
+
+            this.moodleXmlService.ExportMoodleXml(null);
         }
     }
 }

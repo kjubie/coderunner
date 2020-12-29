@@ -37,8 +37,8 @@ namespace FHTW.CodeRunner.Services.Controllers
         }
 
         [HttpPost]
-        [Route("export/collection")]
-        public virtual IActionResult ExportCollection()
+        [Route("import/collection")]
+        public virtual IActionResult ImportCollection()
         {
             return this.Ok();
         }

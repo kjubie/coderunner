@@ -53,7 +53,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public string TemplateParam { get; set; }
 
         /// <summary>
-        /// Gets or Sets a value indicatíng whether the template parameter namespace can be omitted.
+        /// Gets or sets a value indicating whether gets or Sets a value indicatíng whether the template parameter namespace can be omitted.
         /// </summary>
         public bool TemplateParamLiftFlag { get; set; }
 

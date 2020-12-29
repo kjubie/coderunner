@@ -84,6 +84,8 @@ namespace FHTW.CodeRunner.Services.AutoMapper
             this.CreateMap<BlEntities.QuestionType, DalEntities.QuestionType>()
                 .ReverseMap();
 
+            this.CreateMap<DalEntities.ExerciseInstance, BlEntities.ExerciseInstance>();
+
             this.CreateMap<DalEntities.MinimalExercise, BlEntities.ExerciseShort>()
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.TagList))
                 .ForMember(dest => dest.WrittenLanguages, opt => opt.MapFrom(src => src.WrittenLanguageList))

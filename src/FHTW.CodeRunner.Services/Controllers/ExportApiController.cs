@@ -40,7 +40,7 @@ namespace FHTW.CodeRunner.Services.Controllers
 
         [HttpPost]
         [Route("export/exercise")]
-        public virtual IActionResult ExportExercise([FromBody] SvcEntities.Exercise body)
+        public virtual IActionResult ExportExercise([FromBody] SvcEntities.ExportExercise body)
         {
             if (body == null)
             {
@@ -50,9 +50,9 @@ namespace FHTW.CodeRunner.Services.Controllers
                 });
             }
 
-            var blExercise = this.mapper.Map<BlEntities.Exercise>(body);
+            var blExportExercise = this.mapper.Map<BlEntities.ExportExercise>(body);
 
-            this.exportLogic.ExportExercise(blExercise);
+            this.exportLogic.ExportExercise(blExportExercise);
             return this.Ok();
         }
 

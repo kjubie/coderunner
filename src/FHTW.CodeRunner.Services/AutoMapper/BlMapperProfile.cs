@@ -90,6 +90,8 @@ namespace FHTW.CodeRunner.Services.AutoMapper
             this.CreateMap<SvcEntities.UserAuthentication, BlEntities.User>();
 
             this.CreateMap<BlEntities.ExerciseCreatePreparation, SvcEntities.ExerciseCreatePreparation>();
+
+            this.CreateMap<SvcEntities.ExportExercise, BlEntities.ExportExercise>();
         }
     }
 }
