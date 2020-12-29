@@ -48,6 +48,6 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ExerciseInstance GetExerciseInstance(int id, int version, string programming_language, string written_language);
+        public ExerciseInstance GetExerciseInstance(int id, string programming_language, string written_language, int version = -1);
     }
 }

@@ -128,18 +128,16 @@ namespace FHTW.CodeRunner.Services
                 }
 
                 context.EnsureSeeded();
+
                 /* //TEST
-                var serviceProvider = new ServiceCollection()
-                .AddLogging()
-                .BuildServiceProvider();
 
-                var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+                IExerciseRepository rep = new ExerciseRepository(context);
+                ICollectionRepository repC = new CollectionRepository(context);
 
-                var exerciseLogger = loggerFactory.CreateLogger<ExerciseRepository>();
-
-                IExerciseRepository rep = new ExerciseRepository(context, exerciseLogger);
-
-                var list = rep.GetExerciseInstance(1, 2, "C++", "English");*/
+                var list = rep.GetMinimalList();
+                var instance = rep.GetExerciseInstance(1, "C++", "English");
+                var ce = repC.GetExercisesInstances(1);
+                var ci = repC.GetCollectionInstance(1);*/
             }
 
             if (env.IsDevelopment())

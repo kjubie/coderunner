@@ -60,6 +60,9 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 UpdateOrAdd<TestCase>(context, "testcase", options);
                 UpdateOrAdd<ExerciseLanguage>(context, "exercise_language", options);
                 UpdateOrAdd<ExerciseBody>(context, "exercise_body", options);
+                UpdateOrAdd<Collection>(context, "collection", options);
+                UpdateOrAdd<CollectionLanguage>(context, "collection_language", options);
+                UpdateOrAdd<CollectionExercise>(context, "collection_exercise", options);
             }
             catch (Exception e)
             {

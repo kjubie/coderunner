@@ -22,16 +22,14 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         /// </summary>
         /// <param name="dbcontext">The dbcontext to be used for the repository.</param>
         /// <param name="logger">The logger.</param>
-        public ExerciseRepository(CodeRunnerContext dbcontext, ILogger<ExerciseRepository> logger)
-            : base(dbcontext, logger)
+        public ExerciseRepository(CodeRunnerContext dbcontext)
+            : base(dbcontext)
         {
         }
 
         /// <inheritdoc/>
         public Exercise Create(Exercise exercise)
         {
-            this.Logger.LogDebug("Creating exercise: ", exercise);
-
             if (exercise.Id != 0)
             {
                 throw new DalException($"Attempting to create exercise with Id = {exercise.Id}. Id must be 0");
@@ -66,7 +64,6 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             }
             catch (Exception e)
             {
-                this.Logger.LogError("Exception thrown in ExerciseRepository.Create()", e);
                 throw new DalException("Creating exercise failed", e);
             }
 
@@ -76,8 +73,6 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         /// <inheritdoc/>
         public new Exercise Update(Exercise exercise)
         {
-            this.Logger.LogDebug("Updating exercise: ", exercise);
-
             var version = exercise.ExerciseVersion;
 
             if (exercise.Id == 0)
@@ -152,7 +147,6 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             }
             catch (Exception e)
             {
-                this.Logger.LogError("Exception thrown in ExerciseRepository.Create()", e);
                 throw new DalException("Updating exercise failed", e);
             }
 
@@ -190,7 +184,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         /// <inheritdoc/>
         public List<MinimalExercise> GetMinimalList()
         {
-            return this.Context.Exercise
+            return this.Context.Exercise.AsNoTracking()
                 .Select(m => new MinimalExercise
                 {
                     Id = m.Id,
@@ -236,8 +230,13 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         }
 
         /// <inheritdoc/>
-        public ExerciseInstance GetExerciseInstance(int id, int version, string programming_language, string written_language)
+        public ExerciseInstance GetExerciseInstance(int id, string programming_language, string written_language, int version = -1)
         {
+            if (version == -1)
+            {
+                version = this.GetLatestVersionNumber(id);
+            }
+
             return this.Context.Exercise.AsNoTracking()
                 .Where(e => e.Id == id)
                 .Include(e => e.ExerciseVersion)

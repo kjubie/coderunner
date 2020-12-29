@@ -21,8 +21,8 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         /// Initializes a new instance of the <see cref="UserRepository"/> class.
         /// </summary>
         /// <param name="dbcontext">The dbcontext to be used for the repository.</param>
-        public UserRepository(CodeRunnerContext dbcontext, ILogger<UserRepository> logger)
-            : base(dbcontext, logger)
+        public UserRepository(CodeRunnerContext dbcontext)
+            : base(dbcontext)
         {
         }
 
