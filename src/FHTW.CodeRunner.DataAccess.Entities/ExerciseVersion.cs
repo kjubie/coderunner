@@ -7,9 +7,23 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
+using Microsoft.EntityFrameworkCore;
 
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
+    public enum ValidState
+    {
+        [EnumMember(Value = "NotValid")]
+        NotValid = 0,
+
+        [EnumMember(Value = "Valid")]
+        Valid = 1,
+
+        [EnumMember(Value = "NotChecked")]
+        NotChecked = 2,
+    }
+
     [ExcludeFromCodeCoverage]
     [Table("exercise_version")]
     public partial class ExerciseVersion : IEntity
@@ -38,8 +52,8 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         [Column("last_modified")]
         public DateTime LastModified { get; set; }
 
-        [Column("valid_flag")]
-        public bool ValidFlag { get; set; }
+        [Column("valid_state")]
+        public ValidState ValidState { get; set; }
 
         [Column("fk_user_id")]
         public int FkUserId { get; set; }

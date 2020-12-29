@@ -105,19 +105,19 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         }
 
         /// <summary>
-        /// Gets a value indicating whether the exercise is valid.
+        /// Gets a value indicating the state of the exercise.
         /// </summary>
-        public bool IsValid
+        public ValidState ValidState
         {
             get
             {
                 if (this.Version != null)
                 {
-                    return this.Version.ValidFlag;
+                    return this.Version.ValidState;
                 }
                 else
                 {
-                    return false;
+                    return ValidState.NotValid;
                 }
             }
         }

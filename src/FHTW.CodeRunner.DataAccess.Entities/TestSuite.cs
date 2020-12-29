@@ -64,24 +64,6 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         public string RuntimeData { get; set; }
 
         /// <summary>
-        /// Gets or Sets the template parameter for the exercise.
-        /// </summary>
-        [Column("template_param")]
-        public string TemplateParam { get; set; }
-
-        /// <summary>
-        /// Gets or Sets a value indicating whether the template parameter namespace can be omitted.
-        /// </summary>
-        [Column("template_param_lift_flag")]
-        public bool TemplateParamLiftFlag { get; set; }
-
-        /// <summary>
-        /// Gets or Sets a value indicating whether twig should be used for every field.
-        /// </summary>
-        [Column("twig_all_flag")]
-        public bool TwigAllFlag { get; set; }
-
-        /// <summary>
         /// Gets or Sets the inverse property of <see cref="Entities.Exercise"/>.
         /// </summary>
         [InverseProperty("FkTestSuite")]

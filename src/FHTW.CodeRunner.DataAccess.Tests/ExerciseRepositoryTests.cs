@@ -57,7 +57,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 
                 Assert.IsTrue(version.FkUserId == exercise.FkUserId);
                 Assert.IsTrue(version.LastModified == exercise.Created);
-                Assert.IsTrue(version.ValidFlag == false);
+                Assert.IsTrue(version.ValidState == ValidState.NotChecked);
                 Assert.IsTrue(version.VersionNumber == 0);
                 Assert.IsNull(version.CreatorDifficulty);
                 Assert.IsNull(version.CreatorRating);
@@ -119,7 +119,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                             CreatorRating = 3,
                             CreatorDifficulty = 4,
                             LastModified = System.DateTime.Now,
-                            ValidFlag = false,
+                            ValidState = ValidState.NotChecked,
                             FkUserId = 0,
                             FkExerciseId = 0,
                             ExerciseLanguage = new List<ExerciseLanguage>
@@ -135,6 +135,9 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                                         Id = 0,
                                         FullTitle = "FullTitle1",
                                         Introduction = "Introduction1",
+                                        TemplateParam = "TemplateParam1",
+                                        TemplateParamLiftFlag = false,
+                                        TwigAllFlag = false,
                                     },
                                     ExerciseBody = new List<ExerciseBody>
                                     {

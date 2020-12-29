@@ -55,8 +55,8 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 exerciseVersion.LastModified = exercise.Created;
                 exerciseVersion.FkUserId = exercise.FkUserId;
                 exerciseVersion.FkExerciseId = exercise.Id;
-                exerciseVersion.VersionNumber = 0; // TODO
-                exerciseVersion.ValidFlag = false;
+                exerciseVersion.VersionNumber = 0; // TODO maybe not start with zero ?
+                exerciseVersion.ValidState = ValidState.NotChecked;
 
                 this.Context.ExerciseVersion.Add(exerciseVersion);
                 this.Save();
