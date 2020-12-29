@@ -52,8 +52,9 @@ namespace FHTW.CodeRunner.Services.Controllers
 
             var blExportExercise = this.mapper.Map<BlEntities.ExportExercise>(body);
 
-            this.exportLogic.ExportExercise(blExportExercise);
-            return this.Ok();
+            string xmlString = this.exportLogic.ExportExercise(blExportExercise);
+
+            return this.Ok(xmlString);
         }
 
         [HttpPost]

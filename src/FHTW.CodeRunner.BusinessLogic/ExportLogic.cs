@@ -42,7 +42,7 @@ namespace FHTW.CodeRunner.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public void ExportExercise(BlEntities.ExportExercise exportExercise)
+        public string ExportExercise(BlEntities.ExportExercise exportExercise)
         {
             var dalExerciseInstance = this.exerciseRepository.GetExerciseInstance(exportExercise.Id, exportExercise.ProgrammingLanguage, exportExercise.WrittenLanguage, exportExercise.Version);
             var blExerciseInstance = this.mapper.Map<BlEntities.ExerciseInstance>(dalExerciseInstance);
@@ -56,7 +56,7 @@ namespace FHTW.CodeRunner.BusinessLogic
 
             var quiz = this.mapper.Map<EsEntities.Quiz>(blCollectionInstance);
 
-            this.moodleXmlService.ExportMoodleXml(quiz);
+            return this.moodleXmlService.ExportMoodleXml(quiz);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace FHTW.CodeRunner.ExportService.Interfaces
 {
     public interface IMoodleXmlService
     {
-        public void ExportMoodleXml(Quiz quiz);
+        public string ExportMoodleXml(Quiz quiz);
 
         public Quiz ImportMoodleXml();
     }
