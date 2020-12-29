@@ -11,6 +11,58 @@ using System.Diagnostics.CodeAnalysis;
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
     /// <summary>
+    /// Enum for Precheck State.
+    /// </summary>
+    public enum PreCheckState
+    {
+        /// <summary>
+        /// No precheck.
+        /// </summary>
+        Deactivated = 0,
+
+        /// <summary>
+        /// Run test with empty parameters.
+        /// </summary>
+        Empty = 1,
+
+        /// <summary>
+        /// Run all tests where UseAsExampleFlag is set.
+        /// </summary>
+        Examples = 2,
+
+        /// <summary>
+        /// Run all explicitly marked tests.
+        /// </summary>
+        Selected = 3,
+
+        /// <summary>
+        /// Run all tests.
+        /// </summary>
+        All = 4,
+    }
+
+    /// <summary>
+    /// Enum for the display state of the feedback.
+    /// </summary>
+    public enum GeneralFeedbackDisplayState
+    {
+        /// <summary>
+        /// Use value set by testcase.
+        /// </summary>
+        SetFromTest = 0,
+
+        /// <summary>
+        /// Force display of feedback.
+        /// </summary>
+        ForceDisplay = 1,
+
+        /// <summary>
+        /// Force hiding of feedback.
+        /// </summary>
+        ForceHide = 2,
+    }
+
+    /// <summary>
     /// The TestSuite entity.
     /// </summary>
     [ExcludeFromCodeCoverage]
@@ -62,6 +114,18 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         /// </summary>
         [Column("runtime_data")]
         public string RuntimeData { get; set; }
+
+        /// <summary>
+        /// Gets or Sets state of precheck.
+        /// </summary>
+        [Column("precheck")]
+        public PreCheckState PreCheck { get; set; }
+
+        /// <summary>
+        /// Gets or Sets state of general feedback display.
+        /// </summary>
+        [Column("feedback_display")]
+        public GeneralFeedbackDisplayState GeneralFeedbackDisplay { get; set; }
 
         /// <summary>
         /// Gets or Sets the inverse property of <see cref="Entities.Exercise"/>.
