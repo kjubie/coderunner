@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ExerciseExport } from '../data-objects/exercise-export';
 import { ExerciseHome } from '../data-objects/exercise-home';
 import { ExerciseListHomeService } from '../services/exercise-list-home.service';
 
@@ -13,8 +15,10 @@ export class HomeComponent implements OnInit {
   programmingLangs: string[] = ["C#", "Java", "Python", "..."];
   viewSelected: string = "list";
   exerciseList: ExerciseHome[];
+  selectedExercise: ExerciseHome;
+  exerciseForExport: ExerciseExport = new ExerciseExport();
 
-  constructor(private exerciseListHomeService: ExerciseListHomeService) {}
+  constructor(private exerciseListHomeService: ExerciseListHomeService, private modalService: NgbModal) {}
 
   ngOnInit() {
     this.exerciseListHomeService.getAllExercies().subscribe(this.loadAllExercisesObserver);
@@ -43,6 +47,37 @@ export class HomeComponent implements OnInit {
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
       console.log(this.exerciseList);
+    }
+  }
+
+  exportSingleExercise(idx: number, modalContent) {
+    console.log('Export a Single exercise (idx: ' + idx + ')');
+    this.selectedExercise = this.exerciseList[idx];
+    
+    // set needed data
+    this.exerciseForExport.id = this.selectedExercise.id;
+    this.exerciseForExport.title = this.selectedExercise.title;
+    this.exerciseForExport.user = this.selectedExercise.user;
+    this.exerciseForExport.tagList = this.selectedExercise.tagList;
+
+    // open Modal for exercise
+    this.modalService.open(modalContent, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      console.log('Closed with ' + result);
+      console.log('You can export the exercise now...');
+      console.log(this.exerciseForExport);
+      // ToDo: add export functionality
+    }, (reason) => {
+      console.log('Dismissed ' + this.getDismissReason(reason));
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
     }
   }
 }

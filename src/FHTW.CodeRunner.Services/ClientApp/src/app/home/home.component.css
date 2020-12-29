@@ -89,3 +89,9 @@ li.blackLine {
     color: white;
     background-color:  rgb(125, 202, 247);
 }
+
+ul#exercisePopover {
+    list-style-type: none;
+    padding: 0;
+    cursor: pointer;
+}
