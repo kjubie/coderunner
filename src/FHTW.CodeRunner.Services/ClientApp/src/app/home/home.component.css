@@ -95,3 +95,7 @@ ul#exercisePopover {
     padding: 0;
     cursor: pointer;
 }
+
+div.text-right {
+    margin-top: 10px;
+}

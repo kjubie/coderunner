@@ -50,26 +50,44 @@
 <!-- modal for export -->
 <ng-template #exportModal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Export Exercise '{{ exerciseForExport.title }}'</h4>
+    <h4 class="modal-title" id="modal-basic-title">Export Exercise '{{ selectedExercise.title }}'</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form>
+    <form (ngSubmit)="exportExercise()">
       <div class="form-group">
+        <label for="version"><strong>Exercise Version:</strong></label>
+        <select class="form-control" id="version" name="version" [(ngModel)]="exerciseForExport.version">
+          <!-- ToDo: remove once versionList is sent with exercises -->
+          <option *ngIf="selectedExercise.versionList == undefined" [ngValue]="0">0</option>
+          <!-- <option *ngFor="let version of selectedExercise.versionList" [ngValue]="version">{{ version }}</option> -->
+        </select>
+        <div *ngIf="versionInvalid" class="alert alert-danger">
+          Version is required.
+        </div>
         <label for="writtenLang"><strong>Language:</strong></label>
         <select class="form-control" id="writtenLang" name="writtenLang" [(ngModel)]="exerciseForExport.writtenLanguage">
-          <option *ngFor="let wLang of selectedExercise.writtenLanguageList" [ngValue]="wLang">{{ wLang.name }}</option>
+          <option *ngFor="let wLang of selectedExercise.writtenLanguageList" [ngValue]="wLang.name">{{ wLang.name }}</option>
         </select>
+        <div *ngIf="wLangInvalid" class="alert alert-danger">
+          Language is required.
+        </div>
         <label for="programmingLang"><strong>Programming Language:</strong></label>
         <select class="form-control" id="programmingLang" name="programmingLang" [(ngModel)]="exerciseForExport.programmingLanguage">
-          <option *ngFor="let pLang of selectedExercise.programmingLanguageList" [ngValue]="pLang">{{ pLang.name }}</option>
+          <option *ngFor="let pLang of selectedExercise.programmingLanguageList" [ngValue]="pLang.name">{{ pLang.name }}</option>
         </select>
+        <div *ngIf="pLangInvalid" class="alert alert-danger">
+          Programming Language is required.
+        </div>
+        <div class="text-right">
+          <button type="submit" class="btn btn-primary">Export Exercise</button>
+        </div>
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Export')">Export Exercise</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close')">Close</button>
   </div>
 </ng-template>

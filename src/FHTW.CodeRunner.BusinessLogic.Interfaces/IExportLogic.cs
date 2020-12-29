@@ -11,7 +11,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
 {
     public interface IExportLogic
     {
-        void ExportExercise(Exercise exercise);
+        string ExportExercise(ExportExercise exportExercise);
 
         void ExportCollection(Collection collection);
     }

@@ -34,7 +34,7 @@
 
             <label for="show" class="col-2 col-form-label">Display</label>
             <div class="col-10">
-                <select class="form-control col-2" id="show" name="show">
+                <select class="form-control col-2" id="show" name="show"  [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].displayType">
                     <option value="SHOW" [ngValue]="SHOW">Show</option>
                     <option value="HIDE" [ngValue]="HIDE">Hide</option>
                     <option value="HIDE_IF_FAIL" [ngValue]="HIDE_IF_FAIL">Hide if fail</option>

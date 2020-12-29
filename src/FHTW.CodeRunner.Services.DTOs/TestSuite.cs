@@ -62,7 +62,7 @@ namespace FHTW.CodeRunner.Services.DTOs
         public string TemplateParam { get; set; }
 
         /// <summary>
-        /// Gets or Sets a value indicatíng whether the template parameter namespace can be omitted.
+        /// Gets or sets a value indicating whether gets or Sets a value indicatíng whether the template parameter namespace can be omitted.
         /// </summary>
         [DataMember(Name = "templateParamLiftFlag")]
         public bool TemplateParamLiftFlag { get; set; }

@@ -2,6 +2,7 @@
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace FHTW.CodeRunner.ExportService.Entities
@@ -10,6 +11,6 @@ namespace FHTW.CodeRunner.ExportService.Entities
     public class Testcases
     {
         [XmlElement(ElementName = "testcase")]
-        public Testcase Testcase { get; set; }
+        public List<Testcase> Testcase { get; set; }
     }
 }
