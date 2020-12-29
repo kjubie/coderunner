@@ -21,19 +21,6 @@ namespace FHTW.CodeRunner.DataAccess.Tests
     public class UIRepositoryTests
     {
         private CodeRunnerTestDb testDb;
-        private ILogger<UIRepository> logger;
-
-        [OneTimeSetUp]
-        public void Setup()
-        {
-            var serviceProvider = new ServiceCollection()
-                .AddLogging()
-                .BuildServiceProvider();
-
-            var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
-
-            this.logger = loggerFactory.CreateLogger<UIRepository>();
-        }
 
         [TearDown]
         public void NullDatabase() => this.testDb = null;
@@ -44,7 +31,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             this.SetupDatabaseSeeded();
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
-                IUIRepository rep = new UIRepository(context, this.logger);
+                IUIRepository rep = new UIRepository(context);
 
                 var programming_languages = rep.GetProgrammingLanguages();
 
@@ -59,7 +46,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             this.SetupDatabaseSeeded();
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
-                IUIRepository rep = new UIRepository(context, this.logger);
+                IUIRepository rep = new UIRepository(context);
 
                 var written_languages = rep.GetWrittenLanguages();
 
@@ -74,7 +61,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             this.SetupDatabaseSeeded();
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
-                IUIRepository rep = new UIRepository(context, this.logger);
+                IUIRepository rep = new UIRepository(context);
 
                 var questionTypes = rep.GetQuestionTypes();
 

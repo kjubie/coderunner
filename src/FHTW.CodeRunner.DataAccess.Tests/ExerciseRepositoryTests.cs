@@ -20,19 +20,6 @@ namespace FHTW.CodeRunner.DataAccess.Tests
     public class ExerciseRepositoryTests
     {
         private CodeRunnerTestDb testDb;
-        private ILogger<ExerciseRepository> exerciseLogger;
-
-        [OneTimeSetUp]
-        public void Setup()
-        {
-            var serviceProvider = new ServiceCollection()
-                .AddLogging()
-                .BuildServiceProvider();
-
-            var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
-
-            this.exerciseLogger = loggerFactory.CreateLogger<ExerciseRepository>();
-        }
 
         [TearDown]
         public void NullDatabase() => this.testDb = null;
@@ -43,7 +30,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             this.SetupDatabase(DbTestController.State.SEEDED);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
-                IExerciseRepository rep = new ExerciseRepository(context, this.exerciseLogger);
+                IExerciseRepository rep = new ExerciseRepository(context);
 
                 User user = context.User.FirstOrDefault();
 
@@ -83,7 +70,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             this.SetupDatabase(DbTestController.State.SEEDED);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
-                IExerciseRepository rep = new ExerciseRepository(context, this.exerciseLogger);
+                IExerciseRepository rep = new ExerciseRepository(context);
 
                 // Setup create new exercise
                 User user = context.User.FirstOrDefault();

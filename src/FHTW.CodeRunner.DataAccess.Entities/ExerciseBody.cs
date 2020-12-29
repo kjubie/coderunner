@@ -98,8 +98,8 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         /// <summary>
         /// Gets or Sets the number of attainable points.
         /// </summary>
-        [Column("optainable_points")]
-        public int OptainablePoints { get; set; }
+        [Column("obtainable_points")]
+        public int ObtainablePoints { get; set; }
 
         /// <summary>
         /// Gets or Sets the ID Number that identifies groups in moodle.
