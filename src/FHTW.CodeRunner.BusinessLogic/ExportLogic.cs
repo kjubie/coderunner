@@ -12,6 +12,7 @@ using FHTW.CodeRunner.ExportService.Interfaces;
 using Microsoft.Extensions.Logging;
 using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
 using DalEntities = FHTW.CodeRunner.DataAccess.Entities;
+using EsEntities = FHTW.CodeRunner.ExportService.Entities;
 
 namespace FHTW.CodeRunner.BusinessLogic
 {
@@ -43,10 +44,19 @@ namespace FHTW.CodeRunner.BusinessLogic
 
         public void ExportExercise(BlEntities.ExportExercise exportExercise)
         {
-            var dalExerciseInstance = this.exerciseRepository.GetExerciseInstance(exportExercise.Id, exportExercise.Version, exportExercise.ProgrammingLanguage, exportExercise.WrittenLanguage);
+            var dalExerciseInstance = this.exerciseRepository.GetExerciseInstance(exportExercise.Id, exportExercise.ProgrammingLanguage, exportExercise.WrittenLanguage, exportExercise.Version);
             var blExerciseInstance = this.mapper.Map<BlEntities.ExerciseInstance>(dalExerciseInstance);
 
-            this.moodleXmlService.ExportMoodleXml(null);
+            var blCollectionInstance = new BlEntities.CollectionInstance
+            {
+                Exercises = new List<BlEntities.ExerciseInstance>(),
+            };
+
+            blCollectionInstance.Exercises.Add(blExerciseInstance);
+
+            var quiz = this.mapper.Map<EsEntities.Quiz>(blCollectionInstance);
+
+            this.moodleXmlService.ExportMoodleXml(quiz);
         }
     }
 }

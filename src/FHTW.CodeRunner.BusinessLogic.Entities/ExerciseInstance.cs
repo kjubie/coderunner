@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="ExerciseInstance.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -55,6 +59,11 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         /// Gets or sets the test suite.
         /// </summary>
         public TestSuite TestSuite { get; set; }
+
+        /// <summary>
+        /// Gets or sets the tag lsit.
+        /// </summary>
+        public ICollection<Tag> Tags { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the exercise is valid.

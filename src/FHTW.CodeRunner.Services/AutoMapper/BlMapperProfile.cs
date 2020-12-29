@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
+using EsEntities = FHTW.CodeRunner.ExportService.Entities;
 using SvcEntities = FHTW.CodeRunner.Services.DTOs;
 
 namespace FHTW.CodeRunner.Services.AutoMapper
@@ -92,6 +93,9 @@ namespace FHTW.CodeRunner.Services.AutoMapper
             this.CreateMap<BlEntities.ExerciseCreatePreparation, SvcEntities.ExerciseCreatePreparation>();
 
             this.CreateMap<SvcEntities.ExportExercise, BlEntities.ExportExercise>();
+
+            this.CreateMap<BlEntities.CollectionInstance, EsEntities.Quiz>()
+                .ConvertUsing(new Converters.MoodleQuizConverter());
         }
     }
 }
