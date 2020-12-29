@@ -13,7 +13,15 @@
                     <span *ngFor="let pLang of exerciseList[i].programmingLanguageList" class="badge badge-pill tag-green">{{ pLang.name }}</span>
                 </div>
                 <div class="col-1 btn-alignment">
-                    <button type="button" class="btn btn-outline-primary">+</button>
+                    <ng-template #optionPopoverBody>
+                        <ul id="exercisePopover">
+                            <li (click)="exportExercise(i)">Export</li>
+                        </ul>
+                    </ng-template>
+                    <button type="button" class="btn mr-2" placement="right"
+                            [ngbPopover]="optionPopoverBody" popoverTitle="Options">
+                        <img src="../../../../assets/img/option_dots.png" alt="vertical dots" />
+                    </button>
                 </div>
             </div>
         </div>

@@ -59,9 +59,14 @@
                 <textarea class="form-control-plaintext" id="runtimeData" name="runtimeData" rows="5" [(ngModel)]="exerciseBody.testSuit.runtimeData"></textarea>
             </div>
 
-            <label for="complexity" class="col-2 col-form-label">Complexity</label>
+            <!-- <label for="complexity" class="col-2 col-form-label">Complexity</label>
             <div class="col-10">
                 <input type="number" class="form-control-plaintext" id="complexity" name="complexity">
+            </div> -->
+
+            <label for="testOnSave" class="col-2 col-form-label">Test on Save</label>
+            <div class="col-10">
+                <input type="checkbox" id="testOnSave" name="testOnSave" [(ngModel)]="exerciseBody.testSuit.testOnSaveFlag">
             </div>
         </div>
     </form>
