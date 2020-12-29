@@ -6,6 +6,7 @@ import { WrittenLanguage } from "./written-language";
 export class ExerciseHome {
 
     constructor() {
+        this.versionList = [];
         this.tagList = [];
         this.writtenLanguageList = [];
         this.programmingLanguageList = [];
@@ -15,6 +16,7 @@ export class ExerciseHome {
     title: string;
     created: string;
     user: Author;
+    versionList: number[];
     tagList: Tag[];
     writtenLanguageList: WrittenLanguage[];
     programmingLanguageList: ProgrammingLanguage[];

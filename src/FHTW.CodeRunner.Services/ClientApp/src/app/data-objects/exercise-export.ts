@@ -7,15 +7,11 @@ export class ExerciseExport {
     
     constructor() {
         this.tagList = [];
-        this.writtenLanguage = new WrittenLanguage;
-        this.programmingLanguage = new ProgrammingLanguage;
     }
 
     id: number;
-    title: string;
-    created: string;
-    user: Author;
+    version: number;
     tagList: Tag[];
-    writtenLanguage: WrittenLanguage;
-    programmingLanguage: ProgrammingLanguage;
+    writtenLanguage: string;
+    programmingLanguage: string;
 }
