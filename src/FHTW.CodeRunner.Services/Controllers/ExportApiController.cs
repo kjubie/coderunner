@@ -54,7 +54,12 @@ namespace FHTW.CodeRunner.Services.Controllers
 
             string xmlString = this.exportLogic.ExportExercise(blExportExercise);
 
-            return this.Ok(xmlString);
+            return new ContentResult
+            {
+                ContentType = "application/xml",
+                Content = xmlString,
+                StatusCode = 200,
+            };
         }
 
         [HttpPost]
