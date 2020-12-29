@@ -224,20 +224,23 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         /// <inheritdoc/>
         public int GetLatestVersionNumber(int id)
         {
-            return this.Context.ExerciseVersion
-                .Where(e => e.FkExerciseId == id)
-                .Max(e => e.VersionNumber);
+            var query = this.Context.ExerciseVersion
+                .Where(e => e.FkExerciseId == id);
+
+            return query.Any() ? query.Max(e => e.VersionNumber) : throw new DalException($"No versions for exercise id = {id} found");
         }
 
         /// <inheritdoc/>
         public ExerciseInstance GetExerciseInstance(int id, string programming_language, string written_language, int version = -1)
         {
+            using var transaction = this.Context.Database.BeginTransaction();
+
             if (version == -1)
             {
                 version = this.GetLatestVersionNumber(id);
             }
 
-            return this.Context.Exercise.AsNoTracking()
+            var instance = this.Context.Exercise
                 .Where(e => e.Id == id)
                 .Include(e => e.ExerciseVersion)
                     .ThenInclude(v => v.ExerciseLanguage)
@@ -255,25 +258,52 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                     Created = e.Created,
                     User = e.FkUser,
                     WrittenLanguage = e.ExerciseVersion
-                        .Single(v => v.VersionNumber == version)
+                        .SingleOrDefault(v => v.VersionNumber == version)
                         .ExerciseLanguage
-                            .Single(el => el.FkWrittenLanguage.Name == written_language)
+                            .SingleOrDefault(el => el.FkWrittenLanguage.Name == written_language)
                                 .FkWrittenLanguage.Name,
                     Version = e.ExerciseVersion
-                        .Single(v => v.VersionNumber == version),
+                        .SingleOrDefault(v => v.VersionNumber == version),
                     Header = e.ExerciseVersion
-                        .Single(v => v.VersionNumber == version)
+                        .SingleOrDefault(v => v.VersionNumber == version)
                         .ExerciseLanguage
-                            .Single(el => el.FkWrittenLanguage.Name == written_language)
+                            .SingleOrDefault(el => el.FkWrittenLanguage.Name == written_language)
                                 .FkExerciseHeader,
                     Body = e.ExerciseVersion
-                        .Single(v => v.VersionNumber == version)
+                        .SingleOrDefault(v => v.VersionNumber == version)
                         .ExerciseLanguage
-                            .Single(el => el.FkWrittenLanguage.Name == written_language)
+                            .SingleOrDefault(el => el.FkWrittenLanguage.Name == written_language)
                                 .ExerciseBody
-                                    .Single(eb => eb.FkProgrammingLanguage.Name == programming_language),
-                })
-                .FirstOrDefault();
+                                    .SingleOrDefault(eb => eb.FkProgrammingLanguage.Name == programming_language),
+                }).FirstOrDefault();
+
+            if (instance == null)
+            {
+                throw new DalException($"No exercise with id = {id} found");
+            }
+
+            if (instance.Version == null)
+            {
+                throw new DalException($"exercise with id = {id} has no version = {version}");
+            }
+
+            if (instance.WrittenLanguage == null || instance.Header == null)
+            {
+                throw new DalException($"exercise with id = {id} has no written language = {written_language}");
+            }
+
+            if (instance.Body == null)
+            {
+                throw new DalException($"exercise with id = {id} has no programming language = {programming_language}");
+            }
+
+            return instance;
+        }
+
+        /// <inheritdoc/>
+        public bool InstanceExists(int id, string programming_language, string written_language, int version = -1)
+        {
+            throw new NotImplementedException();
         }
     }
 }

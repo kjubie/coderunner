@@ -44,10 +44,23 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         public int GetLatestVersionNumber(int id);
 
         /// <summary>
-        /// test.
+        /// Gets the an instance of a exercise, which only has one version, written lanuage and programming language.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The id of the exercise.</param>
+        /// <param name="programming_language">The programming language as a string.</param>
+        /// <param name="written_language">The written language as a string.</param>
+        /// <param name="version">The version of the exercise. If version is -1 or not set, the newest version is used.</param>
+        /// <returns>The exercise instance.</returns>
         public ExerciseInstance GetExerciseInstance(int id, string programming_language, string written_language, int version = -1);
+
+        /// <summary>
+        /// Checks if an exercise instance with a given version, programming language and writtenlanguage exists.
+        /// </summary>
+        /// <param name="id">The id of the exercise.</param>
+        /// <param name="programming_language">The programming language as a string.</param>
+        /// <param name="written_language">The written language as a string.</param>
+        /// <param name="version">The version of the exercise. If version is -1 or not set, the newest version is used.</param>
+        /// <returns>True if this exercise instance exists.</returns>
+        public bool InstanceExists(int id, string programming_language, string written_language, int version = -1);
     }
 }
