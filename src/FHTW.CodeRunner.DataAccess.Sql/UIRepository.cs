@@ -19,17 +19,14 @@ namespace FHTW.CodeRunner.DataAccess.Sql
     public class UIRepository : IUIRepository
     {
         private readonly CodeRunnerContext context;
-        private readonly ILogger<UIRepository> logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UIRepository"/> class.
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="logger">The logger.</param>
-        public UIRepository(CodeRunnerContext context, ILogger<UIRepository> logger)
+        public UIRepository(CodeRunnerContext context)
         {
             this.context = context;
-            this.logger = logger;
         }
 
         /// <inheritdoc/>
@@ -41,7 +38,6 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             }
             catch (Exception e)
             {
-                this.logger.LogError("Error in GetProgrammingLanguages()", e);
                 throw new DalException(e.Message, e);
             }
         }
@@ -55,7 +51,6 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             }
             catch (Exception e)
             {
-                this.logger.LogError("Error in GetWrittenLanguages()", e);
                 throw new DalException(e.Message, e);
             }
         }
@@ -69,7 +64,6 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             }
             catch (Exception e)
             {
-                this.logger.LogError("Error in QuestionType()", e);
                 throw new DalException(e.Message, e);
             }
         }
