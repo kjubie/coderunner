@@ -91,7 +91,7 @@ namespace FHTW.CodeRunner.BusinessLogic
             else
             {
                 var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
-                this.exerciseRepository.Insert(dalExercise);
+                this.exerciseRepository.CreateAndUpdate(dalExercise);
                 this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
             }
         }
@@ -111,7 +111,7 @@ namespace FHTW.CodeRunner.BusinessLogic
                 if (validationResult.IsValid)
                 {
                     var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
-                    this.exerciseRepository.Insert(dalExercise);
+                    this.exerciseRepository.CreateAndUpdate(dalExercise);
                     this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
                 }
                 else

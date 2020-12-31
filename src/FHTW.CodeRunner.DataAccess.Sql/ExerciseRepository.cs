@@ -152,6 +152,17 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         }
 
         /// <inheritdoc/>
+        public Exercise CreateAndUpdate(Exercise exercise)
+        {
+            if (exercise.Id == 0)
+            {
+                var inserted_exercise = this.Create(exercise);
+            }
+
+            return this.Update(exercise);
+        }
+
+        /// <inheritdoc/>
         public Exercise GetById(int id)
         {
             return this.context.Exercise
@@ -302,6 +313,12 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         public bool InstanceExists(int id, string programming_language, string written_language, int version = -1)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public bool Exists(Exercise exercise)
+        {
+            return this.context.Exercise.Any(e => e == exercise);
         }
     }
 }

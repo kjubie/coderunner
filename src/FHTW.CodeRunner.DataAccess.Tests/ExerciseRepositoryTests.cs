@@ -11,6 +11,8 @@ using FHTW.CodeRunner.DataAccess.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using NUnit.Framework;
 
 namespace FHTW.CodeRunner.DataAccess.Tests
@@ -165,6 +167,99 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                 };
 
                 Exercise returnedExercise = rep.Update(updatedExercise);
+
+                Assert.IsNotNull(returnedExercise);
+                Assert.IsTrue(returnedExercise.ExerciseTag.Count == 2);
+            }
+        }
+
+        [Test]
+        public void ShouldCreateAndUpdate()
+        {
+            this.SetupDatabase(DbTestController.State.SEEDED);
+            using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
+            {
+                IExerciseRepository rep = new ExerciseRepository(context);
+
+                var json = @"
+                {
+	                ""id"":0,
+	                ""fkUser"":{
+		                ""name"":""sabrina""
+	                },
+	                ""exerciseTag"":[{}],
+	                ""exerciseVersion"":[{
+		                ""id"":0,
+		                ""fkUser"":{""name"":""sabrina""},
+		                ""exerciseLanguage"":[{
+			                ""id"":0,
+			                ""fkExerciseHeader"":{
+				                ""id"":0,
+				                ""templateParam"":""Template Parameters"",
+				                ""templateParamLiftFlag"":true,
+				                ""twigAllFlag"":true,
+				                ""fullTitle"":""Full"",
+				                ""shortTitle"":""Short"",
+				                ""introduction"":""Intro""
+			                },
+			                ""fkWrittenLanguage"":{""name"":""English""},
+			                ""exerciseBody"":[{
+				                ""id"":0,
+				                ""fkTestSuite"":{
+					                ""id"":0,
+					                ""testCase"":[{
+						                ""id"":0,
+						                ""testCode"":""Test Case 1"",
+						                ""orderUsed"":1,
+						                ""standardInput"":""Standard Input"",
+						                ""expectedOutput"":""Expected Output"",
+						                ""additionalData"":""Extra Data"",
+						                ""displayType"":""SHOW"",
+						                ""useAsExampleFlag"":true,
+						                ""hideOnFailFlag"":true,
+						                ""points"":100
+					                }],
+					                ""fkQuestionType"":{
+						                ""id"":1,
+						                ""name"":""c++_question_type""
+					                },
+					                ""templateDebugFlag"":true,
+					                ""preCheck"":0,
+					                ""generalFeedbackDisplay"":0,
+					                ""globalExtraParam"":""Global Extra"",
+					                ""runtimeData"":""Runtime Data"",
+					                ""testOnSaveFlag"":true
+				                },
+				                ""fkProgrammingLanguage"":{""id"":1,""name"":""C++""},
+				                ""fieldLines"":20,
+				                ""subtractSystem"":""10"",
+				                ""optainablePoints"":100,
+				                ""idNum"":1,
+				                ""solution"":""Answer"",
+				                ""prefill"":""Answer Preload"",
+				                ""allowFiles"":0,
+				                ""filesRequired"":0,
+				                ""filesRegex"":""RegEx"",
+				                ""filesDescription"":""RegEx Description"",
+				                ""maxAllowedFiles"":0,
+				                ""feedback"":""General Feedback (E)""
+			                }]
+		                }],
+		                ""validState"":0,
+		                ""lastModified"":""2020-12-31T11:43:44.929Z"",
+		                ""creatorDifficulty"":0,
+		                ""creatorRating"":0,""versionNumber"":0
+	                }],
+	                ""created"":""2020-12-31T11:43:44.929Z"",
+	                ""title"":""Title""
+                }";
+
+                var options = new JsonSerializerOptions();
+                options.PropertyNameCaseInsensitive = true;
+
+                var exercise = JsonSerializer.Deserialize<Exercise>(json, options);
+
+                Exercise returnedExercise = rep.CreateAndUpdate(exercise);
 
                 Assert.IsNotNull(returnedExercise);
                 Assert.IsTrue(returnedExercise.ExerciseTag.Count == 2);

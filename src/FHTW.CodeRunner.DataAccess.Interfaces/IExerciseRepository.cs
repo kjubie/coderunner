@@ -35,6 +35,14 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         public Exercise Update(Exercise exercise);
 
         /// <summary>
+        /// Creates and updates a new exercise.
+        /// If the exercise id is set only update is called.
+        /// </summary>
+        /// <param name="exercise">the exercise.</param>
+        /// <returns>returns inserted exercise.</returns>
+        public Exercise CreateAndUpdate(Exercise exercise);
+
+        /// <summary>
         /// Gets a list of exercises containing:
         ///     - tagList.
         ///     - writtenLanguageList.
@@ -69,5 +77,12 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// <param name="version">The version of the exercise. If version is -1 or not set, the newest version is used.</param>
         /// <returns>True if this exercise instance exists.</returns>
         public bool InstanceExists(int id, string programming_language, string written_language, int version = -1);
+
+        /// <summary>
+        /// Checks if exerice exists.
+        /// </summary>
+        /// <param name="exercise">The exercise.</param>
+        /// <returns>True if exercise exists, else false.</returns>
+        public bool Exists(Exercise exercise);
     }
 }
