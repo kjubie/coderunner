@@ -15,17 +15,15 @@ namespace FHTW.CodeRunner.DataAccess.Sql
     /// <summary>
     /// The repository for the <see cref="Exercise"/> entity.
     /// </summary>
-    public class ExerciseRepository : SimpleRepository<Exercise, CodeRunnerContext>, IExerciseRepository
+    public class ExerciseRepository : IExerciseRepository
     {
+        private readonly CodeRunnerContext context;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ExerciseRepository"/> class.
         /// </summary>
         /// <param name="dbcontext">The dbcontext to be used for the repository.</param>
-        /// <param name="logger">The logger.</param>
-        public ExerciseRepository(CodeRunnerContext dbcontext)
-            : base(dbcontext)
-        {
-        }
+        public ExerciseRepository(CodeRunnerContext dbcontext) => this.context = dbcontext;
 
         /// <inheritdoc/>
         public Exercise Create(Exercise exercise)
@@ -45,10 +43,10 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             try
             {
-                using var transaction = this.Context.Database.BeginTransaction();
+                using var transaction = this.context.Database.BeginTransaction();
 
-                this.Context.Exercise.Add(exercise);
-                this.Save();
+                this.context.Exercise.Add(exercise);
+                this.context.SaveChanges();
 
                 ExerciseVersion exerciseVersion = new ExerciseVersion();
 
@@ -58,8 +56,8 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 exerciseVersion.VersionNumber = 0; // TODO maybe not start with zero ?
                 exerciseVersion.ValidState = ValidState.NotChecked;
 
-                this.Context.ExerciseVersion.Add(exerciseVersion);
-                this.Save();
+                this.context.ExerciseVersion.Add(exerciseVersion);
+                this.context.SaveChanges();
                 transaction.Commit();
             }
             catch (Exception e)
@@ -71,7 +69,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         }
 
         /// <inheritdoc/>
-        public new Exercise Update(Exercise exercise)
+        public Exercise Update(Exercise exercise)
         {
             var version = exercise.ExerciseVersion;
 
@@ -97,7 +95,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             try
             {
-                using var transaction = this.Context.Database.BeginTransaction();
+                using var transaction = this.context.Database.BeginTransaction();
 
                 // set known ids.
                 exercise.ExerciseTag = exercise.ExerciseTag.Select(e =>
@@ -120,7 +118,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 }).ToList();
 
                 // add everything new
-                this.Context.ChangeTracker.TrackGraph(exercise, e =>
+                this.context.ChangeTracker.TrackGraph(exercise, e =>
                 {
                     if (e.Entry.IsKeySet)
                     {
@@ -133,7 +131,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 });
 
                 // update existing
-                this.Context.ChangeTracker.TrackGraph(exercise, e =>
+                this.context.ChangeTracker.TrackGraph(exercise, e =>
                 {
                     if (e.Entry.IsKeySet)
                     {
@@ -141,7 +139,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                     }
                 });
 
-                this.Save();
+                this.context.SaveChanges();
 
                 transaction.Commit();
             }
@@ -154,9 +152,9 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         }
 
         /// <inheritdoc/>
-        public override Exercise GetById(int id)
+        public Exercise GetById(int id)
         {
-            return this.Context.Exercise
+            return this.context.Exercise
                 .Include(e => e.FkUser)
                 .Include(e => e.ExerciseTag)
                     .ThenInclude(et => et.FkTag)
@@ -184,7 +182,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         /// <inheritdoc/>
         public List<MinimalExercise> GetMinimalList()
         {
-            return this.Context.Exercise.AsNoTracking()
+            return this.context.Exercise.AsNoTracking()
                 .Select(m => new MinimalExercise
                 {
                     Id = m.Id,
@@ -224,7 +222,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         /// <inheritdoc/>
         public int GetLatestVersionNumber(int id)
         {
-            var query = this.Context.ExerciseVersion
+            var query = this.context.ExerciseVersion
                 .Where(e => e.FkExerciseId == id);
 
             return query.Any() ? query.Max(e => e.VersionNumber) : throw new DalException($"No versions for exercise id = {id} found");
@@ -233,14 +231,14 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         /// <inheritdoc/>
         public ExerciseInstance GetExerciseInstance(int id, string programming_language, string written_language, int version = -1)
         {
-            using var transaction = this.Context.Database.BeginTransaction();
+            using var transaction = this.context.Database.BeginTransaction();
 
             if (version == -1)
             {
                 version = this.GetLatestVersionNumber(id);
             }
 
-            var instance = this.Context.Exercise
+            var instance = this.context.Exercise
                 .Where(e => e.Id == id)
                 .Include(e => e.ExerciseVersion)
                     .ThenInclude(v => v.ExerciseLanguage)

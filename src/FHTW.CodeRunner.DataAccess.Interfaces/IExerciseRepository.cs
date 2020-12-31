@@ -8,8 +8,15 @@ using FHTW.CodeRunner.DataAccess.Entities;
 
 namespace FHTW.CodeRunner.DataAccess.Interfaces
 {
-    public interface IExerciseRepository : ISimpleRepository<Exercise>
+    public interface IExerciseRepository
     {
+        /// <summary>
+        /// Retrieves the entity from the data provider with the corresponding id.
+        /// </summary>
+        /// <param name="id">The id of the entity.</param>
+        /// <returns>The instance of the entity.</returns>
+        Exercise GetById(int id);
+
         /// <summary>
         /// Creates an empty exercise.
         /// </summary>
@@ -25,7 +32,7 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// </summary>
         /// <param name="exercise">the exercise with correct id.</param>
         /// <returns>returns the updated exercise.</returns>
-        public new Exercise Update(Exercise exercise);
+        public Exercise Update(Exercise exercise);
 
         /// <summary>
         /// Gets a list of exercises containing:
