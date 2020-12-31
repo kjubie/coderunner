@@ -5,6 +5,7 @@
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using AutoMapper;
 using FHTW.CodeRunner.BusinessLogic;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
@@ -24,6 +25,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
@@ -32,12 +34,15 @@ namespace FHTW.CodeRunner.Services
     [ExcludeFromCodeCoverage]
     public class Startup
     {
+        private readonly IWebHostEnvironment hostingEnv;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
         /// <param name="configuration">th configuration.</param>
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
+            this.hostingEnv = env;
             this.Configuration = configuration;
         }
 
@@ -90,7 +95,30 @@ namespace FHTW.CodeRunner.Services
             services.AddCors();
             services.AddControllers();
 
-            // configure basic authentication 
+            services
+                .AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new OpenApiInfo
+                    {
+                        Version = "v1",
+                        Title = "FHTW CodeRunner",
+                        Description = "API for managing CodeRunner Actions (ASP.NET 5)",
+                        Contact = new OpenApiContact()
+                        {
+                            Name = "FHTW",
+                            Url = new Uri("http://www.technikum-wien.at/"),
+                            Email = string.Empty,
+                        },
+                    });
+                    c.CustomSchemaIds(type => type.FullName);
+                    c.IncludeXmlComments($"{AppContext.BaseDirectory}{Path.DirectorySeparatorChar}{this.hostingEnv.ApplicationName}.xml");
+
+                    // Include DataAnnotation attributes on Controller Action parameters as Swagger validation rules (e.g required, pattern, ..)
+                    // Use [ValidateModelState] on Actions to actually validate it in C# as well!
+                    // c.OperationFilter<GeneratePathParamsValidationFilter>();
+                });
+
+            // configure basic authentication
             services.AddAuthentication("BasicAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
@@ -151,6 +179,16 @@ namespace FHTW.CodeRunner.Services
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
