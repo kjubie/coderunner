@@ -9,6 +9,58 @@ using System.Runtime.Serialization;
 
 namespace FHTW.CodeRunner.Services.DTOs
 {
+    /// <summary>
+    /// Enum for Precheck State.
+    /// </summary>
+    public enum PreCheckState
+    {
+        /// <summary>
+        /// No precheck.
+        /// </summary>
+        Deactivated = 0,
+
+        /// <summary>
+        /// Run test with empty parameters.
+        /// </summary>
+        Empty = 1,
+
+        /// <summary>
+        /// Run all tests where UseAsExampleFlag is set.
+        /// </summary>
+        Examples = 2,
+
+        /// <summary>
+        /// Run all explicitly marked tests.
+        /// </summary>
+        Selected = 3,
+
+        /// <summary>
+        /// Run all tests.
+        /// </summary>
+        All = 4,
+    }
+
+    /// <summary>
+    /// Enum for the display state of the feedback.
+    /// </summary>
+    public enum GeneralFeedbackDisplayState
+    {
+        /// <summary>
+        /// Use value set by testcase.
+        /// </summary>
+        SetFromTest = 0,
+
+        /// <summary>
+        /// Force display of feedback.
+        /// </summary>
+        ForceDisplay = 1,
+
+        /// <summary>
+        /// Force hiding of feedback.
+        /// </summary>
+        ForceHide = 2,
+    }
+
     [DataContract]
     [ExcludeFromCodeCoverage]
     public class TestSuite
@@ -56,22 +108,16 @@ namespace FHTW.CodeRunner.Services.DTOs
         public string RuntimeData { get; set; }
 
         /// <summary>
-        /// Gets or Sets the template parameter for the exercise.
+        /// Gets or Sets state of precheck.
         /// </summary>
-        [DataMember(Name = "templateParam")]
-        public string TemplateParam { get; set; }
+        [DataMember(Name = "preCheck")]
+        public PreCheckState PreCheck { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether gets or Sets a value indicatíng whether the template parameter namespace can be omitted.
+        /// Gets or Sets state of general feedback display.
         /// </summary>
-        [DataMember(Name = "templateParamLiftFlag")]
-        public bool TemplateParamLiftFlag { get; set; }
-
-        /// <summary>
-        /// Gets or Sets a value indicating whether twig should be used for every field.
-        /// </summary>
-        [DataMember(Name = "twigAllFlag")]
-        public bool TwigAllFlag { get; set; }
+        [DataMember(Name = "generalFeedbackDisplay")]
+        public GeneralFeedbackDisplayState GeneralFeedbackDisplay { get; set; }
 
         [DataMember(Name = "testCaseList")]
         public ICollection<TestCase> TestCase { get; set; }

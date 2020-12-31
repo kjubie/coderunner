@@ -42,7 +42,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         /// <summary>
         /// Gets or Sets the number of attainable points.
         /// </summary>
-        public int OptainablePoints { get; set; }
+        public int ObtainablePoints { get; set; }
 
         /// <summary>
         /// Gets or Sets the ID Number that identifies groups in moodle.

@@ -5,9 +5,22 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
+    public enum ValidState
+    {
+        [EnumMember(Value = "NotValid")]
+        NotValid = 0,
+
+        [EnumMember(Value = "Valid")]
+        Valid = 1,
+
+        [EnumMember(Value = "NotChecked")]
+        NotChecked = 2,
+    }
+
     [ExcludeFromCodeCoverage]
     public class ExerciseVersion
     {
@@ -28,6 +41,8 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public int? CreatorDifficulty { get; set; }
 
         public DateTime LastModified { get; set; }
+
+        public ValidState ValidState { get; set; }
 
         public User FkUser { get; set; }
 

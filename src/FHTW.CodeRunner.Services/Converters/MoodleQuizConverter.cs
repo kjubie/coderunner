@@ -38,42 +38,43 @@ namespace FHTW.CodeRunner.Services.Converters
                     Tags = new EsEntities.Tags(),
                 };
 
+                question.Questiontext.Text = string.Empty;
                 var header = exerciseInstance.Header;
                 if (header != null)
                 {
                     question.Name.Text = header.FullTitle;
+                    question.Questiontext.Text = header.Introduction + "\n";
+                    question.Templateparams = header.TemplateParam;
+                    question.Hoisttemplateparams = header.TemplateParamLiftFlag == true ? "1" : "0";
+                    question.Twigall = header.TwigAllFlag == true ? "1" : "0";
                 }
 
                 var body = exerciseInstance.Body;
                 if (body != null)
                 {
                     question.Questiontext.Format = "html";
-                    question.Questiontext.Text = body.Description;
+                    question.Questiontext.Text += body.Description;
 
                     question.Generalfeedback.Format = "html";
                     question.Generalfeedback.Text = body.Feedback;
 
-                    question.Defaultgrade = body.OptainablePoints.ToString();
+                    question.Defaultgrade = body.ObtainablePoints.ToString();
                     question.Penalty = string.Empty; // TODO
                     question.Hidden = "0"; // TODO
                     question.Idnumber = body.IdNum.ToString();
 
-                    question.Prototypetype = string.Empty; // TODO
-                    question.Allornothing = string.Empty; // TODO
+                    question.Prototypetype = "0"; // TODO: Left out
+                    question.Allornothing = body.GradingFlag.ToString();
                     question.Penaltyregime = body.SubtractSystem;
-                    question.Precheck = string.Empty; // TODO
-                    question.Showsource = string.Empty; // TODO
                     question.Answerboxlines = body.FieldLines.ToString();
-                    question.Answerboxcolumns = string.Empty;
+                    question.Answerboxcolumns = "100"; // TODO
                     question.Answerpreload = body.Prefill;
-                    question.Globalextra = string.Empty; // TODO
                     question.Useace = string.Empty; // TODO
                     question.Resultcolumns = string.Empty; // TODO
                     question.Template = string.Empty; // TODO
                     question.Iscombinatortemplate = string.Empty; // TODO
                     question.Allowmultiplestdins = string.Empty; // TODO
-                    question.Answer = string.Empty; // TODO
-                    question.Validateonsave = string.Empty; // TODO
+                    question.Answer = body.Solution;
                     question.Testsplitterre = string.Empty; // TODO
                     question.Language = string.Empty; // TODO
                     question.Acelang = string.Empty; // TODO
@@ -82,22 +83,24 @@ namespace FHTW.CodeRunner.Services.Converters
                     question.Cputimelimitsecs = string.Empty; // TODO
                     question.Memlimitmb = string.Empty; // TODO
                     question.Sandboxparams = string.Empty; // TODO
-                    question.Templateparams = string.Empty; // TODO
-                    question.Hoisttemplateparams = string.Empty; // TODO
-                    question.Twigall = string.Empty; // TODO
                     question.Uiplugin = string.Empty; // TODO
-                    question.Attachments = string.Empty; // TODO
-                    question.Attachmentsrequired = string.Empty; // TODO
-                    question.Maxfilesize = string.Empty; // TODO
-                    question.Filenamesregex = string.Empty; // TODO
-                    question.Filenamesexplain = string.Empty; // TODO
-                    question.Displayfeedback = string.Empty; // TODO
+
+                    question.Attachments = body.AllowFiles.ToString();
+                    question.Attachmentsrequired = body.FilesRequired.ToString();
+                    question.Maxfilesize = body.FilesSize.ToString();
+                    question.Filenamesregex = body.FilesRegex;
+                    question.Filenamesexplain = body.FilesDescription;
                 }
 
                 var testSuite = exerciseInstance.TestSuite;
                 if (testSuite != null)
                 {
                     question.Coderunnertype = testSuite.FkQuestionType == null ? string.Empty : testSuite.FkQuestionType.Name;
+                    question.Showsource = testSuite.TemplateDebugFlag == true ? "1" : "0";
+                    question.Globalextra = testSuite.GlobalExtraParam;
+                    question.Validateonsave = testSuite.TestOnSaveFlag == true ? "1" : "0";
+                    question.Precheck = testSuite.PreCheck.ToString();
+                    question.Displayfeedback = testSuite.GeneralFeedbackDisplay.ToString();
 
                     var testCases = testSuite.TestCase;
                     if (testCases != null)
@@ -120,7 +123,7 @@ namespace FHTW.CodeRunner.Services.Converters
                             newTestCase.Extra.Text = testCase.AdditionalData;
                             newTestCase.Display.Text = testCase.DisplayType;
 
-                            newTestCase.Testtype = string.Empty; // TODO
+                            newTestCase.Testtype = "0"; // TODO: Ask Jacob
                             newTestCase.Useasexample = testCase.UseAsExampleFlag == true ? "1" : "0";
                             newTestCase.Hiderestiffail = testCase.HideOnFailFlag == true ? "1" : "0";
                             newTestCase.Mark = System.Convert.ToString(testCase.Points);

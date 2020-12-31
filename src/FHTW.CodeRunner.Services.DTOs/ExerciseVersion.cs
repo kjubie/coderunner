@@ -9,6 +9,18 @@ using System.Runtime.Serialization;
 
 namespace FHTW.CodeRunner.Services.DTOs
 {
+    public enum ValidState
+    {
+        [EnumMember(Value = "NotValid")]
+        NotValid = 0,
+
+        [EnumMember(Value = "Valid")]
+        Valid = 1,
+
+        [EnumMember(Value = "NotChecked")]
+        NotChecked = 2,
+    }
+
     [DataContract]
     [ExcludeFromCodeCoverage]
     public class ExerciseVersion
@@ -35,6 +47,9 @@ namespace FHTW.CodeRunner.Services.DTOs
 
         [DataMember(Name = "lastModified")]
         public DateTime LastModified { get; set; }
+
+        [DataMember(Name = "validState")]
+        public ValidState ValidState { get; set; }
 
         [DataMember(Name = "user")]
         public User FkUser { get; set; }

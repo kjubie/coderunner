@@ -68,6 +68,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         /// <summary>
         /// Gets or sets a value indicating whether the exercise is valid.
         /// </summary>
-        public bool IsValid { get; set; }
+        public ValidState ValidState { get; set; }
     }
 }
