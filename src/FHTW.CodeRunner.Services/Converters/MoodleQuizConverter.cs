@@ -59,31 +59,31 @@ namespace FHTW.CodeRunner.Services.Converters
                     question.Generalfeedback.Text = body.Feedback;
 
                     question.Defaultgrade = body.ObtainablePoints.ToString();
-                    question.Penalty = string.Empty; // TODO
-                    question.Hidden = "0"; // TODO
+                    question.Penalty = string.Empty; // TODO: Changeable?
+                    question.Hidden = "0"; // TODO: Changeable?
                     question.Idnumber = body.IdNum.ToString();
 
-                    question.Prototypetype = "0"; // TODO: Left out
+                    question.Prototypetype = "0"; // Left out
                     question.Allornothing = body.GradingFlag.ToString();
                     question.Penaltyregime = body.SubtractSystem;
                     question.Answerboxlines = body.FieldLines.ToString();
-                    question.Answerboxcolumns = "100"; // TODO
+                    question.Answerboxcolumns = "100"; // TODO: Changeable?
                     question.Answerpreload = body.Prefill;
-                    question.Useace = string.Empty; // TODO
-                    question.Resultcolumns = string.Empty; // TODO
-                    question.Template = string.Empty; // TODO
-                    question.Iscombinatortemplate = string.Empty; // TODO
-                    question.Allowmultiplestdins = string.Empty; // TODO
+                    question.Useace = string.Empty; // Left out
+                    question.Resultcolumns = string.Empty; // Left out
+                    question.Template = string.Empty; // Left out
+                    question.Iscombinatortemplate = string.Empty; // Left out
+                    question.Allowmultiplestdins = string.Empty; // Left out
                     question.Answer = body.Solution;
-                    question.Testsplitterre = string.Empty; // TODO
-                    question.Language = string.Empty; // TODO
-                    question.Acelang = string.Empty; // TODO
-                    question.Sandbox = string.Empty; // TODO
-                    question.Grader = string.Empty; // TODO
-                    question.Cputimelimitsecs = string.Empty; // TODO
-                    question.Memlimitmb = string.Empty; // TODO
-                    question.Sandboxparams = string.Empty; // TODO
-                    question.Uiplugin = string.Empty; // TODO
+                    question.Testsplitterre = string.Empty; // Left out
+                    question.Language = string.Empty; // Left out
+                    question.Acelang = string.Empty; // Left out
+                    question.Sandbox = string.Empty; // Left out
+                    question.Grader = string.Empty; // Left out
+                    question.Cputimelimitsecs = string.Empty; // Left out
+                    question.Memlimitmb = string.Empty; // Left out
+                    question.Sandboxparams = string.Empty; // Left out
+                    question.Uiplugin = string.Empty; // Left out
 
                     question.Attachments = body.AllowFiles.ToString();
                     question.Attachmentsrequired = body.FilesRequired.ToString();
@@ -123,7 +123,7 @@ namespace FHTW.CodeRunner.Services.Converters
                             newTestCase.Extra.Text = testCase.AdditionalData;
                             newTestCase.Display.Text = testCase.DisplayType;
 
-                            newTestCase.Testtype = "0"; // TODO: Ask Jacob
+                            newTestCase.Testtype = "0"; // TODO: Changeable?
                             newTestCase.Useasexample = testCase.UseAsExampleFlag == true ? "1" : "0";
                             newTestCase.Hiderestiffail = testCase.HideOnFailFlag == true ? "1" : "0";
                             newTestCase.Mark = System.Convert.ToString(testCase.Points);
