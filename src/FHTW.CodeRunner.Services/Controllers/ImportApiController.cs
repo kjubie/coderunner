@@ -14,6 +14,9 @@ using Microsoft.Extensions.Logging;
 
 namespace FHTW.CodeRunner.Services.Controllers
 {
+    /// <summary>
+    /// All import operations can be accessed with this controller.
+    /// </summary>
     [Authorize]
     [ApiController]
     [Route("api")]
@@ -26,9 +29,9 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="ImportApiController"/> class.
         /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="mapper"></param>
-        /// <param name="importLogic"></param>
+        /// <param name="logger">The injected logger.</param>
+        /// <param name="mapper">The injected AutoMapper.</param>
+        /// <param name="importLogic">The injected logic class.</param>
         public ImportApiController(ILogger<ImportApiController> logger, IMapper mapper, IImportLogic importLogic)
         {
             this.logger = logger;
@@ -36,6 +39,10 @@ namespace FHTW.CodeRunner.Services.Controllers
             this.importLogic = importLogic;
         }
 
+        /// <summary>
+        /// Imports a collection.
+        /// </summary>
+        /// <returns>A Statuscode.</returns>
         [HttpPost]
         [Route("import/collection")]
         public virtual IActionResult ImportCollection()

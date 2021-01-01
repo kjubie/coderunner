@@ -31,6 +31,9 @@ using Newtonsoft.Json.Serialization;
 
 namespace FHTW.CodeRunner.Services
 {
+    /// <summary>
+    /// Class to configure the startup of the Webserver.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class Startup
     {
@@ -39,16 +42,23 @@ namespace FHTW.CodeRunner.Services
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
-        /// <param name="configuration">th configuration.</param>
+        /// <param name="env">The hosting environment.</param>
+        /// <param name="configuration">The parameters for configuration.</param>
         public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
             this.hostingEnv = env;
             this.Configuration = configuration;
         }
 
+        /// <summary>
+        /// Gets the configuration of the startup.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services">The collection for the sevices.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             string connection;
@@ -140,7 +150,11 @@ namespace FHTW.CodeRunner.Services
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app">The builder for the application.</param>
+        /// <param name="env">The hosting environment.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())

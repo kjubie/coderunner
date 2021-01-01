@@ -14,6 +14,9 @@ using Microsoft.Extensions.Logging;
 
 namespace FHTW.CodeRunner.Services.Pages
 {
+    /// <summary>
+    /// Model class for the error page.
+    /// </summary>
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [ExcludeFromCodeCoverage]
     public class ErrorModel : PageModel
@@ -23,7 +26,7 @@ namespace FHTW.CodeRunner.Services.Pages
         /// <summary>
         /// Initializes a new instance of the <see cref="ErrorModel"/> class.
         /// </summary>
-        /// <param name="logger"></param>
+        /// <param name="logger">The injected logger.</param>
         public ErrorModel(ILogger<ErrorModel> logger)
         {
             this.logger = logger;

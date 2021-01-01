@@ -16,6 +16,9 @@ using SvcEntities = FHTW.CodeRunner.Services.DTOs;
 
 namespace FHTW.CodeRunner.Services.Controllers
 {
+    /// <summary>
+    /// All export operations can be accessed with this controller.
+    /// </summary>
     [Authorize]
     [ApiController]
     [Route("api")]
@@ -28,9 +31,9 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="ExportApiController"/> class.
         /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="mapper"></param>
-        /// <param name="exportLogic"></param>
+        /// <param name="logger">The injected logger.</param>
+        /// <param name="mapper">The injected AutoMapper.</param>
+        /// <param name="exportLogic">The injected logic class.</param>
         public ExportApiController(ILogger<ExportApiController> logger, IMapper mapper, IExportLogic exportLogic)
         {
             this.logger = logger;
@@ -38,6 +41,11 @@ namespace FHTW.CodeRunner.Services.Controllers
             this.exportLogic = exportLogic;
         }
 
+        /// <summary>
+        /// Exports a single exercise.
+        /// </summary>
+        /// <param name="body">Defining exercise parameters.</param>
+        /// <returns>A Moodle XML Document.</returns>
         [HttpPost]
         [Route("export/exercise")]
         public virtual IActionResult ExportExercise([FromBody] SvcEntities.ExportExercise body)
@@ -62,6 +70,11 @@ namespace FHTW.CodeRunner.Services.Controllers
             };
         }
 
+        /// <summary>
+        /// Exports a collection.
+        /// </summary>
+        /// <param name="body">Defining collection parameters.</param>
+        /// <returns>A Moodle XML Document.</returns>
         [HttpPost]
         [Route("export/collection")]
         public virtual IActionResult ExportCollection([FromBody] SvcEntities.Collection body)

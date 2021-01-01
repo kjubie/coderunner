@@ -14,14 +14,26 @@ using Microsoft.Extensions.Logging;
 
 namespace FHTW.CodeRunner.Services
 {
+    /// <summary>
+    /// Staring class.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class Program
     {
+        /// <summary>
+        /// Starting function.
+        /// </summary>
+        /// <param name="args">Command line parameters.</param>
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
         }
 
+        /// <summary>
+        /// Function for starting the Webserver.
+        /// </summary>
+        /// <param name="args">Arguments for configuration.</param>
+        /// <returns>Webserver host.</returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>

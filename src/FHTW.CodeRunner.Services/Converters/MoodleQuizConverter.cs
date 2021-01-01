@@ -12,6 +12,9 @@ using EsEntities = FHTW.CodeRunner.ExportService.Entities;
 
 namespace FHTW.CodeRunner.Services.Converters
 {
+    /// <summary>
+    /// AutoMapper Converter for the Moodle Quiz and Collection.
+    /// </summary>
     public class MoodleQuizConverter : ITypeConverter<BlEntities.CollectionInstance, EsEntities.Quiz>
     {
         /// <inheritdoc/>

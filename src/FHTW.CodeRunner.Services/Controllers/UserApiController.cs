@@ -17,6 +17,9 @@ using SvcEntities = FHTW.CodeRunner.Services.DTOs;
 
 namespace FHTW.CodeRunner.Services.Controllers
 {
+    /// <summary>
+    /// All user operations can be accessed with this controller.
+    /// </summary>
     [Authorize]
     [ApiController]
     [Route("api")]
@@ -29,9 +32,9 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="UserApiController"/> class.
         /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="mapper"></param>
-        /// <param name="userLogic"></param>
+        /// <param name="logger">The injected logger.</param>
+        /// <param name="mapper">The injected AutoMapper.</param>
+        /// <param name="userLogic">The injected logic class.</param>
         public UserApiController(ILogger<UserApiController> logger, IMapper mapper, IUserLogic userLogic)
         {
             this.logger = logger;
@@ -39,6 +42,11 @@ namespace FHTW.CodeRunner.Services.Controllers
             this.userLogic = userLogic;
         }
 
+        /// <summary>
+        /// Authenticating an user.
+        /// </summary>
+        /// <param name="body">User credentials.</param>
+        /// <returns>A Statuscode.</returns>
         [AllowAnonymous]
         [HttpPost]
         [Route("user/authenticate")]

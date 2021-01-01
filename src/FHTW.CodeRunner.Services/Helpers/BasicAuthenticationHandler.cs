@@ -21,6 +21,9 @@ using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
 
 namespace FHTW.CodeRunner.Services.Helpers
 {
+    /// <summary>
+    /// Class for handling the basic authentication.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
@@ -29,11 +32,11 @@ namespace FHTW.CodeRunner.Services.Helpers
         /// <summary>
         /// Initializes a new instance of the <see cref="BasicAuthenticationHandler"/> class.
         /// </summary>
-        /// <param name="options"></param>
-        /// <param name="logger"></param>
-        /// <param name="encoder"></param>
-        /// <param name="clock"></param>
-        /// <param name="userLogic"></param>
+        /// <param name="options">The injected authenication options.</param>
+        /// <param name="logger">The injected logger.</param>
+        /// <param name="encoder">The injected url encoder.</param>
+        /// <param name="clock">The injected system clock.</param>
+        /// <param name="userLogic">The injected logic class.</param>
         public BasicAuthenticationHandler(
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,

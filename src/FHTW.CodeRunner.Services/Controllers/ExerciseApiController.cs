@@ -16,6 +16,9 @@ using SvcEntities = FHTW.CodeRunner.Services.DTOs;
 
 namespace FHTW.CodeRunner.Services.Controllers
 {
+    /// <summary>
+    /// All exercise operations can be accessed with this controller.
+    /// </summary>
     [Authorize]
     [ApiController]
     [Route("api")]
@@ -28,9 +31,9 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="ExerciseApiController"/> class.
         /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="mapper"></param>
-        /// <param name="exerciseLogic"></param>
+        /// <param name="logger">The injected logger.</param>
+        /// <param name="mapper">The injected AutoMapper.</param>
+        /// <param name="exerciseLogic">The injected logic class.</param>
         public ExerciseApiController(ILogger<ExerciseApiController> logger, IMapper mapper, IExerciseLogic exerciseLogic)
         {
             this.logger = logger;
@@ -38,6 +41,11 @@ namespace FHTW.CodeRunner.Services.Controllers
             this.exerciseLogic = exerciseLogic;
         }
 
+        /// <summary>
+        /// Gets a test exercise.
+        /// </summary>
+        /// <param name="id">The Id of the test exercise.</param>
+        /// <returns>One exercise.</returns>
         [HttpGet]
         [Route("exercise/{id}")]
         public virtual IActionResult GetTestExercise(int id)
@@ -48,6 +56,11 @@ namespace FHTW.CodeRunner.Services.Controllers
             return this.Ok(svcExercise);
         }
 
+        /// <summary>
+        /// Saves an exercise to the system.
+        /// </summary>
+        /// <param name="body">An exercise.</param>
+        /// <returns>A Statuscode.</returns>
         [HttpPost]
         [Route("exercise")]
         public virtual IActionResult SaveExercise([FromBody] SvcEntities.Exercise body)
@@ -66,6 +79,11 @@ namespace FHTW.CodeRunner.Services.Controllers
             return this.Ok();
         }
 
+        /// <summary>
+        /// Validates an exercise.
+        /// </summary>
+        /// <param name="body">An exercise.</param>
+        /// <returns>A Statuscode.</returns>
         [HttpPost]
         [Route("exercise/validate")]
         public virtual IActionResult ValidateExercise([FromBody] SvcEntities.Exercise body)
@@ -84,6 +102,10 @@ namespace FHTW.CodeRunner.Services.Controllers
             return this.Ok();
         }
 
+        /// <summary>
+        /// Gets data for the 'Create Exercise'-section in the frontend.
+        /// </summary>
+        /// <returns>Lists of necessary attributes.</returns>
         [HttpGet]
         [Route("exercise/prepare")]
         public virtual IActionResult GetExerciseCreatePreparation()
@@ -94,6 +116,10 @@ namespace FHTW.CodeRunner.Services.Controllers
             return this.Ok(svcExerciseCreatePreparation);
         }
 
+        /// <summary>
+        /// Gets a list of exercises.
+        /// </summary>
+        /// <returns>A list of exercises in a minmal format.</returns>
         [HttpGet]
         [Route("exercise/short")]
         public virtual IActionResult GetExerciseShort()
