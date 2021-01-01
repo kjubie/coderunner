@@ -24,6 +24,89 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
         }
 
         [Test]
+        public void GetExerciseShortList_CorrectCount()
+        {
+            // Arrange
+            var logger = Mock.Of<ILogger<ExerciseLogic>>();
+            const int count = 5;
+
+            IMapper mapper = new Mapper(
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<DalEntities.MinimalExercise, BlEntities.ExerciseShort>();
+                }));
+
+            var exerciseShortList = new System.Collections.Generic.List<DalEntities.MinimalExercise>(Builder<DalEntities.MinimalExercise>
+                .CreateListOfSize(count)
+                .Build());
+
+            var exerciseRepoMock = new Mock<IExerciseRepository>();
+            exerciseRepoMock.Setup(p => p.GetMinimalList()).Returns(exerciseShortList);
+
+            var uiRepoMock = new Mock<IUIRepository>();
+
+            IExerciseRepository exerciseRepo = exerciseRepoMock.Object;
+            IUIRepository uiRepo = uiRepoMock.Object;
+
+            IExerciseLogic logic = new ExerciseLogic(logger, mapper, exerciseRepo, uiRepo);
+
+            // Act
+            var result = logic.GetExerciseShortList();
+
+            // Assert
+            Assert.AreEqual(count, result.Count);
+        }
+
+        [Test]
+        public void GetExerciseCreatePreparation_NotNull()
+        {
+            // Arrange
+            var logger = Mock.Of<ILogger<ExerciseLogic>>();
+            const int count = 5;
+
+            IMapper mapper = new Mapper(
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<DalEntities.ProgrammingLanguage, BlEntities.ProgrammingLanguage>();
+                    cfg.CreateMap<DalEntities.WrittenLanguage, BlEntities.WrittenLanguage>();
+                    cfg.CreateMap<DalEntities.QuestionType, BlEntities.QuestionType>();
+                }));
+
+            var programmingLanguageList = new System.Collections.Generic.List<DalEntities.ProgrammingLanguage>(Builder<DalEntities.ProgrammingLanguage>
+                .CreateListOfSize(count)
+                .Build());
+
+            var writtenLanguageList = new System.Collections.Generic.List<DalEntities.WrittenLanguage>(Builder<DalEntities.WrittenLanguage>
+                .CreateListOfSize(count)
+                .Build());
+
+            var questionTypeList = new System.Collections.Generic.List<DalEntities.QuestionType>(Builder<DalEntities.QuestionType>
+                .CreateListOfSize(count)
+                .Build());
+
+            var exerciseRepoMock = new Mock<IExerciseRepository>();
+
+            var uiRepoMock = new Mock<IUIRepository>();
+            uiRepoMock.Setup(p => p.GetProgrammingLanguages()).Returns(programmingLanguageList);
+            uiRepoMock.Setup(p => p.GetWrittenLanguages()).Returns(writtenLanguageList);
+            uiRepoMock.Setup(p => p.GetQuestionTypes()).Returns(questionTypeList);
+
+            IExerciseRepository exerciseRepo = exerciseRepoMock.Object;
+            IUIRepository uiRepo = uiRepoMock.Object;
+
+            IExerciseLogic logic = new ExerciseLogic(logger, mapper, exerciseRepo, uiRepo);
+
+            // Act
+            var result = logic.GetExerciseCreatePreparation();
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(count, result.ProgrammingLanguages.Count);
+            Assert.AreEqual(count, result.WrittenLanguages.Count);
+            Assert.AreEqual(count, result.QuestionTypes.Count);
+        }
+
+        [Test]
         public void SaveExercise_ValidExercise_NoException()
         {
             // Arrange
@@ -32,16 +115,19 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             IMapper mapper = new Mapper(
                 new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<BlEntities.Exercise, DalEntities.Exercise>().ReverseMap();
-                    cfg.CreateMap<BlEntities.User, DalEntities.User>().ReverseMap();
+                    cfg.CreateMap<BlEntities.Exercise, DalEntities.Exercise>();
+                    cfg.CreateMap<BlEntities.User, DalEntities.User>();
                 }));
 
-            var repoMock = new Mock<IExerciseRepository>();
-            repoMock.Setup(p => p.Insert(It.IsAny<DalEntities.Exercise>()));
+            var exerciseRepoMock = new Mock<IExerciseRepository>();
+            exerciseRepoMock.Setup(p => p.CreateAndUpdate(It.IsAny<DalEntities.Exercise>()));
 
-            IExerciseRepository repo = repoMock.Object;
+            var uiRepoMock = new Mock<IUIRepository>();
 
-            IExerciseLogic logic = new ExerciseLogic(logger, mapper, repo, null);
+            IExerciseRepository exerciseRepo = exerciseRepoMock.Object;
+            IUIRepository uiRepo = uiRepoMock.Object;
+
+            IExerciseLogic logic = new ExerciseLogic(logger, mapper, exerciseRepo, uiRepo);
 
             var validExercise = Builder<BlEntities.Exercise>
                 .CreateNew()
@@ -54,7 +140,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
         }
 
         [Test]
-        public void SaveExercise_NullExercise_ValidationException()
+        public void SaveExercise_NullExercise_BlValidationException()
         {
             // Arrange
             var logger = Mock.Of<ILogger<ExerciseLogic>>();
@@ -62,15 +148,18 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             IMapper mapper = new Mapper(
                 new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<BlEntities.Exercise, DalEntities.Exercise>().ReverseMap();
+                    cfg.CreateMap<BlEntities.Exercise, DalEntities.Exercise>();
                 }));
 
-            var repoMock = new Mock<IExerciseRepository>();
-            repoMock.Setup(p => p.Insert(It.IsAny<DalEntities.Exercise>()));
+            var exerciseRepoMock = new Mock<IExerciseRepository>();
+            exerciseRepoMock.Setup(p => p.CreateAndUpdate(It.IsAny<DalEntities.Exercise>()));
 
-            IExerciseRepository repo = repoMock.Object;
+            var uiRepoMock = new Mock<IUIRepository>();
 
-            IExerciseLogic logic = new ExerciseLogic(logger, mapper, repo, null);
+            IExerciseRepository exerciseRepo = exerciseRepoMock.Object;
+            IUIRepository uiRepo = uiRepoMock.Object;
+
+            IExerciseLogic logic = new ExerciseLogic(logger, mapper, exerciseRepo, uiRepo);
 
             BlEntities.Exercise nullExercise = null;
 
@@ -88,16 +177,19 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             IMapper mapper = new Mapper(
                 new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<BlEntities.Exercise, DalEntities.Exercise>().ReverseMap();
-                    cfg.CreateMap<BlEntities.User, DalEntities.User>().ReverseMap();
+                    cfg.CreateMap<BlEntities.Exercise, DalEntities.Exercise>();
+                    cfg.CreateMap<BlEntities.User, DalEntities.User>();
                 }));
 
-            var repoMock = new Mock<IExerciseRepository>();
-            repoMock.Setup(p => p.Insert(It.IsAny<DalEntities.Exercise>()));
+            var exerciseRepoMock = new Mock<IExerciseRepository>();
+            exerciseRepoMock.Setup(p => p.CreateAndUpdate(It.IsAny<DalEntities.Exercise>()));
 
-            IExerciseRepository repo = repoMock.Object;
+            var uiRepoMock = new Mock<IUIRepository>();
 
-            IExerciseLogic logic = new ExerciseLogic(logger, mapper, repo, null);
+            IExerciseRepository exerciseRepo = exerciseRepoMock.Object;
+            IUIRepository uiRepo = uiRepoMock.Object;
+
+            IExerciseLogic logic = new ExerciseLogic(logger, mapper, exerciseRepo, uiRepo);
 
             var validExercise = Builder<BlEntities.Exercise>
                 .CreateNew()
@@ -118,15 +210,18 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             IMapper mapper = new Mapper(
                 new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<BlEntities.Exercise, DalEntities.Exercise>().ReverseMap();
+                    cfg.CreateMap<BlEntities.Exercise, DalEntities.Exercise>();
                 }));
 
-            var repoMock = new Mock<IExerciseRepository>();
-            repoMock.Setup(p => p.Insert(It.IsAny<DalEntities.Exercise>()));
+            var exerciseRepoMock = new Mock<IExerciseRepository>();
+            exerciseRepoMock.Setup(p => p.CreateAndUpdate(It.IsAny<DalEntities.Exercise>()));
 
-            IExerciseRepository repo = repoMock.Object;
+            var uiRepoMock = new Mock<IUIRepository>();
 
-            IExerciseLogic logic = new ExerciseLogic(logger, mapper, repo, null);
+            IExerciseRepository exerciseRepo = exerciseRepoMock.Object;
+            IUIRepository uiRepo = uiRepoMock.Object;
+
+            IExerciseLogic logic = new ExerciseLogic(logger, mapper, exerciseRepo, uiRepo);
 
             BlEntities.Exercise nullExercise = null;
 

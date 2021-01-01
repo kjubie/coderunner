@@ -59,31 +59,14 @@ namespace FHTW.CodeRunner.Services.Converters
                     question.Generalfeedback.Text = body.Feedback;
 
                     question.Defaultgrade = body.ObtainablePoints.ToString();
-                    question.Penalty = string.Empty; // TODO: Changeable?
-                    question.Hidden = "0"; // TODO: Changeable?
                     question.Idnumber = body.IdNum.ToString();
 
-                    question.Prototypetype = "0"; // Left out
                     question.Allornothing = body.GradingFlag.ToString();
                     question.Penaltyregime = body.SubtractSystem;
                     question.Answerboxlines = body.FieldLines.ToString();
-                    question.Answerboxcolumns = "100"; // TODO: Changeable?
+
                     question.Answerpreload = body.Prefill;
-                    question.Useace = string.Empty; // Left out
-                    question.Resultcolumns = string.Empty; // Left out
-                    question.Template = string.Empty; // Left out
-                    question.Iscombinatortemplate = string.Empty; // Left out
-                    question.Allowmultiplestdins = string.Empty; // Left out
                     question.Answer = body.Solution;
-                    question.Testsplitterre = string.Empty; // Left out
-                    question.Language = string.Empty; // Left out
-                    question.Acelang = string.Empty; // Left out
-                    question.Sandbox = string.Empty; // Left out
-                    question.Grader = string.Empty; // Left out
-                    question.Cputimelimitsecs = string.Empty; // Left out
-                    question.Memlimitmb = string.Empty; // Left out
-                    question.Sandboxparams = string.Empty; // Left out
-                    question.Uiplugin = string.Empty; // Left out
 
                     question.Attachments = body.AllowFiles.ToString();
                     question.Attachmentsrequired = body.FilesRequired.ToString();
@@ -147,6 +130,28 @@ namespace FHTW.CodeRunner.Services.Converters
                         question.Tags.Tag.Add(newTag);
                     }
                 }
+
+                // TODO: The following attributes are uncertain and have to be discussed
+                question.Penalty = string.Empty;
+                question.Hidden = "0";
+                question.Answerboxcolumns = "100";
+
+                // The following attributes have been ignored because they were not relevant at the time of creation
+                question.Prototypetype = "0";
+                question.Useace = string.Empty;
+                question.Resultcolumns = string.Empty;
+                question.Template = string.Empty;
+                question.Iscombinatortemplate = string.Empty;
+                question.Allowmultiplestdins = string.Empty;
+                question.Testsplitterre = string.Empty;
+                question.Language = string.Empty;
+                question.Acelang = string.Empty;
+                question.Sandbox = string.Empty;
+                question.Grader = string.Empty;
+                question.Cputimelimitsecs = string.Empty;
+                question.Memlimitmb = string.Empty;
+                question.Sandboxparams = string.Empty;
+                question.Uiplugin = string.Empty;
 
                 quiz.Question.Add(question);
             }

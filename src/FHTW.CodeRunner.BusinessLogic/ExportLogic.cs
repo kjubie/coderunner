@@ -6,8 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
+using FHTW.CodeRunner.BusinessLogic.Exceptions;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using FHTW.CodeRunner.DataAccess.Interfaces;
+using FHTW.CodeRunner.DataAccess.Sql;
 using FHTW.CodeRunner.ExportService.Interfaces;
 using Microsoft.Extensions.Logging;
 using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
@@ -44,19 +46,38 @@ namespace FHTW.CodeRunner.BusinessLogic
 
         public string ExportExercise(BlEntities.ExportExercise exportExercise)
         {
-            var dalExerciseInstance = this.exerciseRepository.GetExerciseInstance(exportExercise.Id, exportExercise.ProgrammingLanguage, exportExercise.WrittenLanguage, exportExercise.Version);
-            var blExerciseInstance = this.mapper.Map<BlEntities.ExerciseInstance>(dalExerciseInstance);
-
-            var blCollectionInstance = new BlEntities.CollectionInstance
+            if (exportExercise == null)
             {
-                Exercises = new List<BlEntities.ExerciseInstance>(),
-            };
+                this.logger.LogError("ExportExercise is null");
+                throw new BlValidationException("ExportExercise is null", null);
+            }
 
-            blCollectionInstance.Exercises.Add(blExerciseInstance);
+            try
+            {
+                var dalExerciseInstance = this.exerciseRepository.GetExerciseInstance(
+                exportExercise.Id,
+                exportExercise.ProgrammingLanguage,
+                exportExercise.WrittenLanguage,
+                exportExercise.Version);
 
-            var quiz = this.mapper.Map<EsEntities.Quiz>(blCollectionInstance);
+                var blExerciseInstance = this.mapper.Map<BlEntities.ExerciseInstance>(dalExerciseInstance);
 
-            return this.moodleXmlService.ExportMoodleXml(quiz);
+                var blCollectionInstance = new BlEntities.CollectionInstance
+                {
+                    Exercises = new List<BlEntities.ExerciseInstance>(),
+                };
+
+                blCollectionInstance.Exercises.Add(blExerciseInstance);
+
+                var quiz = this.mapper.Map<EsEntities.Quiz>(blCollectionInstance);
+
+                return this.moodleXmlService.ExportMoodleXml(quiz);
+            }
+            catch (DalException e)
+            {
+                this.logger.LogError(e.Message);
+                throw new BlDataNotFoundException("Getting Exercise Instance failed for Exercise with Id: " + exportExercise.Id, e);
+            }
         }
     }
 }
