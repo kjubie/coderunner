@@ -4,10 +4,17 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
+    /// <summary>
+    /// A single exercise instance.
+    /// Normaly an exercise can exist in many different written languages, versions or programming languages.
+    /// An exercise instance however, only has one written language, version and programming language.
+    /// </summary>
+    [ExcludeFromCodeCoverage]
     public class ExerciseInstance
     {
         /// <summary>
@@ -61,9 +68,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public TestSuite TestSuite { get; set; }
 
         /// <summary>
-        /// Gets or sets the tag lsit.
+        /// Gets or sets the tag list.
         /// </summary>
-        public ICollection<Tag> Tags { get; set; }
+        public ICollection<Tag> TagList { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the exercise is valid.

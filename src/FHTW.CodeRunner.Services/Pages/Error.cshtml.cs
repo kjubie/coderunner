@@ -32,10 +32,19 @@ namespace FHTW.CodeRunner.Services.Pages
             this.logger = logger;
         }
 
+        /// <summary>
+        /// Gets or sets id for the Request.
+        /// </summary>
         public string RequestId { get; set; }
 
+        /// <summary>
+        /// Gets a value indicating whether Request Id is set.
+        /// </summary>
         public bool ShowRequestId => !string.IsNullOrEmpty(this.RequestId);
 
+        /// <summary>
+        /// Sets the Request Id.
+        /// </summary>
         public void OnGet()
         {
             this.RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier;

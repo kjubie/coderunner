@@ -9,37 +9,46 @@ using System.Runtime.Serialization;
 
 namespace FHTW.CodeRunner.Services.DTOs
 {
+    /// <summary>
+    /// Entity that defines the exercise for the collection.
+    /// </summary>
     [DataContract]
     [ExcludeFromCodeCoverage]
     public class CollectionExercise
     {
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         [DataMember(Name = "id")]
         public int Id { get; set; }
 
-        [DataMember(Name = "collectionLanguageId")]
-        public int FkCollectionLanguageId { get; set; }
-
+        /// <summary>
+        /// Gets or sets the version.
+        /// </summary>
         [DataMember(Name = "versionNumber")]
         public int VersionNumber { get; set; }
 
-        [DataMember(Name = "exerciseId")]
-        public int FkExerciseId { get; set; }
-
-        [DataMember(Name = "programmingLanguageId")]
-        public int FkProgrammingLanguageId { get; set; }
-
-        [DataMember(Name = "writtenLanguageId")]
-        public int FkWrittenLanguageId { get; set; }
-
+        /// <summary>
+        /// Gets or sets the hierarchy for the language.
+        /// </summary>
         [DataMember(Name = "collectionLanguage")]
         public CollectionLanguage FkCollectionLanguage { get; set; }
 
+        /// <summary>
+        /// Gets or sets an exercise.
+        /// </summary>
         [DataMember(Name = "exercise")]
         public Exercise FkExercise { get; set; }
 
+        /// <summary>
+        /// Gets or sets a programming language.
+        /// </summary>
         [DataMember(Name = "programmingLanguage")]
         public ProgrammingLanguage FkProgrammingLanguage { get; set; }
 
+        /// <summary>
+        /// Gets or sets a written language.
+        /// </summary>
         [DataMember(Name = "writtenLanguage")]
         public WrittenLanguage FkWrittenLanguage { get; set; }
     }

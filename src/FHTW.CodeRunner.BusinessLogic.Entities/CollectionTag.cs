@@ -8,13 +8,20 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
+    /// <summary>
+    /// Enity for defining the tags in a collection.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class CollectionTag
     {
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         public int Id { get; set; }
 
-        public Collection FkCollection { get; set; }
-
+        /// <summary>
+        /// Gets or sets the tag.
+        /// </summary>
         public Tag FkTag { get; set; }
     }
 }

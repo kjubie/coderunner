@@ -8,9 +8,15 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
+    /// <summary>
+    /// Entity that describes the body for an exercise.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class ExerciseBody
     {
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         public int Id { get; set; }
 
         /// <summary>
@@ -66,13 +72,11 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
 
         /// <summary>
         /// Gets or Sets the mode of the allowed attachments field.
-        /// Value Constraints {0,1,2,3,4} in <see cref="FHTW.CodeRunner.DataAccess.Sql.CodeRunnerContext"/>.
         /// </summary>
         public int AllowFiles { get; set; }
 
         /// <summary>
         /// Gets or Sets the mode of the attachments required field.
-        /// Value Constraints {0,1,2,3} in <see cref="FHTW.CodeRunner.DataAccess.Sql.CodeRunnerContext"/>.
         /// </summary>
         public int FilesRequired { get; set; }
 
@@ -91,10 +95,19 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         /// </summary>
         public int FilesSize { get; set; }
 
+        /// <summary>
+        /// Gets or sets the language for the exercise.
+        /// </summary>
         public ExerciseLanguage FkExerciseLanguage { get; set; }
 
+        /// <summary>
+        /// Gets or sets the programming language for the exercise.
+        /// </summary>
         public ProgrammingLanguage FkProgrammingLanguage { get; set; }
 
+        /// <summary>
+        /// Gets or sets the test suite for the exercise.
+        /// </summary>
         public TestSuite FkTestSuite { get; set; }
     }
 }

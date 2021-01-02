@@ -9,6 +9,9 @@ using System.Runtime.Serialization;
 
 namespace FHTW.CodeRunner.Services.DTOs
 {
+    /// <summary>
+    /// Entity that holds multiple Exercises.
+    /// </summary>
     [DataContract]
     [ExcludeFromCodeCoverage]
     public class Collection
@@ -22,24 +25,39 @@ namespace FHTW.CodeRunner.Services.DTOs
             this.CollectionTag = new HashSet<CollectionTag>();
         }
 
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         [DataMember(Name = "id")]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the title.
+        /// </summary>
         [DataMember(Name = "title")]
         public string Title { get; set; }
 
+        /// <summary>
+        /// Gets or sets the creation date.
+        /// </summary>
         [DataMember(Name = "created")]
         public DateTime Created { get; set; }
 
-        [DataMember(Name = "userId")]
-        public int FkUserId { get; set; }
-
+        /// <summary>
+        /// Gets or sets the author.
+        /// </summary>
         [DataMember(Name = "user")]
         public User FkUser { get; set; }
 
+        /// <summary>
+        /// Gets or sets multiple CollectionLanguage Entities.
+        /// </summary>
         [DataMember(Name = "collectionLanguageList")]
         public ICollection<CollectionLanguage> CollectionLanguage { get; set; }
 
+        /// <summary>
+        /// Gets or sets multiple CollectionTage Entities.
+        /// </summary>
         [DataMember(Name = "collectionTagList")]
         public ICollection<CollectionTag> CollectionTag { get; set; }
     }

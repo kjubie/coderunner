@@ -119,7 +119,7 @@ namespace FHTW.CodeRunner.Services.Converters
                     }
                 }
 
-                var tags = exerciseInstance.Tags;
+                var tags = exerciseInstance.TagList;
                 if (tags != null)
                 {
                     question.Tags.Tag = new List<EsEntities.Tag>();

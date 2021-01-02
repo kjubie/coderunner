@@ -8,6 +8,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
+    /// <summary>
+    /// Enity for defining the exercises for a certain written language.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class CollectionLanguage
     {
@@ -19,18 +22,29 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
             this.CollectionExercise = new HashSet<CollectionExercise>();
         }
 
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         public int Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the full title.
+        /// </summary>
         public string FullTitle { get; set; }
 
+        /// <summary>
+        /// Gets or sets a short title.
+        /// </summary>
         public string ShortTitle { get; set; }
 
+        /// <summary>
+        /// Gets or sets an introduction.
+        /// </summary>
         public string Introduction { get; set; }
 
-        public int FkCollectionId { get; set; }
-
-        public Collection FkCollection { get; set; }
-
+        /// <summary>
+        /// Gets or sets multiple Collection Exercise entities.
+        /// </summary>
         public ICollection<CollectionExercise> CollectionExercise { get; set; }
     }
 }

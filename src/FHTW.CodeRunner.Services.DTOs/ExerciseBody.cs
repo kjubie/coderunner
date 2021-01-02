@@ -9,10 +9,16 @@ using System.Runtime.Serialization;
 
 namespace FHTW.CodeRunner.Services.DTOs
 {
+    /// <summary>
+    /// Entity that describes the body for an exercise.
+    /// </summary>
     [DataContract]
     [ExcludeFromCodeCoverage]
     public class ExerciseBody
     {
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         [DataMember(Name = "id")]
         public int Id { get; set; }
 
@@ -79,14 +85,12 @@ namespace FHTW.CodeRunner.Services.DTOs
 
         /// <summary>
         /// Gets or Sets the mode of the allowed attachments field.
-        /// Value Constraints {0,1,2,3,4} in <see cref="FHTW.CodeRunner.DataAccess.Sql.CodeRunnerContext"/>.
         /// </summary>
         [DataMember(Name = "allowFiles")]
         public int AllowFiles { get; set; }
 
         /// <summary>
         /// Gets or Sets the mode of the attachments required field.
-        /// Value Constraints {0,1,2,3} in <see cref="FHTW.CodeRunner.DataAccess.Sql.CodeRunnerContext"/>.
         /// </summary>
         [DataMember(Name = "filesRequired")]
         public int FilesRequired { get; set; }
@@ -109,12 +113,21 @@ namespace FHTW.CodeRunner.Services.DTOs
         [DataMember(Name = "filesSize")]
         public int FilesSize { get; set; }
 
+        /// <summary>
+        /// Gets or sets the language for the exercise.
+        /// </summary>
         [DataMember(Name = "exerciseLanguage")]
         public ExerciseLanguage FkExerciseLanguage { get; set; }
 
+        /// <summary>
+        /// Gets or sets the programming language for the exercise.
+        /// </summary>
         [DataMember(Name = "programmingLanguage")]
         public ProgrammingLanguage FkProgrammingLanguage { get; set; }
 
+        /// <summary>
+        /// Gets or sets the test suite for the exercise.
+        /// </summary>
         [DataMember(Name = "testSuite")]
         public TestSuite FkTestSuite { get; set; }
     }
