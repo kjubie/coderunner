@@ -105,6 +105,11 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         }
 
         /// <summary>
+        /// Gets a collection of tags.
+        /// </summary>
+        public ICollection<Tag> TagList { get; init; }
+
+        /// <summary>
         /// Gets a value indicating the state of the exercise.
         /// </summary>
         public ValidState ValidState

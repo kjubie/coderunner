@@ -171,8 +171,7 @@ namespace FHTW.CodeRunner.Services
 
                 context.EnsureSeeded();
 
-                //TEST
-
+                // TEST
                 IExerciseRepository rep = new ExerciseRepository(context);
                 ICollectionRepository repC = new CollectionRepository(context);
 

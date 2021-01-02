@@ -289,6 +289,13 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                             .SingleOrDefault(el => el.FkWrittenLanguage.Name == written_language)
                                 .ExerciseBody
                                     .SingleOrDefault(eb => eb.FkProgrammingLanguage.Name == programming_language),
+                    TagList = e.ExerciseTag
+                        .Select(et => new Tag()
+                        {
+                            Id = et.FkTagId,
+                            Name = et.FkTag.Name,
+                        })
+                        .ToList(),
                 }).FirstOrDefault();
 
             if (instance == null)
