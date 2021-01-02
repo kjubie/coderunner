@@ -53,5 +53,10 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         /// Gets a collection of programming languages, in which the exercise is availbale in.
         /// </summary>
         public ICollection<ProgrammingLanguage> ProgrammingLanguageList { get; init; }
+
+        /// <summary>
+        /// Gets a collection of versions, in which the exercise is availbale in.
+        /// </summary>
+        public ICollection<int> VersionList { get; init; }
     }
 }

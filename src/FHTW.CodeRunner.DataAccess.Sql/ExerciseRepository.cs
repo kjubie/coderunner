@@ -226,6 +226,9 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                         }))
                         .ToHashSet(new ProgrammingLanguageComparator())
                         .ToList(),
+                    VersionList = m.ExerciseVersion
+                        .Select(v => v.VersionNumber)
+                        .ToList(),
                 })
                 .ToList();
         }
