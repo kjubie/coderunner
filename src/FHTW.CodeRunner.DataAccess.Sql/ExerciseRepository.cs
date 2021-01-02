@@ -259,6 +259,11 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 .Include(e => e.ExerciseVersion)
                     .ThenInclude(v => v.ExerciseLanguage)
                         .ThenInclude(el => el.ExerciseBody)
+                            .ThenInclude(eb => eb.FkTestSuite)
+                                .ThenInclude(ts => ts.FkQuestionType)
+                .Include(e => e.ExerciseVersion)
+                    .ThenInclude(v => v.ExerciseLanguage)
+                        .ThenInclude(el => el.ExerciseBody)
                             .ThenInclude(eb => eb.FkProgrammingLanguage)
                 .Select(e => new ExerciseInstance
                 {
