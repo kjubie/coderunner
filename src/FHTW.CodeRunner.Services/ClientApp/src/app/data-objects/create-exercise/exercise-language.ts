@@ -4,14 +4,15 @@ import { WrittenLanguage } from "../written-language";
 
 export class ExerciseLanguage {
     constructor() {
-        this.exerciseHeader = new ExerciseHeader();
-        this.writtenLanguage = new WrittenLanguage();
+        this.id = 0;
+        this.fkExerciseHeader = new ExerciseHeader();
+        this.fkWrittenLanguage = new WrittenLanguage();
         this.exerciseBody = new ExerciseBody();
     }
 
     id: number;
-    exerciseHeader: ExerciseHeader;
-    writtenLanguage: WrittenLanguage;
+    fkExerciseHeader: ExerciseHeader;
+    fkWrittenLanguage: WrittenLanguage;
     exerciseBody: ExerciseBody;
 
 }

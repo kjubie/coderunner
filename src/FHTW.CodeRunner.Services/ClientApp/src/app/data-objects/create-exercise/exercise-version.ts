@@ -3,15 +3,17 @@ import { ExerciseLanguage } from "./exercise-language";
 
 export class ExerciseVersion {
     constructor() {
-        this.user = new Author();
-        this.exerciseLanguageList = [];
+        this.id = 0;
+        this.fkUser = new Author();
+        this.exerciseLanguage = [];
     }
 
     id: number;
     versionNumber: number;
     creatorRating: number;
     creatorDifficulty: number;
-    lastModified: Date;
-    user: Author;
-    exerciseLanguageList: ExerciseLanguage[];
+    lastModified: string;
+    validState: number;
+    fkUser: Author;
+    exerciseLanguage: ExerciseLanguage[];
 }

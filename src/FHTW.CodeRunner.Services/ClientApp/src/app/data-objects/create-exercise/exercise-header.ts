@@ -1,9 +1,12 @@
-import { ExerciseBody } from "./exercise-body";
-
 export class ExerciseHeader {
-    constructor() {}
+    constructor() {
+        this.id = 0;
+    }
 
     id: number;
     fullTitle: string;
     introduction: string;
+    templateParam: string;
+    templateParamLiftFlag: boolean;
+    twigAllFlag: boolean; 
 }

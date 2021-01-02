@@ -3,6 +3,10 @@ import { TestSuit } from "./test-suit";
 
 export class ExerciseBody {
 
+    constructor() {
+        this.id = 0;
+    }
+
     id: number;
     description: string;
     hint: string;
@@ -25,6 +29,6 @@ export class ExerciseBody {
     minRequiredFiles: number;
     maxRequiredFiles: number;
     example: string;
-    programmingLanguage: ProgrammingLanguage;
-    testSuit: TestSuit;
+    fkProgrammingLanguage: ProgrammingLanguage;
+    fkTestSuit: TestSuit;
 }

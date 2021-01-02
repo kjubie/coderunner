@@ -1,20 +1,21 @@
+import { QuestionType } from "../question-type";
 import { TestCase } from "./test-case";
 
 export class TestSuit {
     constructor() {
-        this.testCaseList = [];
+        this.id = 0;
+        this.testCase = [];
     }
 
     id: number;
-    questionType: string;
+    fkQuestionType: QuestionType;
     templateDebugFlag: boolean;
     testOnSaveFlag: boolean;
     globalExtraParam: string;
     runtimeData: string;
-    templateParam: string;
-    templateParamliftFlag: boolean;
-    twigAllFlag: boolean;
-    testCaseList: TestCase[];
+    preCheck: number;
+    generalFeedbackDisplay: number;
+    testCase: TestCase[];
     
     //prefill: string;
     //solution: string;
