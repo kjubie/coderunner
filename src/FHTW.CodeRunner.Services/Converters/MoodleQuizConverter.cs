@@ -64,7 +64,7 @@ namespace FHTW.CodeRunner.Services.Converters
                     question.Defaultgrade = body.ObtainablePoints.ToString();
                     question.Idnumber = body.IdNum.ToString();
 
-                    question.Allornothing = body.GradingFlag.ToString();
+                    question.Allornothing = body.GradingFlag == true ? "1" : "0";
                     question.Penaltyregime = body.SubtractSystem;
                     question.Answerboxlines = body.FieldLines.ToString();
 
@@ -85,8 +85,8 @@ namespace FHTW.CodeRunner.Services.Converters
                     question.Showsource = testSuite.TemplateDebugFlag == true ? "1" : "0";
                     question.Globalextra = testSuite.GlobalExtraParam;
                     question.Validateonsave = testSuite.TestOnSaveFlag == true ? "1" : "0";
-                    question.Precheck = testSuite.PreCheck.ToString();
-                    question.Displayfeedback = testSuite.GeneralFeedbackDisplay.ToString();
+                    question.Precheck = ((int)testSuite.PreCheck).ToString();
+                    question.Displayfeedback = ((int)testSuite.GeneralFeedbackDisplay).ToString();
 
                     var testCases = testSuite.TestCase;
                     if (testCases != null)
@@ -138,6 +138,7 @@ namespace FHTW.CodeRunner.Services.Converters
                 question.Penalty = string.Empty;
                 question.Hidden = "0";
                 question.Answerboxcolumns = "100";
+                question.Type = "coderunner";
 
                 // The following attributes have been ignored because they were not relevant at the time of creation
                 question.Prototypetype = "0";
