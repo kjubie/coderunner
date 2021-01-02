@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb" class="blue">
     <ol class="breadcrumb blue">
         <li class="breadcrumb-item">Body</li>
-        <li class="breadcrumb-item">{{ exerciseBody.programmingLanguage.name }}</li>
+        <li class="breadcrumb-item">{{ pLang }}</li>
         <li class="breadcrumb-item">Test Suite</li>
         <li class="breadcrumb-item" aria-current="page"><span class="active">Test</span></li>
     </ol>
@@ -17,24 +17,29 @@
                 <textarea class="form-control-plaintext" id="testcase" name="testcase" rows="5" [(ngModel)]="testCase.testCode"></textarea>
             </div>
 
+            <label for="orderUsed" class="col-2 col-form-label">Order Used</label>
+            <div class="col-10">
+                <input type="number" class="form-control-plaintext" id="orderUsed" name="orderUsed" [(ngModel)]="testCase.orderUsed">
+            </div>
+
             <label for="stdin" class="col-2 col-form-label">Standard Input</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="stdin" name="stdin" rows="5" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].standardInput"></textarea>
+                <textarea class="form-control-plaintext" id="stdin" name="stdin" rows="5" [(ngModel)]="testCase.standardInput"></textarea>
             </div>
 
             <label for="output" class="col-2 col-form-label">Expected Output</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="output" name="output" rows="5" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].expectedOutput"></textarea>
+                <textarea class="form-control-plaintext" id="output" name="output" rows="5" [(ngModel)]="testCase.expectedOutput"></textarea>
             </div>
 
             <label for="additionalData" class="col-2 col-form-label">Extra Data</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="additionalData" name="additionalData" rows="5" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].additionalData"></textarea>
+                <textarea class="form-control-plaintext" id="additionalData" name="additionalData" rows="5" [(ngModel)]="testCase.additionalData"></textarea>
             </div>
 
             <label for="show" class="col-2 col-form-label">Display</label>
             <div class="col-10">
-                <select class="form-control col-2" id="show" name="show"  [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].displayType">
+                <select class="form-control col-2" id="show" name="show"  [(ngModel)]="testCase.displayType">
                     <option value="SHOW" [ngValue]="SHOW">Show</option>
                     <option value="HIDE" [ngValue]="HIDE">Hide</option>
                     <option value="HIDE_IF_FAIL" [ngValue]="HIDE_IF_FAIL">Hide if fail</option>
@@ -44,17 +49,17 @@
 
             <label for="useAsExample" class="col-2 col-form-label">Use as Example</label>
             <div class="col-10">
-                <input type="checkbox" id="useAsExample" name="useAsExample" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].useAsExampleFlag">
+                <input type="checkbox" id="useAsExample" name="useAsExample" [(ngModel)]="testCase.useAsExampleFlag">
             </div>
 
             <label for="hideOnFail" class="col-2 col-form-label">Hide Rest if Fail</label>
             <div class="col-10">
-                <input type="checkbox" id="hideOnFail" name="hideOnFail" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].hideOnFailFlag">
+                <input type="checkbox" id="hideOnFail" name="hideOnFail" [(ngModel)]="testCase.hideOnFailFlag">
             </div>
 
             <label for="points" class="col-2 col-form-label">Points</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-2" id="points" name="points" [(ngModel)]="exerciseBody.testSuit.testCaseList[testCaseIdx].points">
+                <input type="text" class="form-control-plaintext col-2" id="points" name="points" [(ngModel)]="testCase.points">
             </div>
         </div>
     </form>
@@ -64,7 +69,7 @@
     <nav aria-label="breadcrumb" class="blue float-left">
         <ol class="breadcrumb blue">
             <li class="breadcrumb-item">Body</li>
-            <li class="breadcrumb-item">{{ exerciseBody.programmingLanguage.name }}</li>
+            <li class="breadcrumb-item">{{ pLang }}</li>
             <li class="breadcrumb-item">Test Suite</li>
             <li class="breadcrumb-item" aria-current="page"><span class="active">Test</span></li>
         </ol>

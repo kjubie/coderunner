@@ -2,7 +2,7 @@
     <ol class="breadcrumb blue">
         <!-- TODO: Load Language into Breadcrumb -->
         <li class="breadcrumb-item">Body</li>
-        <li class="breadcrumb-item" aria-current="page">{{ exerciseBody.programmingLanguage.name }}</li>
+        <li class="breadcrumb-item" aria-current="page">{{ exerciseBody.fkProgrammingLanguage.name }}</li>
         <li class="breadcrumb-item" aria-current="page"><span class="active">Languages</span></li>
     </ol>
 </nav>
@@ -11,7 +11,6 @@
 <h6 class="description">Language specific Descriptions</h6>
 <div class="contentSeperator">
     <form>
-        <!-- TODO: Load Language into heading -->
         <h4>{{ writtenLang }}</h4>
         <div class="from-group content-group row">
             <label for="genFeedback" class="col-2 col-form-label">General Feedback</label>
@@ -26,7 +25,7 @@
     <nav aria-label="breadcrumb" class="blue float-left">
         <ol class="breadcrumb blue">
             <li class="breadcrumb-item">Body</li>
-            <li class="breadcrumb-item" aria-current="page">{{ exerciseBody.programmingLanguage.name }}</li>
+            <li class="breadcrumb-item" aria-current="page">{{ exerciseBody.fkProgrammingLanguage.name }}</li>
             <li class="breadcrumb-item" aria-current="page"><span class="active">Languages</span></li>
         </ol>
     </nav>

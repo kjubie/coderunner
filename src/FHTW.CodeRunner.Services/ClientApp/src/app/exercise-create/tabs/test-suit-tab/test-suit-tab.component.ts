@@ -1,5 +1,5 @@
-import { Component, Input } from "@angular/core";
-import { ExerciseBody } from "src/app/data-objects/create-exercise/exercise-body";
+import { Component, Input, OnInit } from "@angular/core";
+import { TestSuit } from "src/app/data-objects/create-exercise/test-suit";
 import { QuestionType } from "src/app/data-objects/question-type";
 
 @Component({
@@ -7,8 +7,12 @@ import { QuestionType } from "src/app/data-objects/question-type";
     templateUrl: './test-suit-tab.component.html',
     styleUrls: ['../../exercise-create.component.css']
 })
-export class TestSuitTabComponent {
+export class TestSuitTabComponent implements OnInit {
 
-    @Input() exerciseBody: ExerciseBody;
+    @Input() testSuit: TestSuit;
     @Input() questionTypes: QuestionType[];
+
+    ngOnInit() {
+        this.testSuit.fkQuestionType = new QuestionType();
+    }
 }

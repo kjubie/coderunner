@@ -5,33 +5,19 @@
         <div class="from-group row">
             <label for="questionType" class="col-2 col-form-label">Question Type</label>
             <div class="col-10">
-                <!-- ToDo: read from Database -->
-                <!-- Possibility to add new Language here? -->
-                <!-- <select> 
-                    <option>C#</option>
-                    <option>Java</option>
-                    <option>Python</option>
-                    <option>Kotlin</option>
-                    <option>C++</option> 
-                <select> -->
-                <select class="form-control" name="questionType" [(ngModel)]="exerciseBody.testSuit.questionType">
+                <select class="form-control" name="questionType" [(ngModel)]="testSuit.fkQuestionType">
                     <option *ngFor="let q of questionTypes" [ngValue]="q">{{ q.name }}</option>
                 </select>
             </div>
 
-<!--             <label for="questionType" class="col-2 col-form-label">Question Type</label>
-            <div class="col-10">
-                <input type="text" class="form-control-plaintext" id="questionType" name="questionType" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.testSuit.questionType">
-            </div> -->
-
             <label for="templDebugging" class="col-2 col-form-label">Template Debugging</label>
             <div class="col-10">
-                <input type="checkbox" id="templDebugging" name="templDebugging" [(ngModel)]="exerciseBody.testSuit.templateDebugFlag">
+                <input type="checkbox" id="templDebugging" name="templDebugging" [(ngModel)]="testSuit.templateDebugFlag">
             </div>
 
             <label for="precheck" class="col-2 col-form-label">Precheck</label>
             <div class="col-10">
-                <select class="form-control" id="precheck" name="precheck">
+                <select class="form-control" id="precheck" name="precheck" [(ngModel)]="testSuit.preCheck">
                     <option value="0" [ngValue]="0">Deactivated</option>
                     <option value="1" [ngValue]="1">Empty</option>
                     <option value="2" [ngValue]="2">Examples</option>
@@ -42,7 +28,7 @@
 
             <label for="feedback" class="col-2 col-form-label">Display Feedback</label>
             <div class="col-10">
-                <select class="form-control" id="feedback" name="feedback">
+                <select class="form-control" id="feedback" name="feedback" [(ngModel)]="testSuit.generalFeedbackDisplay">
                     <option value="0" [ngValue]="0">Set by Test</option>
                     <option value="1" [ngValue]="1">Force Show</option>
                     <option value="2" [ngValue]="2">Force Hide</option>
@@ -51,12 +37,12 @@
 
             <label for="globalExtra" class="col-2 col-form-label">Global Extra</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="globalExtra" name="globalExtra" rows="5" [(ngModel)]="exerciseBody.testSuit.globalExtraParam"></textarea>
+                <textarea class="form-control-plaintext" id="globalExtra" name="globalExtra" rows="5" [(ngModel)]="testSuit.globalExtraParam"></textarea>
             </div>
 
             <label for="runtimeData" class="col-2 col-form-label">Runtime Data</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="runtimeData" name="runtimeData" rows="5" [(ngModel)]="exerciseBody.testSuit.runtimeData"></textarea>
+                <textarea class="form-control-plaintext" id="runtimeData" name="runtimeData" rows="5" [(ngModel)]="testSuit.runtimeData"></textarea>
             </div>
 
             <!-- <label for="complexity" class="col-2 col-form-label">Complexity</label>
@@ -66,7 +52,7 @@
 
             <label for="testOnSave" class="col-2 col-form-label">Test on Save</label>
             <div class="col-10">
-                <input type="checkbox" id="testOnSave" name="testOnSave" [(ngModel)]="exerciseBody.testSuit.testOnSaveFlag">
+                <input type="checkbox" id="testOnSave" name="testOnSave" [(ngModel)]="testSuit.testOnSaveFlag">
             </div>
         </div>
     </form>

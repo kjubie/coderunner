@@ -9,7 +9,6 @@ import { TestCase } from "src/app/data-objects/create-exercise/test-case";
 })
 export class TestCaseTabComponent {
 
-    @Input() exerciseBody: ExerciseBody;
     @Input() testCase: TestCase;
-    @Input() testCaseIdx: number;
+    @Input() pLang: string;
 }

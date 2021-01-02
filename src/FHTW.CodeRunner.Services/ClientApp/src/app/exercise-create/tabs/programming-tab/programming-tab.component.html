@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb" class="blue">
     <ol class="breadcrumb blue">
         <li class="breadcrumb-item">Body</li>
-        <li class="breadcrumb-item">{{ exerciseBody.programmingLanguage.name }}</li>
+        <li class="breadcrumb-item">{{ exerciseBody.fkProgrammingLanguage.name }}</li>
         <li class="breadcrumb-item" aria-current="page"><span class="active">General</span></li>
     </ol>
 </nav>
@@ -11,14 +11,6 @@
 <div class="contentSeperator">
     <form>
         <div class="from-group content-group row">
-            <!-- <label for="programmingLang" class="col-2 col-form-label">Language</label>
-            <div class="col-10">
-                ToDo: read from Database
-                Possibility to add new Language here?
-                <select class="form-control" id="programmingLang" name="name" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.programmingLanguage.name">
-                    <option *ngFor="let lang of languages" [ngValue]="lang">{{ lang }}</option>
-                </select>
-            </div> -->
             <label for="fieldLines" class="col-2 col-form-label">Answerfield Lines</label>
             <div class="col-10">
                 <input type="text" class="form-control-plaintext col-1" id="fieldLines" name="fieldLines" placeholder="20" [(ngModel)]="exerciseBody.fieldLines">
@@ -38,11 +30,6 @@
             <div class="col-10">
                 <input type="text" class="form-control-plaintext col-1" id="idNum" name="idNum" [(ngModel)]="exerciseBody.idNum">
             </div>
-
-<!--             <label for="hint" class="col-2 col-form-label">Lift Template Parameters</label>
-            <div class="col-10">
-                <input type="checkbox" class="form-check" id="hint" name="hint" [(ngModel)]="exerciseBody.hint">
-            </div> -->
 
             <label for="answer" class="col-2 col-form-label">Answer</label>
             <div class="col-10">
@@ -104,7 +91,7 @@
     <nav aria-label="breadcrumb" class="blue float-left">
         <ol class="breadcrumb blue">
             <li class="breadcrumb-item">Body</li>
-            <li class="breadcrumb-item">{{ exerciseBody.programmingLanguage.name }}</li>
+            <li class="breadcrumb-item">{{ exerciseBody.fkProgrammingLanguage.name }}</li>
             <li class="breadcrumb-item" aria-current="page"><span class="active">General</span></li>
         </ol>
     </nav>

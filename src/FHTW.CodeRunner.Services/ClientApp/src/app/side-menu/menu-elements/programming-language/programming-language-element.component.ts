@@ -7,12 +7,15 @@ import { ProgrammingLanguage } from "src/app/data-objects/programming-language";
     styleUrls: ['../../side-menu.component.css']
 })
 export class ProgrammingLanguageElementComponent implements OnInit {
+    
     @Input() lang;
     @Input() writtenLang;
     @Input() idx;
     @Input() selectedElement;
+
     @Output() selectElementEvent = new EventEmitter<string>();
     @Output() removePLangEvent = new EventEmitter<ProgrammingLanguage>();
+
     programmingLang;
     testCases = [];
     showProgrammingList = true;

@@ -9,27 +9,19 @@
 <h6 class="description">Written / Spoken Language specific Description</h6>
 <div class="contentSeperator">
     <form>
-        <!-- TODO: Load Language into heading -->
-        <h4>{{ exerciseLanguage.writtenLanguage.name }}</h4>
+        <h4>{{ exerciseLanguage.fkWrittenLanguage.name }}</h4>
         <div class="from-group content-group row">
-            <!-- ToDo: add new language and set details for every language -->
-            <!-- <label for="writtenLang" class="col-2 col-form-label">Written Language</label>
-            <div class="col-10">
-                <select class="form-control" id="writtenLang" name="name" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].writtenLanguage.name">
-                    <option *ngFor="let lang of languages" [ngValue]="lang">{{ lang }}</option>
-                </select>
-            </div> -->
             <label for="fullTitle" class="col-2 col-form-label">Exercise Title</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext" id="fullTitle" name="fullTitle" placeholder="Full Title" [(ngModel)]="exerciseLanguage.exerciseHeader.fullTitle">
+                <input type="text" class="form-control-plaintext" id="fullTitle" name="fullTitle" placeholder="Full Title" [(ngModel)]="exerciseLanguage.fkExerciseHeader.fullTitle">
             </div>
             <label for="shortTitle" class="col-2 col-form-label">Short Title</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext" id="shortTitle" name="shortTitle" placeholder="Short Title" [(ngModel)]="exerciseLanguage.exerciseHeader.shortTitle">
+                <input type="text" class="form-control-plaintext" id="shortTitle" name="shortTitle" placeholder="Short Title" [(ngModel)]="exerciseLanguage.fkExerciseHeader.shortTitle">
             </div>
             <label for="introduction" class="col-2 col-form-label">Exercise Introduction</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="introduction" name="introduction" rows="4" [(ngModel)]="exerciseLanguage.exerciseHeader.introduction"></textarea>
+                <textarea class="form-control-plaintext" id="introduction" name="introduction" rows="4" [(ngModel)]="exerciseLanguage.fkExerciseHeader.introduction"></textarea>
             </div>
         </div>
     </form>

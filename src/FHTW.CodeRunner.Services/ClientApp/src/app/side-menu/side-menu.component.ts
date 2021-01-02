@@ -8,18 +8,25 @@ import { WrittenLanguage } from "../data-objects/written-language";
     styleUrls: ['./side-menu.component.css']
 })
 export class SideMenuComponent {
+
     @Input() availableLangsW: WrittenLanguage[];
     @Input() availableLangsP: ProgrammingLanguage[];
     @Input() selectedElement: string;
+
     @Output() selectElementEvent = new EventEmitter<string>();
     @Output() addWrittenLangEvent = new EventEmitter<WrittenLanguage>();
+    @Output() removeWrittenLangEvent = new EventEmitter<WrittenLanguage>();
     @Output() addProgrammingLangEvent = new EventEmitter<ProgrammingLanguage>();
+    @Output() removeProgrammingLangEvent = new EventEmitter<ProgrammingLanguage>();
+
     writtenLang = [{id: 1, name: "English"}];
     programmingLang: ProgrammingLanguage[] = [];
     testCases = ["Test"];
+
     showHeadList = true;
     showLanguageList = true;
     showBodyList = true;
+    
     isLangAvailable = true;
     isProgrammingLangAvailable = true;
 
@@ -99,6 +106,7 @@ export class SideMenuComponent {
             if (!this.isLangAvailable) {
                 this.isLangAvailable = true;
             }
+            this.removeWrittenLangEvent.emit(lang);
         }
     }
 
@@ -110,6 +118,7 @@ export class SideMenuComponent {
             if (!this.isProgrammingLangAvailable) {
                 this.isProgrammingLangAvailable = true;
             }
+            this.removeProgrammingLangEvent.emit(lang);
         }
     }
 }
