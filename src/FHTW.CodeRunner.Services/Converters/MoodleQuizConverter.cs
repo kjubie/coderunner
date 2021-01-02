@@ -46,7 +46,7 @@ namespace FHTW.CodeRunner.Services.Converters
                 if (header != null)
                 {
                     question.Name.Text = header.FullTitle;
-                    question.Questiontext.Text = header.Introduction + "\n";
+                    question.Questiontext.Text = header.Introduction + " ";
                     question.Templateparams = header.TemplateParam;
                     question.Hoisttemplateparams = header.TemplateParamLiftFlag == true ? "1" : "0";
                     question.Twigall = header.TwigAllFlag == true ? "1" : "0";

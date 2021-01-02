@@ -16,7 +16,7 @@ namespace FHTW.CodeRunner.ExportService
     {
         public string ExportMoodleXml(Quiz quiz)
         {
-            using (var writer = new StringWriter())
+            using (var writer = new Utf8StringWriter())
             {
                 XmlSerializer xmlSerializer = new XmlSerializer(quiz.GetType());
                 xmlSerializer.Serialize(writer, quiz);
@@ -29,5 +29,10 @@ namespace FHTW.CodeRunner.ExportService
         {
             throw new NotImplementedException();
         }
+    }
+
+    public class Utf8StringWriter : StringWriter
+    {
+        public override Encoding Encoding => Encoding.UTF8;
     }
 }
