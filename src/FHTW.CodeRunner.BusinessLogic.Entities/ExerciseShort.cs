@@ -25,5 +25,10 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public List<WrittenLanguage> WrittenLanguages { get; set; }
 
         public List<ProgrammingLanguage> ProgrammingLanguages { get; set; }
+
+        /// <summary>
+        /// Gets or sets a collection of versions, in which the exercise is availbale in.
+        /// </summary>
+        public ICollection<int> VersionList { get; set; }
     }
 }

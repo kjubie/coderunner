@@ -34,5 +34,11 @@ namespace FHTW.CodeRunner.Services.DTOs
 
         [DataMember(Name = "programmingLanguageList")]
         public List<ProgrammingLanguage> ProgrammingLanguages { get; set; }
+
+        /// <summary>
+        /// Gets or sets a collection of versions, in which the exercise is availbale in.
+        /// </summary>
+        [DataMember(Name = "versionList")]
+        public ICollection<int> VersionList { get; set; }
     }
 }

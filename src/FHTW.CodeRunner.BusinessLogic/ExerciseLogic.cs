@@ -90,12 +90,24 @@ namespace FHTW.CodeRunner.BusinessLogic
             }
             else
             {
+                if (exercise.Created == null)
+                {
+                    exercise.Created = DateTime.Now;
+                }
+
+                if (exercise.ExerciseVersion != null)
+                {
+                    exercise.ExerciseVersion.FirstOrDefault().LastModified = DateTime.Now;
+                    exercise.ExerciseVersion.FirstOrDefault().ValidState = BlEntities.ValidState.NotChecked;
+                }
+
                 var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
                 this.exerciseRepository.CreateAndUpdate(dalExercise);
                 this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
             }
         }
 
+        /// <inheritdoc/>
         public void ValidateExercise(BlEntities.Exercise exercise)
         {
             if (exercise == null)
@@ -110,6 +122,17 @@ namespace FHTW.CodeRunner.BusinessLogic
 
                 if (validationResult.IsValid)
                 {
+                    if (exercise.Created == null)
+                    {
+                        exercise.Created = DateTime.Now;
+                    }
+
+                    if (exercise.ExerciseVersion != null)
+                    {
+                        exercise.ExerciseVersion.FirstOrDefault().LastModified = DateTime.Now;
+                        exercise.ExerciseVersion.FirstOrDefault().ValidState = BlEntities.ValidState.Valid;
+                    }
+
                     var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
                     this.exerciseRepository.CreateAndUpdate(dalExercise);
                     this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
