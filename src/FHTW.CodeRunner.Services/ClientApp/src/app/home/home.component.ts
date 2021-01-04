@@ -69,11 +69,11 @@ export class HomeComponent implements OnInit {
     // open Modal for exercise
     this.modalService.open(modalContent, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       console.log('Closed with ' + result);
-      this.resetForm();
     }, (reason) => {
       console.log('Dismissed ' + this.getDismissReason(reason));
-      this.resetForm();
     });
+  
+    this.resetForm();
   }
 
   private getDismissReason(reason: any): string {
@@ -89,14 +89,13 @@ export class HomeComponent implements OnInit {
   exportExercise() {
     // validate exercise
     this.versionInvalid = (this.exerciseForExport.version == undefined);
-    this.wLangInvalid = (this.exerciseForExport.writtenLanguage == undefined || this.exerciseForExport.writtenLanguage == "");
-    this.pLangInvalid = (this.exerciseForExport.programmingLanguage == undefined || this.exerciseForExport.programmingLanguage == "");
+    this.wLangInvalid = (this.exerciseForExport.writtenLanguage == undefined);
+    this.pLangInvalid = (this.exerciseForExport.programmingLanguage == undefined);
 
     if (!this.versionInvalid && !this.wLangInvalid && !this.pLangInvalid) {
       console.log('exercise is ready for export');
       console.log(this.exerciseForExport);
       // this.exportService.exportExercise(this.exerciseForExport).subscribe(this.exportExerciseObserver);
-      this.resetForm();
       this.modalService.dismissAll('Exercise exported');
     }
     else {

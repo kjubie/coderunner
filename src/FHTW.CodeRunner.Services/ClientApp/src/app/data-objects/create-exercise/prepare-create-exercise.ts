@@ -1,5 +1,6 @@
 import { ProgrammingLanguage } from "../programming-language";
 import { QuestionType } from "../question-type";
+import { Tag } from "../tag";
 import { WrittenLanguage } from "../written-language";
 
 export class PrepareCreateExercise {
@@ -7,5 +8,6 @@ export class PrepareCreateExercise {
     programmingLanguageList?: ProgrammingLanguage[];
     writtenLanguageList?: WrittenLanguage[];
     questionTypeList?: QuestionType[];
+    tagList?: Tag[];
     
 }

@@ -34,9 +34,21 @@
 
             <label for="tagSelect" class="col-2 col-form-label">Tags</label>
             <div class="col-10">
-                <select class="form-control" id="tagSelect" name="tagSelect" [(ngModel)]="exercise.exerciseTag[0].name">
-                    <option [ngValue]="placeholder">placeholder</option>
-                </select>
+                <span *ngFor="let tag of exercise.exerciseTag; let idx = index" class="badge badge-pill tag">
+                    <span class="tagFunctions" (click)="removeTag(idx)">x</span> {{ tag.name }}
+                </span>
+            </div>
+            <div class="col-2">
+                <!-- Left blank on purpose... -->
+            </div>
+            <div class="col-2 tagFunctions">
+                <a (click)="showExistingTags(existingTagModal)"><img src="../../../../assets/img/plus.png" > Add from existing Tags</a>
+            </div>
+            <div class="col-2 tagFunctions">
+                <a (click)="createNewTag(createTagModal)"><img src="../../../../assets/img/plus.png" > Create new Tag</a>
+            </div>
+            <div class="col-6">
+                <!-- Left blank on purpose... -->
             </div>
         </div>
     </form>
@@ -50,3 +62,53 @@
         </ol>
     </nav>
 </div>
+
+<!-- modal for creating new tags -->
+<ng-template #createTagModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Create a new Tag</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="newTagForm" (ngSubmit)="addNewTag(newTagForm.value)">
+        <div class="form-group">
+          <label for="tagName"><strong>Name:</strong></label>
+          <input type="text" class="form-control-plaintext" id="tagName" name="tagName" placeholder="e.g. linked list" formControlName="tagName">
+        </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary btn-outline-dark">Add</button>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close')">Close</button>
+    </div>
+  </ng-template>
+
+  <!-- modal for creating new tags -->
+<ng-template #existingTagModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add existing Tag</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form class="modalForm" [formGroup]="existingTagForm" (ngSubmit)="addExistingTag(existingTagForm.value)">
+        <div class="form-group">
+          <label for="tagName"><strong>Select Tag:</strong></label>
+          <select class="form-control" name="tagName" id="tagName" formControlName="tag">
+              <option *ngFor="let tag of existingTags" [ngValue]="tag">{{ tag.name }}</option>
+          </select>
+        </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary btn-outline-dark">Add</button>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close')">Close</button>
+    </div>
+  </ng-template>

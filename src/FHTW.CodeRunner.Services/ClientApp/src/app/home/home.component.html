@@ -60,9 +60,7 @@
       <div class="form-group">
         <label for="version"><strong>Exercise Version:</strong></label>
         <select class="form-control" id="version" name="version" [(ngModel)]="exerciseForExport.version">
-          <!-- ToDo: remove once versionList is sent with exercises -->
-          <option *ngIf="selectedExercise.versionList == undefined" [ngValue]="0">0</option>
-          <!-- <option *ngFor="let version of selectedExercise.versionList" [ngValue]="version">{{ version }}</option> -->
+          <option *ngFor="let version of selectedExercise.versionList" [ngValue]="version">{{ version }}</option>
         </select>
         <div *ngIf="versionInvalid" class="alert alert-danger">
           Version is required.

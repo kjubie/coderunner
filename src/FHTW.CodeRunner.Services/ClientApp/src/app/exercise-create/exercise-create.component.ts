@@ -22,10 +22,11 @@ export class ExerciseCreateComponent implements OnInit {
 
   selectedElement = 'General';
 
-  dataToCreateExercise: PrepareCreateExercise;
+  dataToCreateExercise: PrepareCreateExercise; // add TagList for adding Tags
   writtenLangs: WrittenLanguage[];
   programmingLangs: ProgrammingLanguage[];
   questionTypes: QuestionType[];
+  tagList: Tag[];
 
   writtenLangIdx: number;
   programmingLangIdx: number;
@@ -52,6 +53,7 @@ export class ExerciseCreateComponent implements OnInit {
       this.writtenLangs = this.dataToCreateExercise.writtenLanguageList;
       this.programmingLangs = this.dataToCreateExercise.programmingLanguageList;
       this.questionTypes = this.dataToCreateExercise.questionTypeList;
+      this.tagList = this.dataToCreateExercise.tagList;
 
       for (let i=0; i<this.writtenLangs.length; i++) {
         // remove default written lang:
@@ -72,12 +74,10 @@ export class ExerciseCreateComponent implements OnInit {
     this.exercise.fkUser = new Author();
     this.exercise.fkUser.name = localStorage.getItem('name');
 
-    this.exercise.exerciseTag[0] = new Tag();
-
     this.exercise.exerciseVersion[0] = new ExerciseVersion();
     this.exercise.exerciseVersion[0].fkUser = this.exercise.fkUser;
     this.exercise.exerciseVersion[0].validState = 0;
-    this.exercise.exerciseVersion[0].lastModified = this.exercise.created;
+    this.exercise.exerciseVersion[0].lastModified = this.exercise.created;  // ToDo: set created & lastModified on Save
     this.exercise.exerciseVersion[0].creatorDifficulty = 0;
     this.exercise.exerciseVersion[0].creatorRating = 0;
     this.exercise.exerciseVersion[0].versionNumber = 0;
