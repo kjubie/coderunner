@@ -48,7 +48,9 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 
                 User user = TestDataBuilder<User>.Single();
 
-                Assert.IsTrue(rep.Authenticate(user));
+                var r = rep.Authenticate(user);
+
+                Assert.IsNotNull(r);
             }
         }
 

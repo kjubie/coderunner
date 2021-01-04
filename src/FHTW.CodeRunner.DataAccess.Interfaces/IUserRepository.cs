@@ -20,7 +20,7 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// Note: Passwords are not yet supported.
         /// </summary>
         /// <param name="user">The user conteining both the name and password.</param>
-        /// <returns>True if the user with the given name password exists, else False.</returns>
-        bool Authenticate(User user);
+        /// <returns>The user id if the user with the given name password exists, else null.</returns>
+        int? Authenticate(User user);
     }
 }

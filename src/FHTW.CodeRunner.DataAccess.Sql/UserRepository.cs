@@ -27,12 +27,14 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         }
 
         /// <inheritdoc/>
-        public bool Authenticate(User user)
+        public int? Authenticate(User user)
         {
-            return this.Context.User
+            var u = this.Context.User
                 .Where(u => u.Name == user.Name)
                 .Where(u => u.Password == user.Password)
-                .Count() == 1;
+                .SingleOrDefault();
+
+            return u == null ? null : u.Id;
         }
     }
 }
