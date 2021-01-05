@@ -63,7 +63,7 @@ namespace FHTW.CodeRunner.Services.Helpers
                 return AuthenticateResult.Fail("Missing Authorization Header");
             }
 
-            bool result = false;
+            int? result = null;
             try
             {
                 var authHeader = AuthenticationHeaderValue.Parse(this.Request.Headers["Authorization"]);
@@ -83,7 +83,7 @@ namespace FHTW.CodeRunner.Services.Helpers
                 return AuthenticateResult.Fail("Invalid Authorization Header");
             }
 
-            if (!result)
+            if (!result.HasValue)
             {
                 return AuthenticateResult.Fail("Invalid Username or Password");
             }

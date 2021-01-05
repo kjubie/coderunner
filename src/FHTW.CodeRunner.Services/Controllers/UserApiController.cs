@@ -62,11 +62,14 @@ namespace FHTW.CodeRunner.Services.Controllers
 
             var blUser = this.mapper.Map<BlEntities.User>(body);
 
-            bool result = this.userLogic.AuthenticateUser(blUser);
+            int? result = this.userLogic.AuthenticateUser(blUser);
 
-            if (result)
+            if (result.HasValue)
             {
-                return this.Ok();
+                return this.Ok(new SvcEntities.AuthenticateOk
+                {
+                    Id = result.Value,
+                });
             }
             else
             {

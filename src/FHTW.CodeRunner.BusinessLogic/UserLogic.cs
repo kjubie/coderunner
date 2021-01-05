@@ -34,10 +34,10 @@ namespace FHTW.CodeRunner.BusinessLogic
         }
 
         /// <inheritdoc/>
-        public bool AuthenticateUser(BlEntities.User user)
+        public int? AuthenticateUser(BlEntities.User user)
         {
             var dalUser = this.mapper.Map<DalEntities.User>(user);
-            bool result = this.userRepository.Authenticate(dalUser);
+            int? result = this.userRepository.Authenticate(dalUser);
 
             return result;
         }

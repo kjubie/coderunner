@@ -11,6 +11,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
 {
     public interface IUserLogic
     {
-        bool AuthenticateUser(User user);
+        int? AuthenticateUser(User user);
     }
 }
