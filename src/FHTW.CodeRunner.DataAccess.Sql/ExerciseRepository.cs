@@ -48,16 +48,6 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 this.context.Exercise.Add(exercise);
                 this.context.SaveChanges();
 
-                ExerciseVersion exerciseVersion = new ExerciseVersion();
-
-                exerciseVersion.LastModified = exercise.Created;
-                exerciseVersion.FkUserId = exercise.FkUserId;
-                exerciseVersion.FkExerciseId = exercise.Id;
-                exerciseVersion.VersionNumber = 0; // TODO maybe not start with zero ?
-                exerciseVersion.ValidState = ValidState.NotChecked;
-
-                this.context.ExerciseVersion.Add(exerciseVersion);
-                this.context.SaveChanges();
                 transaction.Commit();
             }
             catch (Exception e)
@@ -97,15 +87,19 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             {
                 using var transaction = this.context.Database.BeginTransaction();
 
-                // set known ids.
-                exercise.ExerciseTag = exercise.ExerciseTag.Select(e =>
+                if (exercise.ExerciseTag != null)
                 {
-                    e.FkExerciseId = exercise.Id;
-                    return e;
-                }).ToList();
+                    // set known ids.
+                    exercise.ExerciseTag = exercise.ExerciseTag.Select(e =>
+                    {
+                        e.FkExerciseId = exercise.Id;
+                        return e;
+                    }).ToList();
+                }
 
                 exercise.ExerciseVersion = exercise.ExerciseVersion.Select(e =>
                 {
+                    e.Id = exercise.Id;
                     e.FkExerciseId = exercise.Id;
                     e.FkUserId = exercise.FkUserId;
                     e.ExerciseLanguage = e.ExerciseLanguage.Select(el =>
@@ -163,13 +157,21 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         }
 
         /// <inheritdoc/>
-        public Exercise GetById(int id)
+        public Exercise GetById(int id, int version = -1)
         {
+            using var transaction = this.context.Database.BeginTransaction();
+
+            if (version < 0)
+            {
+                version = this.GetLatestVersionNumber(id);
+            }
+
             return this.context.Exercise
+                .Where(e => e.Id == id)
                 .Include(e => e.FkUser)
                 .Include(e => e.ExerciseTag)
                     .ThenInclude(et => et.FkTag)
-                .Include(e => e.ExerciseVersion)
+                .Include(e => e.ExerciseVersion.Where(ev => ev.VersionNumber == version))
                     .ThenInclude(v => v.FkUser)
                 .Include(e => e.ExerciseVersion)
                     .ThenInclude(v => v.ExerciseLanguage)
@@ -187,7 +189,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                         .ThenInclude(el => el.ExerciseBody)
                             .ThenInclude(eb => eb.FkProgrammingLanguage)
                 .AsEnumerable()
-                .FirstOrDefault(e => e.Id == id);
+                .FirstOrDefault();
         }
 
         /// <inheritdoc/>
@@ -247,7 +249,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         {
             using var transaction = this.context.Database.BeginTransaction();
 
-            if (version == -1)
+            if (version < 0)
             {
                 version = this.GetLatestVersionNumber(id);
             }
@@ -322,12 +324,6 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             }
 
             return instance;
-        }
-
-        /// <inheritdoc/>
-        public bool InstanceExists(int id, string programming_language, string written_language, int version = -1)
-        {
-            throw new NotImplementedException();
         }
 
         /// <inheritdoc/>

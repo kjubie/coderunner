@@ -8,14 +8,20 @@ using FHTW.CodeRunner.DataAccess.Entities;
 
 namespace FHTW.CodeRunner.DataAccess.Interfaces
 {
+    /// <summary>
+    /// The interface for the ExerciseRepository.
+    /// It provides methods to create, update and query exercises.
+    /// </summary>
     public interface IExerciseRepository
     {
         /// <summary>
-        /// Retrieves the entity from the data provider with the corresponding id.
+        /// Retrieves the entity from the data provider with the corresponding id and version.
+        /// If the version is less than 0 the latest version is queried.
         /// </summary>
-        /// <param name="id">The id of the entity.</param>
+        /// <param name="id">The id of the exercise.</param>
+        /// <param name="version">The version of the exercise (default -1).</param>
         /// <returns>The instance of the entity.</returns>
-        Exercise GetById(int id);
+        Exercise GetById(int id, int version = -1);
 
         /// <summary>
         /// Creates an empty exercise.
@@ -54,7 +60,7 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// <summary>
         /// Gets the latest version number of a given exercise.
         /// </summary>
-        /// <param name="id">The id of the exercise</param>
+        /// <param name="id">The id of the exercise.</param>
         /// <returns>The lateset version nummber.</returns>
         public int GetLatestVersionNumber(int id);
 
@@ -64,19 +70,9 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// <param name="id">The id of the exercise.</param>
         /// <param name="programming_language">The programming language as a string.</param>
         /// <param name="written_language">The written language as a string.</param>
-        /// <param name="version">The version of the exercise. If version is -1 or not set, the newest version is used.</param>
+        /// <param name="version">The version of the exercise. If version is less than 0, the newest version is used.</param>
         /// <returns>The exercise instance.</returns>
         public ExerciseInstance GetExerciseInstance(int id, string programming_language, string written_language, int version = -1);
-
-        /// <summary>
-        /// Checks if an exercise instance with a given version, programming language and writtenlanguage exists.
-        /// </summary>
-        /// <param name="id">The id of the exercise.</param>
-        /// <param name="programming_language">The programming language as a string.</param>
-        /// <param name="written_language">The written language as a string.</param>
-        /// <param name="version">The version of the exercise. If version is -1 or not set, the newest version is used.</param>
-        /// <returns>True if this exercise instance exists.</returns>
-        public bool InstanceExists(int id, string programming_language, string written_language, int version = -1);
 
         /// <summary>
         /// Checks if exerice exists.

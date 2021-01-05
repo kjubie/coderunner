@@ -184,13 +184,11 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                 var json = @"
                 {
 	                ""id"":0,
-	                ""fkUser"":{
-		                ""name"":""sabrina""
-	                },
+	                ""fkUserId"":1,
 	                ""exerciseTag"":[{}],
 	                ""exerciseVersion"":[{
 		                ""id"":0,
-		                ""fkUser"":{""name"":""sabrina""},
+		                ""fkUserId"":1,
 		                ""exerciseLanguage"":[{
 			                ""id"":0,
 			                ""fkExerciseHeader"":{
@@ -219,10 +217,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 						                ""hideOnFailFlag"":true,
 						                ""points"":100
 					                }],
-					                ""fkQuestionType"":{
-						                ""id"":1,
-						                ""name"":""c++_question_type""
-					                },
+					                ""fkQuestionTypeId"":1,
 					                ""templateDebugFlag"":true,
 					                ""preCheck"":0,
 					                ""generalFeedbackDisplay"":0,
@@ -230,7 +225,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 					                ""runtimeData"":""Runtime Data"",
 					                ""testOnSaveFlag"":true
 				                },
-				                ""fkProgrammingLanguage"":{""id"":1,""name"":""C++""},
+				                ""fkProgrammingLanguageId"":1,
 				                ""fieldLines"":20,
 				                ""subtractSystem"":""10"",
 				                ""optainablePoints"":100,
@@ -248,7 +243,8 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 		                ""validState"":0,
 		                ""lastModified"":""2020-12-31T11:43:44.929Z"",
 		                ""creatorDifficulty"":0,
-		                ""creatorRating"":0,""versionNumber"":0
+		                ""creatorRating"":0,
+                        ""versionNumber"":0
 	                }],
 	                ""created"":""2020-12-31T11:43:44.929Z"",
 	                ""title"":""Title""
@@ -262,7 +258,6 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                 Exercise returnedExercise = rep.CreateAndUpdate(exercise);
 
                 Assert.IsNotNull(returnedExercise);
-                Assert.IsTrue(returnedExercise.ExerciseTag.Count == 2);
             }
         }
 
@@ -299,6 +294,20 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             }*/
 
             Assert.IsTrue(true);
+        }
+
+        [Test]
+        public void ShouldGetExerciseById()
+        {
+            this.SetupDatabase(DbTestController.State.SEEDEDJSON);
+            using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
+            {
+                IExerciseRepository rep = new ExerciseRepository(context);
+
+                var e = rep.GetById(1);
+
+                Assert.IsNotNull(e);
+            }
         }
 
         private void SetupDatabase(DbTestController.State state) => this.testDb = new CodeRunnerTestDb(state);
