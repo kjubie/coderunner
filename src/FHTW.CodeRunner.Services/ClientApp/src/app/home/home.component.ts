@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit {
     if (!this.versionInvalid && !this.wLangInvalid && !this.pLangInvalid) {
       console.log('exercise is ready for export');
       console.log(this.exerciseForExport);
-      // this.exportService.exportExercise(this.exerciseForExport).subscribe(this.exportExerciseObserver);
+      this.exportService.exportExercise(this.exerciseForExport).subscribe(this.exportExerciseObserver);
       this.modalService.dismissAll('Exercise exported');
     }
     else {

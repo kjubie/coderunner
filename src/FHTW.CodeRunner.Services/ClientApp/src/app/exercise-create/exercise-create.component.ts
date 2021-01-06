@@ -60,7 +60,7 @@ export class ExerciseCreateComponent implements OnInit {
   ngOnInit() {
     this.createExerciseService.prepareExercise().subscribe(this.prepareExerciseObserver);
 
-    this.exercise = this.helper.createNewExercise(this.writtenLangs);
+    this.exercise = this.helper.createNewExercise();
   }
 
   setSelectedElement(element: string) {

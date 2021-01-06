@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Exercise } from "src/app/data-objects/create-exercise/exercise";
+import { ExerciseTag } from "src/app/data-objects/create-exercise/exercise-tags";
 import { Tag } from "src/app/data-objects/tag";
 
 @Component({
@@ -55,7 +56,10 @@ export class GeneralTabComponent implements OnInit {
         tag.id = 0;
         tag.name = formData.tagName;
 
-        this.exercise.exerciseTag.push(tag);
+        let exerciseTag = new ExerciseTag();
+        exerciseTag.fkTag = tag;
+
+        this.exercise.exerciseTag.push(exerciseTag);
         this.modalService.dismissAll('New Tag added');
     }
 
@@ -73,7 +77,10 @@ export class GeneralTabComponent implements OnInit {
     }
 
     addExistingTag(formData) {
-        this.exercise.exerciseTag.push(formData.tag);
+        let exerciseTag = new ExerciseTag();
+        exerciseTag.fkTag = formData.tag;
+
+        this.exercise.exerciseTag.push(exerciseTag);
         this.modalService.dismissAll('Existing Tag added');
     }
 

@@ -1,5 +1,6 @@
 import { Author } from "../author";
 import { Tag } from "../tag";
+import { ExerciseTag } from "./exercise-tags";
 import { ExerciseVersion } from "./exercise-version";
 
 export class Exercise {
@@ -14,6 +15,6 @@ export class Exercise {
     title: string;
     created: Date;
     fkUser: Author;
-    exerciseTag: Tag[];
+    exerciseTag: ExerciseTag[];
     exerciseVersion: ExerciseVersion[];
 }

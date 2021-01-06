@@ -1,12 +1,12 @@
 import { ProgrammingLanguage } from "../programming-language";
-import { TestSuit } from "./test-suit";
+import { TestSuite } from "./test-suite";
 
 export class ExerciseBody {
 
     constructor() {
         this.id = 0;
         this.fkProgrammingLanguage = new ProgrammingLanguage();
-        this.fkTestSuit = new TestSuit();
+        this.fkTestSuite = new TestSuite();
     }
 
     id: number;
@@ -15,7 +15,7 @@ export class ExerciseBody {
     fieldLines: number;
     gradingFlag: boolean;
     subtractSystem: string;
-    optainablePoints: number;
+    obtainablePoints: number;
     idNum: number;
     solution: string;
     prefill: string;
@@ -32,5 +32,5 @@ export class ExerciseBody {
     maxRequiredFiles: number;
     example: string;
     fkProgrammingLanguage: ProgrammingLanguage;
-    fkTestSuit: TestSuit;
+    fkTestSuite: TestSuite;
 }

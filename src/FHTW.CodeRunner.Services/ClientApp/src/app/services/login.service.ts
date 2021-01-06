@@ -14,15 +14,15 @@ export class LoginService {
 
   login(name: string, pwd: string) {
     let password = sha512(pwd);
-    // { auth_token: string, status: string, message: string }
     return this.httpClient
         .post<any>(this.loginUrl, { name, password }, {observe: 'response' as 'body'})
         .pipe(tap(res => {
             console.log("login response: " + res.status);
-            if (res.status == 200 && res.statusText == "OK") {
+            if (res.status == 200 && res.ok) {
               localStorage.setItem('auth_token', res.auth_token);
               localStorage.setItem('name', name);
               localStorage.setItem('pwd', password);
+              localStorage.setItem('user_id', res.body.id);
             } else {
               console.log("login failed");
             }

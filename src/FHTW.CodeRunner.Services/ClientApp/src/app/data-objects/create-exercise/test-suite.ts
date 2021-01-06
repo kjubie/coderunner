@@ -1,10 +1,11 @@
 import { QuestionType } from "../question-type";
 import { TestCase } from "./test-case";
 
-export class TestSuit {
+export class TestSuite {
     constructor() {
         this.id = 0;
-        this.testCase = [];
+        this.testCase = [new TestCase()];
+        this.fkQuestionType = new QuestionType();
     }
 
     id: number;
