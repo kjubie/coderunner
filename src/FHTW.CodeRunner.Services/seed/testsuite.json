@@ -1,6 +1,5 @@
 [
     {   // Exercise 1, C++, V1
-        "Id": 1,
         "FkQuestionTypeId": 1,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
@@ -10,7 +9,6 @@
         "GeneralFeedbackDisplay": 1
     },
     {   // Exercise 1, C#, V1
-        "Id": 2,
         "FkQuestionTypeId": 2,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
@@ -20,7 +18,6 @@
         "GeneralFeedbackDisplay": 1
     },
     {   // Exercise 1, C++, V2
-        "Id": 3,
         "FkQuestionTypeId": 1,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
@@ -30,7 +27,6 @@
         "GeneralFeedbackDisplay": 1
     },
     {   // Exercise 1, C#, V2
-        "Id": 4,
         "FkQuestionTypeId": 2,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
@@ -40,7 +36,6 @@
         "GeneralFeedbackDisplay": 1
     },
     {   // Exercise 1, C++, V3
-        "Id": 5,
         "FkQuestionTypeId": 1,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
@@ -50,7 +45,6 @@
         "GeneralFeedbackDisplay": 1
     },
     {   // Exercise 1, C#, V3
-        "Id": 6,
         "FkQuestionTypeId": 2,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
@@ -60,7 +54,6 @@
         "GeneralFeedbackDisplay": 1
     },
     {   // Exercise 2, Python, V1
-        "Id": 7,
         "FkQuestionTypeId": 3,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
@@ -70,7 +63,6 @@
         "GeneralFeedbackDisplay": 1
     },
     {   // Exercise 2, Java, V1
-        "Id": 8,
         "FkQuestionTypeId": 4,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,
@@ -80,7 +72,6 @@
         "GeneralFeedbackDisplay": 1
     },
     {   // Exercise 3, C, V1
-        "Id": 9,
         "FkQuestionTypeId": 5,
         "TemplateDebugFlag": true,
         "TestOnSaveFlag": false,

@@ -171,16 +171,16 @@ namespace FHTW.CodeRunner.Services
                     context.Database.Migrate();
                 }
 
-                context.EnsureSeeded();
+                //context.EnsureSeeded();
 
-                // TEST
+                /*// TEST
                 IExerciseRepository rep = new ExerciseRepository(context);
                 ICollectionRepository repC = new CollectionRepository(context);
 
                 var list = rep.GetMinimalList();
                 var instance = rep.GetExerciseInstance(1, "C++", "English", 3);
                 var ce = repC.GetExercisesInstances(1);
-                var ci = repC.GetCollectionInstance(1);
+                var ci = repC.GetCollectionInstance(1);*/
             }
 
             if (env.IsDevelopment())
