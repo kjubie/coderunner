@@ -33,14 +33,6 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 throw new DalException($"Attempting to create exercise with Id = {exercise.Id}. Id must be 0");
             }
 
-            // reset undesired properties
-            exercise.Rating = null;
-            exercise.FkUser = null;
-            exercise.Difficulty = null;
-            exercise.ExerciseTag = null;
-            exercise.CollectionExercise = null;
-            exercise.Comment = null;
-
             try
             {
                 using var transaction = this.context.Database.BeginTransaction();
@@ -85,31 +77,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             try
             {
-                using var transaction = this.context.Database.BeginTransaction();
-
-                if (exercise.ExerciseTag != null)
-                {
-                    // set known ids.
-                    exercise.ExerciseTag = exercise.ExerciseTag.Select(e =>
-                    {
-                        e.FkExerciseId = exercise.Id;
-                        return e;
-                    }).ToList();
-                }
-
-                exercise.ExerciseVersion = exercise.ExerciseVersion.Select(e =>
-                {
-                    e.Id = exercise.Id;
-                    e.FkExerciseId = exercise.Id;
-                    e.FkUserId = exercise.FkUserId;
-                    e.ExerciseLanguage = e.ExerciseLanguage.Select(el =>
-                    {
-                        el.FkExerciseVersionId = e.Id;
-                        return el;
-                    }).ToList();
-
-                    return e;
-                }).ToList();
+                using var transaction = this.context.Database.BeginTransaction(); 
 
                 // add everything new
                 this.context.ChangeTracker.TrackGraph(exercise, e =>
@@ -123,6 +91,8 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                         e.Entry.State = EntityState.Added;
                     }
                 });
+
+                this.context.SaveChanges();
 
                 // update existing
                 this.context.ChangeTracker.TrackGraph(exercise, e =>
@@ -150,7 +120,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         {
             if (exercise.Id == 0)
             {
-                var inserted_exercise = this.Create(exercise);
+                this.Create(exercise);
             }
 
             return this.Update(exercise);

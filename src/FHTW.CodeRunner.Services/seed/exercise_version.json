@@ -1,6 +1,5 @@
 [
     {   // Exercise 1, V1
-        "Id": 1,
         "VersionNumber": 1,
         "CreatorRating": 3,
         "CreatorDifficulty": 4,
@@ -10,7 +9,6 @@
         "FkExerciseId": 1
     },
     {   // Exercise 1, V2
-        "Id": 2,
         "VersionNumber": 2,
         "CreatorRating": 4,
         "CreatorDifficulty": 5,
@@ -20,7 +18,6 @@
         "FkExerciseId": 1
     },
     {   // Exercise 1, V3
-        "Id": 3,
         "VersionNumber": 3,
         "CreatorRating": 5,
         "CreatorDifficulty": 5,
@@ -30,7 +27,6 @@
         "FkExerciseId": 1
     },
     {   // Exercise 2, V1
-        "Id": 4,
         "VersionNumber": 1,
         "CreatorRating": 2,
         "CreatorDifficulty": 3,
@@ -40,7 +36,6 @@
         "FkExerciseId": 2
     },
     {   // Exercise 3, V1
-        "Id": 5,
         "VersionNumber": 1,
         "CreatorRating": 5,
         "CreatorDifficulty": 5,

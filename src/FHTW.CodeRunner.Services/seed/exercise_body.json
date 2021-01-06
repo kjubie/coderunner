@@ -1,6 +1,5 @@
 [
     {   // Exercise 1, English, C++, V1
-        "Id": 1,
         "FkProgrammingLanguageId": 1,
         "Description": "Description_c++_V1",
         "Hint": "Hint_c++_V1",
@@ -21,7 +20,6 @@
         "FilesSize": 2000
     },
     {   // Exercise 1, German, C++, V1
-        "Id": 2,
         "FkProgrammingLanguageId": 1,
         "Description": "Beschreibung_c++_V1",
         "Hint": "Hinweis_c++_V1",
@@ -42,7 +40,6 @@
         "FilesSize": 2000
     },
     {   // Exercise 1, English, C#, V1
-        "Id": 3,
         "FkProgrammingLanguageId": 1,
         "Description": "Description_c#_V1",
         "Hint": "Hint_c#_V1",
@@ -63,7 +60,6 @@
         "FilesSize": 4000
     },
     {   // Exercise 1, German, C#, V1
-        "Id": 4,
         "FkProgrammingLanguageId": 2,
         "Description": "Beschreibung_c#_V1",
         "Hint": "Hinweis_c#_V1",
@@ -84,7 +80,6 @@
         "FilesSize": 4000
     },
     {   // Exercise 1, English, C++, V2
-        "Id": 5,
         "FkProgrammingLanguageId": 1,
         "Description": "Description_c++_V2",
         "Hint": "Hint_c++_V2",
@@ -105,7 +100,6 @@
         "FilesSize": 2000
     },
     {   // Exercise 1, German, C++, V2
-        "Id": 6,
         "FkProgrammingLanguageId": 1,
         "Description": "Beschreibung_c++_V2",
         "Hint": "Hinweis_c++_V2",
@@ -126,7 +120,6 @@
         "FilesSize": 2000
     },
     {   // Exercise 1, English, C#, V2
-        "Id": 7,
         "FkProgrammingLanguageId": 1,
         "Description": "Description_c#_V2",
         "Hint": "Hint_c#_V2",
@@ -147,7 +140,6 @@
         "FilesSize": 4000
     },
     {   // Exercise 1, German, C#, V2
-        "Id": 8,
         "FkProgrammingLanguageId": 2,
         "Description": "Beschreibung_c#_V2",
         "Hint": "Hinweis_c#_V2",
@@ -168,7 +160,6 @@
         "FilesSize": 4000
     },
     {   // Exercise 1, English, C++, V3
-        "Id": 9,
         "FkProgrammingLanguageId": 1,
         "Description": "Description_c++_V3",
         "Hint": "Hint_c++_V3",
@@ -189,7 +180,6 @@
         "FilesSize": 2000
     },
     {   // Exercise 1, German, C++, V3
-        "Id": 10,
         "FkProgrammingLanguageId": 1,
         "Description": "Beschreibung_c++_V3",
         "Hint": "Hinweis_c++_V3",
@@ -210,7 +200,6 @@
         "FilesSize": 2000
     },
     {   // Exercise 1, English, C#, V3
-        "Id": 11,
         "FkProgrammingLanguageId": 1,
         "Description": "Description_c#_V3",
         "Hint": "Hint_c#_V3",
@@ -231,7 +220,6 @@
         "FilesSize": 4000
     },
     {   // Exercise 1, German, C#, V3
-        "Id": 12,
         "FkProgrammingLanguageId": 2,
         "Description": "Beschreibung_c#_V3",
         "Hint": "Hinweis_c#_V3",
@@ -252,7 +240,6 @@
         "FilesSize": 4000
     },
     {   // Exercise 2, English, Python, V1
-        "Id": 13,
         "FkProgrammingLanguageId": 6,
         "Description": "Description_py_V1",
         "Hint": "Hint_py_V1",
@@ -273,7 +260,6 @@
         "FilesSize": 2500
     },
     {   // Exercise 2, German, Python, V1
-        "Id": 14,
         "FkProgrammingLanguageId": 6,
         "Description": "Beschreibung_py_V1",
         "Hint": "Hinweis_py_V1",
@@ -294,7 +280,6 @@
         "FilesSize": 2500
     },
     {   // Exercise 2, English, Java, V1
-        "Id": 15,
         "FkProgrammingLanguageId": 3,
         "Description": "Description_java_V1",
         "Hint": "Hint_java_V1",
@@ -315,7 +300,6 @@
         "FilesSize": 5000
     },
     {   // Exercise 2, German, Java, V1
-        "Id": 16,
         "FkProgrammingLanguageId": 3,
         "Description": "Beschreibung_java_V1",
         "Hint": "Hinweis_java_V1",
@@ -336,7 +320,6 @@
         "FilesSize": 5000
     },
     {   // Exercise 3, German, C, V1
-        "Id": 17,
         "FkProgrammingLanguageId": 5,
         "Description": "Beschreibung_c_V1",
         "Hint": "Hinweis_c_V1",
