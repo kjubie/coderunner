@@ -1,5 +1,4 @@
 import { Component, Input } from "@angular/core";
-import { ExerciseBody } from "src/app/data-objects/create-exercise/exercise-body";
 import { TestCase } from "src/app/data-objects/create-exercise/test-case";
 
 @Component({

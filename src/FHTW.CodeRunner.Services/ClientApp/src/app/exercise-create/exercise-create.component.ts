@@ -7,6 +7,7 @@ import { ProgrammingLanguage } from '../data-objects/programming-language';
 import { PrepareCreateExercise } from '../data-objects/create-exercise/prepare-create-exercise';
 import { QuestionType } from '../data-objects/question-type';
 import { CreateExerciseHelperService } from './create-exercise-helper.service';
+import { TestCase } from '../data-objects/create-exercise/test-case';
 
 @Component({
   selector: 'app-exercise-create',
@@ -50,7 +51,7 @@ export class ExerciseCreateComponent implements OnInit {
       for (let idx = 0; idx < this.writtenLangs.length; idx++) {
         // remove default written lang:
         if (this.writtenLangs[idx].name == "English") {
-          this.exercise.exerciseVersion[0].exerciseLanguage[0].fkWrittenLanguage = this.writtenLangs[idx];
+          this.exercise.exerciseVersionList[0].exerciseLanguageList[0].writtenLanguage = this.writtenLangs[idx];
           this.writtenLangs.splice(idx, 1);
         }
       }
@@ -61,6 +62,9 @@ export class ExerciseCreateComponent implements OnInit {
     this.createExerciseService.prepareExercise().subscribe(this.prepareExerciseObserver);
 
     this.exercise = this.helper.createNewExercise();
+    this.writtenLangIdx = 0;
+    this.programmingLangIdx = 0;
+    this.testIdx = 0;
   }
 
   setSelectedElement(element: string) {
@@ -74,11 +78,10 @@ export class ExerciseCreateComponent implements OnInit {
       this.writtenLangIdx = parseInt(split[1]);
     }
     else if (this.selectedElement.includes('Programming')) {
-      split = this.selectedElement.split('Programming_');
+      split = this.selectedElement.split('Programming');
       split = split[1].split('_');
-      let selectedPLang = split[0];
       
-      this.programmingLangIdx = this.helper.getCorrectIdx(selectedPLang, this.exercise);
+      this.programmingLangIdx = parseInt(split[0]);
 
       if (this.selectedElement.includes('TestCase')) {
         split = this.selectedElement.split('TestCase');
@@ -87,9 +90,8 @@ export class ExerciseCreateComponent implements OnInit {
       else if (this.selectedElement.includes('Lang')) {
         split = this.selectedElement.split('Lang');
 
-        this.programmingLangIdx += parseInt(split[1]);
+        this.writtenLangIdx = parseInt(split[1]);
       }
-      console.log(this.programmingLangIdx);
     }
   }
 
@@ -101,9 +103,15 @@ export class ExerciseCreateComponent implements OnInit {
     this.exercise = this.helper.addProgrammingLang(lang, this.exercise);
   }
 
+  addNewTest(test: TestCase) {
+    this.exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[this.programmingLangIdx].testSuite.testCaseList.push(test);
+  }
+
   saveExercise() {
     // this.exercise.created = new Date().toISOString();
     // this.exercise.exerciseVersion[0].lastModified = this.exercise.created;
+    this.exercise.user = null;
+    this.exercise.exerciseVersionList[0].user = null;
 
     this.exercise = this.helper.copyBodyData(this.exercise);
     console.log(this.exercise);

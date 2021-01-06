@@ -18,105 +18,60 @@ export class CreateExerciseHelperService {
   createNewExercise(): Exercise {
     let exercise = new Exercise();
 
-    exercise.fkUser = new Author();
-    exercise.fkUser.id = (localStorage.getItem('user_id') !== null) ? parseInt(localStorage.getItem('user_id')) : 0;
-    exercise.fkUser.name = localStorage.getItem('name');
+    exercise.user = new Author();
+    exercise.user.id = (localStorage.getItem('user_id') !== null) ? parseInt(localStorage.getItem('user_id')) : 0;
+    exercise.user.name = localStorage.getItem('name');
 
-    exercise.exerciseVersion[0] = new ExerciseVersion();
-    exercise.exerciseVersion[0].fkUser = exercise.fkUser;
-    exercise.exerciseVersion[0].validState = 0;
-    exercise.exerciseVersion[0].creatorDifficulty = 0;
-    exercise.exerciseVersion[0].creatorRating = 0;
-    exercise.exerciseVersion[0].versionNumber = 0;
+    exercise.exerciseVersionList[0] = new ExerciseVersion();
+    exercise.exerciseVersionList[0].user = exercise.user;
+    exercise.exerciseVersionList[0].validState = 0;
+    exercise.exerciseVersionList[0].creatorDifficulty = 0;
+    exercise.exerciseVersionList[0].creatorRating = 0;
+    exercise.exerciseVersionList[0].versionNumber = 0;
 
-    exercise.exerciseVersion[0].exerciseLanguage[0] = new ExerciseLanguage();
-    exercise.exerciseVersion[0].exerciseLanguage[0].fkWrittenLanguage = new WrittenLanguage();
-    exercise.exerciseVersion[0].exerciseLanguage[0].exerciseBody[0] = new ExerciseBody();
+    exercise.exerciseVersionList[0].exerciseLanguageList[0] = new ExerciseLanguage();
+    exercise.exerciseVersionList[0].exerciseLanguageList[0].writtenLanguage = new WrittenLanguage();
+    exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0] = new ExerciseBody();
           
     return exercise;
   }
 
-  getCorrectIdx(selectedLang: string, exercise: Exercise): number {
-    let idx = 0;
-    
-    for (let i=0; i<exercise.exerciseVersion[0].exerciseLanguage.length; i++) {
-      if (exercise.exerciseVersion[0].exerciseLanguage[i].exerciseBody[0].fkProgrammingLanguage.name === selectedLang) {
-        idx = i;
-        break;
-      }
-    }
-    
-    return idx;
-  }
-
   addWrittenLang(lang: WrittenLanguage, exercise: Exercise): Exercise {
     let toBeAdded: ExerciseLanguage[] = [];
-    exercise.exerciseVersion[0].exerciseLanguage.forEach(el => {
+
+    exercise.exerciseVersionList[0].exerciseLanguageList.forEach(el => {
       // check if exercise already has body with pLang
-      if (el.exerciseBody[0] != undefined && el.exerciseBody[0].fkProgrammingLanguage != undefined) {
-        // let newLang = Object.assign(new ExerciseLanguage(), el); // ToDo: make deepcopy
+      if (el.exerciseBody[0] != undefined && el.exerciseBody[0].programmingLanguage != undefined) {
         let newLang = cloneDeep(el);
-        newLang.fkWrittenLanguage = lang;
-      
+        newLang.writtenLanguage = lang;
+
         toBeAdded.push(newLang);
       }
       else {
         let exerciseLang = new ExerciseLanguage();
-        exerciseLang.fkWrittenLanguage = lang;
+        exerciseLang.writtenLanguage = lang;
     
         toBeAdded.push(exerciseLang);
       }
     });
     
-    // insert in specific order for easier data-binding
     toBeAdded.forEach(toAdd => {
-      if (toAdd.exerciseBody[0].fkProgrammingLanguage == undefined) {
-        exercise.exerciseVersion[0].exerciseLanguage.push(toAdd);
-      }
-      else {
-        let exerciseLangs: ExerciseLanguage[] = [];
-        exercise.exerciseVersion[0].exerciseLanguage.forEach(el => {
-          exerciseLangs.push(el);
-          if (toAdd.exerciseBody[0].fkProgrammingLanguage.name === el.exerciseBody[0].fkProgrammingLanguage.name) {
-            exerciseLangs.push(toAdd);
-          }
-        });
-    
-        exercise.exerciseVersion[0].exerciseLanguage = exerciseLangs;
-      }
+      exercise.exerciseVersionList[0].exerciseLanguageList.push(toAdd);
     });
-
+    
     return exercise;
   }
 
-  addProgrammingLang(lang: ProgrammingLanguage, exercise: Exercise): Exercise {
-    let toBeAdded: ExerciseLanguage[] = [];
-    let englishAdded = false;
-    let germanAdded = false;
-        
+  addProgrammingLang(lang: ProgrammingLanguage, exercise: Exercise): Exercise {        
     // add programming lang for all written langs
-    exercise.exerciseVersion[0].exerciseLanguage.forEach(el => {
+    exercise.exerciseVersionList[0].exerciseLanguageList.forEach(el => {
       // check if a programming lang already exists
-      if (el.exerciseBody[0].fkProgrammingLanguage.name == undefined) {
-        el.exerciseBody[0] = new ExerciseBody();
-        el.exerciseBody[0].fkTestSuite = new TestSuite();
-        el.exerciseBody[0].fkTestSuite.testCase = [new TestCase()];
-        el.exerciseBody[0].fkProgrammingLanguage = lang
+      if (el.exerciseBody[0].programmingLanguage.name == undefined) {
+        el.exerciseBody[0] = this.createNewBody(lang);
       }
       else {
-        if (el.fkWrittenLanguage.name == 'English' && !englishAdded) {
-          toBeAdded = this.createNewExerciseLang(toBeAdded, el, lang);
-          englishAdded = true;
-        }
-        else if (el.fkWrittenLanguage.name == 'German' && !germanAdded) {
-          toBeAdded = this.createNewExerciseLang(toBeAdded, el, lang);
-          germanAdded = true;
-        }
+        el.exerciseBody.push(this.createNewBody(lang));
       }
-    });
-
-    toBeAdded.forEach(el => {
-      exercise.exerciseVersion[0].exerciseLanguage.push(el);
     });
 
     return exercise;
@@ -125,15 +80,15 @@ export class CreateExerciseHelperService {
   removeWLang(lang: WrittenLanguage, exercise: Exercise): Exercise {
     let toBeRemoved = [];
     
-    exercise.exerciseVersion[0].exerciseLanguage.forEach(el => {
-      if (el.fkWrittenLanguage.name === lang.name) {
-        let idx = exercise.exerciseVersion[0].exerciseLanguage.indexOf(el);
+    exercise.exerciseVersionList[0].exerciseLanguageList.forEach(el => {
+      if (el.writtenLanguage.name === lang.name) {
+        let idx = exercise.exerciseVersionList[0].exerciseLanguageList.indexOf(el);
         toBeRemoved.push(idx);
       }
     });
     
     for (let i = toBeRemoved.length-1; i >= 0; i--) {
-      exercise.exerciseVersion[0].exerciseLanguage.splice(toBeRemoved[i], 1);
+      exercise.exerciseVersionList[0].exerciseLanguageList.splice(toBeRemoved[i], 1);
     }
 
     return exercise;
@@ -141,16 +96,27 @@ export class CreateExerciseHelperService {
     
   removePLang(lang: ProgrammingLanguage, exercise: Exercise): Exercise {
     let toBeRemoved = [];
-    
-    exercise.exerciseVersion[0].exerciseLanguage.forEach(el => {
-      if (el.exerciseBody[0].fkProgrammingLanguage.name === lang.name) {
-        let idx = exercise.exerciseVersion[0].exerciseLanguage.indexOf(el);
-        toBeRemoved.push(idx);
-      }
+
+    exercise.exerciseVersionList[0].exerciseLanguageList.forEach(el => {
+      // check each body
+      el.exerciseBody.forEach(body => {
+        if (body.programmingLanguage === lang) {
+          let elIdx = exercise.exerciseVersionList[0].exerciseLanguageList.indexOf(el);
+          let bodyIdx = el.exerciseBody.indexOf(body);
+
+          let remove = {
+            el: elIdx,
+            body: bodyIdx
+          }
+
+          toBeRemoved.push(remove);
+        }
+      })
     });
     
     for (let i = toBeRemoved.length-1; i >= 0; i--) {
-      exercise.exerciseVersion[0].exerciseLanguage.splice(toBeRemoved[i], 1);
+      let remove = toBeRemoved[i];
+      exercise.exerciseVersionList[0].exerciseLanguageList[remove.el].exerciseBody.splice(remove.body, 1);
     }
 
     return exercise;
@@ -159,13 +125,13 @@ export class CreateExerciseHelperService {
   copyBodyData(exercise: Exercise): Exercise {
     let bodyToCopy: ExerciseBody = null;
 
-    exercise.exerciseVersion[0].exerciseLanguage.forEach(el => {
-      if (bodyToCopy === null || !(el.exerciseBody[0].fkProgrammingLanguage === bodyToCopy.fkProgrammingLanguage)) {
+    exercise.exerciseVersionList[0].exerciseLanguageList.forEach(el => {
+      if (bodyToCopy === null || !(el.exerciseBody[0].programmingLanguage === bodyToCopy.programmingLanguage)) {
         bodyToCopy = el.exerciseBody[0];
       }
       else {
-        el.exerciseBody[0].fkTestSuite = bodyToCopy.fkTestSuite;
-        el.exerciseBody[0].fkProgrammingLanguage = bodyToCopy.fkProgrammingLanguage;
+        el.exerciseBody[0].testSuite = bodyToCopy.testSuite;
+        el.exerciseBody[0].programmingLanguage = bodyToCopy.programmingLanguage;
         el.exerciseBody[0].description = bodyToCopy.description;
         el.exerciseBody[0].hint = bodyToCopy.hint;
         el.exerciseBody[0].fieldLines = bodyToCopy.fieldLines;
@@ -186,16 +152,12 @@ export class CreateExerciseHelperService {
     return exercise;
   }
 
-  private createNewExerciseLang(toBeAdded: ExerciseLanguage[], source: ExerciseLanguage, lang: ProgrammingLanguage) {
-    let exerciseLang = cloneDeep(source);
-    exerciseLang.exerciseBody[0] = new ExerciseBody();
-    
-    exerciseLang.exerciseBody[0].fkTestSuit = new TestSuite();
-    exerciseLang.exerciseBody[0].fkTestSuit.testCase = [new TestCase()];
-    exerciseLang.exerciseBody[0].fkProgrammingLanguage = lang
-    
-    toBeAdded.push(exerciseLang);
-    
-    return toBeAdded;
+  private createNewBody(lang: ProgrammingLanguage) {
+    let body = new ExerciseBody();
+    body.testSuite = new TestSuite();
+    body.testSuite.testCaseList = [new TestCase()];
+    body.programmingLanguage = lang
+
+    return body;
   }
 }

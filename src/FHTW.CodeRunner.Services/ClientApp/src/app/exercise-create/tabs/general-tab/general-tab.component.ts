@@ -57,9 +57,9 @@ export class GeneralTabComponent implements OnInit {
         tag.name = formData.tagName;
 
         let exerciseTag = new ExerciseTag();
-        exerciseTag.fkTag = tag;
+        exerciseTag.tag = tag;
 
-        this.exercise.exerciseTag.push(exerciseTag);
+        this.exercise.exerciseTagList.push(exerciseTag);
         this.modalService.dismissAll('New Tag added');
     }
 
@@ -78,16 +78,16 @@ export class GeneralTabComponent implements OnInit {
 
     addExistingTag(formData) {
         let exerciseTag = new ExerciseTag();
-        exerciseTag.fkTag = formData.tag;
+        exerciseTag.tag = formData.tag;
 
-        this.exercise.exerciseTag.push(exerciseTag);
+        this.exercise.exerciseTagList.push(exerciseTag);
         this.modalService.dismissAll('Existing Tag added');
     }
 
     removeTag(id: number) {
         console.log('remove tag with id ' + id);
 
-        this.exercise.exerciseTag.splice(id, 1);
+        this.exercise.exerciseTagList.splice(id, 1);
     }
 
     private getDismissReason(reason: any): string {

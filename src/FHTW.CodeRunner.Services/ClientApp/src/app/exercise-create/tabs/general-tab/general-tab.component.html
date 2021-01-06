@@ -17,25 +17,25 @@
 
             <label for="param" class="col-2 col-form-label">Template Parameters</label>
             <div class="col-10">
-                <textarea type="text" class="form-control-plaintext" rows="4" id="param" name="param" placeholder="Template Parameters" [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseHeader.templateParam"></textarea>
+                <textarea type="text" class="form-control-plaintext" rows="4" id="param" name="param" placeholder="Template Parameters" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParam"></textarea>
             </div>
 
             <label for="twig" class="col-2 col-form-label">Twig Control</label>
             <div class="col-10 form-inline">
                 <div class="form-group col-3">
-                    <input type="checkbox" id="liftParam" name="liftParam" [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseHeader.templateParamLiftFlag">
+                    <input type="checkbox" id="liftParam" name="liftParam" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParamLiftFlag">
                     <p class="ml-3">Lift Template Parameters</p>
                 </div>
                 <div class="form-group col-3">
-                    <input type="checkbox" id="twigAll" name="twigAll" [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseHeader.twigAllFlag">
+                    <input type="checkbox" id="twigAll" name="twigAll" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.twigAllFlag">
                     <p class="ml-3">Twig for All</p>
                 </div>
             </div>
 
             <label for="tagSelect" class="col-2 col-form-label">Tags</label>
             <div class="col-10">
-                <span *ngFor="let tag of exercise.exerciseTag; let idx = index" class="badge badge-pill tag">
-                    <span class="tagFunctions" (click)="removeTag(idx)">x</span> {{ tag.fkTag.name }}
+                <span *ngFor="let tag of exercise.exerciseTagList; let idx = index" class="badge badge-pill tag">
+                    <span class="tagFunctions" (click)="removeTag(idx)">x</span> {{ tag.tag.name }}
                 </span>
             </div>
             <div class="col-2">

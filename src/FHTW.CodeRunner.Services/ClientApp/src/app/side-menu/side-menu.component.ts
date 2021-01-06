@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { TestCase } from "../data-objects/create-exercise/test-case";
 import { ProgrammingLanguage } from "../data-objects/programming-language";
 import { WrittenLanguage } from "../data-objects/written-language";
 
@@ -18,6 +19,7 @@ export class SideMenuComponent {
     @Output() removeWrittenLangEvent = new EventEmitter<WrittenLanguage>();
     @Output() addProgrammingLangEvent = new EventEmitter<ProgrammingLanguage>();
     @Output() removeProgrammingLangEvent = new EventEmitter<ProgrammingLanguage>();
+    @Output() addTestCaseEvent = new EventEmitter<TestCase>();
 
     writtenLang = [{id: 1, name: "English"}];
     programmingLang: ProgrammingLanguage[] = [];
@@ -56,6 +58,7 @@ export class SideMenuComponent {
 
     addTestCase() {
         this.testCases.push("Test");
+        this.addTestCaseEvent.emit(new TestCase());
     }
 
     collapseList(listName: string) {

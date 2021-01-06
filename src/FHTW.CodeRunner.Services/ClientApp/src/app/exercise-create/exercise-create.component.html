@@ -1,12 +1,12 @@
-<side-menu [availableLangsW]="writtenLangs" [availableLangsP]="programmingLangs" [selectedElement]="selectedElement" (selectElementEvent)="setSelectedElement($event)" (addWrittenLangEvent)="addWrittenLang($event)" (addProgrammingLangEvent)="addProgrammingLang($event)" (removeWrittenLangEvent)="removeWLang($event)" (removeProgrammingLangEvent)="removePLang($event)"></side-menu>
+<side-menu [availableLangsW]="writtenLangs" [availableLangsP]="programmingLangs" [selectedElement]="selectedElement" (selectElementEvent)="setSelectedElement($event)" (addWrittenLangEvent)="addWrittenLang($event)" (addProgrammingLangEvent)="addProgrammingLang($event)" (removeWrittenLangEvent)="removeWLang($event)" (removeProgrammingLangEvent)="removePLang($event)" (addTestCaseEvent)="addNewTest($event)"></side-menu>
 
 <div class="content">
     <general-tab *ngIf="selectedElement == 'General'" [exercise]="exercise" [existingTags]="tagList"></general-tab>
-    <written-lang-tab *ngIf="selectedElement.includes('WrittenLang')" [exerciseLanguage]="exercise.exerciseVersion[0].exerciseLanguage[writtenLangIdx]"></written-lang-tab>
-    <programming-tab *ngIf="selectedElement.includes('Programming') && selectedElement.includes('General')" [exerciseBody]="exercise.exerciseVersion[0].exerciseLanguage[programmingLangIdx].exerciseBody[0]"></programming-tab>
-    <programming-langs-tab *ngIf="selectedElement.includes('Programming') && selectedElement.includes('Lang')" [exerciseBody]="exercise.exerciseVersion[0].exerciseLanguage[programmingLangIdx].exerciseBody[0]" [writtenLang]="exercise.exerciseVersion[0].exerciseLanguage[programmingLangIdx].fkWrittenLanguage.name"></programming-langs-tab>
-    <test-suit-tab *ngIf="selectedElement.includes('TestSuit')" [testSuite]="exercise.exerciseVersion[0].exerciseLanguage[0].exerciseBody[0].fkTestSuite" [questionTypes]="questionTypes"></test-suit-tab>
-    <testcase-tab *ngIf="selectedElement.includes('TestCase')" [testCase]="exercise.exerciseVersion[0].exerciseLanguage[0].exerciseBody[0].fkTestSuite.testCase[testIdx]" [pLang]="exercise.exerciseVersion[0].exerciseLanguage[0].exerciseBody[0].fkProgrammingLanguage.name"></testcase-tab>
+    <written-lang-tab *ngIf="selectedElement.includes('WrittenLang')" [exerciseLanguage]="exercise.exerciseVersionList[0].exerciseLanguageList[writtenLangIdx]"></written-lang-tab>
+    <programming-tab *ngIf="selectedElement.includes('Programming') && selectedElement.includes('General')" [exerciseBody]="exercise.exerciseVersionList[0].exerciseLanguageList[writtenLangIdx].exerciseBody[programmingLangIdx]"></programming-tab>
+    <programming-langs-tab *ngIf="selectedElement.includes('Programming') && selectedElement.includes('Lang')" [exerciseBody]="exercise.exerciseVersionList[0].exerciseLanguageList[writtenLangIdx].exerciseBody[programmingLangIdx]" [writtenLang]="exercise.exerciseVersionList[0].exerciseLanguageList[programmingLangIdx].writtenLanguage.name"></programming-langs-tab>
+    <test-suit-tab *ngIf="selectedElement.includes('TestSuit')" [testSuite]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[programmingLangIdx].testSuite" [questionTypes]="questionTypes"></test-suit-tab>
+    <testcase-tab *ngIf="selectedElement.includes('TestCase')" [testCase]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[programmingLangIdx].testSuite.testCaseList[testIdx]" [pLang]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].programmingLanguage.name"></testcase-tab>
 </div>
 
 <div class="text-right">

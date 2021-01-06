@@ -13,6 +13,6 @@ export class TestSuitTabComponent implements OnInit {
     @Input() questionTypes: QuestionType[];
 
     ngOnInit() {
-        this.testSuite.fkQuestionType = new QuestionType();
+        this.testSuite.questionType = new QuestionType();
     }
 }

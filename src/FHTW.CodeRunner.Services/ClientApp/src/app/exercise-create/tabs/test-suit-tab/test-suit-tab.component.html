@@ -5,7 +5,7 @@
         <div class="from-group row">
             <label for="questionType" class="col-2 col-form-label">Question Type</label>
             <div class="col-10">
-                <select class="form-control" name="questionType" [(ngModel)]="testSuite.fkQuestionType">
+                <select class="form-control" name="questionType" [(ngModel)]="testSuite.questionType">
                     <option *ngFor="let q of questionTypes" [ngValue]="q">{{ q.name }}</option>
                 </select>
             </div>
@@ -18,20 +18,20 @@
             <label for="precheck" class="col-2 col-form-label">Precheck</label>
             <div class="col-10">
                 <select class="form-control" id="precheck" name="precheck" [(ngModel)]="testSuite.preCheck">
-                    <option value="0" [ngValue]="0">Deactivated</option>
-                    <option value="1" [ngValue]="1">Empty</option>
-                    <option value="2" [ngValue]="2">Examples</option>
-                    <option value="3" [ngValue]="3">Selected</option>
-                    <option value="4" [ngValue]="4">All</option>
+                    <option [ngValue]="0">Deactivated</option>
+                    <option [ngValue]="1">Empty</option>
+                    <option [ngValue]="2">Examples</option>
+                    <option [ngValue]="3">Selected</option>
+                    <option [ngValue]="4">All</option>
                 </select>
             </div>
 
             <label for="feedback" class="col-2 col-form-label">Display Feedback</label>
             <div class="col-10">
                 <select class="form-control" id="feedback" name="feedback" [(ngModel)]="testSuite.generalFeedbackDisplay">
-                    <option value="0" [ngValue]="0">Set by Test</option>
-                    <option value="1" [ngValue]="1">Force Show</option>
-                    <option value="2" [ngValue]="2">Force Hide</option>
+                    <option [ngValue]="0">Set by Test</option>
+                    <option [ngValue]="1">Force Show</option>
+                    <option [ngValue]="2">Force Hide</option>
                 </select>
             </div>
 
