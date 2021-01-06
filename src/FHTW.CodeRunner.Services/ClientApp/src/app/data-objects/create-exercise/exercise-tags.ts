@@ -3,9 +3,9 @@ import { Tag } from "../tag";
 export class ExerciseTag {
     constructor() {
         this.id = 0;
-        this.fkTag = new Tag();
+        this.tag = new Tag();
     }
 
     id: number;
-    fkTag: Tag;
+    tag: Tag;
 }

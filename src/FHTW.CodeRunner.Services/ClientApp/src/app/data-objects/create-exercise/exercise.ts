@@ -6,15 +6,15 @@ import { ExerciseVersion } from "./exercise-version";
 export class Exercise {
     constructor() {
         this.id = 0;
-        this.fkUser = new Author();
-        this.exerciseTag = [];
-        this.exerciseVersion = [];
+        this.user = new Author();
+        this.exerciseTagList = [];
+        this.exerciseVersionList = [];
     }
 
     id: number;
     title: string;
     created: Date;
-    fkUser: Author;
-    exerciseTag: ExerciseTag[];
-    exerciseVersion: ExerciseVersion[];
+    user: Author;
+    exerciseTagList: ExerciseTag[];
+    exerciseVersionList: ExerciseVersion[];
 }

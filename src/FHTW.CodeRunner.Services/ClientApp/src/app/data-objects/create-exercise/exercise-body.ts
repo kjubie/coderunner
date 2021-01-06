@@ -5,8 +5,8 @@ export class ExerciseBody {
 
     constructor() {
         this.id = 0;
-        this.fkProgrammingLanguage = new ProgrammingLanguage();
-        this.fkTestSuite = new TestSuite();
+        this.programmingLanguage = new ProgrammingLanguage();
+        this.testSuite = new TestSuite();
     }
 
     id: number;
@@ -31,6 +31,6 @@ export class ExerciseBody {
     minRequiredFiles: number;
     maxRequiredFiles: number;
     example: string;
-    fkProgrammingLanguage: ProgrammingLanguage;
-    fkTestSuite: TestSuite;
+    programmingLanguage: ProgrammingLanguage;
+    testSuite: TestSuite;
 }
