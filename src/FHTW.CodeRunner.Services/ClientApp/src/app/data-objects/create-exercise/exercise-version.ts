@@ -12,7 +12,7 @@ export class ExerciseVersion {
     versionNumber: number;
     creatorRating: number;
     creatorDifficulty: number;
-    lastModified: string;
+    lastModified: Date;
     validState: number;
     fkUser: Author;
     exerciseLanguage: ExerciseLanguage[];

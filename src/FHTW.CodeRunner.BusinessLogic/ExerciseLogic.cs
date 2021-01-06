@@ -95,11 +95,11 @@ namespace FHTW.CodeRunner.BusinessLogic
                     exercise.Created = DateTime.Now;
                 }
 
-                if (exercise.ExerciseVersion != null)
-                {
-                    exercise.ExerciseVersion.FirstOrDefault().LastModified = DateTime.Now;
-                    exercise.ExerciseVersion.FirstOrDefault().ValidState = BlEntities.ValidState.NotChecked;
-                }
+                // if (exercise.ExerciseVersion != null)
+                // {
+                //     exercise.ExerciseVersion.FirstOrDefault().LastModified = DateTime.Now;
+                //     exercise.ExerciseVersion.FirstOrDefault().ValidState = BlEntities.ValidState.NotChecked;
+                // }
 
                 var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
                 this.exerciseRepository.CreateAndUpdate(dalExercise);

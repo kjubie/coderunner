@@ -5,6 +5,8 @@ export class ExerciseBody {
 
     constructor() {
         this.id = 0;
+        this.fkProgrammingLanguage = new ProgrammingLanguage();
+        this.fkTestSuit = new TestSuit();
     }
 
     id: number;

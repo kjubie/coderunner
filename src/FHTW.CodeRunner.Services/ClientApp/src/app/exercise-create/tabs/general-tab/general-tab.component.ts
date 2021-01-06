@@ -12,7 +12,7 @@ import { Tag } from "src/app/data-objects/tag";
 export class GeneralTabComponent implements OnInit {
 
     @Input() exercise: Exercise;
-    @Input() existingTags: Tag[] = [];
+    @Input() existingTags: Tag[];
 
     newTagForm;
     existingTagForm;
@@ -28,6 +28,8 @@ export class GeneralTabComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.existingTags = [];
+
         for (let i=0; i<5; i++) {
             let tag = new Tag();
             tag.id = i+1;
