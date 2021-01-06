@@ -7,12 +7,12 @@ export class ExerciseLanguage {
         this.id = 0;
         this.fkExerciseHeader = new ExerciseHeader();
         this.fkWrittenLanguage = new WrittenLanguage();
-        this.exerciseBody = new ExerciseBody();
+        this.exerciseBody = [];
     }
 
     id: number;
     fkExerciseHeader: ExerciseHeader;
     fkWrittenLanguage: WrittenLanguage;
-    exerciseBody: ExerciseBody;
+    exerciseBody: ExerciseBody[];
 
 }

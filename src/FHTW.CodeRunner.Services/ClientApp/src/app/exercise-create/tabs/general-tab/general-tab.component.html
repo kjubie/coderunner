@@ -35,7 +35,7 @@
             <label for="tagSelect" class="col-2 col-form-label">Tags</label>
             <div class="col-10">
                 <span *ngFor="let tag of exercise.exerciseTag; let idx = index" class="badge badge-pill tag">
-                    <span class="tagFunctions" (click)="removeTag(idx)">x</span> {{ tag.name }}
+                    <span class="tagFunctions" (click)="removeTag(idx)">x</span> {{ tag.fkTag.name }}
                 </span>
             </div>
             <div class="col-2">
