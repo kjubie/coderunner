@@ -3,6 +3,7 @@
 // </copyright>
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -126,6 +127,25 @@ namespace FHTW.CodeRunner.Services
                     // Include DataAnnotation attributes on Controller Action parameters as Swagger validation rules (e.g required, pattern, ..)
                     // Use [ValidateModelState] on Actions to actually validate it in C# as well!
                     // c.OperationFilter<GeneratePathParamsValidationFilter>();
+                    c.AddSecurityDefinition("Basic", new OpenApiSecurityScheme
+                    {
+                        Description = "Basic auth added to authorization header",
+                        Name = "Authorization",
+                        In = ParameterLocation.Header,
+                        Scheme = "basic",
+                        Type = SecuritySchemeType.Http,
+                    });
+
+                    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Basic" },
+                            },
+                            new List<string>()
+                        },
+                    });
                 });
 
             services.AddSwaggerGenNewtonsoftSupport();

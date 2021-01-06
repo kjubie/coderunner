@@ -11,6 +11,7 @@ using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
 using SvcEntities = FHTW.CodeRunner.Services.DTOs;
 
@@ -48,6 +49,10 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <returns>A Moodle XML Document.</returns>
         [HttpPost]
         [Route("export/exercise")]
+        [Produces("text/xml")]
+        [SwaggerOperation("ExportExercise")]
+        [SwaggerResponse(statusCode: 200, description: "Successfully exported the exercise")]
+        [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "The operation failed due to an error.")]
         public virtual IActionResult ExportExercise([FromBody] SvcEntities.ExportExercise body)
         {
             if (body == null)
@@ -77,6 +82,10 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <returns>A Moodle XML Document.</returns>
         [HttpPost]
         [Route("export/collection")]
+        [Produces("text/xml")]
+        [SwaggerOperation("ExportCollection")]
+        [SwaggerResponse(statusCode: 200, description: "Successfully exported the collection")]
+        [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "The operation failed due to an error.")]
         public virtual IActionResult ExportCollection([FromBody] SvcEntities.Collection body)
         {
             if (body == null)

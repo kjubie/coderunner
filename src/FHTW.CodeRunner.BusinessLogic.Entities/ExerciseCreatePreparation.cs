@@ -15,5 +15,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public List<WrittenLanguage> WrittenLanguages { get; set; }
 
         public List<QuestionType> QuestionTypes { get; set; }
+
+        public List<Tag> Tags { get; set; }
     }
 }

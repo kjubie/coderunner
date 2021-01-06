@@ -11,6 +11,9 @@ using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
+using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
+using SvcEntities = FHTW.CodeRunner.Services.DTOs;
 
 namespace FHTW.CodeRunner.Services.Controllers
 {
@@ -45,6 +48,9 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <returns>A Statuscode.</returns>
         [HttpPost]
         [Route("import/collection")]
+        [SwaggerOperation("ImportCollection")]
+        [SwaggerResponse(statusCode: 200, description: "Successfully imported the collection")]
+        [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "The operation failed due to an error.")]
         public virtual IActionResult ImportCollection()
         {
             return this.Ok();
