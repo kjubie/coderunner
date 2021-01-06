@@ -102,6 +102,43 @@ namespace FHTW.CodeRunner.BusinessLogic
                 // }
 
                 var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
+                if (dalExercise.FkUser != null)
+                {
+                    dalExercise.FkUserId = dalExercise.FkUser.Id;
+                }
+
+                if (dalExercise.ExerciseVersion != null)
+                {
+                    if (dalExercise.ExerciseVersion.Count == 1)
+                    {
+                        var ver = dalExercise.ExerciseVersion.First();
+                        ver.FkUserId = ver.FkUser.Id;
+
+                        if (ver.ExerciseLanguage != null)
+                        {
+                            if (ver.ExerciseLanguage.Count == 1)
+                            {
+                                var lang = ver.ExerciseLanguage.First();
+                                lang.FkWrittenLanguageId = lang.FkWrittenLanguage.Id;
+
+                                if (lang.ExerciseBody != null)
+                                {
+                                    if (lang.ExerciseBody.Count == 1)
+                                    {
+                                        var body = lang.ExerciseBody.First();
+                                        body.FkProgrammingLanguageId = body.FkProgrammingLanguage.Id;
+
+                                        if (body.FkTestSuite != null)
+                                        {
+                                            body.FkTestSuite.FkQuestionTypeId = body.FkTestSuite.FkQuestionType.Id;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 this.exerciseRepository.CreateAndUpdate(dalExercise);
                 this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
             }
