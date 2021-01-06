@@ -105,6 +105,7 @@ namespace FHTW.CodeRunner.BusinessLogic
                 if (dalExercise.FkUser != null)
                 {
                     dalExercise.FkUserId = dalExercise.FkUser.Id;
+                    dalExercise.FkUser = null;
                 }
 
                 if (dalExercise.ExerciseVersion != null)
@@ -113,6 +114,7 @@ namespace FHTW.CodeRunner.BusinessLogic
                     {
                         var ver = dalExercise.ExerciseVersion.First();
                         ver.FkUserId = ver.FkUser.Id;
+                        ver.FkUser = null;
 
                         if (ver.ExerciseLanguage != null)
                         {
@@ -120,6 +122,7 @@ namespace FHTW.CodeRunner.BusinessLogic
                             {
                                 var lang = ver.ExerciseLanguage.First();
                                 lang.FkWrittenLanguageId = lang.FkWrittenLanguage.Id;
+                                lang.FkWrittenLanguage = null;
 
                                 if (lang.ExerciseBody != null)
                                 {
@@ -127,10 +130,12 @@ namespace FHTW.CodeRunner.BusinessLogic
                                     {
                                         var body = lang.ExerciseBody.First();
                                         body.FkProgrammingLanguageId = body.FkProgrammingLanguage.Id;
+                                        body.FkProgrammingLanguage = null;
 
                                         if (body.FkTestSuite != null)
                                         {
                                             body.FkTestSuite.FkQuestionTypeId = body.FkTestSuite.FkQuestionType.Id;
+                                            body.FkTestSuite.FkQuestionType = null;
                                         }
                                     }
                                 }
