@@ -110,8 +110,6 @@ export class ExerciseCreateComponent implements OnInit {
   saveExercise() {
     // this.exercise.created = new Date().toISOString();
     // this.exercise.exerciseVersion[0].lastModified = this.exercise.created;
-    this.exercise.user = null;
-    this.exercise.exerciseVersionList[0].user = null;
 
     this.exercise = this.helper.copyBodyData(this.exercise);
     console.log(this.exercise);
