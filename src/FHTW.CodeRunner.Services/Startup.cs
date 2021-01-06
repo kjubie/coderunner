@@ -128,6 +128,8 @@ namespace FHTW.CodeRunner.Services
                     // c.OperationFilter<GeneratePathParamsValidationFilter>();
                 });
 
+            services.AddSwaggerGenNewtonsoftSupport();
+
             // configure basic authentication
             services.AddAuthentication("BasicAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
