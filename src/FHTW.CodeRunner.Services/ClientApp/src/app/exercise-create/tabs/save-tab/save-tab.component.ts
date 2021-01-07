@@ -8,7 +8,7 @@ import { Exercise } from 'src/app/data-objects/create-exercise/exercise';
 })
 export class SaveTabComponent {
 
-    @Input() exercise;
+    @Input() exercise: Exercise;
     @Output() saveExerciseEvent = new EventEmitter<Exercise>();
 
     saveExercise() {

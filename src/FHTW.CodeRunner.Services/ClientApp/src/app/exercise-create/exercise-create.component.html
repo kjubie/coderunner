@@ -7,9 +7,10 @@
     <programming-langs-tab *ngIf="selectedElement.includes('Programming') && selectedElement.includes('Lang')" [exerciseBody]="exercise.exerciseVersion[0].exerciseLanguage[programmingLangIdx].exerciseBody" [writtenLang]="exercise.exerciseVersion[0].exerciseLanguage[programmingLangIdx].fkWrittenLanguage.name"></programming-langs-tab>
     <test-suit-tab *ngIf="selectedElement.includes('TestSuit')" [testSuit]="exercise.exerciseVersion[0].exerciseLanguage[0].exerciseBody.fkTestSuit" [questionTypes]="questionTypes"></test-suit-tab>
     <testcase-tab *ngIf="selectedElement.includes('TestCase')" [testCase]="exercise.exerciseVersion[0].exerciseLanguage[0].exerciseBody.fkTestSuit.testCase[testIdx]" [pLang]="exercise.exerciseVersion[0].exerciseLanguage[0].exerciseBody.fkProgrammingLanguage.name"></testcase-tab>
+    <save-tab *ngIf="selectedElement.includes('Summary')" [exercise]="exercise"></save-tab>
 </div>
 
 <div class="text-right">
     <input type="button" class="btn btn-primary next-btn" value="Save" (click)="saveExercise()">
-    <input type="button" class="btn btn-primary next-btn" value="Summary">
+    <input type="button" class="btn btn-primary next-btn" value="Summary" (click)="setSelectedElement('Summary')">
 </div>
