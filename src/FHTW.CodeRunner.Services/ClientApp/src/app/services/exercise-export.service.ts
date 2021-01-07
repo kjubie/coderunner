@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
@@ -6,18 +6,18 @@ import { ExerciseExport } from "../data-objects/exercise-export";
 
 @Injectable({ providedIn: 'root' })
 export class ExerciseExportService {
-    private getAllExercisesUrl = "https://localhost:5001/api/export/exercise";
+    private exportExerciseUrl = "https://localhost:5001/api/export/exercise";
 
     constructor(
         private http: HttpClient,
     ) { }
 
     // POST exercise for export
-    exportExercise(exercise: ExerciseExport): Observable<ExerciseExport> {
-        return this.http.post<ExerciseExport>(this.getAllExercisesUrl, exercise).pipe(
-            tap(_ => console.log('exercise was exported')),
-            catchError(this.handleError<ExerciseExport>('exportExercise'))
-        );
+    exportExercise(exercise: ExerciseExport): Observable<any> {
+      return this.http.post<any>(this.exportExerciseUrl, exercise, { responseType: 'text' as 'json' }).pipe(
+        tap(_ => console.log('exercise was exported')),
+        catchError(this.handleError<any>('exportExercise'))
+      );
     }
 
     /**
