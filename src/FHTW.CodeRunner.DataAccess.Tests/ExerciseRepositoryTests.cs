@@ -316,7 +316,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             Assert.IsTrue(true);
         }
 
-        /*[Test]
+        [Test]
         public void ShouldGetExerciseById()
         {
             this.SetupDatabase(DbTestController.State.SEEDEDJSON);
@@ -328,7 +328,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 
                 Assert.IsNotNull(e);
             }
-        }*/
+        }
 
         private void SetupDatabase(DbTestController.State state) => this.testDb = new CodeRunnerTestDb(state);
     }
