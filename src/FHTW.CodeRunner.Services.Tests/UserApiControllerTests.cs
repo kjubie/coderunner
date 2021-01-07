@@ -37,7 +37,7 @@ namespace FHTW.CodeRunner.Services.Tests
                 }));
 
             var logicMock = new Mock<IUserLogic>();
-            logicMock.Setup(p => p.AuthenticateUser(It.IsAny<BlEntities.User>())).Returns(true);
+            logicMock.Setup(p => p.AuthenticateUser(It.IsAny<BlEntities.User>())).Returns(2);
 
             IUserLogic logic = logicMock.Object;
             UserApiController controller = new UserApiController(logger, mapper, logic);
@@ -50,7 +50,7 @@ namespace FHTW.CodeRunner.Services.Tests
             var response = controller.AuthenticateUser(userAuthentication);
 
             // Assert
-            Assert.IsInstanceOf<OkResult>(response);
+            Assert.IsInstanceOf<OkObjectResult>(response);
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace FHTW.CodeRunner.Services.Tests
                 }));
 
             var logicMock = new Mock<IUserLogic>();
-            logicMock.Setup(p => p.AuthenticateUser(It.IsAny<BlEntities.User>())).Returns(false);
+            logicMock.Setup(p => p.AuthenticateUser(It.IsAny<BlEntities.User>()));
 
             IUserLogic logic = logicMock.Object;
             UserApiController controller = new UserApiController(logger, mapper, logic);

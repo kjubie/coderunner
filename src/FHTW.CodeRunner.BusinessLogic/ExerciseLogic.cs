@@ -171,11 +171,11 @@ namespace FHTW.CodeRunner.BusinessLogic
                         exercise.Created = DateTime.Now;
                     }
 
-                    if (exercise.ExerciseVersion != null)
+                    /*if (exercise.ExerciseVersion != null)
                     {
                         exercise.ExerciseVersion.FirstOrDefault().LastModified = DateTime.Now;
                         exercise.ExerciseVersion.FirstOrDefault().ValidState = BlEntities.ValidState.Valid;
-                    }
+                    }*/
 
                     var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
                     this.exerciseRepository.CreateAndUpdate(dalExercise);

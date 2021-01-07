@@ -49,7 +49,6 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <returns>A Moodle XML Document.</returns>
         [HttpPost]
         [Route("export/exercise")]
-        [Produces("text/xml")]
         [SwaggerOperation("ExportExercise")]
         [SwaggerResponse(statusCode: 200, description: "Successfully exported the exercise")]
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "The operation failed due to an error.")]
