@@ -44,6 +44,16 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                     Title = "Title1",
                     Created = creationDate,
                     FkUserId = user.Id,
+                    ExerciseVersion = new List<ExerciseVersion>
+                    {
+                        new ExerciseVersion
+                        {
+                            Id = 0,
+                            LastModified = creationDate,
+                            ValidState = ValidState.NotChecked,
+                            FkUserId = user.Id,
+                        },
+                    },
                 };
 
                 rep.Create(exercise);
@@ -84,6 +94,16 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                     Title = "Title1",
                     Created = creationDate,
                     FkUserId = user.Id,
+                    ExerciseVersion = new List<ExerciseVersion>
+                    {
+                        new ExerciseVersion
+                        {
+                            Id = 0,
+                            LastModified = creationDate,
+                            ValidState = ValidState.NotChecked,
+                            FkUserId = user.Id,
+                        },
+                    },
                 };
 
                 rep.Create(exercise);
@@ -185,7 +205,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                 {
 	                ""id"":0,
 	                ""fkUserId"":1,
-	                ""exerciseTag"":[{}],
+	                ""exerciseTag"":[],
 	                ""exerciseVersion"":[{
 		                ""id"":0,
 		                ""fkUserId"":1,
@@ -200,7 +220,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 				                ""shortTitle"":""Short"",
 				                ""introduction"":""Intro""
 			                },
-			                ""fkWrittenLanguage"":{""name"":""English""},
+			                ""fkWrittenLanguageId"":1,
 			                ""exerciseBody"":[{
 				                ""id"":0,
 				                ""fkTestSuite"":{

@@ -1,54 +1,45 @@
 [
     {   // Exercise 1, English, V1
-        "Id": 1,
         "FkWrittenLanguageId": 1,
         "FkExerciseVersionId": 1,
         "FkExerciseHeaderId": 1
     },
     {   // Exercise 1, German, V1
-        "Id": 2,
         "FkWrittenLanguageId": 2,
         "FkExerciseVersionId": 1,
         "FkExerciseHeaderId": 2
     },
     {   // Exercise 1, English, V2
-        "Id": 3,
         "FkWrittenLanguageId": 1,
         "FkExerciseVersionId": 2,
         "FkExerciseHeaderId": 3
     },
     {   // Exercise 1, German, V2
-        "Id": 4,
         "FkWrittenLanguageId": 2,
         "FkExerciseVersionId": 2,
         "FkExerciseHeaderId": 4
     },
     {   // Exercise 1, English, V3
-        "Id": 5,
         "FkWrittenLanguageId": 1,
         "FkExerciseVersionId": 3,
         "FkExerciseHeaderId": 5
     },
     {   // Exercise 1, German, V3
-        "Id": 6,
         "FkWrittenLanguageId": 2,
         "FkExerciseVersionId": 3,
         "FkExerciseHeaderId": 6
     },
     {   // Exercise 2, English, V1
-        "Id": 7,
         "FkWrittenLanguageId": 1,
         "FkExerciseVersionId": 4,
         "FkExerciseHeaderId": 7
     },
     {   // Exercise 2, German, V1
-        "Id": 8,
         "FkWrittenLanguageId": 2,
         "FkExerciseVersionId": 4,
         "FkExerciseHeaderId": 8
     },
     {   // Exercise 3, German, V1
-        "Id": 9,
         "FkWrittenLanguageId": 1,
         "FkExerciseVersionId": 5,
         "FkExerciseHeaderId": 9
