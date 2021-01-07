@@ -1,24 +1,20 @@
 [
     {
-        "Id": 1,
         "Number": 4,
         "FkExerciseId": 1,
         "FkUserId": 2
     },
     {
-        "Id": 2,
         "Number": 5,
         "FkExerciseId": 1,
         "FkUserId": 3
     },
     {
-        "Id": 3,
         "Number": 3,
         "FkExerciseId": 1,
         "FkUserId": 4
     },
     {
-        "Id": 4,
         "Number": 1,
         "FkExerciseId": 2,
         "FkUserId": 1

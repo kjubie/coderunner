@@ -1,51 +1,46 @@
 [
     {   // Exercise 1, V1
-        "Id": 1,
         "VersionNumber": 1,
         "CreatorRating": 3,
         "CreatorDifficulty": 4,
         "LastModified": "2020-04-23T18:28:43.51",
-        "ValidFlag": true,
+        "ValidState": 1,
         "FkUserId": 1,
         "FkExerciseId": 1
     },
     {   // Exercise 1, V2
-        "Id": 2,
         "VersionNumber": 2,
         "CreatorRating": 4,
         "CreatorDifficulty": 5,
         "LastModified": "2020-05-14T18:28:43.51",
-        "ValidFlag": true,
+        "ValidState": 1,
         "FkUserId": 1,
         "FkExerciseId": 1
     },
     {   // Exercise 1, V3
-        "Id": 3,
         "VersionNumber": 3,
         "CreatorRating": 5,
         "CreatorDifficulty": 5,
         "LastModified": "2020-06-17T18:28:43.51",
-        "ValidFlag": true,
+        "ValidState": 1,
         "FkUserId": 1,
         "FkExerciseId": 1
     },
     {   // Exercise 2, V1
-        "Id": 4,
         "VersionNumber": 1,
         "CreatorRating": 2,
         "CreatorDifficulty": 3,
         "LastModified": "2020-09-23T18:28:43.51",
-        "ValidFlag": true,
+        "ValidState": 1,
         "FkUserId": 1,
         "FkExerciseId": 2
     },
     {   // Exercise 3, V1
-        "Id": 5,
         "VersionNumber": 1,
         "CreatorRating": 5,
         "CreatorDifficulty": 5,
         "LastModified": "2020-02-23T18:28:43.51",
-        "ValidFlag": true,
+        "ValidState": 1,
         "FkUserId": 3,
         "FkExerciseId": 3
     }

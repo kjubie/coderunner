@@ -3,25 +3,25 @@
 </li>
 <li *ngIf="showProgrammingList">
     <ul class="secondUl">
-        <li (click)="setSelectedElement('Programming_' + lang.name + '_General')">
-            <a [ngClass]="{'active' : selectedElement == ('Programming_'+lang.name+'_General')}">General</a>
+        <li (click)="setSelectedElement('Programming' + idx + '_General')">
+            <a [ngClass]="{'active' : selectedElement == ('Programming'+idx+'_General')}">General</a>
         </li>
         <li (click)="collapseList('writtenLanguageList', idx)"><i class="arrow down" [attr.id]="'arrowWrittenLanguageList' + idx"></i> Language</li>
         <li *ngIf="showWrittenLanguageList">
             <ul class="thirdUl">
-                <li *ngFor="let l of writtenLang; let i = index" (click)="setSelectedElement('Programming_' + lang.name + '_Lang' + i)">
-                    <a [ngClass]="{'active' : selectedElement == ('Programming_'+lang.name+'_Lang'+i)}">{{ l.name }}</a>
+                <li *ngFor="let l of writtenLang; let i = index" (click)="setSelectedElement('Programming' + idx + '_Lang' + i)">
+                    <a [ngClass]="{'active' : selectedElement == ('Programming'+idx+'_Lang'+i)}">{{ l.name }}</a>
                 </li>
             </ul>
         </li>
-        <li (click)="setSelectedElement('Programming_' + lang.name + '_TestSuit')">
+        <li (click)="setSelectedElement('Programming' + idx + '_TestSuit')">
             <i (click)="collapseList('testSuitList', idx)" class="arrow down" [attr.id]="'arrowTestSuitList' + idx"></i>
-            <a [ngClass]="{'active' : selectedElement == ('Programming_'+lang.name+'_TestSuit')}"> Test Suit</a>
+            <a [ngClass]="{'active' : selectedElement == ('Programming'+idx+'_TestSuit')}"> Test Suit</a>
         </li>
         <li *ngIf="showTestSuitList">
             <ul class="thirdUl">
-                <li *ngFor="let test of testCases; let i = index" (click)="setSelectedElement('Programming_' + lang.name + '_TestCase' + i)">
-                    <a [ngClass]="{'active' : selectedElement == ('Programming_'+lang.name+'_TestCase'+i)}">{{ test }}</a><a *ngIf="isLastTestCase(i)" (click)="removeTestCase(test)"> (Remove)</a>
+                <li *ngFor="let test of testCases; let i = index" (click)="setSelectedElement('Programming' + idx + '_TestCase' + i)">
+                    <a [ngClass]="{'active' : selectedElement == ('Programming'+idx+'_TestCase'+i)}">{{ test }}</a><a *ngIf="isLastTestCase(i)" (click)="removeTestCase(test)"> (Remove)</a>
                 </li>
                 <li (click)="addTestCase()"><img src="../../assets/img/plus.png"/> Test Case</li>
             </ul>

@@ -68,6 +68,8 @@ namespace FHTW.CodeRunner.BusinessLogic
             var dalQuestionTypes = this.uiRepository.GetQuestionTypes();
             exerciseCreatePreparation.QuestionTypes = this.mapper.Map<List<BlEntities.QuestionType>>(dalQuestionTypes);
 
+            exerciseCreatePreparation.Tags = new List<BlEntities.Tag>();
+
             return exerciseCreatePreparation;
         }
 
@@ -95,13 +97,55 @@ namespace FHTW.CodeRunner.BusinessLogic
                     exercise.Created = DateTime.Now;
                 }
 
-                if (exercise.ExerciseVersion != null)
-                {
-                    exercise.ExerciseVersion.FirstOrDefault().LastModified = DateTime.Now;
-                    exercise.ExerciseVersion.FirstOrDefault().ValidState = BlEntities.ValidState.NotChecked;
-                }
+                // if (exercise.ExerciseVersion != null)
+                // {
+                //     exercise.ExerciseVersion.FirstOrDefault().LastModified = DateTime.Now;
+                //     exercise.ExerciseVersion.FirstOrDefault().ValidState = BlEntities.ValidState.NotChecked;
+                // }
 
                 var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
+                if (dalExercise.FkUser != null)
+                {
+                    dalExercise.FkUserId = dalExercise.FkUser.Id;
+                    dalExercise.FkUser = null;
+                }
+
+                if (dalExercise.ExerciseVersion != null)
+                {
+                    if (dalExercise.ExerciseVersion.Count == 1)
+                    {
+                        var ver = dalExercise.ExerciseVersion.First();
+                        ver.FkUserId = ver.FkUser.Id;
+                        ver.FkUser = null;
+
+                        if (ver.ExerciseLanguage != null)
+                        {
+                            if (ver.ExerciseLanguage.Count == 1)
+                            {
+                                var lang = ver.ExerciseLanguage.First();
+                                lang.FkWrittenLanguageId = lang.FkWrittenLanguage.Id;
+                                lang.FkWrittenLanguage = null;
+
+                                if (lang.ExerciseBody != null)
+                                {
+                                    if (lang.ExerciseBody.Count == 1)
+                                    {
+                                        var body = lang.ExerciseBody.First();
+                                        body.FkProgrammingLanguageId = body.FkProgrammingLanguage.Id;
+                                        body.FkProgrammingLanguage = null;
+
+                                        if (body.FkTestSuite != null)
+                                        {
+                                            body.FkTestSuite.FkQuestionTypeId = body.FkTestSuite.FkQuestionType.Id;
+                                            body.FkTestSuite.FkQuestionType = null;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 this.exerciseRepository.CreateAndUpdate(dalExercise);
                 this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
             }
@@ -127,11 +171,11 @@ namespace FHTW.CodeRunner.BusinessLogic
                         exercise.Created = DateTime.Now;
                     }
 
-                    if (exercise.ExerciseVersion != null)
+                    /*if (exercise.ExerciseVersion != null)
                     {
                         exercise.ExerciseVersion.FirstOrDefault().LastModified = DateTime.Now;
                         exercise.ExerciseVersion.FirstOrDefault().ValidState = BlEntities.ValidState.Valid;
-                    }
+                    }*/
 
                     var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
                     this.exerciseRepository.CreateAndUpdate(dalExercise);

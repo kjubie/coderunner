@@ -17,15 +17,6 @@ namespace FHTW.CodeRunner.Services.DTOs
     public class Exercise
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Exercise"/> class.
-        /// </summary>
-        public Exercise()
-        {
-            this.ExerciseTag = new HashSet<ExerciseTag>();
-            this.ExerciseVersion = new HashSet<ExerciseVersion>();
-        }
-
-        /// <summary>
         /// Gets or sets the id.
         /// </summary>
         [DataMember(Name = "id")]

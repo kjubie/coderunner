@@ -5,13 +5,10 @@ import { WrittenLanguage } from "./written-language";
 
 export class ExerciseExport {
     
-    constructor() {
-        this.tagList = [];
-    }
+    constructor() {}
 
     id: number;
     version: number;
-    tagList: Tag[];
     writtenLanguage: string;
     programmingLanguage: string;
 }

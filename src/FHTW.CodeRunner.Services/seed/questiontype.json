@@ -1,22 +1,17 @@
 [
     {
-        "Id": 1,
         "Name": "c++_question_type"
     },
     {
-        "Id": 2,
         "Name": "c#_question_type"
     },
     {
-        "Id": 3,
         "Name": "python_question_type"
     },
     {
-        "Id": 4,
         "Name": "java_question_type"
     },
     {
-        "Id": 5,
         "Name": "c_question_type"
     }
 ]

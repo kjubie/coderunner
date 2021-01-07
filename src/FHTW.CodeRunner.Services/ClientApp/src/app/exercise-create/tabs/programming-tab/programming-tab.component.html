@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb" class="blue">
     <ol class="breadcrumb blue">
         <li class="breadcrumb-item">Body</li>
-        <li class="breadcrumb-item">{{ exerciseBody.fkProgrammingLanguage.name }}</li>
+        <li class="breadcrumb-item">{{ exerciseBody.programmingLanguage.name }}</li>
         <li class="breadcrumb-item" aria-current="page"><span class="active">General</span></li>
     </ol>
 </nav>
@@ -23,7 +23,7 @@
 
             <label for="points" class="col-2 col-form-label">Obtainable Points</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-1" id="points" name="points" [(ngModel)]="exerciseBody.optainablePoints">
+                <input type="text" class="form-control-plaintext col-1" id="points" name="points" [(ngModel)]="exerciseBody.obtainablePoints">
             </div>
 
             <label for="idNum" class="col-2 col-form-label">ID-Number</label>
@@ -48,21 +48,21 @@
             <label for="allowAttachments" class="col-2 col-form-label">Allow Attachments</label>
             <div class="col-10">
                 <select class="form-control col-3" name="allowAttachments" id="allowAttachments" [(ngModel)]="exerciseBody.allowFiles">
-                    <option value="0" [ngValue]="0">No</option>
-                    <option value="1" [ngValue]="1">1</option>
-                    <option value="2" [ngValue]="2">2</option>
-                    <option value="3" [ngValue]="3">3</option>
-                    <option value="4" [ngValue]="4">Unlimited</option>
+                    <option [ngValue]="0">No</option>
+                    <option [ngValue]="1">1</option>
+                    <option [ngValue]="2">2</option>
+                    <option [ngValue]="3">3</option>
+                    <option [ngValue]="4">Unlimited</option>
                 </select>
             </div>
 
             <label for="neededAttachments" class="col-2 col-form-label">Required Attachments</label>
             <div class="col-10">
                 <select class="form-control col-3" name="neededAttachments" id="neededAttachments" [(ngModel)]="exerciseBody.filesRequired">
-                    <option value="0" [ngValue]="0">Attachments are optional</option>
-                    <option value="1" [ngValue]="1">1</option>
-                    <option value="2" [ngValue]="2">2</option>
-                    <option value="3" [ngValue]="3">3</option>
+                    <option [ngValue]="0">Attachments are optional</option>
+                    <option [ngValue]="1">1</option>
+                    <option [ngValue]="2">2</option>
+                    <option [ngValue]="3">3</option>
                 </select>
             </div>
 
@@ -79,8 +79,8 @@
             <!-- TODO: add filesizes -->
             <label for="maxDataSize" class="col-2 col-form-label">Max Filesize</label>
             <div class="col-10">
-                <select class="form-control col-3" name="maxDataSize" id="maxDataSize" [(ngModel)]="exerciseBody.maxAllowedFiles">
-                    <option value="0" [ngValue]="0">10kB</option>
+                <select class="form-control col-3" name="fileSize" id="fileSize" [(ngModel)]="exerciseBody.fileSize">
+                    <option [ngValue]="0">10kB</option>
                 </select>
             </div>
         </div>
@@ -91,7 +91,7 @@
     <nav aria-label="breadcrumb" class="blue float-left">
         <ol class="breadcrumb blue">
             <li class="breadcrumb-item">Body</li>
-            <li class="breadcrumb-item">{{ exerciseBody.fkProgrammingLanguage.name }}</li>
+            <li class="breadcrumb-item">{{ exerciseBody.programmingLanguage.name }}</li>
             <li class="breadcrumb-item" aria-current="page"><span class="active">General</span></li>
         </ol>
     </nav>

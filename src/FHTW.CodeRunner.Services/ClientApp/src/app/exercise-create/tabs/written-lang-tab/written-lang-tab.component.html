@@ -9,19 +9,19 @@
 <h6 class="description">Written / Spoken Language specific Description</h6>
 <div class="contentSeperator">
     <form>
-        <h4>{{ exerciseLanguage.fkWrittenLanguage.name }}</h4>
+        <h4>{{ exerciseLanguage.writtenLanguage.name }}</h4>
         <div class="from-group content-group row">
             <label for="fullTitle" class="col-2 col-form-label">Exercise Title</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext" id="fullTitle" name="fullTitle" placeholder="Full Title" [(ngModel)]="exerciseLanguage.fkExerciseHeader.fullTitle">
+                <input type="text" class="form-control-plaintext" id="fullTitle" name="fullTitle" placeholder="Full Title" [(ngModel)]="exerciseLanguage.exerciseHeader.fullTitle">
             </div>
             <label for="shortTitle" class="col-2 col-form-label">Short Title</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext" id="shortTitle" name="shortTitle" placeholder="Short Title" [(ngModel)]="exerciseLanguage.fkExerciseHeader.shortTitle">
+                <input type="text" class="form-control-plaintext" id="shortTitle" name="shortTitle" placeholder="Short Title" [(ngModel)]="exerciseLanguage.exerciseHeader.shortTitle">
             </div>
             <label for="introduction" class="col-2 col-form-label">Exercise Introduction</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="introduction" name="introduction" rows="4" [(ngModel)]="exerciseLanguage.fkExerciseHeader.introduction"></textarea>
+                <textarea class="form-control-plaintext" id="introduction" name="introduction" rows="4" [(ngModel)]="exerciseLanguage.exerciseHeader.introduction"></textarea>
             </div>
         </div>
     </form>

@@ -5,44 +5,44 @@
         <div class="from-group row">
             <label for="questionType" class="col-2 col-form-label">Question Type</label>
             <div class="col-10">
-                <select class="form-control" name="questionType" [(ngModel)]="testSuit.fkQuestionType">
+                <select class="form-control" name="questionType" [(ngModel)]="testSuite.questionType">
                     <option *ngFor="let q of questionTypes" [ngValue]="q">{{ q.name }}</option>
                 </select>
             </div>
 
             <label for="templDebugging" class="col-2 col-form-label">Template Debugging</label>
             <div class="col-10">
-                <input type="checkbox" id="templDebugging" name="templDebugging" [(ngModel)]="testSuit.templateDebugFlag">
+                <input type="checkbox" id="templDebugging" name="templDebugging" [(ngModel)]="testSuite.templateDebugFlag">
             </div>
 
             <label for="precheck" class="col-2 col-form-label">Precheck</label>
             <div class="col-10">
-                <select class="form-control" id="precheck" name="precheck" [(ngModel)]="testSuit.preCheck">
-                    <option value="0" [ngValue]="0">Deactivated</option>
-                    <option value="1" [ngValue]="1">Empty</option>
-                    <option value="2" [ngValue]="2">Examples</option>
-                    <option value="3" [ngValue]="3">Selected</option>
-                    <option value="4" [ngValue]="4">All</option>
+                <select class="form-control" id="precheck" name="precheck" [(ngModel)]="testSuite.preCheck">
+                    <option [ngValue]="0">Deactivated</option>
+                    <option [ngValue]="1">Empty</option>
+                    <option [ngValue]="2">Examples</option>
+                    <option [ngValue]="3">Selected</option>
+                    <option [ngValue]="4">All</option>
                 </select>
             </div>
 
             <label for="feedback" class="col-2 col-form-label">Display Feedback</label>
             <div class="col-10">
-                <select class="form-control" id="feedback" name="feedback" [(ngModel)]="testSuit.generalFeedbackDisplay">
-                    <option value="0" [ngValue]="0">Set by Test</option>
-                    <option value="1" [ngValue]="1">Force Show</option>
-                    <option value="2" [ngValue]="2">Force Hide</option>
+                <select class="form-control" id="feedback" name="feedback" [(ngModel)]="testSuite.generalFeedbackDisplay">
+                    <option [ngValue]="0">Set by Test</option>
+                    <option [ngValue]="1">Force Show</option>
+                    <option [ngValue]="2">Force Hide</option>
                 </select>
             </div>
 
             <label for="globalExtra" class="col-2 col-form-label">Global Extra</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="globalExtra" name="globalExtra" rows="5" [(ngModel)]="testSuit.globalExtraParam"></textarea>
+                <textarea class="form-control-plaintext" id="globalExtra" name="globalExtra" rows="5" [(ngModel)]="testSuite.globalExtraParam"></textarea>
             </div>
 
             <label for="runtimeData" class="col-2 col-form-label">Runtime Data</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="runtimeData" name="runtimeData" rows="5" [(ngModel)]="testSuit.runtimeData"></textarea>
+                <textarea class="form-control-plaintext" id="runtimeData" name="runtimeData" rows="5" [(ngModel)]="testSuite.runtimeData"></textarea>
             </div>
 
             <!-- <label for="complexity" class="col-2 col-form-label">Complexity</label>
@@ -52,7 +52,7 @@
 
             <label for="testOnSave" class="col-2 col-form-label">Test on Save</label>
             <div class="col-10">
-                <input type="checkbox" id="testOnSave" name="testOnSave" [(ngModel)]="testSuit.testOnSaveFlag">
+                <input type="checkbox" id="testOnSave" name="testOnSave" [(ngModel)]="testSuite.testOnSaveFlag">
             </div>
         </div>
     </form>

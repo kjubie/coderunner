@@ -1,21 +1,22 @@
 import { QuestionType } from "../question-type";
 import { TestCase } from "./test-case";
 
-export class TestSuit {
+export class TestSuite {
     constructor() {
         this.id = 0;
-        this.testCase = [];
+        this.testCaseList = [new TestCase()];
+        this.questionType = new QuestionType();
     }
 
     id: number;
-    fkQuestionType: QuestionType;
+    questionType: QuestionType;
     templateDebugFlag: boolean;
     testOnSaveFlag: boolean;
     globalExtraParam: string;
     runtimeData: string;
     preCheck: number;
     generalFeedbackDisplay: number;
-    testCase: TestCase[];
+    testCaseList: TestCase[];
     
     //prefill: string;
     //solution: string;

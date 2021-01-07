@@ -11,6 +11,8 @@ using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
 using SvcEntities = FHTW.CodeRunner.Services.DTOs;
 
@@ -48,6 +50,9 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <returns>One exercise.</returns>
         [HttpGet]
         [Route("exercise/{id}")]
+        [SwaggerOperation("GetTestExercise")]
+        [SwaggerResponse(statusCode: 200, type: typeof(SvcEntities.Exercise), description: "Successful response")]
+        [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
         public virtual IActionResult GetTestExercise(int id)
         {
             BlEntities.Exercise blExercise = this.exerciseLogic.GetTestExercise(id);
@@ -63,6 +68,9 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <returns>A Statuscode.</returns>
         [HttpPost]
         [Route("exercise")]
+        [SwaggerOperation("SaveExercise")]
+        [SwaggerResponse(statusCode: 200, description: "Successfully saved the exercise")]
+        [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "The operation failed due to an error.")]
         public virtual IActionResult SaveExercise([FromBody] SvcEntities.Exercise body)
         {
             if (body == null)
@@ -86,6 +94,9 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <returns>A Statuscode.</returns>
         [HttpPost]
         [Route("exercise/validate")]
+        [SwaggerOperation("ValidateExercise")]
+        [SwaggerResponse(statusCode: 200, description: "Successfully validated")]
+        [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "The operation failed due to an error.")]
         public virtual IActionResult ValidateExercise([FromBody] SvcEntities.Exercise body)
         {
             if (body == null)
@@ -108,6 +119,9 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <returns>Lists of necessary attributes.</returns>
         [HttpGet]
         [Route("exercise/prepare")]
+        [SwaggerOperation("GetExerciseCreatePreparation")]
+        [SwaggerResponse(statusCode: 200, type: typeof(SvcEntities.ExerciseCreatePreparation), description: "Successful response")]
+        [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
         public virtual IActionResult GetExerciseCreatePreparation()
         {
             BlEntities.ExerciseCreatePreparation blExerciseCreatePreparation = this.exerciseLogic.GetExerciseCreatePreparation();
@@ -122,6 +136,9 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <returns>A list of exercises in a minmal format.</returns>
         [HttpGet]
         [Route("exercise/short")]
+        [SwaggerOperation("GetExerciseShort")]
+        [SwaggerResponse(statusCode: 200, type: typeof(SvcEntities.ExerciseShort), description: "Successful response")]
+        [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
         public virtual IActionResult GetExerciseShort()
         {
             List<BlEntities.ExerciseShort> blExerciseShort = this.exerciseLogic.GetExerciseShortList();

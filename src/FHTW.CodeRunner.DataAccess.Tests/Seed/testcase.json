@@ -1,6 +1,5 @@
 [
     {   // Exercise 1, Testcase 1, C++, V1
-        "Id": 1,
         "OrderUsed": 1,
         "TestCode": "test_code_1_c++_V1",
         "StandardInput": "standard_input_1_c++_V1",
@@ -13,7 +12,6 @@
         "DisplayType": "HIDE"
     },
     {   // Exercise 1, Testcase 2, C++, V1
-        "Id": 2,
         "OrderUsed": 2,
         "TestCode": "test_code_2_c++_V1",
         "StandardInput": "standard_input_2_c++_V1",
@@ -26,7 +24,6 @@
         "DisplayType": "SHOW"
     },
     {   // Exercise 1, Testcase 1, C#, V1
-        "Id": 3,
         "OrderUsed": 1,
         "TestCode": "test_code_1_c#_V1",
         "StandardInput": "standard_input_1_c#_V1",
@@ -39,7 +36,6 @@
         "DisplayType": "SHOW"
     },
     {   // Exercise 1, Testcase 2, C#, V1
-        "Id": 4,
         "OrderUsed": 2,
         "TestCode": "test_code_2_c#_V1",
         "StandardInput": "standard_input_2_c#_V1",
@@ -52,7 +48,6 @@
         "DisplayType": "SHOW"
     },
     {   // Exercise 1, Testcase 1, C++, V2
-        "Id": 5,
         "OrderUsed": 1,
         "TestCode": "test_code_1_c++_V2",
         "StandardInput": "standard_input_1_c++_V2",
@@ -65,7 +60,6 @@
         "DisplayType": "HIDE"
     },
     {   // Exercise 1, Testcase 2, C++, V2
-        "Id": 6,
         "OrderUsed": 2,
         "TestCode": "test_code_2_c++_V2",
         "StandardInput": "standard_input_2_c++_V2",
@@ -78,7 +72,6 @@
         "DisplayType": "SHOW"
     },
     {   // Exercise 1, Testcase 1, C#, V2
-        "Id": 7,
         "OrderUsed": 1,
         "TestCode": "test_code_1_c#_V2",
         "StandardInput": "standard_input_1_c#_V2",
@@ -91,7 +84,6 @@
         "DisplayType": "SHOW"
     },
     {   // Exercise 1, Testcase 2, C#, V2
-        "Id": 8,
         "OrderUsed": 2,
         "TestCode": "test_code_2_c#_V2",
         "StandardInput": "standard_input_2_c#_V2",
@@ -104,7 +96,6 @@
         "DisplayType": "SHOW"
     },
     {   // Exercise 1, Testcase 1, C++, V3
-        "Id": 9,
         "OrderUsed": 1,
         "TestCode": "test_code_1_c++_V3",
         "StandardInput": "standard_input_1_c++_V3",
@@ -117,7 +108,6 @@
         "DisplayType": "HIDE"
     },
     {   // Exercise 1, Testcase 2, C++, V3
-        "Id": 10,
         "OrderUsed": 2,
         "TestCode": "test_code_2_c++_V3",
         "StandardInput": "standard_input_2_c++_V3",
@@ -130,7 +120,6 @@
         "DisplayType": "SHOW"
     },
     {   // Exercise 1, Testcase 1, C#, V3
-        "Id": 11,
         "OrderUsed": 1,
         "TestCode": "test_code_1_c#_V3",
         "StandardInput": "standard_input_1_c#_V3",
@@ -143,7 +132,6 @@
         "DisplayType": "SHOW"
     },
     {   // Exercise 1, Testcase 2, C#, V3
-        "Id": 12,
         "OrderUsed": 2,
         "TestCode": "test_code_2_c#_V3",
         "StandardInput": "standard_input_2_c#_V3",
@@ -156,7 +144,6 @@
         "DisplayType": "SHOW"
     },
     {   // Exercise 2, Testcase 1, Python, V1
-        "Id": 13,
         "OrderUsed": 1,
         "TestCode": "test_code_1_py_V1",
         "StandardInput": "standard_input_1_py_V1",
@@ -169,7 +156,6 @@
         "DisplayType": "HIDE"
     },
     {   // Exercise 2, Testcase 1, Java, V1
-        "Id": 14,
         "OrderUsed": 1,
         "TestCode": "test_code_1_java_V1",
         "StandardInput": "standard_input_1_java_V1",
@@ -182,7 +168,6 @@
         "DisplayType": "HIDE"
     },
     {   // Exercise 3, Testcase 1, C, V1
-        "Id": 15,
         "OrderUsed": 1,
         "TestCode": "test_code_1_c_V1",
         "StandardInput": "standard_input_1_c_V1",

@@ -13,9 +13,12 @@ import { ExerciseExportService } from '../services/exercise-export.service';
 export class HomeComponent implements OnInit {
 
   viewSelected: string = "list";
+  xmlExportString: string;
+
   exerciseList: ExerciseHome[];
   selectedExercise: ExerciseHome;
   exerciseForExport: ExerciseExport = new ExerciseExport();
+
   versionInvalid = false;
   wLangInvalid = false;
   pLangInvalid = false;
@@ -53,18 +56,17 @@ export class HomeComponent implements OnInit {
   }
 
   exportExerciseObserver = {
+    next: x => { this.xmlExportString = x },
+    error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
-      console.log('exercise successfully exported');
+      console.log('download xml file');
+      // console.log(this.xmlExportString);
+      this.downloadXMLFile();
     }
   }
 
   exportSingleExercise(idx: number, modalContent) {
     this.selectedExercise = this.exerciseList[idx];
-    
-    // set needed data
-    this.exerciseForExport.id = this.selectedExercise.id;
-    // this.exerciseForExport.version = 0; // ToDo: remove once version is set in modal
-    this.exerciseForExport.tagList = this.selectedExercise.tagList;
 
     // open Modal for exercise
     this.modalService.open(modalContent, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -72,7 +74,7 @@ export class HomeComponent implements OnInit {
     }, (reason) => {
       console.log('Dismissed ' + this.getDismissReason(reason));
     });
-  
+
     this.resetForm();
   }
 
@@ -93,9 +95,10 @@ export class HomeComponent implements OnInit {
     this.pLangInvalid = (this.exerciseForExport.programmingLanguage == undefined);
 
     if (!this.versionInvalid && !this.wLangInvalid && !this.pLangInvalid) {
+      this.exerciseForExport.id = this.selectedExercise.id;
       console.log('exercise is ready for export');
       console.log(this.exerciseForExport);
-      // this.exportService.exportExercise(this.exerciseForExport).subscribe(this.exportExerciseObserver);
+      this.exportService.exportExercise(this.exerciseForExport).subscribe(this.exportExerciseObserver);
       this.modalService.dismissAll('Exercise exported');
     }
     else {
@@ -108,5 +111,22 @@ export class HomeComponent implements OnInit {
     this.wLangInvalid = false;
     this.pLangInvalid = false;
     this.exerciseForExport = new ExerciseExport();
+  }
+
+  private downloadXMLFile() {
+    const filename = 'ExerciseExport.xml';
+    const blob = new Blob([this.xmlExportString], {type: 'text/xml'});
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE
+      window.navigator.msSaveOrOpenBlob(blob, filename);
+      window.navigator.msSaveOrOpenBlob(blob, filename);
+    } else { //Chrome & Firefox
+      const a = document.createElement('a');
+      const url = window.URL.createObjectURL(blob);
+      a.href = url;
+      a.download = filename;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove();
+    }
   }
 }

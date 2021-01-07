@@ -12,22 +12,22 @@
 
                 <label for="user" class="col-2 col-form-label">Author</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext" id="user" readonly name="user" [(ngModel)]="exercise.fkUser.name">
+                    <input type="text" class="form-control-plaintext" id="user" readonly name="user" [(ngModel)]="exercise.user.name">
                 </div>
 
                 <label for="param" class="col-2 col-form-label">Template Parameters</label>
                 <div class="col-10">
-                    <textarea type="text" class="form-control-plaintext" rows="4" id="param" name="param" readonly [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseHeader.templateParam"></textarea>
+                    <textarea type="text" class="form-control-plaintext" rows="4" id="param" name="param" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParam"></textarea>
                 </div>
 
                 <label for="twig" class="col-2 col-form-label">Twig Control</label>
                 <div class="col-10 form-inline">
                     <div class="form-group col-3">
-                        <input type="checkbox" id="liftParam" name="liftParam" (click)="$event.preventDefault()" [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseHeader.templateParamLiftFlag">
+                        <input type="checkbox" id="liftParam" name="liftParam" (click)="$event.preventDefault()" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParamLiftFlag">
                         <p class="ml-3">Lift Template Parameters</p>
                     </div>
                     <div class="form-group col-3">
-                        <input type="checkbox" id="twigAll" name="twigAll" (click)="$event.preventDefault()" [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseHeader.twigAllFlag">
+                        <input type="checkbox" id="twigAll" name="twigAll" (click)="$event.preventDefault()" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.twigAllFlag">
                         <p class="ml-3">Twig for All</p>
                     </div>
                 </div>
@@ -40,15 +40,15 @@
             <div class="from-group row">
                 <label for="fullTitle" class="col-2 col-form-label">Exercise Title</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext" id="fullTitle" readonly name="fullTitle" [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseHeader.fullTitle">
+                    <input type="text" class="form-control-plaintext" id="fullTitle" readonly name="fullTitle" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.fullTitle">
                 </div>
                 <label for="shortTitle" class="col-2 col-form-label">Short Title</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext" id="shortTitle" readonly name="shortTitle" [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseHeader.shortTitle">
+                    <input type="text" class="form-control-plaintext" id="shortTitle" readonly name="shortTitle" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.shortTitle">
                 </div>
                 <label for="introduction" class="col-2 col-form-label">Exercise Introduction</label>
                 <div class="col-10">
-                    <textarea class="form-control-plaintext" id="introduction" readonly name="introduction" rows="4" [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseHeader.introduction"></textarea>
+                    <textarea class="form-control-plaintext" id="introduction" readonly name="introduction" rows="4" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.introduction"></textarea>
                 </div>
             </div>
         </div>
@@ -59,37 +59,37 @@
             <div class="from-group row">
                 <label for="programmingLang" class="col-2 col-form-label">Language</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext" id="programmingLang" readonly name="name" [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseBody.fkProgrammingLanguage.name">
+                    <input type="text" class="form-control-plaintext" id="programmingLang" readonly name="name" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.programmingLanguage.name">
                 </div>
 
                 <label for="fieldLines" class="col-2 col-form-label">Answerfield Lines</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext col-1" id="fieldLines" name="fieldLines" readonly [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseBody.fieldLines">
+                    <input type="text" class="form-control-plaintext col-1" id="fieldLines" name="fieldLines" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.fieldLines">
                 </div>
 
                 <label for="subSystem" class="col-2 col-form-label">Penalty System</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext col-3" id="subSystem" name="subSystem" readonly [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseBody.subtractSystem">
+                    <input type="text" class="form-control-plaintext col-3" id="subSystem" name="subSystem" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.subtractSystem">
                 </div>
 
                 <label for="points" class="col-2 col-form-label">Obtainable Points</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext col-1" id="points" name="points" readonly [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseBody.obtainablePoints">
+                    <input type="text" class="form-control-plaintext col-1" id="points" name="points" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.obtainablePoints">
                 </div>
 
                 <label for="idNum" class="col-2 col-form-label">ID-Number</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext col-1" id="idNum" name="idNum" readonly [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseBody.idNum">
+                    <input type="text" class="form-control-plaintext col-1" id="idNum" name="idNum" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.idNum">
                 </div>
 
                 <label for="answer" class="col-2 col-form-label">Answer</label>
                 <div class="col-10">
-                    <textarea class="form-control-plaintext" id="answer" name="answer" rows="4" readonly [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseBody.solution"></textarea>
+                    <textarea class="form-control-plaintext" id="answer" name="answer" rows="4" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.solution"></textarea>
                 </div>
 
                 <label for="prefillAnswer" class="col-2 col-form-label">Answer Preload</label>
                 <div class="col-10">
-                    <textarea class="form-control-plaintext" id="prefillAnswer" name="prefillAnswer" rows="4" readonly [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseBody.prefill"></textarea>
+                    <textarea class="form-control-plaintext" id="prefillAnswer" name="prefillAnswer" rows="4" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.prefill"></textarea>
                 </div>
 
                 <h6>Languages</h6>
@@ -97,7 +97,7 @@
                 <h4>{{ writtenLang }}</h4>
                 <label for="genFeedback" class="col-2 col-form-label">General Feedback</label>
                 <div class="col-10">
-                    <textarea class="form-control-plaintext" id="genFeedback" name="genFeedback" rows="9" readonly [(ngModel)]="exercise.exerciseVersion[0].exerciseLanguage[0].fkExerciseBody.feedback"></textarea>
+                    <textarea class="form-control-plaintext" id="genFeedback" name="genFeedback" rows="9" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.feedback"></textarea>
                 </div>
             </div>
         </div>

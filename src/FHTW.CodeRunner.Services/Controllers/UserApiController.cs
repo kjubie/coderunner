@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
 using SvcEntities = FHTW.CodeRunner.Services.DTOs;
 
@@ -50,6 +51,9 @@ namespace FHTW.CodeRunner.Services.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("user/authenticate")]
+        [SwaggerOperation("AuthenticateUser")]
+        [SwaggerResponse(statusCode: 200, type: typeof(SvcEntities.AuthenticateOk), description: "Successfully authenticated the user")]
+        [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "The operation failed due to an error.")]
         public virtual IActionResult AuthenticateUser([FromBody] SvcEntities.UserAuthentication body)
         {
             if (body == null)

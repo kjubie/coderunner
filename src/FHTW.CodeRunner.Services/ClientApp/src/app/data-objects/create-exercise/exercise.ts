@@ -1,21 +1,20 @@
-import { User } from "oidc-client";
-import { ExerciseHeader } from "./exercise-header";
 import { Author } from "../author";
 import { Tag } from "../tag";
+import { ExerciseTag } from "./exercise-tags";
 import { ExerciseVersion } from "./exercise-version";
 
 export class Exercise {
     constructor() {
         this.id = 0;
-        this.fkUser = new Author();
-        this.exerciseTag = [];
-        this.exerciseVersion = [];
+        this.user = new Author();
+        this.exerciseTagList = [];
+        this.exerciseVersionList = [];
     }
 
     id: number;
     title: string;
-    created: string;
-    fkUser: Author;
-    exerciseTag: Tag[];
-    exerciseVersion: ExerciseVersion[];
+    created: Date;
+    user: Author;
+    exerciseTagList: ExerciseTag[];
+    exerciseVersionList: ExerciseVersion[];
 }

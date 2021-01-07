@@ -23,7 +23,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
         }
 
         [Test]
-        public void AuthenticateUser_ValidUser_True()
+        public void AuthenticateUser_ValidUser_Int()
         {
             // Arrange
             var logger = Mock.Of<ILogger<UserLogic>>();
@@ -35,7 +35,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
                 }));
 
             var repoMock = new Mock<IUserRepository>();
-            repoMock.Setup(p => p.Authenticate(It.IsAny<DalEntities.User>())).Returns(true);
+            repoMock.Setup(p => p.Authenticate(It.IsAny<DalEntities.User>())).Returns(2);
 
             IUserRepository repo = repoMock.Object;
 
@@ -48,14 +48,14 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
                 .Build();
 
             // Act
-            bool result = logic.AuthenticateUser(validUser);
+            int? result = logic.AuthenticateUser(validUser);
 
             // Assert
-            Assert.IsTrue(result);
+            Assert.IsNotNull(result);
         }
 
         [Test]
-        public void AuthenticateUser_InvalidUser_False()
+        public void AuthenticateUser_InvalidUser_Null()
         {
             // Arrange
             var logger = Mock.Of<ILogger<UserLogic>>();
@@ -67,7 +67,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
                 }));
 
             var repoMock = new Mock<IUserRepository>();
-            repoMock.Setup(p => p.Authenticate(It.IsAny<DalEntities.User>())).Returns(false);
+            repoMock.Setup(p => p.Authenticate(It.IsAny<DalEntities.User>()));
 
             IUserRepository repo = repoMock.Object;
 
@@ -78,10 +78,10 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
                 .Build();
 
             // Act
-            bool result = logic.AuthenticateUser(validUser);
+            int? result = logic.AuthenticateUser(validUser);
 
             // Assert
-            Assert.IsFalse(result);
+            Assert.IsNull(result);
         }
     }
 }

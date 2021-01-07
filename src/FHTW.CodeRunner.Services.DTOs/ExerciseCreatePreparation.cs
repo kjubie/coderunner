@@ -22,5 +22,8 @@ namespace FHTW.CodeRunner.Services.DTOs
 
         [DataMember(Name = "questionTypeList")]
         public List<QuestionType> QuestionTypes { get; set; }
+
+        [DataMember(Name = "tagList")]
+        public List<Tag> Tags { get; set; }
     }
 }
