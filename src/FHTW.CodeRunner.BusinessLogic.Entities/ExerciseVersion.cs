@@ -24,13 +24,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     [ExcludeFromCodeCoverage]
     public class ExerciseVersion
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ExerciseVersion"/> class.
-        /// </summary>
-        public ExerciseVersion()
-        {
-            this.ExerciseLanguage = new HashSet<ExerciseLanguage>();
-        }
+        private User user;
 
         public int Id { get; set; }
 
@@ -44,7 +38,31 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
 
         public ValidState ValidState { get; set; }
 
-        public User FkUser { get; set; }
+        /// <summary>
+        /// Gets or sets the Foreign Key for the user.
+        /// </summary>
+        public int FkUserId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the author.
+        /// </summary>
+        public User FkUser
+        {
+            get
+            {
+                return this.user;
+            }
+
+            set
+            {
+                this.user = value;
+
+                if (value != null)
+                {
+                    this.FkUserId = value.Id;
+                }
+            }
+        }
 
         public ICollection<ExerciseLanguage> ExerciseLanguage { get; set; }
     }

@@ -46,22 +46,32 @@ namespace FHTW.CodeRunner.Services.AutoMapper
                 .ReverseMap();
 
             this.CreateMap<BlEntities.Exercise, DalEntities.Exercise>()
-                .ReverseMap();
+                .ForMember(dest => dest.FkUser, opt => opt.Ignore());
+
+            this.CreateMap<DalEntities.Exercise, BlEntities.Exercise>();
 
             this.CreateMap<BlEntities.ExerciseBody, DalEntities.ExerciseBody>()
-                .ReverseMap();
+                .ForMember(dest => dest.FkProgrammingLanguage, opt => opt.Ignore());
+
+            this.CreateMap<DalEntities.ExerciseBody, BlEntities.ExerciseBody>();
 
             this.CreateMap<BlEntities.ExerciseHeader, DalEntities.ExerciseHeader>()
                 .ReverseMap();
 
             this.CreateMap<BlEntities.ExerciseLanguage, DalEntities.ExerciseLanguage>()
-                .ReverseMap();
+                .ForMember(dest => dest.FkWrittenLanguage, opt => opt.Ignore());
+
+            this.CreateMap<DalEntities.ExerciseLanguage, BlEntities.ExerciseLanguage>();
 
             this.CreateMap<BlEntities.ExerciseTag, DalEntities.ExerciseTag>()
                 .ReverseMap();
 
             this.CreateMap<BlEntities.ExerciseVersion, DalEntities.ExerciseVersion>()
-                .ReverseMap();
+                .ForMember(dest => dest.FkUser, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(dest => dest.ValidState, opt => opt.MapFrom(src => BlEntities.ValidState.NotChecked));
+
+            this.CreateMap<DalEntities.ExerciseVersion, BlEntities.ExerciseVersion>();
 
             this.CreateMap<BlEntities.ProgrammingLanguage, DalEntities.ProgrammingLanguage>()
                 .ReverseMap();
@@ -76,7 +86,9 @@ namespace FHTW.CodeRunner.Services.AutoMapper
                 .ReverseMap();
 
             this.CreateMap<BlEntities.TestSuite, DalEntities.TestSuite>()
-                .ReverseMap();
+                .ForMember(dest => dest.FkQuestionType, opt => opt.Ignore());
+
+            this.CreateMap<DalEntities.TestSuite, BlEntities.TestSuite>();
 
             this.CreateMap<BlEntities.WrittenLanguage, DalEntities.WrittenLanguage>()
                 .ReverseMap();

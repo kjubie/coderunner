@@ -11,17 +11,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     [ExcludeFromCodeCoverage]
     public class ExerciseLanguage
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ExerciseLanguage"/> class.
-        /// </summary>
-        public ExerciseLanguage()
-        {
-            this.ExerciseBody = new HashSet<ExerciseBody>();
-        }
+        private WrittenLanguage writtenLanguage;
 
         public int Id { get; set; }
-
-        public int FkWrittenLanguageId { get; set; }
 
         public int FkExerciseVersionId { get; set; }
 
@@ -31,7 +23,31 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
 
         public ExerciseVersion FkExerciseVersion { get; set; }
 
-        public WrittenLanguage FkWrittenLanguage { get; set; }
+        /// <summary>
+        /// Gets or sets the Foreign Key for the written language.
+        /// </summary>
+        public int FkWrittenLanguageId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the written language.
+        /// </summary>
+        public WrittenLanguage FkWrittenLanguage
+        {
+            get
+            {
+                return this.writtenLanguage;
+            }
+
+            set
+            {
+                this.writtenLanguage = value;
+
+                if (value != null)
+                {
+                    this.FkWrittenLanguageId = value.Id;
+                }
+            }
+        }
 
         public ICollection<ExerciseBody> ExerciseBody { get; set; }
     }

@@ -63,20 +63,35 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     [ExcludeFromCodeCoverage]
     public class TestSuite
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TestSuite"/> class.
-        /// </summary>
-        public TestSuite()
-        {
-            this.TestCase = new HashSet<TestCase>();
-        }
+        private QuestionType questionType;
 
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets the question type.
+        /// Gets or sets the Foreign Key for the question type.
         /// </summary>
-        public QuestionType FkQuestionType { get; set; }
+        public int FkQuestionTypeId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the question type.
+        /// </summary>
+        public QuestionType FkQuestionType
+        {
+            get
+            {
+                return this.questionType;
+            }
+
+            set
+            {
+                this.questionType = value;
+
+                if (value != null)
+                {
+                    this.FkQuestionTypeId = value.Id;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or Sets a value indicating whether the from the template generated program should be displayed.
