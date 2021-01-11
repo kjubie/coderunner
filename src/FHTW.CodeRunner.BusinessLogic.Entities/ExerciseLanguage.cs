@@ -8,20 +8,23 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
+    /// <summary>
+    /// Entit that describes the written language for an exercise.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class ExerciseLanguage
     {
         private WrittenLanguage writtenLanguage;
 
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         public int Id { get; set; }
 
-        public int FkExerciseVersionId { get; set; }
-
-        public int FkExerciseHeaderId { get; set; }
-
+        /// <summary>
+        /// Gets or sets the exercise header.
+        /// </summary>
         public ExerciseHeader FkExerciseHeader { get; set; }
-
-        public ExerciseVersion FkExerciseVersion { get; set; }
 
         /// <summary>
         /// Gets or sets the Foreign Key for the written language.
@@ -49,6 +52,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
             }
         }
 
+        /// <summary>
+        /// Gets or sets multiple exercise bodies.
+        /// </summary>
         public ICollection<ExerciseBody> ExerciseBody { get; set; }
     }
 }

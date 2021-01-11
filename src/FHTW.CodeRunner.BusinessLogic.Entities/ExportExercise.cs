@@ -9,15 +9,30 @@ using System.Text;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
+    /// <summary>
+    /// Entity that describes the needed information for a specific exercise.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class ExportExercise
     {
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         public int Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the version.
+        /// </summary>
         public int Version { get; set; }
 
+        /// <summary>
+        /// Gets or sets the written language.
+        /// </summary>
         public string WrittenLanguage { get; set; }
 
+        /// <summary>
+        /// Gets or sets the programming language.
+        /// </summary>
         public string ProgrammingLanguage { get; set; }
     }
 }

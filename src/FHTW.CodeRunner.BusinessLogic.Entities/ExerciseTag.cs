@@ -8,13 +8,20 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
+    /// <summary>
+    /// Entity that connects a tag to an exercise.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class ExerciseTag
     {
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         public int Id { get; set; }
 
-        public Exercise FkExercise { get; set; }
-
+        /// <summary>
+        /// Gets or sets the tag.
+        /// </summary>
         public Tag FkTag { get; set; }
     }
 }
