@@ -18,8 +18,8 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         [Column("id")]
         public int Id { get; set; }
 
-        [Column("fk_collection_language_id")]
-        public int FkCollectionLanguageId { get; set; }
+        [Column("fk_collection_id")]
+        public int FkCollectionId { get; set; }
 
         [Column("version_number")]
         public int VersionNumber { get; set; }
@@ -33,9 +33,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         [Column("fk_written_language_id")]
         public int FkWrittenLanguageId { get; set; }
 
-        [ForeignKey(nameof(FkCollectionLanguageId))]
-        [InverseProperty(nameof(CollectionLanguage.CollectionExercise))]
-        public virtual CollectionLanguage FkCollectionLanguage { get; set; }
+        [ForeignKey(nameof(FkCollectionId))]
+        [InverseProperty(nameof(Collection.CollectionExercise))]
+        public virtual Collection FkCollection { get; set; }
 
         [ForeignKey(nameof(FkExerciseId))]
         [InverseProperty(nameof(Exercise.CollectionExercise))]

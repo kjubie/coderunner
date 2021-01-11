@@ -14,14 +14,6 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     [Table("collection_language")]
     public partial class CollectionLanguage
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CollectionLanguage"/> class.
-        /// </summary>
-        public CollectionLanguage()
-        {
-            this.CollectionExercise = new HashSet<CollectionExercise>();
-        }
-
         [Key]
         [Column("id")]
         public int Id { get; set; }
@@ -39,14 +31,17 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         [Column("introduction")]
         public string Introduction { get; set; }
 
+        [Column("fk_written_language_id")]
+        public int FkWrittenLanguageId { get; set; }
+
+        [ForeignKey(nameof(FkWrittenLanguageId))]
+        public WrittenLanguage FkWrittenLanguage { get; set; }
+
         [Column("fk_collection_id")]
         public int FkCollectionId { get; set; }
 
         [ForeignKey(nameof(FkCollectionId))]
         [InverseProperty(nameof(Collection.CollectionLanguage))]
         public virtual Collection FkCollection { get; set; }
-
-        [InverseProperty("FkCollectionLanguage")]
-        public virtual ICollection<CollectionExercise> CollectionExercise { get; set; }
     }
 }

@@ -63,6 +63,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 UpdateOrAdd<Collection>(context, "collection", options);
                 UpdateOrAdd<CollectionLanguage>(context, "collection_language", options);
                 UpdateOrAdd<CollectionExercise>(context, "collection_exercise", options);
+                context.SaveChanges();
             }
             catch (Exception e)
             {

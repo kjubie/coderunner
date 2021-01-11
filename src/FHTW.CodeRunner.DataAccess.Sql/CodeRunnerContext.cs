@@ -92,11 +92,11 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             {
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
-                entity.HasOne(d => d.FkCollectionLanguage)
+                entity.HasOne(d => d.FkCollection)
                     .WithMany(p => p.CollectionExercise)
-                    .HasForeignKey(d => d.FkCollectionLanguageId)
+                    .HasForeignKey(d => d.FkCollectionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("collection_exercise_fk_collection_language_id_fkey");
+                    .HasConstraintName("collection_exercise_fk_collection_id_fkey");
 
                 entity.HasOne(d => d.FkExercise)
                     .WithMany(p => p.CollectionExercise)

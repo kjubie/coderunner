@@ -21,6 +21,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         {
             this.CollectionLanguage = new HashSet<CollectionLanguage>();
             this.CollectionTag = new HashSet<CollectionTag>();
+            this.CollectionExercise = new HashSet<CollectionExercise>();
         }
 
         [Key]
@@ -47,5 +48,8 @@ namespace FHTW.CodeRunner.DataAccess.Entities
 
         [InverseProperty("FkCollection")]
         public virtual ICollection<CollectionTag> CollectionTag { get; set; }
+
+        [InverseProperty("FkCollection")]
+        public virtual ICollection<CollectionExercise> CollectionExercise { get; set; }
     }
 }
