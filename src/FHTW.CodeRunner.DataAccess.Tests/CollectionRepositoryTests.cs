@@ -28,8 +28,9 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         [Test]
         public void ShouldGetExerciseInstancesWithSetLanguage()
         {
-            /* Not testable with SQLITE
-            this.SetupDatabase(DbTestController.State.SEEDEDJSON);
+            // Cannot be tested with sqlite
+            /*
+            this.SetupDatabaseReal(DbTestController.State.SEEDEDJSON);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
                 ICollectionRepository rep = new CollectionRepository(context);
@@ -42,6 +43,26 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             Assert.True(true);
         }
 
-        private void SetupDatabase(DbTestController.State state) => this.testDb = new CodeRunnerTestDb(state);
+        [Test]
+        public void ShouldGetExerciseInstancesWithChosenLanguage()
+        {
+            // Cannot be tested with sqlite
+            /*
+            this.SetupDatabaseReal(DbTestController.State.SEEDEDJSON);
+            using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
+            {
+                ICollectionRepository rep = new CollectionRepository(context);
+
+                var list = rep.GetExercisesInstances(1, "German");
+
+                Assert.NotNull(list);
+            }*/
+
+            Assert.True(true);
+        }
+
+        private void SetupDatabaseReal(DbTestController.State state) => this.testDb = CodeRunnerTestDb.AsRealTestDb(state);
+
+        private void SetupDatabaseInMemory(DbTestController.State state) => this.testDb = CodeRunnerTestDb.AsInMemoryDb(state);
     }
 }

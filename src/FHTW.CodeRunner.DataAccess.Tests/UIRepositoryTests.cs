@@ -28,7 +28,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         [Test]
         public void ShouldGetProgrammingLanguages()
         {
-            this.SetupDatabaseSeeded();
+            this.SetupDatabaseInMemory(DbTestController.State.SEEDED);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
                 IUIRepository rep = new UIRepository(context);
@@ -43,7 +43,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         [Test]
         public void ShouldGetWrittenLanguages()
         {
-            this.SetupDatabaseSeeded();
+            this.SetupDatabaseInMemory(DbTestController.State.SEEDED);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
                 IUIRepository rep = new UIRepository(context);
@@ -58,7 +58,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         [Test]
         public void ShouldGetQuestionTypes()
         {
-            this.SetupDatabaseSeeded();
+            this.SetupDatabaseInMemory(DbTestController.State.SEEDED);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
                 IUIRepository rep = new UIRepository(context);
@@ -70,8 +70,8 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             }
         }
 
-        private void SetupDatabaseEmpty() => this.testDb = new CodeRunnerTestDb(DbTestController.State.EMPTY);
+        private void SetupDatabaseReal(DbTestController.State state) => this.testDb = CodeRunnerTestDb.AsRealTestDb(state);
 
-        private void SetupDatabaseSeeded() => this.testDb = new CodeRunnerTestDb(DbTestController.State.SEEDED);
+        private void SetupDatabaseInMemory(DbTestController.State state) => this.testDb = CodeRunnerTestDb.AsInMemoryDb(state);
     }
 }

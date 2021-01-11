@@ -23,12 +23,8 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         /// Initializes a new instance of the <see cref="CodeRunnerTestDb"/> class.
         /// </summary>
         /// <param name="state">The requestet state of the test db.</param>
-        public CodeRunnerTestDb(State state)
-            : base(
-                  new DbContextOptionsBuilder<CodeRunnerContext>()
-                    .UseSqlite(CreateInMemoryDatabase())
-                    .Options,
-                  state)
+        private CodeRunnerTestDb(DbContextOptions<CodeRunnerContext> options, State state)
+            : base(options, state)
         {
             this.connection = RelationalOptionsExtension.Extract(this.ContextOptions).Connection;
         }
@@ -47,6 +43,30 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             return connection;
         }
 
+        /// <summary>
+        /// Creates the test db in memory.
+        /// </summary>
+        /// <param name="state">The requestet state of the test db.</param>
+        /// <returns>A new instance of the <see cref="CodeRunnerTestDb"/> class.</returns>
+        public static CodeRunnerTestDb AsInMemoryDb(State state)
+        {
+            return new CodeRunnerTestDb(
+                new DbContextOptionsBuilder<CodeRunnerContext>()
+                    .UseSqlite(CreateInMemoryDatabase())
+                    .Options, state);
+        }
 
+        /// <summary>
+        /// Creates a real test database.
+        /// </summary>
+        /// <param name="state">The requestet state of the test db.</param>
+        /// <returns>A new instance of the <see cref="CodeRunnerTestDb"/> class.</returns>
+        public static CodeRunnerTestDb AsRealTestDb(State state)
+        {
+            return new CodeRunnerTestDb(
+                new DbContextOptionsBuilder<CodeRunnerContext>()
+                    .UseNpgsql("Host=localhost;Database=coderunnerdb;Username=postgres;Password=admin;Port=5555")
+                    .Options, state);
+        }
     }
 }

@@ -34,5 +34,13 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// <param name="use_set_language">If true uses the language set in each collection exercise, else uses the language parameter.</param>
         /// <returns>The collection instance in the requested language.</returns>
         CollectionInstance GetCollectionInstance(int id, string language, bool use_set_language);
+
+        /// <summary>
+        /// Creates a new collection or adds a new one.
+        /// Creates a new collection when id is 0.
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <returns></returns>
+        Collection CreateOrUpdate(Collection collection);
     }
 }

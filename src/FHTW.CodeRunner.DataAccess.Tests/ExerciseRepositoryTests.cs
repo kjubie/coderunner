@@ -28,7 +28,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         [Test]
         public void ShouldCreateExercise()
         {
-            this.SetupDatabase(DbTestController.State.SEEDED);
+            this.SetupDatabaseInMemory(DbTestController.State.SEEDEDJSON);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
                 IExerciseRepository rep = new ExerciseRepository(context);
@@ -78,7 +78,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         [Test]
         public void ShouldUpdateTemporarySaveExercise()
         {
-            this.SetupDatabase(DbTestController.State.SEEDED);
+            this.SetupDatabaseInMemory(DbTestController.State.SEEDED);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
                 IExerciseRepository rep = new ExerciseRepository(context);
@@ -195,7 +195,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         [Test]
         public void ShouldCreateAndUpdate()
         {
-            this.SetupDatabase(DbTestController.State.SEEDED);
+            this.SetupDatabaseInMemory(DbTestController.State.SEEDED);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
                 IExerciseRepository rep = new ExerciseRepository(context);
@@ -302,12 +302,12 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         {
             // NOT TESTABLE WITH SQLITE, BECAUSE APPLY IS NOT SUPPORTED
             /*
-            this.SetupDatabase(DbTestController.State.SEEDEDJSON);
+            this.SetupDatabaseReal(DbTestController.State.SEEDEDJSON);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
-                IExerciseRepository rep = new ExerciseRepository(context, this.exerciseLogger);
+                IExerciseRepository rep = new ExerciseRepository(context);
 
-                var list = rep.GetExerciseInstance(1, 1, "C++", "English");
+                var list = rep.GetExerciseInstance(1, "C++", "English");
 
                 Assert.IsNotNull(list);
             }*/
@@ -318,7 +318,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         [Test]
         public void ShouldGetExerciseById()
         {
-            this.SetupDatabase(DbTestController.State.SEEDEDJSON);
+            this.SetupDatabaseInMemory(DbTestController.State.SEEDEDJSON);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
                 IExerciseRepository rep = new ExerciseRepository(context);
@@ -329,6 +329,8 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             }
         }
 
-        private void SetupDatabase(DbTestController.State state) => this.testDb = new CodeRunnerTestDb(state);
+        private void SetupDatabaseReal(DbTestController.State state) => this.testDb = CodeRunnerTestDb.AsRealTestDb(state);
+
+        private void SetupDatabaseInMemory(DbTestController.State state) => this.testDb = CodeRunnerTestDb.AsInMemoryDb(state);
     }
 }

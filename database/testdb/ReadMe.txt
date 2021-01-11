@@ -1,0 +1,1 @@
+The testdb is used to test the DataAccess Layer against a real db.

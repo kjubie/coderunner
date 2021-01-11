@@ -78,5 +78,10 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             return instance;
         }
+
+        public Collection CreateOrUpdate(Collection collection)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
