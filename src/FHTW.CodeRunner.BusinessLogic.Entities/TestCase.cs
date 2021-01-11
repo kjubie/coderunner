@@ -8,9 +8,15 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
+    /// <summary>
+    /// Entity that describes a test case.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class TestCase
     {
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         public int Id { get; set; }
 
         /// <summary>

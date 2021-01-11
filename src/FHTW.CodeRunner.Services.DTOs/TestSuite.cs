@@ -61,18 +61,16 @@ namespace FHTW.CodeRunner.Services.DTOs
         ForceHide = 2,
     }
 
+    /// <summary>
+    /// Entity that describes the test suite.
+    /// </summary>
     [DataContract]
     [ExcludeFromCodeCoverage]
     public class TestSuite
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TestSuite"/> class.
+        /// Gets or sets the id.
         /// </summary>
-        public TestSuite()
-        {
-            this.TestCase = new HashSet<TestCase>();
-        }
-
         [DataMember(Name = "id")]
         public int Id { get; set; }
 
@@ -119,6 +117,9 @@ namespace FHTW.CodeRunner.Services.DTOs
         [DataMember(Name = "generalFeedbackDisplay")]
         public GeneralFeedbackDisplayState GeneralFeedbackDisplay { get; set; }
 
+        /// <summary>
+        /// Gets or sets multiple test case.
+        /// </summary>
         [DataMember(Name = "testCaseList")]
         public ICollection<TestCase> TestCase { get; set; }
     }

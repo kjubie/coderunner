@@ -60,11 +60,17 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         ForceHide = 2,
     }
 
+    /// <summary>
+    /// Entity that describes the test suite.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class TestSuite
     {
         private QuestionType questionType;
 
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         public int Id { get; set; }
 
         /// <summary>
@@ -124,6 +130,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         /// </summary>
         public GeneralFeedbackDisplayState GeneralFeedbackDisplay { get; set; }
 
+        /// <summary>
+        /// Gets or sets multiple test case.
+        /// </summary>
         public ICollection<TestCase> TestCase { get; set; }
     }
 }

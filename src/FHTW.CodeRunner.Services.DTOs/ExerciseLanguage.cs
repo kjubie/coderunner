@@ -9,27 +9,34 @@ using System.Runtime.Serialization;
 
 namespace FHTW.CodeRunner.Services.DTOs
 {
+    /// <summary>
+    /// Entit that describes the written language for an exercise.
+    /// </summary>
     [DataContract]
     [ExcludeFromCodeCoverage]
     public class ExerciseLanguage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExerciseLanguage"/> class.
+        /// Gets or sets the id.
         /// </summary>
-        public ExerciseLanguage()
-        {
-            this.ExerciseBody = new HashSet<ExerciseBody>();
-        }
-
         [DataMember(Name = "id")]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the exercise header.
+        /// </summary>
         [DataMember(Name = "exerciseHeader")]
         public ExerciseHeader FkExerciseHeader { get; set; }
 
+        /// <summary>
+        /// Gets or sets the written language.
+        /// </summary>
         [DataMember(Name = "writtenLanguage")]
         public WrittenLanguage FkWrittenLanguage { get; set; }
 
+        /// <summary>
+        /// Gets or sets multiple exercise bodies.
+        /// </summary>
         [DataMember(Name = "exerciseBody")]
         public ICollection<ExerciseBody> ExerciseBody { get; set; }
     }
