@@ -10,6 +10,9 @@ using FluentValidation;
 
 namespace FHTW.CodeRunner.BusinessLogic.Validators
 {
+    /// <summary>
+    /// Validator for the ExerciseTage Entity.
+    /// </summary>
     public class ExerciseTagValidator : AbstractValidator<ExerciseTag>
     {
         /// <summary>

@@ -14,6 +14,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     [Table("questiontype")]
     public class QuestionType : IEntity
     {
+        /// <inheritdoc/>
         [Key]
         [Column("id")]
         public int Id { get; set; }

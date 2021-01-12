@@ -14,6 +14,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     [Table("exercise_tag")]
     public partial class ExerciseTag : IEntity
     {
+        /// <inheritdoc/>
         [Key]
         [Column("id")]
         public int Id { get; set; }

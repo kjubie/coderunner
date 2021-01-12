@@ -10,6 +10,9 @@ using FluentValidation;
 
 namespace FHTW.CodeRunner.BusinessLogic.Validators
 {
+    /// <summary>
+    /// Validator for the TestCase Entity.
+    /// </summary>
     public class TestCaseValidator : AbstractValidator<TestCase>
     {
         /// <summary>

@@ -13,6 +13,9 @@ using Microsoft.Extensions.Logging;
 
 namespace FHTW.CodeRunner.BusinessLogic
 {
+    /// <summary>
+    /// Logic Class for import actions.
+    /// </summary>
     public class ImportLogic : IImportLogic
     {
         private readonly ILogger logger;
@@ -22,9 +25,9 @@ namespace FHTW.CodeRunner.BusinessLogic
         /// <summary>
         /// Initializes a new instance of the <see cref="ImportLogic"/> class.
         /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="mapper"></param>
-        /// <param name="moodleXmlService"></param>
+        /// <param name="logger">The injected logger.</param>
+        /// <param name="mapper">The injected mapper.</param>
+        /// <param name="moodleXmlService">The injected moodle xml service.</param>
         public ImportLogic(ILogger<ImportLogic> logger, IMapper mapper, IMoodleXmlService moodleXmlService)
         {
             this.logger = logger;
@@ -32,6 +35,7 @@ namespace FHTW.CodeRunner.BusinessLogic
             this.moodleXmlService = moodleXmlService;
         }
 
+        /// <inheritdoc/>
         public Collection ImportCollection()
         {
             throw new NotImplementedException();

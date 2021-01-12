@@ -19,6 +19,9 @@ using DalEntities = FHTW.CodeRunner.DataAccess.Entities;
 
 namespace FHTW.CodeRunner.BusinessLogic
 {
+    /// <summary>
+    /// Logic Class for dealing with exercise actions.
+    /// </summary>
     public class ExerciseLogic : IExerciseLogic
     {
         private readonly ILogger logger;
@@ -29,9 +32,10 @@ namespace FHTW.CodeRunner.BusinessLogic
         /// <summary>
         /// Initializes a new instance of the <see cref="ExerciseLogic"/> class.
         /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="mapper"></param>
-        /// <param name="exerciseRepository"></param>
+        /// <param name="logger">The injected logger.</param>
+        /// <param name="mapper">The injected mapper.</param>
+        /// <param name="exerciseRepository">The injected exercise repository.</param>
+        /// <param name="uiRepository">The injected ui repository.</param>
         public ExerciseLogic(ILogger<ExerciseLogic> logger, IMapper mapper, IExerciseRepository exerciseRepository, IUIRepository uiRepository)
         {
             this.logger = logger;

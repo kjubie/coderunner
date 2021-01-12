@@ -79,6 +79,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             return instance;
         }
 
+        /// <inheritdoc/>
         public Collection CreateOrUpdate(Collection collection)
         {
             try

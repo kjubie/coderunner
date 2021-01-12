@@ -15,15 +15,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     public class Collection
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Collection"/> class.
-        /// </summary>
-        public Collection()
-        {
-            this.CollectionLanguage = new HashSet<CollectionLanguage>();
-            this.CollectionTag = new HashSet<CollectionTag>();
-        }
-
-        /// <summary>
         /// Gets or sets the id.
         /// </summary>
         public int Id { get; set; }
@@ -52,5 +43,10 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         /// Gets or sets multiple CollectionTage Entities.
         /// </summary>
         public ICollection<CollectionTag> CollectionTag { get; set; }
+
+        /// <summary>
+        /// Gets or sets multiple exercises.
+        /// </summary>
+        public ICollection<CollectionExercise> CollectionExercise { get; set; }
     }
 }

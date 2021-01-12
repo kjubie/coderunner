@@ -17,14 +17,6 @@ namespace FHTW.CodeRunner.Services.DTOs
     public class CollectionLanguage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CollectionLanguage"/> class.
-        /// </summary>
-        public CollectionLanguage()
-        {
-            this.CollectionExercise = new HashSet<CollectionExercise>();
-        }
-
-        /// <summary>
         /// Gets or sets the id.
         /// </summary>
         [DataMember(Name = "id")]
@@ -49,9 +41,15 @@ namespace FHTW.CodeRunner.Services.DTOs
         public string Introduction { get; set; }
 
         /// <summary>
-        /// Gets or sets multiple Collection Exercise entities.
+        /// Gets or sets the id for the written language.
         /// </summary>
-        [DataMember(Name = "collectionExerciseList")]
-        public ICollection<CollectionExercise> CollectionExercise { get; set; }
+        [DataMember(Name = "writtenLanguageId")]
+        public int FkWrittenLanguageId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the written language.
+        /// </summary>
+        [DataMember(Name = "writtenLanguage")]
+        public WrittenLanguage FkWrittenLanguage { get; set; }
     }
 }

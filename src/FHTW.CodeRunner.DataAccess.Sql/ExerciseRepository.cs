@@ -77,7 +77,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             try
             {
-                using var transaction = this.context.Database.BeginTransaction(); 
+                using var transaction = this.context.Database.BeginTransaction();
 
                 // add everything new
                 this.context.ChangeTracker.TrackGraph(exercise, e =>

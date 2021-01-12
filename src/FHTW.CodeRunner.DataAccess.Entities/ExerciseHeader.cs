@@ -22,6 +22,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
             this.ExerciseLanguage = new HashSet<ExerciseLanguage>();
         }
 
+        /// <inheritdoc/>
         [Key]
         [Column("id")]
         public int Id { get; set; }

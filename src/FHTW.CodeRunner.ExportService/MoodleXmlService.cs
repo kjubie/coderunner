@@ -14,6 +14,7 @@ namespace FHTW.CodeRunner.ExportService
 {
     public class MoodleXmlService : IMoodleXmlService
     {
+        /// <inheritdoc/>
         public string ExportMoodleXml(Quiz quiz)
         {
             using (var writer = new Utf8StringWriter())
@@ -25,6 +26,7 @@ namespace FHTW.CodeRunner.ExportService
             }
         }
 
+        /// <inheritdoc/>
         public Quiz ImportMoodleXml()
         {
             throw new NotImplementedException();
@@ -33,6 +35,7 @@ namespace FHTW.CodeRunner.ExportService
 
     public class Utf8StringWriter : StringWriter
     {
+        /// <inheritdoc/>
         public override Encoding Encoding => Encoding.UTF8;
     }
 }

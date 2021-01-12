@@ -15,14 +15,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     public class CollectionLanguage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CollectionLanguage"/> class.
-        /// </summary>
-        public CollectionLanguage()
-        {
-            this.CollectionExercise = new HashSet<CollectionExercise>();
-        }
-
-        /// <summary>
         /// Gets or sets the id.
         /// </summary>
         public int Id { get; set; }
@@ -43,8 +35,13 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public string Introduction { get; set; }
 
         /// <summary>
-        /// Gets or sets multiple Collection Exercise entities.
+        /// Gets or sets the id for the written language.
         /// </summary>
-        public ICollection<CollectionExercise> CollectionExercise { get; set; }
+        public int FkWrittenLanguageId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the written language.
+        /// </summary>
+        public WrittenLanguage FkWrittenLanguage { get; set; }
     }
 }

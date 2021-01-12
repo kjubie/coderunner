@@ -18,6 +18,9 @@ using EsEntities = FHTW.CodeRunner.ExportService.Entities;
 
 namespace FHTW.CodeRunner.BusinessLogic
 {
+    /// <summary>
+    /// Logic Class for dealing with export actions.
+    /// </summary>
     public class ExportLogic : IExportLogic
     {
         private readonly ILogger logger;
@@ -28,9 +31,10 @@ namespace FHTW.CodeRunner.BusinessLogic
         /// <summary>
         /// Initializes a new instance of the <see cref="ExportLogic"/> class.
         /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="mapper"></param>
-        /// <param name="moodleXmlService"></param>
+        /// <param name="logger">The injected logger.</param>
+        /// <param name="mapper">The injected mapper.</param>
+        /// <param name="exerciseRepository">The injected exercise repository.</param>
+        /// <param name="moodleXmlService">The injected moodle xml service.</param>
         public ExportLogic(ILogger<ExportLogic> logger, IMapper mapper, IExerciseRepository exerciseRepository, IMoodleXmlService moodleXmlService)
         {
             this.logger = logger;
@@ -39,11 +43,13 @@ namespace FHTW.CodeRunner.BusinessLogic
             this.moodleXmlService = moodleXmlService;
         }
 
+        /// <inheritdoc/>
         public void ExportCollection(BlEntities.Collection collection)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
         public string ExportExercise(BlEntities.ExportExercise exportExercise)
         {
             if (exportExercise == null)

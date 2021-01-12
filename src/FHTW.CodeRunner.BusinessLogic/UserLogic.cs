@@ -14,6 +14,9 @@ using DalEntities = FHTW.CodeRunner.DataAccess.Entities;
 
 namespace FHTW.CodeRunner.BusinessLogic
 {
+    /// <summary>
+    /// Logic Class for user actions.
+    /// </summary>
     public class UserLogic : IUserLogic
     {
         private readonly ILogger logger;
@@ -23,9 +26,9 @@ namespace FHTW.CodeRunner.BusinessLogic
         /// <summary>
         /// Initializes a new instance of the <see cref="UserLogic"/> class.
         /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="mapper"></param>
-        /// <param name="userRepository"></param>
+        /// <param name="logger">The injected logger.</param>
+        /// <param name="mapper">The injected mapper.</param>
+        /// <param name="userRepository">The injected user repository.</param>
         public UserLogic(ILogger<UserLogic> logger, IMapper mapper, IUserRepository userRepository)
         {
             this.logger = logger;

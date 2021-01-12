@@ -23,6 +23,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
             this.ExerciseTag = new HashSet<ExerciseTag>();
         }
 
+        /// <inheritdoc/>
         [Key]
         [Column("id")]
         public int Id { get; set; }

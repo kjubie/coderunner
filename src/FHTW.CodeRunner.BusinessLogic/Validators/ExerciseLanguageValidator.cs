@@ -10,6 +10,9 @@ using FluentValidation;
 
 namespace FHTW.CodeRunner.BusinessLogic.Validators
 {
+    /// <summary>
+    /// Validator for the ExerciseLanguage.
+    /// </summary>
     public class ExerciseLanguageValidator : AbstractValidator<ExerciseLanguage>
     {
         /// <summary>
