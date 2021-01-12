@@ -74,14 +74,109 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                     Header = c.CollectionLanguage
                         .Single(l => l.FkWrittenLanguage.Name == language),
                     Exercises = exercises,
-                }).Single();
+                }).SingleOrDefault();
 
             return instance;
         }
 
         public Collection CreateOrUpdate(Collection collection)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using var transaction = this.context.Database.BeginTransaction();
+
+                // add everything new
+                this.context.ChangeTracker.TrackGraph(collection, e =>
+                {
+                    if (e.Entry.IsKeySet)
+                    {
+                        e.Entry.State = EntityState.Unchanged;
+                    }
+                    else
+                    {
+                        e.Entry.State = EntityState.Added;
+                    }
+                });
+
+                this.context.SaveChanges();
+
+                // update existing
+                this.context.ChangeTracker.TrackGraph(collection, e =>
+                {
+                    if (e.Entry.IsKeySet)
+                    {
+                        e.Entry.State = EntityState.Modified;
+                    }
+                });
+
+                // don't update other fields
+                this.context.Entry(collection).Property(x => x.Created).IsModified = false;
+                this.context.Entry(collection).Property(x => x.FkUserId).IsModified = false;
+                this.context.Entry(collection).Reference(x => x.FkUser).IsModified = false;
+
+                collection.CollectionLanguage.ToList().ForEach(cl =>
+                {
+                    this.context.Entry(cl).Reference(x => x.FkWrittenLanguage).IsModified = false;
+                });
+
+                collection.CollectionExercise.ToList().ForEach(ce =>
+                {
+                    this.context.Entry(ce).Reference(x => x.FkWrittenLanguage).IsModified = false;
+                    this.context.Entry(ce).Reference(x => x.FkProgrammingLanguage).IsModified = false;
+                    this.context.Entry(ce).Reference(x => x.FkExercise).IsModified = false;
+                });
+
+                collection.CollectionTag.ToList().ForEach(ct =>
+                {
+                    this.context.Entry(ct).Reference(x => x.FkTag).IsModified = false;
+                });
+
+                this.context.SaveChanges();
+
+                transaction.Commit();
+            }
+            catch (Exception e) when (e is DbUpdateException || e is DbUpdateConcurrencyException)
+            {
+                throw new DalException("Updating collection failed", e);
+            }
+            catch (Exception e)
+            {
+                throw new DalException("Unexpected error while updating collection", e);
+            }
+
+            return collection;
+        }
+
+        /// <inheritdoc/>
+        public Collection GetById(int id, Mode mode)
+        {
+            return mode switch
+            {
+                Mode.ReadOnly =>
+                    this.context.Collection
+                        .AsNoTracking()
+                        .Include(c => c.CollectionLanguage)
+                            .ThenInclude(cl => cl.FkWrittenLanguage)
+                        .Include(c => c.CollectionTag)
+                            .ThenInclude(ct => ct.FkTag)
+                        .Include(c => c.CollectionExercise)
+                            .ThenInclude(ce => ce.FkProgrammingLanguage)
+                        .Include(c => c.CollectionExercise)
+                            .ThenInclude(ce => ce.FkWrittenLanguage)
+                        .SingleOrDefault(c => c.Id == id),
+                Mode.WriteRead =>
+                    this.context.Collection
+                         .Include(c => c.CollectionLanguage)
+                             .ThenInclude(cl => cl.FkWrittenLanguage)
+                         .Include(c => c.CollectionTag)
+                             .ThenInclude(ct => ct.FkTag)
+                         .Include(c => c.CollectionExercise)
+                             .ThenInclude(ce => ce.FkProgrammingLanguage)
+                         .Include(c => c.CollectionExercise)
+                             .ThenInclude(ce => ce.FkWrittenLanguage)
+                         .SingleOrDefault(c => c.Id == id),
+                _ => throw new ArgumentOutOfRangeException($"enum value {mode} not handled")
+            };
         }
     }
 }
