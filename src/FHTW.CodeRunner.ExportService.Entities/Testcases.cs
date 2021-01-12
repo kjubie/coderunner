@@ -7,9 +7,15 @@ using System.Xml.Serialization;
 
 namespace FHTW.CodeRunner.ExportService.Entities
 {
+    /// <summary>
+    /// Entity that describes testcases.
+    /// </summary>
     [XmlRoot(ElementName = "testcases")]
     public class Testcases
     {
+        /// <summary>
+        /// Gets or sets multiple testcase.
+        /// </summary>
         [XmlElement(ElementName = "testcase")]
         public List<Testcase> Testcase { get; set; }
     }

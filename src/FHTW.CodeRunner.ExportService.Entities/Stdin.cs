@@ -6,9 +6,15 @@ using System.Xml.Serialization;
 
 namespace FHTW.CodeRunner.ExportService.Entities
 {
+    /// <summary>
+    /// Entity that describes the stdin.
+    /// </summary>
     [XmlRoot(ElementName = "stdin")]
     public class Stdin
     {
+        /// <summary>
+        /// Gets or sets the text.
+        /// </summary>
         [XmlElement(ElementName = "text")]
         public string Text { get; set; }
     }

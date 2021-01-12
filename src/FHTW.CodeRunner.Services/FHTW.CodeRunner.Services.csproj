@@ -54,7 +54,6 @@
     <ProjectReference Include="..\FHTW.CodeRunner.BusinessLogic\FHTW.CodeRunner.BusinessLogic.csproj" />
     <ProjectReference Include="..\FHTW.CodeRunner.Migrations\FHTW.CodeRunner.Migrations.csproj" />
     <ProjectReference Include="..\FHTW.CodeRunner.Services.DTOs\FHTW.CodeRunner.Services.DTOs.csproj" />
-    <ProjectReference Include="..\FHTW.CodeRunner.Services.Interfaces\FHTW.CodeRunner.Services.Interfaces.csproj" />
   </ItemGroup>
 
   <ItemGroup>

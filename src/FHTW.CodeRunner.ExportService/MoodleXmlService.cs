@@ -12,6 +12,9 @@ using FHTW.CodeRunner.ExportService.Interfaces;
 
 namespace FHTW.CodeRunner.ExportService
 {
+    /// <summary>
+    /// The service class for dealing with moodle xml actions.
+    /// </summary>
     public class MoodleXmlService : IMoodleXmlService
     {
         /// <inheritdoc/>
@@ -31,11 +34,5 @@ namespace FHTW.CodeRunner.ExportService
         {
             throw new NotImplementedException();
         }
-    }
-
-    public class Utf8StringWriter : StringWriter
-    {
-        /// <inheritdoc/>
-        public override Encoding Encoding => Encoding.UTF8;
     }
 }

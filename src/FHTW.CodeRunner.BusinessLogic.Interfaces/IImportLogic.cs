@@ -9,8 +9,15 @@ using FHTW.CodeRunner.BusinessLogic.Entities;
 
 namespace FHTW.CodeRunner.BusinessLogic.Interfaces
 {
+    /// <summary>
+    /// Interface for dealing with import actions.
+    /// </summary>
     public interface IImportLogic
     {
+        /// <summary>
+        /// Function for imporing a collection.
+        /// </summary>
+        /// <returns>The imported collection.</returns>
         Collection ImportCollection();
     }
 }

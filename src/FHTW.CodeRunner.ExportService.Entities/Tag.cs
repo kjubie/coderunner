@@ -6,9 +6,15 @@ using System.Xml.Serialization;
 
 namespace FHTW.CodeRunner.ExportService.Entities
 {
+    /// <summary>
+    /// Entity that describes the tag.
+    /// </summary>
     [XmlRoot(ElementName = "tag")]
     public class Tag
     {
+        /// <summary>
+        /// Gets or sets the text.
+        /// </summary>
         [XmlElement(ElementName = "text")]
         public string Text { get; set; }
     }
