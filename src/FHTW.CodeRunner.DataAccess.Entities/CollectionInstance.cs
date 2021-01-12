@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
+    [ExcludeFromCodeCoverage]
     [NotMapped]
     public class CollectionInstance
     {

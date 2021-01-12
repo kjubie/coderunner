@@ -12,7 +12,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
 {
     [ExcludeFromCodeCoverage]
     [Table("collection")]
-    public partial class Collection
+    public partial class Collection : IEntity
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Collection"/> class.
@@ -24,6 +24,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
             this.CollectionExercise = new HashSet<CollectionExercise>();
         }
 
+        /// <inheritdoc/>
         [Key]
         [Column("id")]
         public int Id { get; set; }

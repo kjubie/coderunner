@@ -12,8 +12,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
 {
     [ExcludeFromCodeCoverage]
     [Table("collection_exercise")]
-    public partial class CollectionExercise
+    public partial class CollectionExercise : IEntity
     {
+        /// <inheritdoc/>
         [Key]
         [Column("id")]
         public int Id { get; set; }
