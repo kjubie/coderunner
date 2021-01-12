@@ -12,8 +12,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
 {
     [ExcludeFromCodeCoverage]
     [Table("difficulty")]
-    public partial class Difficulty
+    public partial class Difficulty : IEntity
     {
+        /// <inheritdoc/>
         [Key]
         [Column("id")]
         public int Id { get; set; }

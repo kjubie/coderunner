@@ -202,7 +202,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 
                 // Only new things should be added
                 Assert.AreEqual(new_c.CollectionExercise.Count, 2, "After update 2 exercises should be present");
-                Assert.AreEqual(new_c.CollectionLanguage.Count, old.CollectionLanguage.Count,"After update the collectionlanguage count should be the same");
+                Assert.AreEqual(new_c.CollectionLanguage.Count, old.CollectionLanguage.Count, "After update the collectionlanguage count should be the same");
                 Assert.AreEqual(new_c.CollectionTag.Count, 2, "After update 2 tags should be present");
             }
         }

@@ -12,8 +12,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
 {
     [ExcludeFromCodeCoverage]
     [Table("comment")]
-    public partial class Comment
+    public partial class Comment : IEntity
     {
+        /// <inheritdoc/>
         [Key]
         [Column("id")]
         public int Id { get; set; }

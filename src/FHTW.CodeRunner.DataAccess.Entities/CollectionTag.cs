@@ -12,8 +12,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
 {
     [ExcludeFromCodeCoverage]
     [Table("collection_tag")]
-    public partial class CollectionTag
+    public partial class CollectionTag : IEntity
     {
+        /// <inheritdoc/>
         [Key]
         [Column("id")]
         public int Id { get; set; }

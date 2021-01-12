@@ -20,8 +20,16 @@ using Microsoft.Extensions.Logging;
 
 namespace FHTW.CodeRunner.DataAccess.Sql
 {
+    /// <summary>
+    /// Extension to the CodeRunnerContext handling migration and seeding of the database.
+    /// </summary>
     public static class CodeRunnerContextExtension
     {
+        /// <summary>
+        /// Checks if all migrations are applied.
+        /// </summary>
+        /// <param name="context">The context from this.</param>
+        /// <returns>True if migrations are up to date, else false.</returns>
         public static bool AllMigrationsApplied(this CodeRunnerContext context)
         {
             var applied = context.GetService<IHistoryRepository>()
@@ -35,6 +43,16 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             return !total.Except(applied).Any();
         }
 
+        /// <summary>
+        /// Ensures that the database is seeded.
+        /// In the current version it not only seeds the nessesary values like:
+        ///     - WrittenLanguage
+        ///     - ProgrammingLanguage
+        ///     - QuestionType
+        /// But also test exercises and collections.
+        /// When changing the test data it might come to complications with the tests, because they might make assumptions about the available data.
+        /// </summary>
+        /// <param name="context">The context from this.</param>
         public static void EnsureSeeded(this CodeRunnerContext context)
         {
             var options = new JsonSerializerOptions()
