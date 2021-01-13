@@ -1,4 +1,4 @@
-// <copyright file="ExerciseRepositoryTests.cs" company="FHTW CodeRunner">
+// <copyright file="UIRepositoryTests.cs" company="FHTW CodeRunner">
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 

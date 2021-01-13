@@ -14,6 +14,8 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     [ExcludeFromCodeCoverage]
     public class Collection
     {
+        private User user;
+
         /// <summary>
         /// Gets or sets the id.
         /// </summary>
@@ -30,9 +32,30 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public DateTime Created { get; set; }
 
         /// <summary>
+        /// Gets or sets the Foreign Key for the user.
+        /// </summary>
+        public int FkUserId { get; set; }
+
+        /// <summary>
         /// Gets or sets the author.
         /// </summary>
-        public User FkUser { get; set; }
+        public User FkUser
+        {
+            get
+            {
+                return this.user;
+            }
+
+            set
+            {
+                this.user = value;
+
+                if (value != null)
+                {
+                    this.FkUserId = value.Id;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets multiple CollectionLanguage Entities.
@@ -47,6 +70,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         /// <summary>
         /// Gets or sets multiple exercises.
         /// </summary>
-        public ICollection<CollectionExercise> CollectionExercise { get; set; }
+        public ICollection<ExerciseKeys> CollectionExercise { get; set; }
     }
 }

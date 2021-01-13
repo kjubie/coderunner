@@ -1,4 +1,4 @@
-﻿// <copyright file="ExportExercise.cs" company="FHTW CodeRunner">
+﻿// <copyright file="CollectionKeys.cs" company="FHTW CodeRunner">
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
@@ -11,11 +11,11 @@ using System.Text;
 namespace FHTW.CodeRunner.Services.DTOs
 {
     /// <summary>
-    /// Entity that describes the needed information for a specific exercise.
+    /// Entity that describes the needed information for a specific collection.
     /// </summary>
     [DataContract]
     [ExcludeFromCodeCoverage]
-    public class ExportExercise
+    public class CollectionKeys
     {
         /// <summary>
         /// Gets or sets the id.
@@ -24,21 +24,15 @@ namespace FHTW.CodeRunner.Services.DTOs
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the version.
-        /// </summary>
-        [DataMember(Name = "version")]
-        public int Version { get; set; }
-
-        /// <summary>
         /// Gets or sets the written language.
         /// </summary>
         [DataMember(Name = "writtenLanguage")]
         public string WrittenLanguage { get; set; }
 
         /// <summary>
-        /// Gets or sets the programming language.
+        /// Gets or sets a value indicating whether the language set in each collection exercise should be used or the language parameter.
         /// </summary>
-        [DataMember(Name = "programmingLanguage")]
-        public string ProgrammingLanguage { get; set; }
+        [DataMember(Name = "useSetLanguage")]
+        public bool UseSetLanguage { get; set; }
     }
 }
