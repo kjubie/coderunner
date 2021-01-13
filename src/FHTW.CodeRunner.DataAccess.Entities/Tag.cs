@@ -2,7 +2,6 @@
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,6 +9,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
+    /// <summary>
+    /// A tag for an exercise or collection.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     [Table("tag")]
     public partial class Tag : IEntity
@@ -28,6 +30,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         [Column("id")]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the name of the tag.
+        /// </summary>
         [Required]
         [Column("name")]
         [StringLength(30)]

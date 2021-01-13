@@ -127,14 +127,16 @@ namespace FHTW.CodeRunner.DataAccess.Entities
 
         /// <summary>
         /// Gets or Sets the mode of the allowed attachments field.
-        /// Value Constraints {0,1,2,3,4} in <see cref="FHTW.CodeRunner.DataAccess.Sql.CodeRunnerContext"/>.
+        /// Value Constraints {0,1,2,3,4} in coderunner context/>.
+        /// TODO: should be enum.
         /// </summary>
         [Column("allow_files")]
         public int AllowFiles { get; set; }
 
         /// <summary>
         /// Gets or Sets the mode of the attachments required field.
-        /// Value Constraints {0,1,2,3} in <see cref="FHTW.CodeRunner.DataAccess.Sql.CodeRunnerContext"/>.
+        /// Value Constraints {0,1,2,3} in coderunner context.
+        /// TODO: should be enum.
         /// </summary>
         [Column("files_required")]
         public int FilesRequired { get; set; }
