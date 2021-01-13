@@ -85,10 +85,20 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                     ],
                     ""CollectionTag"": [
                         {
-                            ""FkTagId"": 1
+                            ""FkTag"":
+                                {
+                                    ""id"": 1,
+                                    ""name"": ""algorithms""
+                                }
                         },
                         {
-                            ""FkTagId"": 2
+                            ""FkTag"":
+                                {
+                                    ""name"": ""unigerst""
+                                }
+                        },
+                        {
+                            ""FkTagId"": 3
                         }
                     ],
                     ""CollectionExercise"": [
@@ -170,10 +180,17 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                             ""FkWrittenLanguageId"": 1
                         },
                         {
+                            ""Id"": 2,
                             ""VersionNumber"": 1,
                             ""FkExerciseId"": 2,
-                            ""FkProgrammingLanguageId"": 3,
+                            ""FkProgrammingLanguageId"": 6,
                             ""FkWrittenLanguageId"": 1
+                        },
+                        {
+                            ""VersionNumber"": 1,
+                            ""FkExerciseId"": 3,
+                            ""FkProgrammingLanguageId"": 5,
+                            ""FkWrittenLanguageId"": 2
                         }
                     ]
                 }";
@@ -201,7 +218,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                 Assert.AreEqual(new_c.Created, old.Created, "Created date should not update");
 
                 // Only new things should be added
-                Assert.AreEqual(new_c.CollectionExercise.Count, 2, "After update 2 exercises should be present");
+                Assert.AreEqual(new_c.CollectionExercise.Count, 3, "After update 3 exercises should be present");
                 Assert.AreEqual(new_c.CollectionLanguage.Count, old.CollectionLanguage.Count, "After update the collectionlanguage count should be the same");
                 Assert.AreEqual(new_c.CollectionTag.Count, 2, "After update 2 tags should be present");
             }

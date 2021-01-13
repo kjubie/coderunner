@@ -1,9 +1,16 @@
 [
-    {   // Collection 1, Exercise 1, English, C++
-        "FkCollectionId": 1,
-        "VersionNumber": 1,
-        "FkExerciseId": 1,
-        "FkProgrammingLanguageId": 1,
-        "FkWrittenLanguageId": 1
-    }
+  { // Collection 1, Exercise 1, English, C++
+    "FkCollectionId": 1,
+    "VersionNumber": 1,
+    "FkExerciseId": 1,
+    "FkProgrammingLanguageId": 1,
+    "FkWrittenLanguageId": 1
+  },
+  { // Collection 1, Exercise 2, English, C++
+    "FkCollectionId": 1,
+    "VersionNumber": 1,
+    "FkExerciseId": 2,
+    "FkProgrammingLanguageId": 6,
+    "FkWrittenLanguageId": 1
+  }
 ]
