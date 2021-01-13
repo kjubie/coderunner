@@ -17,14 +17,15 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
         /// <summary>
         /// Function for exporting an exercise.
         /// </summary>
-        /// <param name="exportExercise">Needed data that defines a specific exercise.</param>
+        /// <param name="exerciseKeys">Needed data that defines a specific exercise.</param>
         /// <returns>The xml string.</returns>
-        string ExportExercise(ExerciseKeys exportExercise);
+        string ExportExercise(ExerciseKeys exerciseKeys);
 
         /// <summary>
         /// Function for exporting a collection.
         /// </summary>
-        /// <param name="collection">Needed data for exporting a specific collection.</param>
-        void ExportCollection(Collection collection);
+        /// <param name="collectionKeys">Needed data for exporting a specific collection.</param>
+        /// <returns>The xml string.</returns>
+        string ExportCollection(CollectionKeys collectionKeys);
     }
 }
