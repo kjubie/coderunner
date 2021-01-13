@@ -19,7 +19,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
         /// </summary>
         /// <param name="exportExercise">Needed data that defines a specific exercise.</param>
         /// <returns>The xml string.</returns>
-        string ExportExercise(ExportExercise exportExercise);
+        string ExportExercise(ExerciseKeys exportExercise);
 
         /// <summary>
         /// Function for exporting a collection.

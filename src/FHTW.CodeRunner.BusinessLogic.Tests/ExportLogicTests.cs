@@ -55,7 +55,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
 
             IExportLogic logic = new ExportLogic(logger, mapper, exerciseRepo, moodleXmlService);
 
-            BlEntities.ExportExercise nullExportExercise = null;
+            BlEntities.ExerciseKeys nullExportExercise = null;
 
             // Act
             // Assert
@@ -91,7 +91,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
 
             IExportLogic logic = new ExportLogic(logger, mapper, exerciseRepo, moodleXmlService);
 
-            BlEntities.ExportExercise exportExercise = Builder<BlEntities.ExportExercise>
+            BlEntities.ExerciseKeys exportExercise = Builder<BlEntities.ExerciseKeys>
                 .CreateNew()
                 .Build();
 
@@ -129,7 +129,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
 
             IExportLogic logic = new ExportLogic(logger, mapper, exerciseRepo, moodleXmlService);
 
-            BlEntities.ExportExercise exportExercise = Builder<BlEntities.ExportExercise>
+            BlEntities.ExerciseKeys exportExercise = Builder<BlEntities.ExerciseKeys>
                 .CreateNew()
                 .Build();
 

@@ -14,6 +14,8 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     [ExcludeFromCodeCoverage]
     public class CollectionLanguage
     {
+        private WrittenLanguage writtenLanguage;
+
         /// <summary>
         /// Gets or sets the id.
         /// </summary>
@@ -35,13 +37,29 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public string Introduction { get; set; }
 
         /// <summary>
-        /// Gets or sets the id for the written language.
+        /// Gets or sets the Foreign Key for the written language.
         /// </summary>
         public int FkWrittenLanguageId { get; set; }
 
         /// <summary>
         /// Gets or sets the written language.
         /// </summary>
-        public WrittenLanguage FkWrittenLanguage { get; set; }
+        public WrittenLanguage FkWrittenLanguage
+        {
+            get
+            {
+                return this.writtenLanguage;
+            }
+
+            set
+            {
+                this.writtenLanguage = value;
+
+                if (value != null)
+                {
+                    this.FkWrittenLanguageId = value.Id;
+                }
+            }
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace FHTW.CodeRunner.BusinessLogic
         }
 
         /// <inheritdoc/>
-        public string ExportExercise(BlEntities.ExportExercise exportExercise)
+        public string ExportExercise(BlEntities.ExerciseKeys exportExercise)
         {
             if (exportExercise == null)
             {

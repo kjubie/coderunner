@@ -1,4 +1,4 @@
-﻿// <copyright file="ExportExercise.cs" company="FHTW CodeRunner">
+﻿// <copyright file="ExerciseKeys.cs" company="FHTW CodeRunner">
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
@@ -15,7 +15,7 @@ namespace FHTW.CodeRunner.Services.DTOs
     /// </summary>
     [DataContract]
     [ExcludeFromCodeCoverage]
-    public class ExportExercise
+    public class ExerciseKeys
     {
         /// <summary>
         /// Gets or sets the id.

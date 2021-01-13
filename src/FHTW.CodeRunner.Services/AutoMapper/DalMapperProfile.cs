@@ -28,13 +28,17 @@ namespace FHTW.CodeRunner.Services.AutoMapper
                 .ReverseMap();
 
             this.CreateMap<BlEntities.Collection, DalEntities.Collection>()
-                .ReverseMap();
+                .ForMember(dest => dest.FkUser, opt => opt.Ignore());
+
+            this.CreateMap<DalEntities.Collection, BlEntities.Collection>();
 
             this.CreateMap<BlEntities.CollectionExercise, DalEntities.CollectionExercise>()
                 .ReverseMap();
 
             this.CreateMap<BlEntities.CollectionLanguage, DalEntities.CollectionLanguage>()
-                .ReverseMap();
+                .ForMember(dest => dest.FkWrittenLanguage, opt => opt.Ignore());
+
+            this.CreateMap<DalEntities.CollectionLanguage, BlEntities.CollectionLanguage>();
 
             this.CreateMap<BlEntities.CollectionTag, DalEntities.CollectionTag>()
                 .ReverseMap();

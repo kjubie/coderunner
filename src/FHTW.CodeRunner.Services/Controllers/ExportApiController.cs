@@ -52,7 +52,7 @@ namespace FHTW.CodeRunner.Services.Controllers
         [SwaggerOperation("ExportExercise")]
         [SwaggerResponse(statusCode: 200, description: "Successfully exported the exercise")]
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "The operation failed due to an error.")]
-        public virtual IActionResult ExportExercise([FromBody] SvcEntities.ExportExercise body)
+        public virtual IActionResult ExportExercise([FromBody] SvcEntities.ExerciseKeys body)
         {
             if (body == null)
             {
@@ -62,7 +62,7 @@ namespace FHTW.CodeRunner.Services.Controllers
                 });
             }
 
-            var blExportExercise = this.mapper.Map<BlEntities.ExportExercise>(body);
+            var blExportExercise = this.mapper.Map<BlEntities.ExerciseKeys>(body);
 
             string xmlString = this.exportLogic.ExportExercise(blExportExercise);
 

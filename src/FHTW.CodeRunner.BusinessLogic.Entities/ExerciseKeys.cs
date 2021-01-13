@@ -1,4 +1,4 @@
-﻿// <copyright file="ExportExercise.cs" company="FHTW CodeRunner">
+﻿// <copyright file="ExerciseKeys.cs" company="FHTW CodeRunner">
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
@@ -13,7 +13,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     /// Entity that describes the needed information for a specific exercise.
     /// </summary>
     [ExcludeFromCodeCoverage]
-    public class ExportExercise
+    public class ExerciseKeys
     {
         /// <summary>
         /// Gets or sets the id.

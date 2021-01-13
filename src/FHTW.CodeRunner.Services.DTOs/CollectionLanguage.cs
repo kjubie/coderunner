@@ -41,12 +41,6 @@ namespace FHTW.CodeRunner.Services.DTOs
         public string Introduction { get; set; }
 
         /// <summary>
-        /// Gets or sets the id for the written language.
-        /// </summary>
-        [DataMember(Name = "writtenLanguageId")]
-        public int FkWrittenLanguageId { get; set; }
-
-        /// <summary>
         /// Gets or sets the written language.
         /// </summary>
         [DataMember(Name = "writtenLanguage")]

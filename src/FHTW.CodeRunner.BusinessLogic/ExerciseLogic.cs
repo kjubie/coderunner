@@ -5,8 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.Json;
 using AutoMapper;
 using FHTW.CodeRunner.BusinessLogic.Exceptions;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
