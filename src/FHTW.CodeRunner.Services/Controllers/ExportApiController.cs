@@ -96,8 +96,14 @@ namespace FHTW.CodeRunner.Services.Controllers
 
             var blCollectionKeys = this.mapper.Map<BlEntities.CollectionKeys>(body);
 
-            this.exportLogic.ExportCollection(blCollectionKeys);
-            return this.Ok();
+            string xmlString = this.exportLogic.ExportCollection(blCollectionKeys);
+
+            return new ContentResult
+            {
+                ContentType = "application/xml",
+                Content = xmlString,
+                StatusCode = 200,
+            };
         }
     }
 }
