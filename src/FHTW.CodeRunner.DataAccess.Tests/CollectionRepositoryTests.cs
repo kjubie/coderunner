@@ -53,7 +53,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             {
                 ICollectionRepository rep = new CollectionRepository(context);
 
-                var list = rep.GetExercisesInstances(1, "German");
+                var list = rep.GetCollectionInstance(1, "English", true);
 
                 Assert.NotNull(list);
             }*/
@@ -133,9 +133,9 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                 Assert.IsNotNull(added.CollectionLanguage);
                 Assert.IsNotNull(added.CollectionTag);
 
-                Assert.AreEqual(added.CollectionExercise.Count, 2, "2 collection exercises should be present");
-                Assert.AreEqual(added.CollectionLanguage.Count, 1, "1 collection languages should be present");
-                Assert.AreEqual(added.CollectionTag.Count, 2, "2 tags should be present");
+                Assert.AreEqual(2, added.CollectionExercise.Count, "2 collection exercises should be present");
+                Assert.AreEqual(1, added.CollectionLanguage.Count, "1 collection languages should be present");
+                Assert.AreEqual(3, added.CollectionTag.Count, "3 tags should be present");
             }
         }
 
@@ -214,13 +214,13 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                 Assert.IsNotNull(new_c.CollectionTag);
 
                 // should not be updated
-                Assert.AreEqual(new_c.FkUserId, old.FkUserId, "UserId should not update");
-                Assert.AreEqual(new_c.Created, old.Created, "Created date should not update");
+                Assert.AreEqual(old.FkUserId, new_c.FkUserId, "UserId should not update");
+                Assert.AreEqual(old.Created, new_c.Created, "Created date should not update");
 
                 // Only new things should be added
-                Assert.AreEqual(new_c.CollectionExercise.Count, 3, "After update 3 exercises should be present");
-                Assert.AreEqual(new_c.CollectionLanguage.Count, old.CollectionLanguage.Count, "After update the collectionlanguage count should be the same");
-                Assert.AreEqual(new_c.CollectionTag.Count, 2, "After update 2 tags should be present");
+                Assert.AreEqual(3, new_c.CollectionExercise.Count, "After update 3 exercises should be present");
+                Assert.AreEqual(old.CollectionLanguage.Count, new_c.CollectionLanguage.Count, "After update the collectionlanguage count should be the same");
+                Assert.AreEqual(2, new_c.CollectionTag.Count, "After update 2 tags should be present");
             }
         }
 
