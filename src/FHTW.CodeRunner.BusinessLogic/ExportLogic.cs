@@ -62,7 +62,7 @@ namespace FHTW.CodeRunner.BusinessLogic
                 collectionKeys.WrittenLanguage,
                 collectionKeys.UseSetLanguage);
 
-                var blCollectionInstance = this.mapper.Map<BlEntities.ExerciseInstance>(dalCollectionInstance);
+                var blCollectionInstance = this.mapper.Map<BlEntities.CollectionInstance>(dalCollectionInstance);
 
                 var quiz = this.mapper.Map<EsEntities.Quiz>(blCollectionInstance);
 
