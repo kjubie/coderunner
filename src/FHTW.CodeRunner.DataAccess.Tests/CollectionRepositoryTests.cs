@@ -53,11 +53,13 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             {
                 ICollectionRepository rep = new CollectionRepository(context);
 
-                var list = rep.GetExercisesInstances(1, "German");
+                // var list = rep.GetExercisesInstances(1, "German");
+
+                var list = rep.GetCollectionInstance(1, "English", true);
 
                 Assert.NotNull(list);
-            }*/
-
+            }
+            */
             Assert.True(true);
         }
 

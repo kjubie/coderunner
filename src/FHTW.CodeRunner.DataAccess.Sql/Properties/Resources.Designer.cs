@@ -77,13 +77,20 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {   // Collection 1, Exercise 1, English, C++
-        ///        &quot;FkCollectionId&quot;: 1,
-        ///        &quot;VersionNumber&quot;: 1,
-        ///        &quot;FkExerciseId&quot;: 1,
-        ///        &quot;FkProgrammingLanguageId&quot;: 1,
-        ///        &quot;FkWrittenLanguageId&quot;: 1
-        ///    }
+        ///  { // Collection 1, Exercise 1, English, C++
+        ///    &quot;FkCollectionId&quot;: 1,
+        ///    &quot;VersionNumber&quot;: 1,
+        ///    &quot;FkExerciseId&quot;: 1,
+        ///    &quot;FkProgrammingLanguageId&quot;: 1,
+        ///    &quot;FkWrittenLanguageId&quot;: 1
+        ///  },
+        ///  { // Collection 1, Exercise 2, English, C++
+        ///    &quot;FkCollectionId&quot;: 1,
+        ///    &quot;VersionNumber&quot;: 1,
+        ///    &quot;FkExerciseId&quot;: 2,
+        ///    &quot;FkProgrammingLanguageId&quot;: 6,
+        ///    &quot;FkWrittenLanguageId&quot;: 1
+        ///  }
         ///].
         /// </summary>
         internal static string collection_exercise {
