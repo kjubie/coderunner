@@ -30,9 +30,17 @@ namespace FHTW.CodeRunner.ExportService
         }
 
         /// <inheritdoc/>
-        public Quiz ImportMoodleXml()
+        public Quiz ImportMoodleXml(string xml)
         {
-            throw new NotImplementedException();
+            Quiz quiz = new Quiz();
+
+            using (var reader = new StringReader(xml))
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(quiz.GetType());
+                quiz = (Quiz)xmlSerializer.Deserialize(reader);
+            }
+
+            return quiz;
         }
     }
 }

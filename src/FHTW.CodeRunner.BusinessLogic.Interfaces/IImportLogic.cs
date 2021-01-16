@@ -17,7 +17,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
         /// <summary>
         /// Function for imporing a collection.
         /// </summary>
-        /// <returns>The imported collection.</returns>
-        Collection ImportCollection();
+        /// <param name="importData">The moodle quiz as xml string and needed data.</param>
+        void ImportCollection(ImportData importData);
     }
 }

@@ -96,6 +96,8 @@ namespace FHTW.CodeRunner.Services.AutoMapper
 
             this.CreateMap<SvcEntities.CollectionKeys, BlEntities.CollectionKeys>();
 
+            this.CreateMap<SvcEntities.ImportData, BlEntities.ImportData>();
+
             this.CreateMap<BlEntities.CollectionInstance, EsEntities.Quiz>()
                 .ConvertUsing(new Converters.MoodleQuizConverter());
         }

@@ -24,7 +24,8 @@ namespace FHTW.CodeRunner.ExportService.Interfaces
         /// <summary>
         /// Function that imports a moodle xml string.
         /// </summary>
+        /// <param name="xml">The moodle quiz as xml string.</param>
         /// <returns>The moodle quiz entity.</returns>
-        public Quiz ImportMoodleXml();
+        public Quiz ImportMoodleXml(string xml);
     }
 }
