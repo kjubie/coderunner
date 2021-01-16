@@ -45,14 +45,26 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <summary>
         /// Imports a collection.
         /// </summary>
+        /// <param name="body">Defining exercise parameters.</param>
         /// <returns>A Statuscode.</returns>
         [HttpPost]
         [Route("import/collection")]
         [SwaggerOperation("ImportCollection")]
         [SwaggerResponse(statusCode: 200, description: "Successfully imported the collection")]
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "The operation failed due to an error.")]
-        public virtual IActionResult ImportCollection()
+        public virtual IActionResult ImportCollection([FromBody] SvcEntities.ImportData body)
         {
+            if (body == null)
+            {
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = "Exercise should not be null",
+                });
+            }
+
+            var blImportData = this.mapper.Map<BlEntities.ImportData>(body);
+            this.importLogic.ImportCollection(blImportData);
+
             return this.Ok();
         }
     }

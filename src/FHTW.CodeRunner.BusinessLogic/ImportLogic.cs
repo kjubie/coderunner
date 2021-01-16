@@ -57,29 +57,31 @@ namespace FHTW.CodeRunner.BusinessLogic
 
             try
             {
-                var preparedImportData = this.mapper.Map<BlEntities.PreparedImportData>(importData);
-                preparedImportData.Quiz = this.moodleXmlService.ImportMoodleXml(importData.XmlString);
+                EsEntities.Quiz quiz = this.moodleXmlService.ImportMoodleXml(importData.XmlString);
+                importData.XmlString = null;
 
-                var collection = this.mapper.Map<BlEntities.Collection>(preparedImportData);
-
-                if (collection.Created == null)
+                var collection = new BlEntities.Collection
                 {
-                    collection.Created = DateTime.Now;
+                    CollectionExercise = new List<BlEntities.ExerciseKeys>(),
+                };
+
+                foreach (var question in quiz.Question)
+                {
+                    importData.Question = question;
+                    var blExercise = this.mapper.Map<BlEntities.Exercise>(importData);
+
+                    var dalExercise = this.mapper.Map<DalEntities.Exercise>(blExercise);
+                    var savedDalExercise = this.exerciseRepository.CreateAndUpdate(dalExercise);
+
+                    var exerciseKeys = new BlEntities.ExerciseKeys
+                    {
+                        Id = savedDalExercise.Id,
+                    };
+
+                    collection.CollectionExercise.Add(exerciseKeys);
                 }
 
                 var dalCollection = this.mapper.Map<DalEntities.Collection>(collection);
-
-                if (importData == null)
-                {
-                    this.logger.LogError("Collection conversion is not successful");
-                    throw new BlDataNotFoundException("Collection is null", null);
-                }
-
-                foreach (var dalExercise in dalCollection.CollectionExercise)
-                {
-                    var savedDalExercise = this.exerciseRepository.CreateAndUpdate(dalExercise.FkExercise);
-                    dalExercise.FkExerciseId = savedDalExercise.Id;
-                }
 
                 this.collectionRepository.CreateOrUpdate(dalCollection);
                 this.logger.LogInformation("BL passing Collection with Title: " + collection.Title + " to DAL.");

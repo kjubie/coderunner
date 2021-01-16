@@ -18,6 +18,12 @@ namespace FHTW.CodeRunner.Services.DTOs
     public class ImportData
     {
         /// <summary>
+        /// Gets or sets the title.
+        /// </summary>
+        [DataMember(Name = "title")]
+        public string Title { get; set; }
+
+        /// <summary>
         /// Gets or sets the author.
         /// </summary>
         [DataMember(Name = "user")]

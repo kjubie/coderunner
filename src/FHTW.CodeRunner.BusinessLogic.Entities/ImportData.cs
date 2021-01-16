@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using EsEntities = FHTW.CodeRunner.ExportService.Entities;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
@@ -13,6 +14,11 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     /// </summary>
     public class ImportData
     {
+        /// <summary>
+        /// Gets or sets the title.
+        /// </summary>
+        public string Title { get; set; }
+
         /// <summary>
         /// Gets or sets the author.
         /// </summary>
@@ -24,8 +30,23 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public WrittenLanguage WrittenLanguage { get; set; }
 
         /// <summary>
+        /// Gets or sets the programming language.
+        /// </summary>
+        public ProgrammingLanguage ProgrammingLanguage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the question type.
+        /// </summary>
+        public QuestionType QuestionType { get; set; }
+
+        /// <summary>
         /// Gets or sets the xml document as string.
         /// </summary>
         public string XmlString { get; set; }
+
+        /// <summary>
+        /// Gets or sets the question.
+        /// </summary>
+        public EsEntities.Question Question { get; set; }
     }
 }
