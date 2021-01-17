@@ -70,6 +70,6 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         /// <summary>
         /// Gets or sets multiple exercises.
         /// </summary>
-        public ICollection<ExerciseKeys> CollectionExercise { get; set; }
+        public ICollection<CollectionExercise> CollectionExercise { get; set; }
     }
 }

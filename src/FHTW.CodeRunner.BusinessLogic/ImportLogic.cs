@@ -66,7 +66,7 @@ namespace FHTW.CodeRunner.BusinessLogic
                     Title = importData.Title,
                     Created = DateTime.Now,
                     FkUserId = importData.User.Id,
-                    CollectionExercise = new List<BlEntities.ExerciseKeys>(),
+                    CollectionExercise = new List<BlEntities.CollectionExercise>(),
                     CollectionLanguage = new List<BlEntities.CollectionLanguage>(),
                 };
 
@@ -101,12 +101,15 @@ namespace FHTW.CodeRunner.BusinessLogic
                     var dalExercise = this.mapper.Map<DalEntities.Exercise>(blExercise);
                     var savedDalExercise = this.exerciseRepository.CreateAndUpdate(dalExercise);
 
-                    var exerciseKeys = new BlEntities.ExerciseKeys
+                    var collectionExercise = new BlEntities.CollectionExercise
                     {
                         Id = savedDalExercise.Id,
+                        VersionNumber = 1,
+                        FkWrittenLanguageId = importData.WrittenLanguage.Id,
+                        FkProgrammingLanguageId = importData.ProgrammingLanguage.Id,
                     };
 
-                    collection.CollectionExercise.Add(exerciseKeys);
+                    collection.CollectionExercise.Add(collectionExercise);
                 }
 
                 var dalCollection = this.mapper.Map<DalEntities.Collection>(collection);

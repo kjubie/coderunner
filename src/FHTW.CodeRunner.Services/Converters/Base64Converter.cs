@@ -13,8 +13,12 @@ using SvcEntities = FHTW.CodeRunner.Services.DTOs;
 
 namespace FHTW.CodeRunner.Services.Converters
 {
+    /// <summary>
+    /// AutoMapper Converter for Base64 conversion.
+    /// </summary>
     public class Base64Converter : IValueConverter<string, string>
     {
+        /// <inheritdoc/>
         public string Convert(string sourceMember, ResolutionContext context)
         {
             if (sourceMember == null)
