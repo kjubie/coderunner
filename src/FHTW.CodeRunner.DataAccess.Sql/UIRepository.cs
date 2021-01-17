@@ -34,7 +34,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         {
             try
             {
-                return this.context.ProgrammingLanguage.ToList();
+                return this.context.ProgrammingLanguage?.ToList();
             }
             catch (Exception e)
             {
@@ -47,7 +47,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         {
             try
             {
-                return this.context.WrittenLanguage.ToList();
+                return this.context.WrittenLanguage?.ToList();
             }
             catch (Exception e)
             {
@@ -60,7 +60,20 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         {
             try
             {
-                return this.context.QuestionType.ToList();
+                return this.context.QuestionType?.ToList();
+            }
+            catch (Exception e)
+            {
+                throw new DalException(e.Message, e);
+            }
+        }
+
+        /// <inheritdoc/>
+        public List<Tag> GetTags()
+        {
+            try
+            {
+                return this.context.Tag?.ToList();
             }
             catch (Exception e)
             {

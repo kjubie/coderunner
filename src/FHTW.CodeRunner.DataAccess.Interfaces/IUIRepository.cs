@@ -31,5 +31,11 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// </summary>
         /// <returns>returns a list containing all questiontypes.</returns>
         List<QuestionType> GetQuestionTypes();
+
+        /// <summary>
+        /// Gets a list of all existing tags.
+        /// </summary>
+        /// <returns>returns a list containing all existing tags.</returns>
+        List<Tag> GetTags();
     }
 }
