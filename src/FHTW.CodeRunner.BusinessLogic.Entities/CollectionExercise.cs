@@ -20,9 +20,24 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the version.
+        /// Gets or Sets the prefered version number for the exercise.
         /// </summary>
         public int VersionNumber { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the foreign key id of the regular exercise.
+        /// </summary>
+        public int FkExerciseId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the foreign key id of the prefered programming language.
+        /// </summary>
+        public int FkProgrammingLanguageId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the foreign key id of the prefered written language.
+        /// </summary>
+        public int FkWrittenLanguageId { get; set; }
 
         /// <summary>
         /// Gets or sets the hierarchy for the language.

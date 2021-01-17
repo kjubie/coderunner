@@ -56,6 +56,6 @@ namespace FHTW.CodeRunner.Services.DTOs
         /// Gets or sets multiple exercises.
         /// </summary>
         [DataMember(Name = "collectionExerciseList")]
-        public ICollection<ExerciseKeys> CollectionExercise { get; set; }
+        public ICollection<ExerciseIds> CollectionExercise { get; set; }
     }
 }

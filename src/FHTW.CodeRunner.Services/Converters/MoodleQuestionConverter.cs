@@ -59,7 +59,7 @@ namespace FHTW.CodeRunner.Services.Converters
             var exerciseVersion = new BlEntities.ExerciseVersion
             {
                 Id = 0,
-                VersionNumber = 0, // TODO: Roman fragen.
+                VersionNumber = 0,
                 CreatorRating = 0,
                 CreatorDifficulty = 0,
                 LastModified = DateTime.Now,
@@ -76,9 +76,9 @@ namespace FHTW.CodeRunner.Services.Converters
                 {
                     Id = 0,
                     FullTitle = question.Name?.Text,
-                    Introduction = question.Questiontext?.Text, // TODO: Wohin?
+                    Introduction = string.Empty,
                     TemplateParam = question.Templateparams,
-                    TemplateParamLiftFlag = question.Hoisttemplateparams == "1" ? true : false, // TODO: Default?
+                    TemplateParamLiftFlag = question.Hoisttemplateparams == "1" ? true : false,
                     TwigAllFlag = question.Twigall == "1" ? true : false,
                 },
                 FkWrittenLanguage = null,
@@ -98,7 +98,7 @@ namespace FHTW.CodeRunner.Services.Converters
                 IdNum = int.TryParse(question.Idnumber, out x) ? x : 0,
                 Solution = question.Answer,
                 Prefill = question.Answerpreload,
-                Feedback = question.Generalfeedback?.Text, // TODO: Roman fragen, null erlaubt?
+                Feedback = question.Generalfeedback?.Text,
                 AllowFiles = int.TryParse(question.Attachments, out x) ? x : 0,
                 FilesRequired = int.TryParse(question.Attachmentsrequired, out x) ? x : 0,
                 FilesRegex = question.Filenamesregex,
@@ -116,9 +116,9 @@ namespace FHTW.CodeRunner.Services.Converters
                 TemplateDebugFlag = question.Showsource == "1" ? true : false,
                 TestOnSaveFlag = question.Validateonsave == "1" ? true : false,
                 GlobalExtraParam = question.Globalextra,
-                RuntimeData = string.Empty, // TODO: RuntimeData?
-                PreCheck = int.TryParse(question.Precheck, out x) ? (BlEntities.PreCheckState)x : 0, // TODO: Default?
-                GeneralFeedbackDisplay = int.TryParse(question.Displayfeedback, out x) ? (BlEntities.GeneralFeedbackDisplayState)x : 0, // TODO: Default?
+                RuntimeData = string.Empty, // TODO: RuntimeData? File im Moodle. Pls add.
+                PreCheck = int.TryParse(question.Precheck, out x) ? (BlEntities.PreCheckState)x : BlEntities.PreCheckState.Deactivated, // TODO: Errorhandling
+                GeneralFeedbackDisplay = int.TryParse(question.Displayfeedback, out x) ? (BlEntities.GeneralFeedbackDisplayState)x : BlEntities.GeneralFeedbackDisplayState.SetFromTest, // TODO: Errorhandling
                 TestCase = new List<BlEntities.TestCase>(),
             };
 
@@ -133,7 +133,7 @@ namespace FHTW.CodeRunner.Services.Converters
                     StandardInput = testCase.Stdin?.Text,
                     ExpectedOutput = testCase.Expected?.Text,
                     AdditionalData = testCase.Extra?.Text,
-                    Points = int.TryParse(testCase.Mark, out x) ? x : null, // TODO: null needed?
+                    Points = int.TryParse(testCase.Mark, out x) ? x : null,
                     UseAsExampleFlag = testCase.Useasexample == "1" ? true : false,
                     HideOnFailFlag = testCase.Hiderestiffail == "1" ? true : false,
                     DisplayType = testCase.Display?.Text,
