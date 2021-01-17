@@ -78,7 +78,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         [Test]
         public void ShouldUpdateTemporarySaveExercise()
         {
-            this.SetupDatabaseInMemory(DbTestController.State.SEEDED);
+            this.SetupDatabaseInMemory(DbTestController.State.SEEDEDJSON);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
                 IExerciseRepository rep = new ExerciseRepository(context);
@@ -118,6 +118,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                 body.FkExerciseLanguageId = 0;
                 body.FkTestSuiteId = 0;
                 body.FkTestSuite = TestDataBuilder<TestSuite>.Single();
+                body.FkTestSuite.FkQuestionType = new QuestionType { Name = "c++_question_type" };
                 var testcase = TestDataBuilder<TestCase>.Single();
                 testcase.FkTestSuiteId = 0;
                 body.FkTestSuite.TestCase = new List<TestCase>

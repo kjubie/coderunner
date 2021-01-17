@@ -79,6 +79,33 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             {
                 using var transaction = this.context.Database.BeginTransaction();
 
+                // set ids of existing questiontypes with no id.
+                // this can happen if an exercise imported from moodle has the same questiontype, but of course no id.
+                exercise.ExerciseVersion.ToList().ForEach(ev =>
+                {
+                    ev.ExerciseLanguage.ToList().ForEach(el =>
+                    {
+                        el.ExerciseBody.ToList().ForEach(eb =>
+                        {
+                            if (eb.FkTestSuite != null)
+                            {
+                                if (eb.FkTestSuite.FkQuestionType != null)
+                                {
+                                    // get id if question type exists.
+                                    int? id = this.context.QuestionType
+                                        .AsNoTracking()
+                                        .SingleOrDefault(qt => qt.Name == eb.FkTestSuite.FkQuestionType.Name)?.Id;
+
+                                    if (id != null)
+                                    {
+                                        eb.FkTestSuite.FkQuestionType.Id = (int)id;
+                                    }
+                                }
+                            }
+                        });
+                    });
+                });
+
                 // add everything new
                 this.context.ChangeTracker.TrackGraph(exercise, e =>
                 {
