@@ -103,7 +103,8 @@ namespace FHTW.CodeRunner.BusinessLogic
 
                     var collectionExercise = new BlEntities.CollectionExercise
                     {
-                        Id = savedDalExercise.Id,
+                        Id = 0,
+                        FkExerciseId = savedDalExercise.Id,
                         VersionNumber = 1,
                         FkWrittenLanguageId = importData.WrittenLanguage.Id,
                         FkProgrammingLanguageId = importData.ProgrammingLanguage.Id,
