@@ -36,9 +36,9 @@ namespace FHTW.CodeRunner.Services.DTOs
         public WrittenLanguage WrittenLanguage { get; set; }
 
         /// <summary>
-        /// Gets or sets the xml document as string.
+        /// Gets or sets the xml document as base64 string.
         /// </summary>
-        [DataMember(Name = "xmlString")]
-        public string XmlString { get; set; }
+        [DataMember(Name = "Base64XmlString")]
+        public string Base64XmlString { get; set; }
     }
 }

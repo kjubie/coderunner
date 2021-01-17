@@ -96,7 +96,11 @@ namespace FHTW.CodeRunner.Services.AutoMapper
 
             this.CreateMap<SvcEntities.CollectionKeys, BlEntities.CollectionKeys>();
 
-            this.CreateMap<SvcEntities.ImportData, BlEntities.ImportData>();
+            this.CreateMap<SvcEntities.ImportData, BlEntities.ImportData>()
+                .ForMember(p => p.XmlString, p => p.ConvertUsing<Converters.Base64Converter, string>(p => p.Base64XmlString));
+
+            this.CreateMap<BlEntities.ImportData, BlEntities.Exercise>()
+                .ConvertUsing(new Converters.MoodleQuestionConverter());
 
             this.CreateMap<BlEntities.CollectionInstance, EsEntities.Quiz>()
                 .ConvertUsing(new Converters.MoodleQuizConverter());
