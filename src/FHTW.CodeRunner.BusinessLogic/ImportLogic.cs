@@ -6,35 +6,91 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
-using FHTW.CodeRunner.BusinessLogic.Entities;
+using FHTW.CodeRunner.BusinessLogic.Exceptions;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
+using FHTW.CodeRunner.DataAccess.Interfaces;
+using FHTW.CodeRunner.DataAccess.Sql;
 using FHTW.CodeRunner.ExportService.Interfaces;
 using Microsoft.Extensions.Logging;
+using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
+using DalEntities = FHTW.CodeRunner.DataAccess.Entities;
+using EsEntities = FHTW.CodeRunner.ExportService.Entities;
 
 namespace FHTW.CodeRunner.BusinessLogic
 {
+    /// <summary>
+    /// Logic Class for import actions.
+    /// </summary>
     public class ImportLogic : IImportLogic
     {
         private readonly ILogger logger;
         private readonly IMapper mapper;
+        private readonly IExerciseRepository exerciseRepository;
+        private readonly ICollectionRepository collectionRepository;
         private readonly IMoodleXmlService moodleXmlService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImportLogic"/> class.
         /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="mapper"></param>
-        /// <param name="moodleXmlService"></param>
-        public ImportLogic(ILogger<ImportLogic> logger, IMapper mapper, IMoodleXmlService moodleXmlService)
+        /// <param name="logger">The injected logger.</param>
+        /// <param name="mapper">The injected mapper.</param>
+        /// <param name="exerciseRepository">The injected exercise repository.</param>
+        /// <param name="collectionRepository">The injected collection repository.</param>
+        /// <param name="moodleXmlService">The injected moodle xml service.</param>
+        public ImportLogic(ILogger<ImportLogic> logger, IMapper mapper, IExerciseRepository exerciseRepository, ICollectionRepository collectionRepository, IMoodleXmlService moodleXmlService)
         {
             this.logger = logger;
             this.mapper = mapper;
+            this.exerciseRepository = exerciseRepository;
+            this.collectionRepository = collectionRepository;
             this.moodleXmlService = moodleXmlService;
         }
 
-        public Collection ImportCollection()
+        /// <inheritdoc/>
+        public void ImportCollection(BlEntities.ImportData importData)
         {
-            throw new NotImplementedException();
+            if (importData == null)
+            {
+                this.logger.LogError("ImportData is null");
+                throw new BlValidationException("ImportData is null", null);
+            }
+
+            try
+            {
+                EsEntities.Quiz quiz = this.moodleXmlService.ImportMoodleXml(importData.XmlString);
+                importData.XmlString = null;
+
+                var collection = new BlEntities.Collection
+                {
+                    CollectionExercise = new List<BlEntities.ExerciseKeys>(),
+                };
+
+                foreach (var question in quiz.Question)
+                {
+                    importData.Question = question;
+                    var blExercise = this.mapper.Map<BlEntities.Exercise>(importData);
+
+                    var dalExercise = this.mapper.Map<DalEntities.Exercise>(blExercise);
+                    var savedDalExercise = this.exerciseRepository.CreateAndUpdate(dalExercise);
+
+                    var exerciseKeys = new BlEntities.ExerciseKeys
+                    {
+                        Id = savedDalExercise.Id,
+                    };
+
+                    collection.CollectionExercise.Add(exerciseKeys);
+                }
+
+                var dalCollection = this.mapper.Map<DalEntities.Collection>(collection);
+
+                this.collectionRepository.CreateOrUpdate(dalCollection);
+                this.logger.LogInformation("BL passing Collection with Title: " + collection.Title + " to DAL.");
+            }
+            catch (DalException e)
+            {
+                this.logger.LogError(e.Message);
+                throw new BlDataAccessException("An error occured while importing the collection.", e);
+            }
         }
     }
 }

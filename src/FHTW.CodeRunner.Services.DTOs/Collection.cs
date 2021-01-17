@@ -17,15 +17,6 @@ namespace FHTW.CodeRunner.Services.DTOs
     public class Collection
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Collection"/> class.
-        /// </summary>
-        public Collection()
-        {
-            this.CollectionLanguage = new HashSet<CollectionLanguage>();
-            this.CollectionTag = new HashSet<CollectionTag>();
-        }
-
-        /// <summary>
         /// Gets or sets the id.
         /// </summary>
         [DataMember(Name = "id")]
@@ -60,5 +51,11 @@ namespace FHTW.CodeRunner.Services.DTOs
         /// </summary>
         [DataMember(Name = "collectionTagList")]
         public ICollection<CollectionTag> CollectionTag { get; set; }
+
+        /// <summary>
+        /// Gets or sets multiple exercises.
+        /// </summary>
+        [DataMember(Name = "collectionExerciseList")]
+        public ICollection<ExerciseKeys> CollectionExercise { get; set; }
     }
 }

@@ -1,9 +1,0 @@
-[
-    {   // Collection 1, Exercise 1, English, C++
-        "FkCollectionLanguageId": 1,
-        "VersionNumber": 1,
-        "FkExerciseId": 1,
-        "FkProgrammingLanguageId": 1,
-        "FkWrittenLanguageId": 1
-    }
-]

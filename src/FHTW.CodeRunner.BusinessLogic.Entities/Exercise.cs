@@ -14,17 +14,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     [ExcludeFromCodeCoverage]
     public class Exercise
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Exercise"/> class.
-        /// </summary>
-        public Exercise()
-        {
-            this.Comment = new HashSet<Comment>();
-            this.Difficulty = new HashSet<Difficulty>();
-            this.ExerciseTag = new HashSet<ExerciseTag>();
-            this.ExerciseVersion = new HashSet<ExerciseVersion>();
-            this.Rating = new HashSet<Rating>();
-        }
+        private User user;
 
         /// <summary>
         /// Gets or sets the id.
@@ -42,9 +32,30 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public DateTime Created { get; set; }
 
         /// <summary>
+        /// Gets or sets the Foreign Key for the user.
+        /// </summary>
+        public int FkUserId { get; set; }
+
+        /// <summary>
         /// Gets or sets the author.
         /// </summary>
-        public User FkUser { get; set; }
+        public User FkUser
+        {
+            get
+            {
+                return this.user;
+            }
+
+            set
+            {
+                this.user = value;
+
+                if (value != null)
+                {
+                    this.FkUserId = value.Id;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets multiple comments.

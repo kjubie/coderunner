@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using FHTW.CodeRunner.DataAccess.Entities;
@@ -19,8 +20,16 @@ using Microsoft.Extensions.Logging;
 
 namespace FHTW.CodeRunner.DataAccess.Sql
 {
+    /// <summary>
+    /// Extension to the CodeRunnerContext handling migration and seeding of the database.
+    /// </summary>
     public static class CodeRunnerContextExtension
     {
+        /// <summary>
+        /// Checks if all migrations are applied.
+        /// </summary>
+        /// <param name="context">The context from this.</param>
+        /// <returns>True if migrations are up to date, else false.</returns>
         public static bool AllMigrationsApplied(this CodeRunnerContext context)
         {
             var applied = context.GetService<IHistoryRepository>()
@@ -34,6 +43,16 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             return !total.Except(applied).Any();
         }
 
+        /// <summary>
+        /// Ensures that the database is seeded.
+        /// In the current version it not only seeds the nessesary values like:
+        ///     - WrittenLanguage
+        ///     - ProgrammingLanguage
+        ///     - QuestionType
+        /// But also test exercises and collections.
+        /// When changing the test data it might come to complications with the tests, because they might make assumptions about the available data.
+        /// </summary>
+        /// <param name="context">The context from this.</param>
         public static void EnsureSeeded(this CodeRunnerContext context)
         {
             var options = new JsonSerializerOptions()
@@ -45,24 +64,25 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             try
             {
-                UpdateOrAdd<User>(context, "user", options);
-                UpdateOrAdd<Exercise>(context, "exercise", options);
-                UpdateOrAdd<ExerciseVersion>(context, "exercise_version", options);
-                UpdateOrAdd<Comment>(context, "comment", options);
-                UpdateOrAdd<Difficulty>(context, "difficulty", options);
-                UpdateOrAdd<ExerciseHeader>(context, "exercise_header", options);
-                UpdateOrAdd<Tag>(context, "tag", options);
-                UpdateOrAdd<ExerciseTag>(context, "exercise_tag", options);
-                UpdateOrAdd<WrittenLanguage>(context, "written_language", options);
-                UpdateOrAdd<ProgrammingLanguage>(context, "programming_language", options);
-                UpdateOrAdd<QuestionType>(context, "questiontype", options);
-                UpdateOrAdd<TestSuite>(context, "testsuite", options);
-                UpdateOrAdd<TestCase>(context, "testcase", options);
-                UpdateOrAdd<ExerciseLanguage>(context, "exercise_language", options);
-                UpdateOrAdd<ExerciseBody>(context, "exercise_body", options);
-                UpdateOrAdd<Collection>(context, "collection", options);
-                UpdateOrAdd<CollectionLanguage>(context, "collection_language", options);
-                UpdateOrAdd<CollectionExercise>(context, "collection_exercise", options);
+                UpdateOrAdd<User>(context, Properties.Resources.user, options);
+                UpdateOrAdd<Exercise>(context, Properties.Resources.exercise, options);
+                UpdateOrAdd<ExerciseVersion>(context, Properties.Resources.exercise_version, options);
+                UpdateOrAdd<Comment>(context, Properties.Resources.comment, options);
+                UpdateOrAdd<Difficulty>(context, Properties.Resources.difficulty, options);
+                UpdateOrAdd<ExerciseHeader>(context, Properties.Resources.exercise_header, options);
+                UpdateOrAdd<Tag>(context, Properties.Resources.tag, options);
+                UpdateOrAdd<ExerciseTag>(context, Properties.Resources.exercise_tag, options);
+                UpdateOrAdd<WrittenLanguage>(context, Properties.Resources.written_language, options);
+                UpdateOrAdd<ProgrammingLanguage>(context, Properties.Resources.programming_language, options);
+                UpdateOrAdd<QuestionType>(context, Properties.Resources.questiontype, options);
+                UpdateOrAdd<TestSuite>(context, Properties.Resources.testsuite, options);
+                UpdateOrAdd<TestCase>(context, Properties.Resources.testcase, options);
+                UpdateOrAdd<ExerciseLanguage>(context, Properties.Resources.exercise_language, options);
+                UpdateOrAdd<ExerciseBody>(context, Properties.Resources.exercise_body, options);
+                UpdateOrAdd<Collection>(context, Properties.Resources.collection, options);
+                UpdateOrAdd<CollectionLanguage>(context, Properties.Resources.collection_language, options);
+                UpdateOrAdd<CollectionExercise>(context, Properties.Resources.collection_exercise, options);
+                context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -73,10 +93,10 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             transaction.Commit();
         }
 
-        private static void UpdateOrAdd<T>(CodeRunnerContext context, string name, JsonSerializerOptions options)
+        private static void UpdateOrAdd<T>(CodeRunnerContext context, string data, JsonSerializerOptions options)
             where T : class
         {
-            var list = JsonSerializer.Deserialize<List<T>>(File.ReadAllText("Seed" + Path.DirectorySeparatorChar + name + ".json"), options);
+            var list = JsonSerializer.Deserialize<List<T>>(data, options);
             var table = context.Set<T>();
 
             list.ForEach(o =>

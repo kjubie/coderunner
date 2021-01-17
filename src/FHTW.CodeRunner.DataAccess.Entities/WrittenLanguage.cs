@@ -10,6 +10,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.DataAccess.Entities
 {
+    /// <summary>
+    /// A written language that is available for creating exercises and colletion.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     [Table("written_language")]
     public partial class WrittenLanguage : IEntity
@@ -23,10 +26,14 @@ namespace FHTW.CodeRunner.DataAccess.Entities
             this.ExerciseLanguage = new HashSet<ExerciseLanguage>();
         }
 
+        /// <inheritdoc/>
         [Key]
         [Column("id")]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the name of the language.
+        /// </summary>
         [Required]
         [Column("name")]
         [StringLength(30)]

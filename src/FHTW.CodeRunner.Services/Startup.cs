@@ -155,11 +155,13 @@ namespace FHTW.CodeRunner.Services
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             services.AddTransient<IExerciseLogic, ExerciseLogic>();
+            services.AddTransient<ICollectionLogic, CollectionLogic>();
             services.AddTransient<IUserLogic, UserLogic>();
             services.AddTransient<IExportLogic, ExportLogic>();
             services.AddTransient<IImportLogic, ImportLogic>();
 
             services.AddTransient<IExerciseRepository, ExerciseRepository>();
+            services.AddTransient<ICollectionRepository, CollectionRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUIRepository, UIRepository>();
 

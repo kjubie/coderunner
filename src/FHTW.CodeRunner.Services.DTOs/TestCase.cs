@@ -9,10 +9,16 @@ using System.Runtime.Serialization;
 
 namespace FHTW.CodeRunner.Services.DTOs
 {
+    /// <summary>
+    /// Entity that describes a test case.
+    /// </summary>
     [DataContract]
     [ExcludeFromCodeCoverage]
     public class TestCase
     {
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         [DataMember(Name = "id")]
         public int Id { get; set; }
 

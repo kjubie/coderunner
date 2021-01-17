@@ -26,7 +26,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleRepository{TEntity, TContext}"/> class.
-        /// automatically creates an instance of the <see cref="TContext"/> type.
+        /// automatically creates an instance of the TContext" type.
         /// it is generally recommended to inject the context by using the <see cref="SimpleRepository{TEntity, TContext}.SimpleRepository(TContext)"/>constructor.
         /// </summary>
         [Obsolete]

@@ -52,7 +52,7 @@ namespace FHTW.CodeRunner.Services.Controllers
         [SwaggerOperation("ExportExercise")]
         [SwaggerResponse(statusCode: 200, description: "Successfully exported the exercise")]
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "The operation failed due to an error.")]
-        public virtual IActionResult ExportExercise([FromBody] SvcEntities.ExportExercise body)
+        public virtual IActionResult ExportExercise([FromBody] SvcEntities.ExerciseKeys body)
         {
             if (body == null)
             {
@@ -62,9 +62,9 @@ namespace FHTW.CodeRunner.Services.Controllers
                 });
             }
 
-            var blExportExercise = this.mapper.Map<BlEntities.ExportExercise>(body);
+            var blExerciseKeys = this.mapper.Map<BlEntities.ExerciseKeys>(body);
 
-            string xmlString = this.exportLogic.ExportExercise(blExportExercise);
+            string xmlString = this.exportLogic.ExportExercise(blExerciseKeys);
 
             return new ContentResult
             {
@@ -81,11 +81,10 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <returns>A Moodle XML Document.</returns>
         [HttpPost]
         [Route("export/collection")]
-        [Produces("text/xml")]
         [SwaggerOperation("ExportCollection")]
         [SwaggerResponse(statusCode: 200, description: "Successfully exported the collection")]
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "The operation failed due to an error.")]
-        public virtual IActionResult ExportCollection([FromBody] SvcEntities.Collection body)
+        public virtual IActionResult ExportCollection([FromBody] SvcEntities.CollectionKeys body)
         {
             if (body == null)
             {
@@ -95,10 +94,16 @@ namespace FHTW.CodeRunner.Services.Controllers
                 });
             }
 
-            var blCollection = this.mapper.Map<BlEntities.Collection>(body);
+            var blCollectionKeys = this.mapper.Map<BlEntities.CollectionKeys>(body);
 
-            this.exportLogic.ExportCollection(blCollection);
-            return this.Ok();
+            string xmlString = this.exportLogic.ExportCollection(blCollectionKeys);
+
+            return new ContentResult
+            {
+                ContentType = "application/xml",
+                Content = xmlString,
+                StatusCode = 200,
+            };
         }
     }
 }

@@ -8,6 +8,9 @@ using FluentValidation;
 
 namespace FHTW.CodeRunner.BusinessLogic.Validators
 {
+    /// <summary>
+    /// Validator for the User Entity.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class UserValidator : AbstractValidator<User>
     {

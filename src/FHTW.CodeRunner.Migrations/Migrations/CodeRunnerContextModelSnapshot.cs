@@ -56,9 +56,9 @@ namespace FHTW.CodeRunner.Migrations.Migrations
                         .HasColumnName("id")
                         .UseIdentityByDefaultColumn();
 
-                    b.Property<int>("FkCollectionLanguageId")
+                    b.Property<int>("FkCollectionId")
                         .HasColumnType("integer")
-                        .HasColumnName("fk_collection_language_id");
+                        .HasColumnName("fk_collection_id");
 
                     b.Property<int>("FkExerciseId")
                         .HasColumnType("integer")
@@ -78,7 +78,7 @@ namespace FHTW.CodeRunner.Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FkCollectionLanguageId");
+                    b.HasIndex("FkCollectionId");
 
                     b.HasIndex("FkExerciseId");
 
@@ -101,6 +101,10 @@ namespace FHTW.CodeRunner.Migrations.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("fk_collection_id");
 
+                    b.Property<int>("FkWrittenLanguageId")
+                        .HasColumnType("integer")
+                        .HasColumnName("fk_written_language_id");
+
                     b.Property<string>("FullTitle")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -120,6 +124,8 @@ namespace FHTW.CodeRunner.Migrations.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FkCollectionId");
+
+                    b.HasIndex("FkWrittenLanguageId");
 
                     b.ToTable("collection_language");
                 });
@@ -720,10 +726,10 @@ namespace FHTW.CodeRunner.Migrations.Migrations
 
             modelBuilder.Entity("FHTW.CodeRunner.DataAccess.Entities.CollectionExercise", b =>
                 {
-                    b.HasOne("FHTW.CodeRunner.DataAccess.Entities.CollectionLanguage", "FkCollectionLanguage")
+                    b.HasOne("FHTW.CodeRunner.DataAccess.Entities.Collection", "FkCollection")
                         .WithMany("CollectionExercise")
-                        .HasForeignKey("FkCollectionLanguageId")
-                        .HasConstraintName("collection_exercise_fk_collection_language_id_fkey")
+                        .HasForeignKey("FkCollectionId")
+                        .HasConstraintName("collection_exercise_fk_collection_id_fkey")
                         .IsRequired();
 
                     b.HasOne("FHTW.CodeRunner.DataAccess.Entities.Exercise", "FkExercise")
@@ -744,7 +750,7 @@ namespace FHTW.CodeRunner.Migrations.Migrations
                         .HasConstraintName("collection_exercise_fk_written_language_id_fkey")
                         .IsRequired();
 
-                    b.Navigation("FkCollectionLanguage");
+                    b.Navigation("FkCollection");
 
                     b.Navigation("FkExercise");
 
@@ -761,7 +767,15 @@ namespace FHTW.CodeRunner.Migrations.Migrations
                         .HasConstraintName("collection_language_fk_collection_id_fkey")
                         .IsRequired();
 
+                    b.HasOne("FHTW.CodeRunner.DataAccess.Entities.WrittenLanguage", "FkWrittenLanguage")
+                        .WithMany()
+                        .HasForeignKey("FkWrittenLanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("FkCollection");
+
+                    b.Navigation("FkWrittenLanguage");
                 });
 
             modelBuilder.Entity("FHTW.CodeRunner.DataAccess.Entities.CollectionTag", b =>
@@ -965,14 +979,11 @@ namespace FHTW.CodeRunner.Migrations.Migrations
 
             modelBuilder.Entity("FHTW.CodeRunner.DataAccess.Entities.Collection", b =>
                 {
+                    b.Navigation("CollectionExercise");
+
                     b.Navigation("CollectionLanguage");
 
                     b.Navigation("CollectionTag");
-                });
-
-            modelBuilder.Entity("FHTW.CodeRunner.DataAccess.Entities.CollectionLanguage", b =>
-                {
-                    b.Navigation("CollectionExercise");
                 });
 
             modelBuilder.Entity("FHTW.CodeRunner.DataAccess.Entities.Exercise", b =>

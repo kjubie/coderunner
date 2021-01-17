@@ -8,9 +8,15 @@ using System.Xml.Serialization;
 
 namespace FHTW.CodeRunner.ExportService.Entities
 {
+    /// <summary>
+    /// Entity that describes a category.
+    /// </summary>
     [XmlRoot(ElementName = "category")]
     public class Category
     {
+        /// <summary>
+        /// Gets or sets the text.
+        /// </summary>
         [XmlElement(ElementName = "text")]
         public string Text { get; set; }
     }

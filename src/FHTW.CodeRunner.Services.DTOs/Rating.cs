@@ -9,25 +9,28 @@ using System.Runtime.Serialization;
 
 namespace FHTW.CodeRunner.Services.DTOs
 {
+    /// <summary>
+    /// Entity that describes the rating.
+    /// </summary>
     [DataContract]
     [ExcludeFromCodeCoverage]
     public class Rating
     {
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         [DataMember(Name = "id")]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the number.
+        /// </summary>
         [DataMember(Name = "number")]
         public int Number { get; set; }
 
-        [DataMember(Name = "exerciseId")]
-        public int FkExerciseId { get; set; }
-
-        [DataMember(Name = "userId")]
-        public int FkUserId { get; set; }
-
-        [DataMember(Name = "exercise")]
-        public Exercise FkExercise { get; set; }
-
+        /// <summary>
+        /// Gets or sets the author.
+        /// </summary>
         [DataMember(Name = "user")]
         public User FkUser { get; set; }
     }

@@ -8,13 +8,25 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
+    /// <summary>
+    /// Entity that describes the header of an exercise.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class ExerciseHeader
     {
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         public int Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the fullt title.
+        /// </summary>
         public string FullTitle { get; set; }
 
+        /// <summary>
+        /// Gets or sets the introduction.
+        /// </summary>
         public string Introduction { get; set; }
 
         /// <summary>

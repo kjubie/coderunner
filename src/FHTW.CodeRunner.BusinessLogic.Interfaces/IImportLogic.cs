@@ -9,8 +9,15 @@ using FHTW.CodeRunner.BusinessLogic.Entities;
 
 namespace FHTW.CodeRunner.BusinessLogic.Interfaces
 {
+    /// <summary>
+    /// Interface for dealing with import actions.
+    /// </summary>
     public interface IImportLogic
     {
-        Collection ImportCollection();
+        /// <summary>
+        /// Function for imporing a collection.
+        /// </summary>
+        /// <param name="importData">The moodle quiz as xml string and needed data.</param>
+        void ImportCollection(ImportData importData);
     }
 }

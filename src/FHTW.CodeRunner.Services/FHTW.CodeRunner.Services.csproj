@@ -19,10 +19,10 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.1">
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -54,7 +54,6 @@
     <ProjectReference Include="..\FHTW.CodeRunner.BusinessLogic\FHTW.CodeRunner.BusinessLogic.csproj" />
     <ProjectReference Include="..\FHTW.CodeRunner.Migrations\FHTW.CodeRunner.Migrations.csproj" />
     <ProjectReference Include="..\FHTW.CodeRunner.Services.DTOs\FHTW.CodeRunner.Services.DTOs.csproj" />
-    <ProjectReference Include="..\FHTW.CodeRunner.Services.Interfaces\FHTW.CodeRunner.Services.Interfaces.csproj" />
   </ItemGroup>
 
   <ItemGroup>

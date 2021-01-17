@@ -14,6 +14,8 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     [ExcludeFromCodeCoverage]
     public class ExerciseBody
     {
+        private ProgrammingLanguage programmingLanguage;
+
         /// <summary>
         /// Gets or sets the id.
         /// </summary>
@@ -101,9 +103,30 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public ExerciseLanguage FkExerciseLanguage { get; set; }
 
         /// <summary>
-        /// Gets or sets the programming language for the exercise.
+        /// Gets or sets the Foreign Key for the programming language.
         /// </summary>
-        public ProgrammingLanguage FkProgrammingLanguage { get; set; }
+        public int FkProgrammingLanguageId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the programming language.
+        /// </summary>
+        public ProgrammingLanguage FkProgrammingLanguage
+        {
+            get
+            {
+                return this.programmingLanguage;
+            }
+
+            set
+            {
+                this.programmingLanguage = value;
+
+                if (value != null)
+                {
+                    this.FkProgrammingLanguageId = value.Id;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the test suite for the exercise.

@@ -12,6 +12,10 @@ using Microsoft.Extensions.Logging;
 
 namespace FHTW.CodeRunner.DataAccess.Sql
 {
+    /// <summary>
+    /// The implemenation of the ICollectionRepository interface.
+    /// This repository manages the collections.
+    /// </summary>
     public class CollectionRepository : ICollectionRepository
     {
         private readonly CodeRunnerContext context;
@@ -25,40 +29,155 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             this.context = context;
         }
 
-        public CollectionInstance GetCollectionInstance(int id)
+        /// <inheritdoc/>
+        public ICollection<ExerciseInstance> GetExercisesInstances(int id, string language = null)
         {
-            var instances = this.GetExercisesInstances(id);
-            return this.context.Collection
+            var collection = this.context.Collection
+                .Include(c => c.CollectionExercise)
+                    .ThenInclude(x => x.FkProgrammingLanguage)
+                .Include(c => c.CollectionExercise)
+                    .ThenInclude(x => x.FkWrittenLanguage)
+                .SingleOrDefault(c => c.Id == id);
+
+            var list = collection?.CollectionExercise?.ToList() ?? throw new DalException($"collection with id = {id} does not exist");
+
+            var repo = new ExerciseRepository(this.context);
+
+            var instances = language switch
+            {
+                null => from ce in list select repo.GetExerciseInstance(ce.FkExerciseId, ce.FkProgrammingLanguage.Name, ce.FkWrittenLanguage.Name, ce.VersionNumber),
+                _ => from ce in list select repo.GetExerciseInstance(ce.FkExerciseId, ce.FkProgrammingLanguage.Name, language, ce.VersionNumber),
+            };
+
+            return instances?.ToList();
+        }
+
+        /// <inheritdoc/>
+        public CollectionInstance GetCollectionInstance(int id, string language, bool use_set_language)
+        {
+            ICollection<ExerciseInstance> exercises = null;
+
+            exercises = use_set_language switch
+            {
+                true => this.GetExercisesInstances(id),
+                false => this.GetExercisesInstances(id, language),
+            };
+
+            var instance = this.context.Collection
+                .Where(c => c.Id == id)
                 .Select(c => new CollectionInstance
                 {
                     Id = c.Id,
                     Title = c.Title,
                     Created = c.Created,
                     User = c.FkUser,
-                    Header = c.CollectionLanguage.FirstOrDefault(),
-                    Exercises = instances,
-                }).FirstOrDefault(c => c.Id == id);
+                    Header = c.CollectionLanguage
+                        .Single(l => l.FkWrittenLanguage.Name == language),
+                    Exercises = exercises,
+                }).SingleOrDefault();
+
+            return instance;
         }
 
-        public ICollection<ExerciseInstance> GetExercisesInstances(int id)
+        /// <inheritdoc/>
+        public Collection CreateOrUpdate(Collection collection)
         {
-            var list = this.GetCollectionExercises(id).ToList();
+            try
+            {
+                using var transaction = this.context.Database.BeginTransaction();
 
-            var repo = new ExerciseRepository(this.context);
+                // add everything new
+                this.context.ChangeTracker.TrackGraph(collection, e =>
+                {
+                    if (e.Entry.IsKeySet)
+                    {
+                        e.Entry.State = EntityState.Unchanged;
+                    }
+                    else
+                    {
+                        e.Entry.State = EntityState.Added;
+                    }
+                });
 
-            var instances = from ce in list select repo.GetExerciseInstance(ce.FkExerciseId, ce.FkProgrammingLanguage.Name, ce.FkWrittenLanguage.Name, ce.VersionNumber);
+                this.context.SaveChanges();
 
-            return instances.ToList();
+                // update existing
+                this.context.ChangeTracker.TrackGraph(collection, e =>
+                {
+                    if (e.Entry.IsKeySet)
+                    {
+                        e.Entry.State = EntityState.Modified;
+                    }
+                });
+
+                // don't update other fields
+                this.context.Entry(collection).Property(x => x.Created).IsModified = false;
+                this.context.Entry(collection).Property(x => x.FkUserId).IsModified = false;
+                this.context.Entry(collection).Reference(x => x.FkUser).IsModified = false;
+
+                collection.CollectionLanguage.ToList().ForEach(cl =>
+                {
+                    this.context.Entry(cl).Reference(x => x.FkWrittenLanguage).IsModified = false;
+                });
+
+                collection.CollectionExercise.ToList().ForEach(ce =>
+                {
+                    this.context.Entry(ce).Reference(x => x.FkWrittenLanguage).IsModified = false;
+                    this.context.Entry(ce).Reference(x => x.FkProgrammingLanguage).IsModified = false;
+                    this.context.Entry(ce).Reference(x => x.FkExercise).IsModified = false;
+                });
+
+                collection.CollectionTag.ToList().ForEach(ct =>
+                {
+                    this.context.Entry(ct).Reference(x => x.FkTag).IsModified = false;
+                });
+
+                this.context.SaveChanges();
+
+                transaction.Commit();
+            }
+            catch (Exception e) when (e is DbUpdateException || e is DbUpdateConcurrencyException)
+            {
+                throw new DalException("Updating collection failed", e);
+            }
+            catch (Exception e)
+            {
+                throw new DalException("Unexpected error while updating collection", e);
+            }
+
+            return collection;
         }
 
-        private ICollection<CollectionExercise> GetCollectionExercises(int id)
+        /// <inheritdoc/>
+        public Collection GetById(int id, Mode mode)
         {
-            // TODO select collection language first ?, first or default here questionable. Collection in different language can have different exercises ?
-            return this.context.Collection
-                .Single(c => c.Id == id)
-                    .CollectionLanguage
-                    .FirstOrDefault()
-                        .CollectionExercise;
+            return mode switch
+            {
+                Mode.ReadOnly =>
+                    this.context.Collection
+                        .AsNoTracking()
+                        .Include(c => c.CollectionLanguage)
+                            .ThenInclude(cl => cl.FkWrittenLanguage)
+                        .Include(c => c.CollectionTag)
+                            .ThenInclude(ct => ct.FkTag)
+                        .Include(c => c.CollectionExercise)
+                            .ThenInclude(ce => ce.FkProgrammingLanguage)
+                        .Include(c => c.CollectionExercise)
+                            .ThenInclude(ce => ce.FkWrittenLanguage)
+                        .SingleOrDefault(c => c.Id == id),
+                Mode.WriteRead =>
+                    this.context.Collection
+                         .Include(c => c.CollectionLanguage)
+                             .ThenInclude(cl => cl.FkWrittenLanguage)
+                         .Include(c => c.CollectionTag)
+                             .ThenInclude(ct => ct.FkTag)
+                         .Include(c => c.CollectionExercise)
+                             .ThenInclude(ce => ce.FkProgrammingLanguage)
+                         .Include(c => c.CollectionExercise)
+                             .ThenInclude(ce => ce.FkWrittenLanguage)
+                         .SingleOrDefault(c => c.Id == id),
+                _ => throw new ArgumentOutOfRangeException($"enum value {mode} not handled")
+            };
         }
     }
 }

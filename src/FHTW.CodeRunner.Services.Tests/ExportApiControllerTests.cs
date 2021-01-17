@@ -34,16 +34,16 @@ namespace FHTW.CodeRunner.Services.Tests
             IMapper mapper = new Mapper(
                 new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<SvcEntities.ExportExercise, BlEntities.ExportExercise>();
+                    cfg.CreateMap<SvcEntities.ExerciseKeys, BlEntities.ExerciseKeys>();
                 }));
 
             var logicMock = new Mock<IExportLogic>();
-            logicMock.Setup(p => p.ExportExercise(It.IsAny<BlEntities.ExportExercise>())).Returns("xml");
+            logicMock.Setup(p => p.ExportExercise(It.IsAny<BlEntities.ExerciseKeys>())).Returns("xml");
 
             IExportLogic logic = logicMock.Object;
             ExportApiController controller = new ExportApiController(logger, mapper, logic);
 
-            var exportExercise = Builder<SvcEntities.ExportExercise>
+            var exportExercise = Builder<SvcEntities.ExerciseKeys>
                 .CreateNew()
                 .Build();
 
@@ -63,16 +63,16 @@ namespace FHTW.CodeRunner.Services.Tests
             IMapper mapper = new Mapper(
                 new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<SvcEntities.ExportExercise, BlEntities.ExportExercise>();
+                    cfg.CreateMap<SvcEntities.ExerciseKeys, BlEntities.ExerciseKeys>();
                 }));
 
             var logicMock = new Mock<IExportLogic>();
-            logicMock.Setup(p => p.ExportExercise(It.IsAny<BlEntities.ExportExercise>())).Returns("xml");
+            logicMock.Setup(p => p.ExportExercise(It.IsAny<BlEntities.ExerciseKeys>())).Returns("xml");
 
             IExportLogic logic = logicMock.Object;
             ExportApiController controller = new ExportApiController(logger, mapper, logic);
 
-            SvcEntities.ExportExercise exportExercise = null;
+            SvcEntities.ExerciseKeys exportExercise = null;
 
             // Act
             var response = controller.ExportExercise(exportExercise);

@@ -23,6 +23,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
             this.ExerciseBody = new HashSet<ExerciseBody>();
         }
 
+        /// <inheritdoc/>
         [Key]
         [Column("id")]
         public int Id { get; set; }
@@ -42,6 +43,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     [NotMapped]
     public class ProgrammingLanguageComparator : IEqualityComparer<ProgrammingLanguage>
     {
+        /// <inheritdoc/>
         public bool Equals(ProgrammingLanguage x, ProgrammingLanguage y)
         {
             if (x == null && y == null)
@@ -62,6 +64,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
             }
         }
 
+        /// <inheritdoc/>
         public int GetHashCode(ProgrammingLanguage obj)
         {
             int hash = obj.Id ^ obj.Name.GetHashCode();

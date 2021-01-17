@@ -12,8 +12,12 @@ using FHTW.CodeRunner.ExportService.Interfaces;
 
 namespace FHTW.CodeRunner.ExportService
 {
+    /// <summary>
+    /// The service class for dealing with moodle xml actions.
+    /// </summary>
     public class MoodleXmlService : IMoodleXmlService
     {
+        /// <inheritdoc/>
         public string ExportMoodleXml(Quiz quiz)
         {
             using (var writer = new Utf8StringWriter())
@@ -25,14 +29,18 @@ namespace FHTW.CodeRunner.ExportService
             }
         }
 
-        public Quiz ImportMoodleXml()
+        /// <inheritdoc/>
+        public Quiz ImportMoodleXml(string xml)
         {
-            throw new NotImplementedException();
-        }
-    }
+            Quiz quiz = new Quiz();
 
-    public class Utf8StringWriter : StringWriter
-    {
-        public override Encoding Encoding => Encoding.UTF8;
+            using (var reader = new StringReader(xml))
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(quiz.GetType());
+                quiz = (Quiz)xmlSerializer.Deserialize(reader);
+            }
+
+            return quiz;
+        }
     }
 }

@@ -9,10 +9,23 @@ using FHTW.CodeRunner.BusinessLogic.Entities;
 
 namespace FHTW.CodeRunner.BusinessLogic.Interfaces
 {
+    /// <summary>
+    /// Interface for export actions.
+    /// </summary>
     public interface IExportLogic
     {
-        string ExportExercise(ExportExercise exportExercise);
+        /// <summary>
+        /// Function for exporting an exercise.
+        /// </summary>
+        /// <param name="exerciseKeys">Needed data that defines a specific exercise.</param>
+        /// <returns>The xml string.</returns>
+        string ExportExercise(ExerciseKeys exerciseKeys);
 
-        void ExportCollection(Collection collection);
+        /// <summary>
+        /// Function for exporting a collection.
+        /// </summary>
+        /// <param name="collectionKeys">Needed data for exporting a specific collection.</param>
+        /// <returns>The xml string.</returns>
+        string ExportCollection(CollectionKeys collectionKeys);
     }
 }

@@ -47,15 +47,18 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             var exerciseRepoMock = new Mock<IExerciseRepository>();
             exerciseRepoMock.Setup(p => p.GetExerciseInstance(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>())).Returns(exerciseInstance);
 
+            var collectionRepoMock = new Mock<ICollectionRepository>();
+
             var moodleXmlServiceMock = new Mock<IMoodleXmlService>();
             moodleXmlServiceMock.Setup(p => p.ExportMoodleXml(It.IsAny<EsEntities.Quiz>())).Returns(xmlString);
 
             IExerciseRepository exerciseRepo = exerciseRepoMock.Object;
+            ICollectionRepository collectionRepo = collectionRepoMock.Object;
             IMoodleXmlService moodleXmlService = moodleXmlServiceMock.Object;
 
-            IExportLogic logic = new ExportLogic(logger, mapper, exerciseRepo, moodleXmlService);
+            IExportLogic logic = new ExportLogic(logger, mapper, exerciseRepo, collectionRepo, moodleXmlService);
 
-            BlEntities.ExportExercise nullExportExercise = null;
+            BlEntities.ExerciseKeys nullExportExercise = null;
 
             // Act
             // Assert
@@ -83,15 +86,18 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             var exerciseRepoMock = new Mock<IExerciseRepository>();
             exerciseRepoMock.Setup(p => p.GetExerciseInstance(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>())).Throws(new DalException("Unit Test"));
 
+            var collectionRepoMock = new Mock<ICollectionRepository>();
+
             var moodleXmlServiceMock = new Mock<IMoodleXmlService>();
             moodleXmlServiceMock.Setup(p => p.ExportMoodleXml(It.IsAny<EsEntities.Quiz>())).Returns(xmlString);
 
             IExerciseRepository exerciseRepo = exerciseRepoMock.Object;
+            ICollectionRepository collectionRepo = collectionRepoMock.Object;
             IMoodleXmlService moodleXmlService = moodleXmlServiceMock.Object;
 
-            IExportLogic logic = new ExportLogic(logger, mapper, exerciseRepo, moodleXmlService);
+            IExportLogic logic = new ExportLogic(logger, mapper, exerciseRepo, collectionRepo, moodleXmlService);
 
-            BlEntities.ExportExercise exportExercise = Builder<BlEntities.ExportExercise>
+            BlEntities.ExerciseKeys exportExercise = Builder<BlEntities.ExerciseKeys>
                 .CreateNew()
                 .Build();
 
@@ -121,15 +127,18 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             var exerciseRepoMock = new Mock<IExerciseRepository>();
             exerciseRepoMock.Setup(p => p.GetExerciseInstance(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>())).Returns(exerciseInstance);
 
+            var collectionRepoMock = new Mock<ICollectionRepository>();
+
             var moodleXmlServiceMock = new Mock<IMoodleXmlService>();
             moodleXmlServiceMock.Setup(p => p.ExportMoodleXml(It.IsAny<EsEntities.Quiz>())).Returns(xmlString);
 
             IExerciseRepository exerciseRepo = exerciseRepoMock.Object;
+            ICollectionRepository collectionRepo = collectionRepoMock.Object;
             IMoodleXmlService moodleXmlService = moodleXmlServiceMock.Object;
 
-            IExportLogic logic = new ExportLogic(logger, mapper, exerciseRepo, moodleXmlService);
+            IExportLogic logic = new ExportLogic(logger, mapper, exerciseRepo, collectionRepo, moodleXmlService);
 
-            BlEntities.ExportExercise exportExercise = Builder<BlEntities.ExportExercise>
+            BlEntities.ExerciseKeys exportExercise = Builder<BlEntities.ExerciseKeys>
                 .CreateNew()
                 .Build();
 

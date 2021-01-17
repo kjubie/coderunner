@@ -17,4 +17,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FHTW.CodeRunner.ExportService.Entities\FHTW.CodeRunner.ExportService.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

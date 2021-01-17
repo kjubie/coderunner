@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace FHTW.CodeRunner.DataAccess.Sql
 {
+    /// <summary>
+    /// The database context.
+    /// </summary>
     public partial class CodeRunnerContext : DbContext
     {
         /// <summary>
@@ -21,50 +24,119 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         /// <summary>
         /// Initializes a new instance of the <see cref="CodeRunnerContext"/> class.
         /// </summary>
-        /// <param name="options"></param>
+        /// <param name="options">Contextoptions.</param>
         public CodeRunnerContext(DbContextOptions<CodeRunnerContext> options)
             : base(options)
         {
         }
 
+        /// <summary>
+        /// Gets or Sets users.
+        /// </summary>
         public virtual DbSet<User> User { get; set; }
 
+        /// <summary>
+        /// Gets or Sets collections.
+        /// A collection is a collection of exercises.
+        /// </summary>
         public virtual DbSet<Collection> Collection { get; set; }
 
+        /// <summary>
+        /// Gets or Sets collection exercises.
+        /// A collection exercise is a wrapper around a exercise in which a prefered version, written language and programming language can be set.
+        /// </summary>
         public virtual DbSet<CollectionExercise> CollectionExercise { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the collection language.
+        /// A collection language holds written lanugage specific data about a collection, like the introduction and description.
+        /// </summary>
         public virtual DbSet<CollectionLanguage> CollectionLanguage { get; set; }
 
+        /// <summary>
+        /// Gets or Sets collection tag.
+        /// A table for the m to n relationship of tags and collections.
+        /// </summary>
         public virtual DbSet<CollectionTag> CollectionTag { get; set; }
 
+        /// <summary>
+        /// Gets or Sets comments.
+        /// A comment is a user comment on an exercise for example.
+        /// </summary>
         public virtual DbSet<Comment> Comment { get; set; }
 
+        /// <summary>
+        /// Gets or Sets difficulty.
+        /// The difficulty refers to the exercise difficulty assessment by a user.
+        /// </summary>
         public virtual DbSet<Difficulty> Difficulty { get; set; }
 
+        /// <summary>
+        /// Gets or Sets exercises.
+        /// A exercise can be in different versions, written languages and programming languages.
+        /// </summary>
         public virtual DbSet<Exercise> Exercise { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the exercise body.
+        /// </summary>
         public virtual DbSet<ExerciseBody> ExerciseBody { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the exercise header.
+        /// </summary>
         public virtual DbSet<ExerciseHeader> ExerciseHeader { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the exercise language entity.
+        /// It is not equivalent to the written language.
+        /// </summary>
         public virtual DbSet<ExerciseLanguage> ExerciseLanguage { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the exercise tag.
+        /// A table for the m to n relationship of tags and exercises.
+        /// </summary>
         public virtual DbSet<ExerciseTag> ExerciseTag { get; set; }
 
+        /// <summary>
+        /// Gets or Sets exercise version.
+        /// </summary>
         public virtual DbSet<ExerciseVersion> ExerciseVersion { get; set; }
 
+        /// <summary>
+        /// Gets or Sets programming language.
+        /// </summary>
         public virtual DbSet<ProgrammingLanguage> ProgrammingLanguage { get; set; }
 
+        /// <summary>
+        /// Gets or Sets rating.
+        /// </summary>
         public virtual DbSet<Rating> Rating { get; set; }
 
+        /// <summary>
+        /// Gets or Sets tags.
+        /// </summary>
         public virtual DbSet<Tag> Tag { get; set; }
 
+        /// <summary>
+        /// Gets or Sets testcases.
+        /// </summary>
         public virtual DbSet<TestCase> TestCase { get; set; }
 
+        /// <summary>
+        /// Gets or Sets testsuites.
+        /// </summary>
         public virtual DbSet<TestSuite> TestSuite { get; set; }
 
+        /// <summary>
+        /// Gets or Sets written language.
+        /// </summary>
         public virtual DbSet<WrittenLanguage> WrittenLanguage { get; set; }
 
+        /// <summary>
+        /// Gets or Sets written language.
+        /// </summary>
         public virtual DbSet<QuestionType> QuestionType { get; set; }
 
         /// <inheritdoc/>
@@ -92,11 +164,11 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             {
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
-                entity.HasOne(d => d.FkCollectionLanguage)
+                entity.HasOne(d => d.FkCollection)
                     .WithMany(p => p.CollectionExercise)
-                    .HasForeignKey(d => d.FkCollectionLanguageId)
+                    .HasForeignKey(d => d.FkCollectionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("collection_exercise_fk_collection_language_id_fkey");
+                    .HasConstraintName("collection_exercise_fk_collection_id_fkey");
 
                 entity.HasOne(d => d.FkExercise)
                     .WithMany(p => p.CollectionExercise)
