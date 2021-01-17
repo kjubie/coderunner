@@ -287,7 +287,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 
                 Assert.AreEqual(2, added.CollectionExercise.Count, "2 collection exercises should be present");
                 Assert.AreEqual(1, added.CollectionLanguage.Count, "1 collection languages should be present");
-                Assert.AreEqual(3, added.CollectionTag.Count, "3 tags should be present");
+                Assert.AreEqual(1, added.CollectionTag.Count, "1 tag should be present");
             }
         }
 

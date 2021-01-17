@@ -92,13 +92,14 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                                 if (eb.FkTestSuite.FkQuestionType != null)
                                 {
                                     // get id if question type exists.
-                                    int? id = this.context.QuestionType
+                                    var questionType = this.context.QuestionType
                                         .AsNoTracking()
-                                        .SingleOrDefault(qt => qt.Name == eb.FkTestSuite.FkQuestionType.Name)?.Id;
+                                        .SingleOrDefault(qt => qt.Name == eb.FkTestSuite.FkQuestionType.Name);
 
-                                    if (id != null)
+                                    if (questionType != null)
                                     {
-                                        eb.FkTestSuite.FkQuestionType.Id = (int)id;
+                                        eb.FkTestSuite.FkQuestionType.Id = questionType.Id;
+                                        eb.FkTestSuite.FkQuestionType.FkProgrammingLanuageId = questionType.FkProgrammingLanuageId;
                                     }
                                 }
                             }
@@ -327,6 +328,15 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         public bool Exists(Exercise exercise)
         {
             return this.context.Exercise.Any(e => e == exercise);
+        }
+
+        /// <inheritdoc/>
+        public QuestionType GetQuestionType(string questiontype)
+        {
+            return this.context.QuestionType
+                    .AsNoTracking()
+                    .Include(qt => qt.FkProgrammingLanguage)
+                    .SingleOrDefault(qt => qt.Name == questiontype);
         }
     }
 }

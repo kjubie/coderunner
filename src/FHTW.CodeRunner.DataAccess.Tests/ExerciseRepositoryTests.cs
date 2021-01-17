@@ -330,6 +330,20 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             }
         }
 
+        [Test]
+        public void ShouldGetQuestionTypeWithProgrammingLanguage()
+        {
+            this.SetupDatabaseInMemory(DbTestController.State.SEEDEDJSON);
+            using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
+            {
+                IExerciseRepository rep = new ExerciseRepository(context);
+
+                var e = rep.GetQuestionType("python_question_type");
+
+                Assert.IsNotNull(e);
+            }
+        }
+
         private void SetupDatabaseReal(DbTestController.State state) => this.testDb = CodeRunnerTestDb.AsRealTestDb(state);
 
         private void SetupDatabaseInMemory(DbTestController.State state) => this.testDb = CodeRunnerTestDb.AsInMemoryDb(state);

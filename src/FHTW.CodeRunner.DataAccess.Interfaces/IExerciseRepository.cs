@@ -80,5 +80,12 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// <param name="exercise">The exercise.</param>
         /// <returns>True if exercise exists, else false.</returns>
         public bool Exists(Exercise exercise);
+
+        /// <summary>
+        /// Gets the question type with its programming language.
+        /// </summary>
+        /// <param name="questiontype">The questiontype.</param>
+        /// <returns>The questiontype entity.</returns>
+        public QuestionType GetQuestionType(string questiontype);
     }
 }
