@@ -1,5 +1,71 @@
-<!-- ToDo: get data from db, implement filters, different display options -->
-<h2>Exercise Collection Overview</h2>
-<div class="container">
-  <p style="text-align: center; font-size: larger;"><i>Under construction</i></p>
+<!-- ToDo: Databindings + Tags -->
+<h1>Exercise Collection Overview</h1>
+<!-- TODO: Add multiple language support + missing fields -->
+<div class="contentSeperator container">
+  <label for="collectionTitle" class="col-form-label">Collection Title: </label>
+  <input type="text" name="collectionTitle" id="collectionTitle" class="col-12 form-control-plaintext mb-5">
+
+  <h2 (click)="collapseList('headDiv')"><i id="arrowHeadList" class="arrow down"></i> Collection Header</h2>
+  <div id="colHeader" name="colHeader" class="contentSeperator mb-5">
+    <div id="colHeaderContent" name="colHeaderContent" *ngIf="showHeadDiv">
+      <div *ngFor="let i of ['English', 'German']" class="mb-3">
+        <h3>{{i}}</h3>
+        <label for="colFullTitle_{{i}}" class="col-form-label">Full Title: </label>
+        <input type="text" name="colFullTitle_{{i}}" id="colFullTitle_{{i}}" class="col-12 form-control-plaintext">
+        
+        <label for="colShortTitle_{{i}}" class="col-form-label">Short Title: </label>
+        <input type="text" name="colShortTitle_{{i}}" id="colShortTitle_{{i}}" class="col-12 form-control-plaintext">
+      
+        <label for="colIntro" class="col-form-label">Introduction: </label>
+        <textarea name="colIntro" id="colIntro" cols="30" rows="10" class="col-12 form-control-plaintext"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <h2>Exercise List</h2>
+  <div class="contentSeperator mb-5">
+    <p class="mr-2">Global Settings: </p>
+    <div class="row mt-3 col-12 mb-5">
+      <select name="langFilter" id="langFilter" class="form-control col-2 mr-1">
+        <option value="" disabled selected hidden>Language</option>
+        <option value="0">English</option>
+      </select>
+    
+      <select name="progFilter" id="progFilter" class="form-control col-3 ml-1">
+        <option value="" disabled selected hidden>Programming Language</option>
+        <option value="0">C++</option>
+      </select>
+
+      <label class="ml-2">Use latest Version: <input type="checkbox" name="useLatest" id="useLatest" class="checkbox"></label>
+    </div>
+
+    <div class="scrollable">
+      <ul class="list-group">
+        <li *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]; let i = index" class="list-group-item colItem mb-1">
+          <div class="row col-12 p-1">
+            <p class="col-3 col-md-3 colItemHeading">heading {{i}}</p>
+
+            <div class="row col-9">
+              <select name="langFilter" id="langFilter" class="form-control col-3 ml-1 mr-1">
+                <option value="" disabled selected hidden>Language</option>
+                <option value="0">English</option>
+              </select>
+          
+              <select name="progFilter" id="progFilter" class="form-control col-4 ml-1">
+                <option value="" disabled selected hidden>Programming Language</option>
+                <option value="0">C++</option>
+              </select>
+
+              <select name="verFilter" id="verFilter" class="form-control col-3 ml-1">
+                <option value="" disabled selected hidden>Version</option>
+                <option value="0">v1.0.0</option>
+              </select>
+
+            </div>
+            <button class="deleteBtn btn ml-3 colItemSettings">&#x2715;</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

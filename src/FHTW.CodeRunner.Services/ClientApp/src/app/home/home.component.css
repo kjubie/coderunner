@@ -3,7 +3,7 @@
 }
 
 .searchIcon {
-    border: 1px solid black;
+    border: 1px solid rgb(53, 171, 240);
     border-top-left-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem;
     background-color: rgb(53, 171, 240);
@@ -20,6 +20,7 @@ div.btn-group {
 
 .blue {
     background-color: rgb(53, 171, 240);
+    border-color: #0098e0;
 }
 
 .float-left button {
@@ -44,24 +45,38 @@ div.btn-group {
 }
 
 .tag {
-    background-color: rgb(53, 171, 240);
+    color:#e1f8ff;
+    background-color: #0098e0;
     margin: 0 5px 0 5px;
 }
 
 .tag-red {
-    background-color: rgb(184, 13, 13);
+    color:#fff4df;
+    background-color: #f78300;
     margin: 0 5px 0 5px;
 }
 
 .tag-green {
-    background-color: rgb(65, 206, 22);
+    color: #d9fbed;
+    background-color:#00a853;
     margin: 0 5px 0 5px;
 }
 
 li.blackLine {
-    margin-right: 5px;
-    border-left: black 12.5px solid;
+    background-color: white;
+    border-radius: 0%;
+    border: none;
 }
+
+li.blackLine::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 10px;
+    background-color: black;
+ }
 
 .ratings {
     margin-top: 5px;
