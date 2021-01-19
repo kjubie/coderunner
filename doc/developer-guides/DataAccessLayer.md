@@ -28,3 +28,22 @@ Der Data Access wurde mit dem Repository Pattern umgesetzt. Alle DB queries lauf
 Die Entities befinden sich im `FHTW.CodeRunner.DataAccess.Entities` Projekt. Weil die Entities automatisch generiert wurden gibt es mehr navigational Properties als eigentlich gebraucht sind. Diese Properties wurden behalten wegen der Möglichkeit, dass sie später noch verwendet werden.
 
 Genauere Informationen zu den Aufbau der Entities befinden sich im Datenstruktur Dokument.
+
+## Tests
+
+Zum leichteren testen des DataAccess Layer wurde ein Test Project hinzugefügt (`FHTW.CodeRunner.DataAccess.Tests`). Getestet wird in einer in-memory SQLite Database. Allerdings sind nicht alle Datenbankoperation, welche benötigt werden, von SQLite unterstützt. Deswegen wurde eine zweite Containerinstanz zum zusätzlichen testen erstellt und die mit SQLite nicht testbaren Testfälle auskommentiert. Wenn diese Testfälle getestet werden sollen muss zuerst die Test Datenbank hochgefahren werden. Genauere Information dazu befinden sich im Setup Guide.
+
+Die uns bekannte Limitierung von SQLite ist das fehlen der APPLY Operation. Die APPLY Funktion wird von EF Core bei Projektionen verwendet. Deshalb können jene Queries welche Projection verwenden nicht mit SQLite getestet werden.
+
+## Seed und Testdaten
+
+Zum initialen befüllen der Datenbank mit benötigten Werten wie Programming Language, Written Language und Questiontype, als auch Testdaten (Exercises, Tags, Collection,...) wird die Datenbank mit Daten aus Json Dateien geseeded. Diese Dateien sind im Ordner `FHTW-CodeRunner\src\FHTW.CodeRunner.DataAccess.Sql\Resources` zu finden.
+Die Logic zum seeden ist in `FHTW.CodeRunner.DataAccess.Sql.CodeRunnerContextExtension.cs` zu finden.
+
+### Probleme beim Seeden
+
+Beim seeden der Datenbank ist es vorgekommen, dass die von PostgreSQL generierten Ids nach dem seeden nichtmehr mit den Ids der Daten synchronisiert waren. Deswegen mussten die fixen Ids aus den Testdaten entfernt werden. Deswegen kann vor dem seeden nichtmehr einfach überprüft werden ob die Testdaten bereits in der Datenbank sind. Aufgrund dessen muss die Datenbank beim neuen Aufsetzen explicit geseeded werden. Genauere Information dazu befinden sich im Setup Guide.
+
+## Migrationen
+
+Falls es gewollt ist, dass die Daten in der Datenbank beim ändern des Daten Schemas behaltet werden wurde die Erstellung von Migrationen eingerichtet. Die Migrationen befinden sich im `FHTW.CodeRunner.Migrations` Projekt.
