@@ -3,7 +3,7 @@ import { Author } from "../author";
 import { CollectionTag } from "./collection-tag";
 import { CollectionLanguage } from "./collection-language";
 
-export class ExerciseCollection {
+export class Collection {
     constructor() {
         this.id = 0;
     }

@@ -193,7 +193,7 @@ namespace FHTW.CodeRunner.Services
                     context.Database.Migrate();
                 }
 
-                context.EnsureSeeded();
+                // context.EnsureSeeded();
 
                 /*// TEST
                 IExerciseRepository rep = new ExerciseRepository(context);
