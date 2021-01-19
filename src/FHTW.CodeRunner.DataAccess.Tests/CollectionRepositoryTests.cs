@@ -66,7 +66,6 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         [Test]
         public void ShouldCreateNewCollection()
         {
-            // Cannot be tested with sqlite
             this.SetupDatabaseInMemory(DbTestController.State.SEEDEDJSON);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
@@ -144,7 +143,6 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         [Test]
         public void ShouldUpdateExistingCollection()
         {
-            // Cannot be tested with sqlite
             this.SetupDatabaseInMemory(DbTestController.State.SEEDEDJSON);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
@@ -223,6 +221,73 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                 Assert.AreEqual(3, new_c.CollectionExercise.Count, "After update 3 exercises should be present");
                 Assert.AreEqual(old.CollectionLanguage.Count, new_c.CollectionLanguage.Count, "After update the collectionlanguage count should be the same");
                 Assert.AreEqual(2, new_c.CollectionTag.Count, "After update 2 tags should be present");
+            }
+        }
+
+        [Test]
+        public void ShouldCreateNewCollectionWithExistingTagsButNoTagId()
+        {
+            this.SetupDatabaseInMemory(DbTestController.State.SEEDEDJSON);
+            using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
+            {
+                ICollectionRepository rep = new CollectionRepository(context);
+
+                var json = @"
+				{   
+                    ""Title"": ""Title_2"",
+                    ""Created"": ""2021-08-23T18:25:43.51"",
+                    ""FkUserId"": 1,
+                    ""CollectionLanguage"": [
+                        {
+                            ""FullTitle"": ""FullTitle_2"",
+                            ""ShortTitle"": ""ShortTitle_2"",
+                            ""Introduction"": ""Introduction_2"",
+                            ""FkWrittenLanguageId"": 1
+                        }
+                    ],
+                    ""CollectionTag"": [
+                        {
+                            ""FkTag"":
+                                {
+                                    ""name"": ""algorithms""
+                                }
+                        }
+                    ],
+                    ""CollectionExercise"": [
+                        {
+                            ""VersionNumber"": 1,
+                            ""FkExerciseId"": 1,
+                            ""FkProgrammingLanguageId"": 1,
+                            ""FkWrittenLanguageId"": 1
+                        },
+                        {
+                            ""VersionNumber"": 1,
+                            ""FkExerciseId"": 2,
+                            ""FkProgrammingLanguageId"": 3,
+                            ""FkWrittenLanguageId"": 1
+                        }
+                    ]
+                }";
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                };
+
+                var collection = JsonSerializer.Deserialize<Collection>(json, options);
+
+                rep.CreateOrUpdate(collection);
+
+                var added = rep.GetById(2, Mode.ReadOnly);
+
+                Assert.IsNotNull(added, "This tests assumes that only one exercise with the id = 1 is in the seeded testdb");
+                Assert.IsNotNull(added.CollectionExercise);
+                Assert.IsNotNull(added.CollectionLanguage);
+                Assert.IsNotNull(added.CollectionTag);
+
+                Assert.AreEqual(2, added.CollectionExercise.Count, "2 collection exercises should be present");
+                Assert.AreEqual(1, added.CollectionLanguage.Count, "1 collection languages should be present");
+                Assert.AreEqual(1, added.CollectionTag.Count, "1 tag should be present");
             }
         }
 

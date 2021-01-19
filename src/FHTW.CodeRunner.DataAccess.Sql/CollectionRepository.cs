@@ -86,6 +86,20 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             {
                 using var transaction = this.context.Database.BeginTransaction();
 
+                // set ids of existing tags with no id.
+                // this can happen if an exercise imported from moodle has the same tag, but of course no id.
+                collection.CollectionTag.ToList().ForEach(ct =>
+                {
+                    if (ct.FkTag != null)
+                    {
+                        int? id = this.context.Tag.AsNoTracking().SingleOrDefault(t => t.Name == ct.FkTag.Name)?.Id;
+                        if (id != null)
+                        {
+                            ct.FkTag.Id = (int)id;
+                        }
+                    }
+                });
+
                 // add everything new
                 this.context.ChangeTracker.TrackGraph(collection, e =>
                 {

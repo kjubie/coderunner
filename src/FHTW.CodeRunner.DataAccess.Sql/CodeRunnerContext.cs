@@ -361,6 +361,8 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             modelBuilder.Entity<ProgrammingLanguage>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                entity.HasIndex(e => e.Name)
+                    .IsUnique();
             });
 
             modelBuilder.Entity<Rating>(entity =>
@@ -383,6 +385,8 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             modelBuilder.Entity<Tag>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                entity.HasIndex(e => e.Name)
+                    .IsUnique();
             });
 
             modelBuilder.Entity<TestCase>(entity =>
@@ -404,11 +408,15 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             modelBuilder.Entity<WrittenLanguage>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                entity.HasIndex(e => e.Name)
+                    .IsUnique();
             });
 
             modelBuilder.Entity<QuestionType>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                entity.HasIndex(e => e.Name)
+                    .IsUnique();
             });
 
             this.OnModelCreatingPartial(modelBuilder);

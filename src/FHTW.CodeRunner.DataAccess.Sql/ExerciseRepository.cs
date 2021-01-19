@@ -26,39 +26,9 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         public ExerciseRepository(CodeRunnerContext dbcontext) => this.context = dbcontext;
 
         /// <inheritdoc/>
-        public Exercise Create(Exercise exercise)
-        {
-            if (exercise.Id != 0)
-            {
-                throw new DalException($"Attempting to create exercise with Id = {exercise.Id}. Id must be 0");
-            }
-
-            try
-            {
-                using var transaction = this.context.Database.BeginTransaction();
-
-                this.context.Exercise.Add(exercise);
-                this.context.SaveChanges();
-
-                transaction.Commit();
-            }
-            catch (Exception e)
-            {
-                throw new DalException("Creating exercise failed", e);
-            }
-
-            return exercise;
-        }
-
-        /// <inheritdoc/>
-        public Exercise Update(Exercise exercise)
+        public Exercise CreateAndUpdate(Exercise exercise)
         {
             var version = exercise.ExerciseVersion;
-
-            if (exercise.Id == 0)
-            {
-                throw new DalException("exercise should already exist");
-            }
 
             if (exercise.FkUserId == 0)
             {
@@ -78,6 +48,47 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             try
             {
                 using var transaction = this.context.Database.BeginTransaction();
+
+                // set ids of existing questiontypes with no id.
+                // this can happen if an exercise imported from moodle has the same questiontype, but of course no id.
+                exercise.ExerciseVersion.ToList().ForEach(ev =>
+                {
+                    ev.ExerciseLanguage.ToList().ForEach(el =>
+                    {
+                        el.ExerciseBody.ToList().ForEach(eb =>
+                        {
+                            if (eb.FkTestSuite != null)
+                            {
+                                if (eb.FkTestSuite.FkQuestionType != null)
+                                {
+                                    // get id if question type exists.
+                                    var questionType = this.context.QuestionType
+                                        .AsNoTracking()
+                                        .SingleOrDefault(qt => qt.Name == eb.FkTestSuite.FkQuestionType.Name);
+
+                                    if (questionType != null)
+                                    {
+                                        eb.FkTestSuite.FkQuestionType.Id = questionType.Id;
+                                        eb.FkTestSuite.FkQuestionType.FkProgrammingLanuageId = questionType.FkProgrammingLanuageId;
+                                    }
+                                }
+                            }
+                        });
+                    });
+                });
+
+                exercise.ExerciseTag.ToList().ForEach(et =>
+                {
+                    if (et.FkTag != null)
+                    {
+                        int? id = this.context.Tag.AsNoTracking().SingleOrDefault(t => t.Name == et.FkTag.Name)?.Id;
+                        if (id != null)
+                        {
+                            et.FkTagId = (int)id;
+                            et.FkTag = null;
+                        }
+                    }
+                });
 
                 // add everything new
                 this.context.ChangeTracker.TrackGraph(exercise, e =>
@@ -113,17 +124,6 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             }
 
             return exercise;
-        }
-
-        /// <inheritdoc/>
-        public Exercise CreateAndUpdate(Exercise exercise)
-        {
-            if (exercise.Id == 0)
-            {
-                this.Create(exercise);
-            }
-
-            return this.Update(exercise);
         }
 
         /// <inheritdoc/>
@@ -300,6 +300,15 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         public bool Exists(Exercise exercise)
         {
             return this.context.Exercise.Any(e => e == exercise);
+        }
+
+        /// <inheritdoc/>
+        public QuestionType GetQuestionType(string questiontype)
+        {
+            return this.context.QuestionType
+                    .AsNoTracking()
+                    .Include(qt => qt.FkProgrammingLanguage)
+                    .SingleOrDefault(qt => qt.Name == questiontype);
         }
     }
 }

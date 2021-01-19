@@ -23,5 +23,11 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         [Column("name")]
         [StringLength(64)]
         public string Name { get; set; }
+
+        [Column("fk_programming_language_id")]
+        public int FkProgrammingLanuageId { get; set; }
+
+        [ForeignKey("FkProgrammingLanuageId")]
+        public virtual ProgrammingLanguage FkProgrammingLanguage { get; set; }
     }
 }

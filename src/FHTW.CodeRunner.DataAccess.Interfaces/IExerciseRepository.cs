@@ -24,23 +24,6 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         Exercise GetById(int id, int version = -1);
 
         /// <summary>
-        /// Creates an empty exercise.
-        /// </summary>
-        /// <param name="exercise">exercise containing title, date and user id. The id has to be 0.</param>
-        /// <returns>returns the Exercise with id and version set.</returns>
-        public Exercise Create(Exercise exercise);
-
-        /// <summary>
-        /// Updates an already existing exercise.
-        /// Requires:
-        ///     - only one ExerciseVersion should be present.
-        ///     - exercise Id and exercise userId should be set.
-        /// </summary>
-        /// <param name="exercise">the exercise with correct id.</param>
-        /// <returns>returns the updated exercise.</returns>
-        public Exercise Update(Exercise exercise);
-
-        /// <summary>
         /// Creates and updates a new exercise.
         /// If the exercise id is set only update is called.
         /// </summary>
@@ -80,5 +63,12 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// <param name="exercise">The exercise.</param>
         /// <returns>True if exercise exists, else false.</returns>
         public bool Exists(Exercise exercise);
+
+        /// <summary>
+        /// Gets the question type with its programming language.
+        /// </summary>
+        /// <param name="questiontype">The questiontype.</param>
+        /// <returns>The questiontype entity.</returns>
+        public QuestionType GetQuestionType(string questiontype);
     }
 }
