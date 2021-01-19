@@ -16,5 +16,3 @@ services:
       POSTGRES_DB: coderunnerdb
     ports: 
         - 5432:5432 
-    #volumes: 
-      #- ./init:/docker-entrypoint-initdb.d
