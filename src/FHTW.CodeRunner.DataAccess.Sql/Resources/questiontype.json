@@ -1,17 +1,22 @@
 [
-    {
-        "Name": "c++_question_type"
-    },
-    {
-        "Name": "c#_question_type"
-    },
-    {
-        "Name": "python_question_type"
-    },
-    {
-        "Name": "java_question_type"
-    },
-    {
-        "Name": "c_question_type"
-    }
+  {
+    "Name": "c++_question_type",
+    "FkProgrammingLanuageId": 1
+  },
+  {
+    "Name": "c#_question_type",
+    "FkProgrammingLanuageId": 2
+  },
+  {
+    "Name": "python_question_type",
+    "FkProgrammingLanuageId": 6
+  },
+  {
+    "Name": "java_question_type",
+    "FkProgrammingLanuageId": 3
+  },
+  {
+    "Name": "c_question_type",
+    "FkProgrammingLanuageId": 5
+  }
 ]

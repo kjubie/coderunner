@@ -62,23 +62,55 @@ namespace FHTW.CodeRunner.BusinessLogic
 
                 var collection = new BlEntities.Collection
                 {
-                    CollectionExercise = new List<BlEntities.ExerciseKeys>(),
+                    Id = 0,
+                    Title = importData.Title,
+                    Created = DateTime.Now,
+                    FkUserId = importData.User.Id,
+                    CollectionExercise = new List<BlEntities.CollectionExercise>(),
+                    CollectionLanguage = new List<BlEntities.CollectionLanguage>(),
                 };
+
+                BlEntities.CollectionLanguage collectionLanguage = new BlEntities.CollectionLanguage
+                {
+                    Id = 0,
+                    FullTitle = importData.Title,
+                    ShortTitle = importData.Title,
+                    Introduction = string.Empty,
+                    FkWrittenLanguage = null,
+                    FkWrittenLanguageId = importData.WrittenLanguage.Id,
+                };
+
+                collection.CollectionLanguage.Add(collectionLanguage);
 
                 foreach (var question in quiz.Question)
                 {
                     importData.Question = question;
+                    importData.ProgrammingLanguage = new BlEntities.ProgrammingLanguage
+                    {
+                        Id = 1,
+                        Name = "C++",
+                    };
+                    importData.QuestionType = new BlEntities.QuestionType
+                    {
+                        Id = 1,
+                        Name = "c++_question_type",
+                    };
+
                     var blExercise = this.mapper.Map<BlEntities.Exercise>(importData);
 
                     var dalExercise = this.mapper.Map<DalEntities.Exercise>(blExercise);
                     var savedDalExercise = this.exerciseRepository.CreateAndUpdate(dalExercise);
 
-                    var exerciseKeys = new BlEntities.ExerciseKeys
+                    var collectionExercise = new BlEntities.CollectionExercise
                     {
-                        Id = savedDalExercise.Id,
+                        Id = 0,
+                        FkExerciseId = savedDalExercise.Id,
+                        VersionNumber = 1,
+                        FkWrittenLanguageId = importData.WrittenLanguage.Id,
+                        FkProgrammingLanguageId = importData.ProgrammingLanguage.Id,
                     };
 
-                    collection.CollectionExercise.Add(exerciseKeys);
+                    collection.CollectionExercise.Add(collectionExercise);
                 }
 
                 var dalCollection = this.mapper.Map<DalEntities.Collection>(collection);

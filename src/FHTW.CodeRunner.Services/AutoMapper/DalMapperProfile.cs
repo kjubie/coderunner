@@ -104,6 +104,8 @@ namespace FHTW.CodeRunner.Services.AutoMapper
 
             this.CreateMap<DalEntities.CollectionInstance, BlEntities.CollectionInstance>();
 
+            this.CreateMap<BlEntities.ExerciseKeys, DalEntities.CollectionExercise>().ReverseMap();
+
             this.CreateMap<DalEntities.MinimalExercise, BlEntities.ExerciseShort>()
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.TagList))
                 .ForMember(dest => dest.WrittenLanguages, opt => opt.MapFrom(src => src.WrittenLanguageList))
