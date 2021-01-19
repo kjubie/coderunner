@@ -121,7 +121,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             this.SetupDatabase(DbTestController.State.SEEDEDJSON);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {
-                IExerciseRepository rep = new ExerciseRepository(context, this.exerciseLogger);
+                IExerciseRepository rep = new ExerciseRepository(context);
 
                 var list = rep.GetMinimalList();
 

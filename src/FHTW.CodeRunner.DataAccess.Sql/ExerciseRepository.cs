@@ -230,7 +230,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                     .ThenInclude(v => v.ExerciseLanguage)
                         .ThenInclude(el => el.ExerciseBody)
                             .ThenInclude(eb => eb.FkTestSuite)
-                                .ThenInclude(ts => ts.TestCase)
+                                .ThenInclude(ts => ts.TestCase.OrderBy(c => c.OrderUsed))
                 .Include(e => e.ExerciseVersion)
                     .ThenInclude(v => v.ExerciseLanguage)
                         .ThenInclude(el => el.ExerciseBody)
