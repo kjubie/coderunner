@@ -17,13 +17,14 @@ using SvcEntities = FHTW.CodeRunner.Services.DTOs;
 
 namespace FHTW.CodeRunner.Services.Tests
 {
+    /// <summary>
+    /// Unit Tests for User Api Controller.
+    /// </summary>
     public class UserApiControllerTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
+        /// <summary>
+        /// Testing the function AuthenticateUser.
+        /// </summary>
         [Test]
         public void AuthenticateUser_ValidUserAuthentication_Ok()
         {
@@ -53,6 +54,9 @@ namespace FHTW.CodeRunner.Services.Tests
             Assert.IsInstanceOf<OkObjectResult>(response);
         }
 
+        /// <summary>
+        /// Testing the function AuthenticateUser.
+        /// </summary>
         [Test]
         public void AuthenticateUser_InvalidUserAuthentication_Ok()
         {
@@ -82,6 +86,9 @@ namespace FHTW.CodeRunner.Services.Tests
             Assert.IsInstanceOf<BadRequestObjectResult>(response);
         }
 
+        /// <summary>
+        /// Testing the function AuthenticateUser.
+        /// </summary>
         [Test]
         public void AuthenticateUser_NullUserAuthentication_BadRequest()
         {

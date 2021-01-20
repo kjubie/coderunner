@@ -19,13 +19,14 @@ using EsEntities = FHTW.CodeRunner.ExportService.Entities;
 
 namespace FHTW.CodeRunner.BusinessLogic.Tests
 {
-    public class ExeportLogicTests
+    /// <summary>
+    /// Unit tests for Export Logic.
+    /// </summary>
+    public class ExportLogicTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
+        /// <summary>
+        /// Testing the function ExportExercise.
+        /// </summary>
         [Test]
         public void ExportExercise_ExportExercise_BlValidationException()
         {
@@ -65,6 +66,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             Assert.Throws<BlValidationException>(() => logic.ExportExercise(nullExportExercise));
         }
 
+        /// <summary>
+        /// Testing the function ExportExercise.
+        /// </summary>
         [Test]
         public void ExportExercise_InvalidExerciseInstance_BlDataAccessException()
         {
@@ -106,6 +110,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             Assert.Throws<BlDataNotFoundException>(() => logic.ExportExercise(exportExercise));
         }
 
+        /// <summary>
+        /// Testing the function ExportExercise.
+        /// </summary>
         [Test]
         public void ExportExercise_ValidExportExercise_NotNull()
         {

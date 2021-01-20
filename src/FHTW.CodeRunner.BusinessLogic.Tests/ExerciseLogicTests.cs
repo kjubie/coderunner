@@ -16,13 +16,14 @@ using DalEntities = FHTW.CodeRunner.DataAccess.Entities;
 
 namespace FHTW.CodeRunner.BusinessLogic.Tests
 {
+    /// <summary>
+    /// Unit Tests for the Exercise Logic.
+    /// </summary>
     public class ExerciseLogicTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
+        /// <summary>
+        /// Testing the function GetExerciseShortList.
+        /// </summary>
         [Test]
         public void GetExerciseShortList_CorrectCount()
         {
@@ -57,6 +58,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             Assert.AreEqual(count, result.Count);
         }
 
+        /// <summary>
+        /// Testing the function GetExerciseCreatePreparation.
+        /// </summary>
         [Test]
         public void GetExerciseCreatePreparation_NotNull()
         {
@@ -106,6 +110,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             Assert.AreEqual(count, result.QuestionTypes.Count);
         }
 
+        /// <summary>
+        /// Testing the function SaveExercise.
+        /// </summary>
         [Test]
         public void SaveExercise_ValidExercise_NoException()
         {
@@ -139,6 +146,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             Assert.DoesNotThrow(() => logic.SaveExercise(validExercise));
         }
 
+        /// <summary>
+        /// Testing the function SaveExercise.
+        /// </summary>
         [Test]
         public void SaveExercise_NullExercise_BlValidationException()
         {
@@ -168,6 +178,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             Assert.Throws<BlValidationException>(() => logic.SaveExercise(nullExercise));
         }
 
+        /// <summary>
+        /// Testing the function ValidateExercise.
+        /// </summary>
         [Test]
         public void ValidateExercise_ValidExercise_NoException()
         {
@@ -201,6 +214,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             Assert.DoesNotThrow(() => logic.ValidateExercise(validExercise));
         }
 
+        /// <summary>
+        /// Testing the function ValidateExercise.
+        /// </summary>
         [Test]
         public void ValidateExercise_NullExercise_ValidationException()
         {
