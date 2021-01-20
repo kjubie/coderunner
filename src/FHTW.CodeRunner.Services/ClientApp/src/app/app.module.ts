@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -30,6 +30,8 @@ import { MatAutocompleteModule, MatButtonToggleModule, MatCardModule, MatCheckbo
 import { CdkTableModule } from '@angular/cdk/table';
 import { ProgrammingLanguageElementComponent } from './side-menu/menu-elements/programming-language/programming-language-element.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularMarkdownEditorModule } from 'angular-markdown-editor';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   exports: [
@@ -100,7 +102,13 @@ export class MaterialModule {}
     AppRoutingModule,
     AuthModule,
     MaterialModule,
-    NgbModule
+    NgbModule,
+    AngularMarkdownEditorModule.forRoot({
+      iconlibrary: 'fa'
+    }),
+    MarkdownModule.forRoot({
+      loader: HttpClient
+    })
   ],
   providers: [
     AuthGuardService,
