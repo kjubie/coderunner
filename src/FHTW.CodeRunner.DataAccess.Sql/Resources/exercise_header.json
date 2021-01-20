@@ -1,74 +1,83 @@
 [
-    {   // Exercise 1, English, V1
-        "FullTitle": "Full_Title_1_V1",
-        "Introduction": "Introduction_1_V1",
-        "FkUserId": 1,
-        "TemplateParam": "template_param_1_V1",
-        "TemplateParamLiftFlag": false,
-        "TwigAllFlag": true
-    },
-    {   // Exercise 1, German, V1
-        "FullTitle": "Voller_Titel_1_V1",
-        "Introduction": "Einleitung_1_V1",
-        "FkUserId": 1,
-        "TemplateParam": "template_param_1_V1",
-        "TemplateParamLiftFlag": false,
-        "TwigAllFlag": true
-    },
-    {   // Exercise 1, English, V2
-        "FullTitle": "Full_Title_1_V2",
-        "Introduction": "Introduction_1_V2",
-        "FkUserId": 1,
-        "TemplateParam": "template_param_1_V2",
-        "TemplateParamLiftFlag": false,
-        "TwigAllFlag": true
-    },
-    {   // Exercise 1, German, V2
-        "FullTitle": "Voller_Titel_1_V2",
-        "Introduction": "Einleitung_1_V2",
-        "FkUserId": 1,
-        "TemplateParam": "template_param_1_V2",
-        "TemplateParamLiftFlag": false,
-        "TwigAllFlag": true
-    },
-    {   // Exercise 1, English, V3
-        "FullTitle": "Full_Title_1_V3",
-        "Introduction": "Introduction_1_V3",
-        "FkUserId": 1,
-        "TemplateParam": "template_param_1_V3",
-        "TemplateParamLiftFlag": false,
-        "TwigAllFlag": true
-    },
-    {   // Exercise 1, German, V3
-        "FullTitle": "Voller_Titel_1_V3",
-        "Introduction": "Einleitung_1_V3",
-        "FkUserId": 1,
-        "TemplateParam": "template_param_1_V3",
-        "TemplateParamLiftFlag": false,
-        "TwigAllFlag": true
-    },
-    {   // Exercise 2, English, V1
-        "FullTitle": "Full_Title_2_V1",
-        "Introduction": "Introduction_2_V1",
-        "FkUserId": 1,
-        "TemplateParam": "template_param_2_V1",
-        "TemplateParamLiftFlag": false,
-        "TwigAllFlag": true
-    },
-    {   // Exercise 2, German, V1
-        "FullTitle": "Voller_Titel_2_V1",
-        "Introduction": "Einleitung_2_V1",
-        "FkUserId": 1,
-        "TemplateParam": "template_param_2_V1",
-        "TemplateParamLiftFlag": false,
-        "TwigAllFlag": true
-    },
-    {   // Exercise 3, German, V1
-        "FullTitle": "Voller_Titel_3_V1",
-        "Introduction": "Einleitung_3_V1",
-        "FkUserId": 3,
-        "TemplateParam": "template_param_3_V1",
-        "TemplateParamLiftFlag": false,
-        "TwigAllFlag": true
-    }
+  { // Exercise 1, English, V1
+    "Id": 1,
+    "FullTitle": "Full_Title_1_V1",
+    "Introduction": "Introduction_1_V1",
+    "FkUserId": 1,
+    "TemplateParam": "template_param_1_V1",
+    "TemplateParamLiftFlag": false,
+    "TwigAllFlag": true
+  },
+  { // Exercise 1, German, V1
+    "Id": 2,
+    "FullTitle": "Voller_Titel_1_V1",
+    "Introduction": "Einleitung_1_V1",
+    "FkUserId": 1,
+    "TemplateParam": "template_param_1_V1",
+    "TemplateParamLiftFlag": false,
+    "TwigAllFlag": true
+  },
+  { // Exercise 1, English, V2
+    "Id": 3,
+    "FullTitle": "Full_Title_1_V2",
+    "Introduction": "Introduction_1_V2",
+    "FkUserId": 1,
+    "TemplateParam": "template_param_1_V2",
+    "TemplateParamLiftFlag": false,
+    "TwigAllFlag": true
+  },
+  { // Exercise 1, German, V2
+    "Id": 4,
+    "FullTitle": "Voller_Titel_1_V2",
+    "Introduction": "Einleitung_1_V2",
+    "FkUserId": 1,
+    "TemplateParam": "template_param_1_V2",
+    "TemplateParamLiftFlag": false,
+    "TwigAllFlag": true
+  },
+  { // Exercise 1, English, V3
+    "Id": 5,
+    "FullTitle": "Full_Title_1_V3",
+    "Introduction": "Introduction_1_V3",
+    "FkUserId": 1,
+    "TemplateParam": "template_param_1_V3",
+    "TemplateParamLiftFlag": false,
+    "TwigAllFlag": true
+  },
+  { // Exercise 1, German, V3
+    "Id": 6,
+    "FullTitle": "Voller_Titel_1_V3",
+    "Introduction": "Einleitung_1_V3",
+    "FkUserId": 1,
+    "TemplateParam": "template_param_1_V3",
+    "TemplateParamLiftFlag": false,
+    "TwigAllFlag": true
+  },
+  { // Exercise 2, English, V1
+    "Id": 7,
+    "FullTitle": "Full_Title_2_V1",
+    "Introduction": "Introduction_2_V1",
+    "FkUserId": 1,
+    "TemplateParam": "template_param_2_V1",
+    "TemplateParamLiftFlag": false,
+    "TwigAllFlag": true
+  },
+  { // Exercise 2, German, V1
+    "Id": 8,
+    "FullTitle": "Voller_Titel_2_V1",
+    "Introduction": "Einleitung_2_V1",
+    "FkUserId": 1,
+    "TemplateParam": "template_param_2_V1",
+    "TemplateParamLiftFlag": false,
+    "TwigAllFlag": true
+  },
+  { // Exercise 3, German, V1
+    "Id": 9,
+    "FullTitle": "Voller_Titel_3_V1",
+    "Introduction": "Einleitung_3_V1",
+    "FkUserId": 3,
+    "TemplateParam": "template_param_3_V1",
+    "TemplateParamLiftFlag": false,
+    "TwigAllFlag": true
+  }
 ]

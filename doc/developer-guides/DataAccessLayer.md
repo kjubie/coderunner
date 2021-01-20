@@ -40,9 +40,17 @@ Die uns bekannte Limitierung von SQLite ist das fehlen der APPLY Operation. Die 
 Zum initialen befüllen der Datenbank mit benötigten Werten wie Programming Language, Written Language und Questiontype, als auch Testdaten (Exercises, Tags, Collection,...) wird die Datenbank mit Daten aus Json Dateien geseeded. Diese Dateien sind im Ordner `FHTW-CodeRunner\src\FHTW.CodeRunner.DataAccess.Sql\Resources` zu finden.
 Die Logic zum seeden ist in `FHTW.CodeRunner.DataAccess.Sql.CodeRunnerContextExtension.cs` zu finden.
 
+!! In der jetzigen Version der Applikation wird die Datenbank bei jedem Start geseeded. Vor dem finalen Deployment sollte das automatische seeden entfernt werden.
+
 ### Probleme beim Seeden
 
+!! Das folgende Problem wurde mittlereweile gelöst. Zur Informationszwecken und für den Fall, dass es nochmal auftritt wurde die Erklärung des Problems in der Dokumentation beibehalten.
+
 Beim seeden der Datenbank ist es vorgekommen, dass die von PostgreSQL generierten Ids nach dem seeden nichtmehr mit den Ids der Daten synchronisiert waren. Deswegen mussten die fixen Ids aus den Testdaten entfernt werden. Deswegen kann vor dem seeden nichtmehr einfach überprüft werden ob die Testdaten bereits in der Datenbank sind. Aufgrund dessen muss die Datenbank beim neuen Aufsetzen explicit geseeded werden. Genauere Information dazu befinden sich im Setup Guide.
+
+#### Lösung
+
+Das Problem wurde gelöst in dem nach dem seeden die id sequence explizit geupdated wird.
 
 ## Migrationen
 

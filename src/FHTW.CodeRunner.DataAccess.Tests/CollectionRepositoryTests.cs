@@ -28,8 +28,8 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         [Test]
         public void ShouldGetExerciseInstancesWithSetLanguage()
         {
-            // Cannot be tested with sqlite
             /*
+            // Cannot be tested with sqlite
             this.SetupDatabaseReal(DbTestController.State.SEEDEDJSON);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
             {

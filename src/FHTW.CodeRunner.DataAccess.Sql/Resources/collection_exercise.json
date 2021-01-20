@@ -1,5 +1,6 @@
 [
   { // Collection 1, Exercise 1, English, C++
+    "Id": 1,
     "FkCollectionId": 1,
     "VersionNumber": 1,
     "FkExerciseId": 1,
@@ -7,6 +8,7 @@
     "FkWrittenLanguageId": 1
   },
   { // Collection 1, Exercise 2, English, C++
+    "Id": 2,
     "FkCollectionId": 1,
     "VersionNumber": 1,
     "FkExerciseId": 2,
