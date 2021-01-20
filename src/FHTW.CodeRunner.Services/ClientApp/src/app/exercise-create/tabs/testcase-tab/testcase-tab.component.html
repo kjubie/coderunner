@@ -39,11 +39,8 @@
 
             <label for="show" class="col-2 col-form-label">Display</label>
             <div class="col-10">
-                <select class="form-control col-2" id="show" name="show"  [(ngModel)]="testCase.displayType">
-                    <option [ngValue]="SHOW">Show</option>
-                    <option [ngValue]="HIDE">Hide</option>
-                    <option [ngValue]="HIDE_IF_FAIL">Hide if fail</option>
-                    <option [ngValue]="HIDE_IF_SUCCEED">Hide if succeed</option>
+                <select class="form-control col-2" id="show" name="show" [(ngModel)]="testCase.displayType">
+                    <option *ngFor="let type of displayTypes" [ngValue]="type.value">{{ type.key }}</option>
                 </select>
             </div>
 

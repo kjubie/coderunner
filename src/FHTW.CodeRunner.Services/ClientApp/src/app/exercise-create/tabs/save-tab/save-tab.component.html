@@ -59,45 +59,45 @@
             <div class="from-group row">
                 <label for="programmingLang" class="col-2 col-form-label">Language</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext" id="programmingLang" readonly name="name" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.programmingLanguage.name">
+                    <input type="text" class="form-control-plaintext" id="programmingLang" readonly name="name" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].programmingLanguage.name">
                 </div>
 
                 <label for="fieldLines" class="col-2 col-form-label">Answerfield Lines</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext col-1" id="fieldLines" name="fieldLines" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.fieldLines">
+                    <input type="text" class="form-control-plaintext col-1" id="fieldLines" name="fieldLines" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].fieldLines">
                 </div>
 
                 <label for="subSystem" class="col-2 col-form-label">Penalty System</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext col-3" id="subSystem" name="subSystem" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.subtractSystem">
+                    <input type="text" class="form-control-plaintext col-3" id="subSystem" name="subSystem" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].subtractSystem">
                 </div>
 
                 <label for="points" class="col-2 col-form-label">Obtainable Points</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext col-1" id="points" name="points" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.obtainablePoints">
+                    <input type="text" class="form-control-plaintext col-1" id="points" name="points" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].obtainablePoints">
                 </div>
 
                 <label for="idNum" class="col-2 col-form-label">ID-Number</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext col-1" id="idNum" name="idNum" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.idNum">
+                    <input type="text" class="form-control-plaintext col-1" id="idNum" name="idNum" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].idNum">
                 </div>
 
                 <label for="answer" class="col-2 col-form-label">Answer</label>
                 <div class="col-10">
-                    <textarea class="form-control-plaintext" id="answer" name="answer" rows="4" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.solution"></textarea>
+                    <textarea class="form-control-plaintext" id="answer" name="answer" rows="4" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].solution"></textarea>
                 </div>
 
                 <label for="prefillAnswer" class="col-2 col-form-label">Answer Preload</label>
                 <div class="col-10">
-                    <textarea class="form-control-plaintext" id="prefillAnswer" name="prefillAnswer" rows="4" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.prefill"></textarea>
+                    <textarea class="form-control-plaintext" id="prefillAnswer" name="prefillAnswer" rows="4" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].prefill"></textarea>
                 </div>
 
                 <h6>Languages</h6>
                 <!-- TODO: show for each language -->
-                <h4>{{ writtenLang }}</h4>
+                <h4>{{ exercise.exerciseVersionList[0].exerciseLanguageList[0].writtenLanguage.name }}</h4>
                 <label for="genFeedback" class="col-2 col-form-label">General Feedback</label>
                 <div class="col-10">
-                    <textarea class="form-control-plaintext" id="genFeedback" name="genFeedback" rows="9" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody.feedback"></textarea>
+                    <textarea class="form-control-plaintext" id="genFeedback" name="genFeedback" rows="9" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].feedback"></textarea>
                 </div>
             </div>
         </div>
@@ -107,49 +107,49 @@
             <div class="from-group row">
                 <label for="questionType" class="col-2 col-form-label">Question Type</label>
                 <div class="col-10">
-                    <select class="form-control" name="questionType" [(ngModel)]="testSuit.fkQuestionType">
+                    <select class="form-control" name="questionType" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.questionType">
                         <option *ngFor="let q of questionTypes" [ngValue]="q">{{ q.name }}</option>
                     </select>
                 </div>
 
                 <label for="templDebugging" class="col-2 col-form-label">Template Debugging</label>
                 <div class="col-10">
-                    <input type="checkbox" id="templDebugging" name="templDebugging" (click)="$event.preventDefault()" [(ngModel)]="testSuit.templateDebugFlag">
+                    <input type="checkbox" id="templDebugging" name="templDebugging" (click)="$event.preventDefault()" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.templateDebugFlag">
                 </div>
 
                 <label for="precheck" class="col-2 col-form-label">Precheck</label>
                 <div class="col-10">
-                    <select class="form-control" id="precheck" name="precheck" [(ngModel)]="testSuit.preCheck">
-                        <option value="0" [ngValue]="0">Deactivated</option>
-                        <option value="1" [ngValue]="1">Empty</option>
-                        <option value="2" [ngValue]="2">Examples</option>
-                        <option value="3" [ngValue]="3">Selected</option>
-                        <option value="4" [ngValue]="4">All</option>
+                    <select class="form-control" id="precheck" name="precheck" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.preCheck">
+                        <option [ngValue]="0">Deactivated</option>
+                        <option [ngValue]="1">Empty</option>
+                        <option [ngValue]="2">Examples</option>
+                        <option [ngValue]="3">Selected</option>
+                        <option [ngValue]="4">All</option>
                     </select>
                 </div>
 
                 <label for="feedback" class="col-2 col-form-label">Display Feedback</label>
                 <div class="col-10">
-                    <select class="form-control" id="feedback" name="feedback" [(ngModel)]="testSuit.generalFeedbackDisplay">
-                        <option value="0" [ngValue]="0">Set by Test</option>
-                        <option value="1" [ngValue]="1">Force Show</option>
-                        <option value="2" [ngValue]="2">Force Hide</option>
+                    <select class="form-control" id="feedback" name="feedback" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.generalFeedbackDisplay">
+                        <option [ngValue]="0">Set by Test</option>
+                        <option [ngValue]="1">Force Show</option>
+                        <option [ngValue]="2">Force Hide</option>
                     </select>
                 </div>
 
                 <label for="globalExtra" class="col-2 col-form-label">Global Extra</label>
                 <div class="col-10">
-                    <textarea class="form-control-plaintext" id="globalExtra" name="globalExtra" rows="5" readonly [(ngModel)]="testSuit.globalExtraParam"></textarea>
+                    <textarea class="form-control-plaintext" id="globalExtra" name="globalExtra" rows="5" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.globalExtraParam"></textarea>
                 </div>
 
                 <label for="runtimeData" class="col-2 col-form-label">Runtime Data</label>
                 <div class="col-10">
-                    <textarea class="form-control-plaintext" id="runtimeData" name="runtimeData" rows="5" readonly [(ngModel)]="testSuit.runtimeData"></textarea>
+                    <textarea class="form-control-plaintext" id="runtimeData" name="runtimeData" rows="5" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.runtimeData"></textarea>
                 </div>
 
                 <label for="testOnSave" class="col-2 col-form-label">Test on Save</label>
                 <div class="col-10">
-                    <input type="checkbox" id="testOnSave" name="testOnSave" (click)="$event.preventDefault()" [(ngModel)]="testSuit.testOnSaveFlag">
+                    <input type="checkbox" id="testOnSave" name="testOnSave" (click)="$event.preventDefault()" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.testOnSaveFlag">
                 </div>
             </div>
         </div>
@@ -159,52 +159,49 @@
         <div class="contentSeperator">
             <label for="testcase" class="col-2 col-form-label">Testcase</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="testcase" name="testcase" rows="5" readonly [(ngModel)]="testCase.testCode"></textarea>
+                <textarea class="form-control-plaintext" id="testcase" name="testcase" rows="5" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.testCaseList[0].testCode"></textarea>
             </div>
 
             <label for="orderUsed" class="col-2 col-form-label">Order Used</label>
             <div class="col-10">
-                <input type="number" class="form-control-plaintext" id="orderUsed" name="orderUsed" readonly [(ngModel)]="testCase.orderUsed">
+                <input type="number" class="form-control-plaintext" id="orderUsed" name="orderUsed" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.testCaseList[0].orderUsed">
             </div>
 
             <label for="stdin" class="col-2 col-form-label">Standard Input</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="stdin" name="stdin" rows="5" readonly [(ngModel)]="testCase.standardInput"></textarea>
+                <textarea class="form-control-plaintext" id="stdin" name="stdin" rows="5" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.testCaseList[0].standardInput"></textarea>
             </div>
 
             <label for="output" class="col-2 col-form-label">Expected Output</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="output" name="output" rows="5" readonly [(ngModel)]="testCase.expectedOutput"></textarea>
+                <textarea class="form-control-plaintext" id="output" name="output" rows="5" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.testCaseList[0].expectedOutput"></textarea>
             </div>
 
             <label for="additionalData" class="col-2 col-form-label">Extra Data</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="additionalData" name="additionalData" rows="5" readonly [(ngModel)]="testCase.additionalData"></textarea>
+                <textarea class="form-control-plaintext" id="additionalData" name="additionalData" rows="5" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.testCaseList[0].additionalData"></textarea>
             </div>
 
             <label for="show" class="col-2 col-form-label">Display</label>
             <div class="col-10">
-                <select class="form-control col-2" id="show" name="show"  [(ngModel)]="testCase.displayType">
-                    <option value="SHOW" [ngValue]="SHOW">Show</option>
-                    <option value="HIDE" [ngValue]="HIDE">Hide</option>
-                    <option value="HIDE_IF_FAIL" [ngValue]="HIDE_IF_FAIL">Hide if fail</option>
-                    <option value="HIDE_IF_SUCCEED" [ngValue]="HIDE_IF_SUCCEED">Hide if succeed</option>
+                <select class="form-control col-2" id="show" name="show"  [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.testCaseList[0].displayType">
+                    <option *ngFor="let type of displayTypes" [ngValue]="type.value">{{ type.key }}</option>
                 </select>
             </div>
 
             <label for="useAsExample" class="col-2 col-form-label">Use as Example</label>
             <div class="col-10">
-                <input type="checkbox" id="useAsExample" name="useAsExample" (click)="$event.preventDefault()" [(ngModel)]="testCase.useAsExampleFlag">
+                <input type="checkbox" id="useAsExample" name="useAsExample" (click)="$event.preventDefault()" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.testCaseList[0].useAsExampleFlag">
             </div>
 
             <label for="hideOnFail" class="col-2 col-form-label">Hide Rest if Fail</label>
             <div class="col-10">
-                <input type="checkbox" id="hideOnFail" name="hideOnFail" (click)="$event.preventDefault()" [(ngModel)]="testCase.hideOnFailFlag">
+                <input type="checkbox" id="hideOnFail" name="hideOnFail" (click)="$event.preventDefault()" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.testCaseList[0].hideOnFailFlag">
             </div>
 
             <label for="points" class="col-2 col-form-label">Points</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-2" id="points" name="points" readonly [(ngModel)]="testCase.points">
+                <input type="text" class="form-control-plaintext col-2" id="points" name="points" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[0].testSuite.testCaseList[0].points">
             </div>
         </div>
 

@@ -5,6 +5,7 @@ export class ExerciseHeader {
 
     id: number;
     fullTitle: string;
+    shortTitle: string;
     introduction: string;
     templateParam: string;
     templateParamLiftFlag: boolean;
