@@ -23,9 +23,9 @@ ausgeführt werden.
 
 ## Starten mit Docker
 
-!! Trotz mehrfacher Versuche und Stunden langer recherche ist es nicht möglich den Container von der Commandline zu starten. Deswegen muss er von Visual Studio aus gestartet werden.
+!! Trotz mehrfacher Versuche und Stunden langer Recherche ist es nicht möglich den Container von der Commandline zu starten. Deswegen muss er von Visual Studio aus gestartet werden.
 
-Um die Applikation als Container zu starten muss in Visual Studio das `docker-compose` Project durch Rechtsklick im SolutionExplorer als Startup Projekt ausgewählt werden. Sobald es ausgewählt ist wird Visual Studio den Container bereits vorbereiten. Jetzt kann der Container durch klicken auf das `Docker Compose` Startsymbol gestartet werden. Das kann je nach Computer sehr lange dauern. Die dazugehörige Datenbank wird dabei automatisch mitgestartet.
+Um die Applikation als Container zu starten muss in Visual Studio das `docker-compose` Project durch Rechtsklick im SolutionExplorer als Startup Projekt ausgewählt werden. Sobald es ausgewählt ist, wird Visual Studio den Container bereits vorbereiten. Jetzt kann der Container durch klicken auf das `Docker Compose` Startsymbol gestartet werden. Das kann je nach Computer sehr lange dauern. Die dazugehörige Datenbank wird dabei automatisch mitgestartet.
 
 ## Normal starten
 
@@ -37,7 +37,7 @@ Wenn die Applikation auf den eigenen Computer laufen soll muss zuerst die Datenb
 
 ausgeführt werden.
 
-Danach kann `FHTW.CodeRunner.Service` im Solution Explorer als Startup Project ausgewählt werden. Jetzt muss nurnoch sichergestellt werden, dass rechts neben dem Startsymbol `FHTW.CodeRunner.Services` steht. Wenn das nicht der Fall ist kann es im Dropdown-menü zur auswahl stehen und die Applikation kann gestartet werden.
+Danach kann `FHTW.CodeRunner.Service` im Solution Explorer als Startup Project ausgewählt werden. Jetzt muss nurnoch sichergestellt werden, dass rechts neben dem Startsymbol `FHTW.CodeRunner.Services` steht. Wenn das nicht der Fall ist, sollte im Dropdown-Menü mehr zur Auswahl stehen und die Applikation kann gestartet werden.
 
 ## Wichtige Tipps
 
