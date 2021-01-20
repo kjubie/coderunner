@@ -4,12 +4,16 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
-RUN apt-get update \
-	&& apt-get -y install curl gnupg \
-	&& curl -sL https://deb.nodesource.com/setup_10.x  | bash - \
+RUN apt-get update -yq \
+    && apt-get -yq install curl gnupg ca-certificates \
+    && curl -L https://deb.nodesource.com/setup_12.x | bash \
 	&& apt-get -y install nodejs
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+RUN apt-get update -yq \
+    && apt-get -yq install curl gnupg ca-certificates \
+    && curl -L https://deb.nodesource.com/setup_12.x | bash \
+	&& apt-get -y install nodejs
 WORKDIR /src
 COPY ["FHTW.CodeRunner.Services/FHTW.CodeRunner.Services.csproj", "FHTW.CodeRunner.Services/"]
 COPY ["FHTW.CodeRunner.Services.DTOs/FHTW.CodeRunner.Services.DTOs.csproj", "FHTW.CodeRunner.Services.DTOs/"]

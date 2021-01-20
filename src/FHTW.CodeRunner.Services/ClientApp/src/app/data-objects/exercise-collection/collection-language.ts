@@ -1,4 +1,6 @@
-export class ExerciseHeader {
+import { WrittenLanguage } from "../written-language";
+
+export class CollectionLanguage {
     constructor() {
         this.id = 0;
     }
@@ -7,7 +9,5 @@ export class ExerciseHeader {
     fullTitle: string;
     shortTitle: string;
     introduction: string;
-    templateParam: string;
-    templateParamLiftFlag: boolean;
-    twigAllFlag: boolean; 
+    writtenLanguage: WrittenLanguage;
 }

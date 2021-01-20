@@ -11,6 +11,15 @@ export class SaveTabComponent {
     @Input() exercise: Exercise;
     @Output() saveExerciseEvent = new EventEmitter<Exercise>();
 
+    questionTypes = [];
+
+    displayTypes = [
+        { key: 'Show', value: 'SHOW' },
+        { key: 'Hide', value: 'HIDE' },
+        { key: 'Hide if fail', value: 'HIDE_IF_FAIL' },
+        { key: 'Hide if succeed', value: 'HIDE_IF_SUCCEED' }
+    ];
+
     saveExercise() {
         this.saveExerciseEvent.emit(this.exercise);
     }

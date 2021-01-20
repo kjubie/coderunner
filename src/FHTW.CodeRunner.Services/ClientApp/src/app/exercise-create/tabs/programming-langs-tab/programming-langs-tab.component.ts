@@ -10,4 +10,6 @@ export class ProgrammingLangsTabComponent {
 
     @Input() exerciseBody: ExerciseBody;
     @Input() writtenLang: string;
+
+    hidePreview() { console.log('test'); }
 }
