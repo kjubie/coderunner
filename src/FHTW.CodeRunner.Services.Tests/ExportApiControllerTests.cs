@@ -17,14 +17,16 @@ using SvcEntities = FHTW.CodeRunner.Services.DTOs;
 
 namespace FHTW.CodeRunner.Services.Tests
 {
+    /// <summary>
+    /// Unit Tests for Export Api Controller.
+    /// </summary>
     public class ExportApiControllerTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         // TODO: Test for Content Type
+
+        /// <summary>
+        /// Testing the function ExportExercise.
+        /// </summary>
         [Test]
         public void ExportExercise_ValidExportExercise_Ok()
         {
@@ -54,6 +56,9 @@ namespace FHTW.CodeRunner.Services.Tests
             Assert.IsInstanceOf<ContentResult>(response);
         }
 
+        /// <summary>
+        /// Testing the function ExportExercise.
+        /// </summary>
         [Test]
         public void ExportExercise_NullExportExercise_BadRequest()
         {

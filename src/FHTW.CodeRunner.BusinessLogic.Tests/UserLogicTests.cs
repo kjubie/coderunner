@@ -15,13 +15,14 @@ using DalEntities = FHTW.CodeRunner.DataAccess.Entities;
 
 namespace FHTW.CodeRunner.BusinessLogic.Tests
 {
+    /// <summary>
+    /// Unit Tests for UserLogic.
+    /// </summary>
     public class UserLogicTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
+        /// <summary>
+        /// Testing the function AuthenticateUser.
+        /// </summary>
         [Test]
         public void AuthenticateUser_ValidUser_Int()
         {
@@ -54,6 +55,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             Assert.IsNotNull(result);
         }
 
+        /// <summary>
+        /// Testing the function AuthenticateUser.
+        /// </summary>
         [Test]
         public void AuthenticateUser_InvalidUser_Null()
         {
