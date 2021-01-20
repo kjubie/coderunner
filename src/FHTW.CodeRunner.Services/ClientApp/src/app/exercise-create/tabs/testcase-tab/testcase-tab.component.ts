@@ -10,4 +10,11 @@ export class TestCaseTabComponent {
 
     @Input() testCase: TestCase;
     @Input() pLang: string;
+
+    displayTypes = [
+        { key: 'Show', value: 'SHOW' },
+        { key: 'Hide', value: 'HIDE' },
+        { key: 'Hide if fail', value: 'HIDE_IF_FAIL' },
+        { key: 'Hide if succeed', value: 'HIDE_IF_SUCCEED' }
+    ];
 }

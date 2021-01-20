@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
   exerciseList: ExerciseHome[];
   selectedExercise: ExerciseHome;
   exerciseForExport: ExerciseExport = new ExerciseExport();
+  languages = ['English', 'German'];
+  programmingLangs = ['C#', 'Java'];
 
   versionInvalid = false;
   wLangInvalid = false;

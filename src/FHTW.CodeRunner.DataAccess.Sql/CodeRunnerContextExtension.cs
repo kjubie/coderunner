@@ -112,6 +112,27 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
                 context.SaveChanges();
             });
+
+            if (context.Database.IsNpgsql())
+            {
+                UpdateSequence(context, table);
+            }
+        }
+
+        /// <summary>
+        /// Updates the id sequence in postgresql.
+        /// </summary>
+        /// <typeparam name="T">EntityType.</typeparam>
+        /// <param name="context">Context.</param>
+        /// <param name="table">TableSet.</param>
+        private static void UpdateSequence<T>(this CodeRunnerContext context, DbSet<T> table)
+            where T : class
+        {
+            string table_name = table.GetTableName<T>(context);
+
+            // Parameterized query not supported by postgresql, but should not be a problem.
+            context.Database.ExecuteSqlRaw($"SELECT setval(pg_get_serial_sequence('{table_name}', 'id'), coalesce(max(id), 0) + 1, false) FROM {table_name}");
+            context.SaveChanges();
         }
     }
 }

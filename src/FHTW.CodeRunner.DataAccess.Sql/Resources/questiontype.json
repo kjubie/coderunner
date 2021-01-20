@@ -1,21 +1,26 @@
 [
   {
+    "Id": 1,
     "Name": "c++_question_type",
     "FkProgrammingLanuageId": 1
   },
   {
+    "Id": 2,
     "Name": "c#_question_type",
     "FkProgrammingLanuageId": 2
   },
   {
+    "Id": 3,
     "Name": "python_question_type",
     "FkProgrammingLanuageId": 6
   },
   {
+    "Id": 4,
     "Name": "java_question_type",
     "FkProgrammingLanuageId": 3
   },
   {
+    "Id": 5,
     "Name": "c_question_type",
     "FkProgrammingLanuageId": 5
   }

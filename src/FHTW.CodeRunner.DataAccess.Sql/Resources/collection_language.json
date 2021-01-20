@@ -1,9 +1,10 @@
 [
-    {   // Collection 1, English, C++
-        "FullTitle": "FullTitle_1",
-        "ShortTitle": "ShortTitle_1",
-        "Introduction": "Introduction_1",
-        "FkCollectionId": 1,
-        "FkWrittenLanguageId": 1
-    }
+  { // Collection 1, English, C++
+    "Id": 1,
+    "FullTitle": "FullTitle_1",
+    "ShortTitle": "ShortTitle_1",
+    "Introduction": "Introduction_1",
+    "FkCollectionId": 1,
+    "FkWrittenLanguageId": 1
+  }
 ]
