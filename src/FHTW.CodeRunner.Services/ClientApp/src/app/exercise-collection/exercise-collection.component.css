@@ -87,3 +87,9 @@ input[type=text], input[type=number], textarea, select {
    transform: rotate(45deg);
    -webkit-transform: rotate(45deg);
 }
+
+.tag {
+   color:#e1f8ff;
+   background-color: #0098e0;
+   margin: 0 5px 0 5px;
+}

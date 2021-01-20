@@ -1,32 +1,53 @@
 <!-- ToDo: Databindings + Tags -->
 <h1>Exercise Collection Overview</h1>
-<!-- TODO: Add multiple language support + missing fields -->
 <div class="contentSeperator container">
   <label for="collectionTitle" class="col-form-label">Collection Title: </label>
-  <input [(ngModel)]="collection.title" type="text" name="collectionTitle" id="collectionTitle" class="col-12 form-control-plaintext mb-5">
+  <input [(ngModel)]="collection.title" type="text" name="collectionTitle" id="collectionTitle" class="col-12 form-control-plaintext mb-2">
 
+  <div class="mb-5">
+    <!-- <label for="tagSelect" class="col-2 col-form-label">Tags</label> -->
+    <p>Tags: </p>
+    <div>
+        <span *ngFor="let tag of collection.collectionTagList; let idx = index" class="badge badge-pill tag">
+            <span class="tagFunctions" (click)="removeTag(idx)">&#x2715;</span> {{ tag.tag.name }}
+        </span>
+    </div>
+    <div>
+        <!-- Left blank on purpose... -->
+    </div>
+    <div class="tagFunctions">
+        <a (click)="showExistingTags(existingTagModal)"><img src="../../../../assets/img/plus.png" > Add from existing Tags</a>
+    </div>
+    <div class="tagFunctions">
+        <a (click)="createNewTag(createTagModal)"><img src="../../../../assets/img/plus.png" > Create new Tag</a>
+    </div>
+    <div>
+        <!-- Left blank on purpose... -->
+    </div>
+  </div>
+  
   <h2 (click)="collapseList('headDiv')"><i id="arrowHeadList" class="arrow down"></i> Collection Header</h2>
   <div id="colHeader" name="colHeader" class="contentSeperator mb-5">
     <div id="colHeaderContent" name="colHeaderContent" *ngIf="showHeadDiv">
-      <div *ngFor="let i of writtenLang" class="mb-3">
+      <div *ngFor="let lang of collectionLangsList" class="mb-3">
         <div class="row col-12">
-          <h3>{{i.name}}</h3>
-          <button (click)="removeLanguage(i)" class="deleteBtn btn ml-3 colItemSettings">&#x2715;</button>
+          <h3>{{lang.writtenLanguage.name}}</h3>
+          <button (click)="removeLanguage(lang)" class="deleteBtn btn ml-3 colItemSettings">&#x2715;</button>
         </div>
-        <label for="colFullTitle_{{i.name}}" class="col-form-label">Full Title: </label>
-        <input type="text" name="colFullTitle_{{i.name}}" id="colFullTitle_{{i.name}}" class="col-12 form-control-plaintext">
+        <label for="colFullTitle_{{lang.writtenLanguage.name}}" class="col-form-label">Full Title: </label>
+        <input [(ngModel)]="lang.fullTitle" type="text" name="colFullTitle_{{lang.writtenLanguage.name}}" id="colFullTitle_{{lang.writtenLanguage.name}}" class="col-12 form-control-plaintext">
         
-        <label for="colShortTitle_{{i.name}}" class="col-form-label">Short Title: </label>
-        <input type="text" name="colShortTitle_{{i.name}}" id="colShortTitle_{{i.name}}" class="col-12 form-control-plaintext">
+        <label for="colShortTitle_{{lang.writtenLanguage.name}}" class="col-form-label">Short Title: </label>
+        <input [(ngModel)]="lang.shortTitle" type="text" name="colShortTitle_{{lang.writtenLanguage.name}}" id="colShortTitle_{{lang.writtenLanguage.name}}" class="col-12 form-control-plaintext">
       
         <label for="colIntro" class="col-form-label">Introduction: </label>
-        <textarea name="colIntro" id="colIntro" cols="30" rows="10" class="col-12 form-control-plaintext"></textarea>
+        <textarea [(ngModel)]="lang.introduction" name="colIntro" id="colIntro" cols="30" rows="10" class="col-12 form-control-plaintext"></textarea>
       </div>
 
       <div ngbDropdown class="d-flex justify-content-center" *ngIf="isLangAvailable">
         <button class="btn btn-primary" id="addLangBtn" ngbDropdownToggle>Add Language</button>
         <div ngbDropdownMenu aria-labelledby="addLangBtn">
-          <button ngbDropdownItem *ngFor="let l of availableLangsW" (click)="addLanguage(l)">{{ l.name }}</button>
+          <button ngbDropdownItem *ngFor="let l of availableLangs" (click)="addLanguage(l)">{{ l.name }}</button>
         </div>
       </div>
     </div>
@@ -54,23 +75,21 @@
         <li *ngFor="let ex of exerciseList; let i = index" class="list-group-item colItem mb-1">
           <div class="row col-12 p-1">
             <p class="col-3 col-md-3 colItemHeading">{{ex.title}}</p>
-
             <div class="row col-9">
+              <select name="verFilter" id="verFilter" class="form-control col-3 ml-1">
+                <option value="" disabled selected hidden>Version</option>
+                <option *ngFor="let ver of ex.versionList" value="{{ver}}">{{ver}}</option>
+              </select>
+
               <select name="langFilter" id="langFilter" class="form-control col-3 ml-1 mr-1">
                 <option value="" disabled selected hidden>Language</option>
-                <option value="0">English</option>
+                <option *ngFor="let lang of ex.writtenLanguageList" value="{{lang.id}}">{{lang.name}}</option>
               </select>
           
               <select name="progFilter" id="progFilter" class="form-control col-4 ml-1">
                 <option value="" disabled selected hidden>Programming Language</option>
-                <option value="0">C++</option>
+                <option *ngFor="let progLang of ex.programmingLanguageList" value="{{progLang.id}}">{{progLang.name}}</option>
               </select>
-
-              <select name="verFilter" id="verFilter" class="form-control col-3 ml-1">
-                <option value="" disabled selected hidden>Version</option>
-                <option value="0">v1.0.0</option>
-              </select>
-
             </div>
             <button (click)="removeExercise(ex)" class="deleteBtn btn ml-3 colItemSettings">&#x2715;</button>
           </div>
@@ -79,3 +98,53 @@
     </div>
   </div>
 </div>
+
+<!-- modal for creating new tags -->
+<ng-template #createTagModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Create a new Tag</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="newTagForm" (ngSubmit)="addNewTag(newTagForm.value)">
+      <div class="form-group">
+        <label for="tagName"><strong>Name:</strong></label>
+        <input type="text" class="form-control-plaintext" id="tagName" name="tagName" placeholder="e.g. linked list" formControlName="tagName">
+      </div>
+      <div class="text-right">
+          <button type="submit" class="btn btn-primary btn-outline-dark">Add</button>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close')">Close</button>
+  </div>
+</ng-template>
+
+<!-- modal for creating new tags -->
+<ng-template #existingTagModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add existing Tag</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="modalForm" [formGroup]="existingTagForm" (ngSubmit)="addExistingTag(existingTagForm.value)">
+      <div class="form-group">
+        <label for="tagName"><strong>Select Tag:</strong></label>
+        <select class="form-control" name="tagName" id="tagName" formControlName="tag">
+            <option *ngFor="let tag of existingTags" [ngValue]="tag">{{ tag.name }}</option>
+        </select>
+      </div>
+      <div class="text-right">
+          <button type="submit" class="btn btn-primary btn-outline-dark">Add</button>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close')">Close</button>
+  </div>
+</ng-template>

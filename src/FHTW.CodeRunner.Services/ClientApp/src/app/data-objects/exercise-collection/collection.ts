@@ -1,4 +1,4 @@
-import { Exercise } from "../create-exercise/exercise";
+import { ExerciseHome } from "../exercise-home";
 import { Author } from "../author";
 import { CollectionTag } from "./collection-tag";
 import { CollectionLanguage } from "./collection-language";
@@ -6,6 +6,9 @@ import { CollectionLanguage } from "./collection-language";
 export class Collection {
     constructor() {
         this.id = 0;
+        this.collectionTagList = [];
+        this.collectionLanguageList = [];
+        this.collectionExerciseList = [];
     }
 
     id: number;
@@ -14,6 +17,5 @@ export class Collection {
     user: Author;
     collectionLanguageList: CollectionLanguage[];
     collectionTagList: CollectionTag[];
-    collectionExerciseList: Exercise[];
-    
+    collectionExerciseList: ExerciseHome[];
 }
