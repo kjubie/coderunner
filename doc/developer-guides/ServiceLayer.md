@@ -4,11 +4,11 @@ Nachfolgend werden einzelne Besonderheiten des Service Layer erläutert. Die zug
 
 ## AutoMapper
 
-Für das Mapping wird AutoMapper verwendet. Die Mapping-Profile befinden sich dabei im Ordner `AutoMapper`. Genauso haben wir auch entschieden einzelne Konvertierungen über den AutoMapper zu lösen. Dafür wurde der Ordner `Converters` angelegt und hier wurden einzelne AutoMapper-Custom-Converters angelegt. Zum Beispiel passiert hier auch das Mapping von den Moodle Quiz Entities auf unsere eigenen Entities.
+Für das Mapping wird AutoMapper verwendet. Die Mapping-Profile befinden sich dabei im Ordner `AutoMapper`. Genauso haben wir auch entschieden einzelne Konvertierungen über den AutoMapper zu lösen. Dafür wurde der Ordner `Converters` angelegt und hier wurden einzelne AutoMapper-Custom-Converters erzeugt. Zum Beispiel passiert hier auch das Mapping von den Moodle Quiz Entities auf unsere eigenen Entities.
 
 ## Basic Authentication
 
-Als Authentifizierung wurde hier sehr simpel Basic Authentication eingesetzt. Hier wurde vorerst keine andere Authentfizierung gewählt, da dieses in einem späteren Stadium mit LDAP verknüpft werden könnte.
+Als Authentifizierung wurde hier sehr simpel Basic Authentication eingesetzt. Dabei wurde vorerst keine andere Authentfizierung gewählt, da dieses in einem späteren Stadium mit LDAP verknüpft werden könnte.
 
 ## Swagger
 
@@ -60,7 +60,7 @@ services
 services.AddSwaggerGenNewtonsoftSupport();
 ```
 
-Hier ist zu beachten, dass die DataContracts aus von DTOs verwendet werden. Genauso wird das Swagger UI immer neu generiert und entsprechend daher auch stets der vorhandenen API. Weiters ist zu erwähnen, dass hier auch Authorisierung hinzugefügt wurde. Da im Frontend aber die Passwörter mit sha512 gesichert werden, muss auch im Swagger UI für das Passwort der Hashwert eingegeben werden.
+Hier ist zu beachten, dass die DataContracts von den DTOs verwendet werden. Genauso wird das Swagger UI immer neu generiert und entspricht daher auch stets der vorhandenen API. Weiters ist zu erwähnen, dass hier auch Authorisierung hinzugefügt wurde. Da im Frontend aber die Passwörter mit sha512 gesichert werden, muss auch im Swagger UI für das Passwort der Hashwert eingegeben werden.
 
 ## ClientApp
 

@@ -17,13 +17,14 @@ using SvcEntities = FHTW.CodeRunner.Services.DTOs;
 
 namespace FHTW.CodeRunner.Services.Tests
 {
+    /// <summary>
+    /// Unit tests for the Exercise Api Controller.
+    /// </summary>
     public class ExerciseApiControllerTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
+        /// <summary>
+        /// Testing the function GetExerciseCreatePreparation.
+        /// </summary>
         [Test]
         public void GetExerciseCreatePreparation_Ok()
         {
@@ -54,6 +55,9 @@ namespace FHTW.CodeRunner.Services.Tests
             Assert.IsInstanceOf<OkObjectResult>(response);
         }
 
+        /// <summary>
+        /// Testing the function SaveExercise.
+        /// </summary>
         [Test]
         public void SaveExercise_ValidExercise_Ok()
         {
@@ -84,6 +88,9 @@ namespace FHTW.CodeRunner.Services.Tests
             Assert.IsInstanceOf<OkResult>(response);
         }
 
+        /// <summary>
+        /// Testing the function SaveExercise.
+        /// </summary>
         [Test]
         public void SaveExercise_NullExercise_BadRequest()
         {

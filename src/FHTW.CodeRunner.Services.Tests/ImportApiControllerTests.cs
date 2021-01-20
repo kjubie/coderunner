@@ -10,7 +10,10 @@ using System.Threading.Tasks;
 
 namespace FHTW.CodeRunner.Services.Tests
 {
-    class ImportApiControllerTests
+    /// <summary>
+    /// Unit Tests for Import Api Controller.
+    /// </summary>
+    public class ImportApiControllerTests
     {
     }
 }

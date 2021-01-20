@@ -17,7 +17,7 @@ Dokumentationen zu FHTW CodeRunner befinden sich an folgenden Orten:
 
 * `doc/developer-guides`: Hier befinden sich jene Dokumente, welche für die Weiterentwicklung an diesem Projekt interessant sein könnten.
 * `doc/meeting-protocols`: Dieser Ordner enthält alle Protokolle zu Meetings mit der Betreuung.
-* `doc/planning-docs`: 
+* `doc/planning-docs`: Dokumente, welcher bei der Planung des Projektes essenziell waren, befinden sich hier.
 * `doc/status-reports`: Hier sind Statusberichte für die einzelnen Meetings zu finden.
 * Kommentare im Code.
 * Swagger UI beinhaltet all jene Informationen, welche zum ansprechen der API benötigt werden: `{coderunner-url}/swagger`.
