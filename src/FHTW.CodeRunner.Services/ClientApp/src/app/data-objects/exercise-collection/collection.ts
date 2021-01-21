@@ -1,5 +1,5 @@
-import { ExerciseHome } from "../exercise-home";
 import { Author } from "../author";
+import { CollectionExercise } from "./collection-exercise";
 import { CollectionTag } from "./collection-tag";
 import { CollectionLanguage } from "./collection-language";
 
@@ -17,5 +17,5 @@ export class Collection {
     user: Author;
     collectionLanguageList: CollectionLanguage[];
     collectionTagList: CollectionTag[];
-    collectionExerciseList: ExerciseHome[];
+    collectionExerciseList: CollectionExercise[];
 }

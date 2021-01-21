@@ -4,6 +4,7 @@ import { ExerciseExport } from '../data-objects/exercise-export';
 import { ExerciseHome } from '../data-objects/exercise-home';
 import { ExerciseListHomeService } from '../services/exercise-list-home.service';
 import { ExerciseExportService } from '../services/exercise-export.service';
+import { CollectionDataService } from '../exercise-collection/exercise-collection.data.service';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
   wLangInvalid = false;
   pLangInvalid = false;
 
-  constructor(private exerciseListHomeService: ExerciseListHomeService, private modalService: NgbModal, private exportService: ExerciseExportService) {}
+  constructor(private exerciseListHomeService: ExerciseListHomeService, private modalService: NgbModal, private exportService: ExerciseExportService, private collectionDataService: CollectionDataService) {}
 
   ngOnInit() {
     this.exerciseListHomeService.getAllExercies().subscribe(this.loadAllExercisesObserver);
@@ -130,5 +131,9 @@ export class HomeComponent implements OnInit {
       window.URL.revokeObjectURL(url);
       a.remove();
     }
+  }
+
+  addExerciseToCollection(idx: number) {
+    this.collectionDataService.sharedExerciseList.push(this.exerciseList[idx]);
   }
 }

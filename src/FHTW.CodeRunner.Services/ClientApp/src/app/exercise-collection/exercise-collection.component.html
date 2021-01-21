@@ -73,21 +73,24 @@
       <ul class="list-group">
         <li *ngFor="let ex of exerciseList; let i = index" class="list-group-item colItem mb-1">
           <div class="row col-12 p-1">
-            <p class="col-3 col-md-3 colItemHeading">{{ex.title}}</p>
+            <div class="col">
+              <p class="col-3 col-md-3 colItemHeading">{{ex.title}}<br><span class="author">{{ex.user.name}}</span></p>
+              <!-- <p class="colItemHeading">{{ex.user.name}}</p> -->
+            </div>
             <div class="row col-9">
-              <select name="verFilter" id="verFilter" class="form-control col-3 ml-1">
-                <option value="" disabled selected hidden>Version</option>
-                <option *ngFor="let ver of ex.versionList" value="{{ver}}">{{ver}}</option>
+              <select [(ngModel)]="collectionExerciseList[i].version" name="verFilter" id="verFilter" class="form-control col-3 ml-1">
+                <option value="0" disabled selected hidden>Version</option>
+                <option *ngFor="let ver of ex.versionList" ngValue="{{ver}}">{{ver}}</option>
               </select>
 
-              <select name="langFilter" id="langFilter" class="form-control col-3 ml-1 mr-1">
-                <option value="" disabled selected hidden>Language</option>
-                <option *ngFor="let lang of ex.writtenLanguageList" value="{{lang.id}}">{{lang.name}}</option>
+              <select [(ngModel)]="collectionExerciseList[i].writtenLanguage" name="langFilter" id="langFilter" class="form-control col-3 ml-1 mr-1">
+                <option value="0" disabled selected hidden>Language</option>
+                <option *ngFor="let lang of ex.writtenLanguageList" ngValue="{{lang.id}}">{{lang.name}}</option>
               </select>
           
-              <select name="progFilter" id="progFilter" class="form-control col-4 ml-1">
-                <option value="" disabled selected hidden>Programming Language</option>
-                <option *ngFor="let progLang of ex.programmingLanguageList" value="{{progLang.id}}">{{progLang.name}}</option>
+              <select [(ngModel)]="collectionExerciseList[i].programmingLanguage" name="progFilter" id="progFilter" class="form-control col-4 ml-1">
+                <option value="0" disabled selected hidden>Programming Language</option>
+                <option *ngFor="let progLang of ex.programmingLanguageList" ngValue="{{progLang.id}}">{{progLang.name}}</option>
               </select>
             </div>
             <button (click)="removeExercise(ex)" class="deleteBtn btn ml-3 colItemSettings">&#x2715;</button>
@@ -96,6 +99,9 @@
       </ul>
     </div>
   </div>
+
+  <button (click)="saveCollection()">Save</button>
+
 </div>
 
 <!-- modal for creating new tags -->

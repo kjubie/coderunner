@@ -41,7 +41,7 @@
   <!-- ToDo: get data from db, implement filters, different display options -->
   <div class="container">
     <h2>Exercises</h2>
-    <list-view *ngIf="viewSelected == 'list'" [exerciseList]="exerciseList" (exportExerciseEvent)="exportSingleExercise($event, exportModal)"></list-view>
+    <list-view *ngIf="viewSelected == 'list'" [exerciseList]="exerciseList" (addExerciseToCollectionEvent)="addExerciseToCollection($event)" (exportExerciseEvent)="exportSingleExercise($event, exportModal)"></list-view>
     <grid-big-view *ngIf="viewSelected == 'grid_big'"></grid-big-view>
     <grid-small-view *ngIf="viewSelected == 'grid_small'"></grid-small-view>
   </div>

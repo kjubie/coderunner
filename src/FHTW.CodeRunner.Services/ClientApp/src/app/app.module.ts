@@ -32,6 +32,7 @@ import { ProgrammingLanguageElementComponent } from './side-menu/menu-elements/p
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularMarkdownEditorModule } from 'angular-markdown-editor';
 import { MarkdownModule } from 'ngx-markdown';
+import { CollectionDataService } from './exercise-collection/exercise-collection.data.service';
 
 @NgModule({
   exports: [
@@ -117,7 +118,8 @@ export class MaterialModule {}
       useClass: TokenInterceptor,
       multi: true
     },
-    AppComponent
+    AppComponent,
+    CollectionDataService,
   ],
   bootstrap: [AppComponent]
 })

@@ -10,8 +10,13 @@ export class ListViewComponent {
 
     @Input() exerciseList: ExerciseHome[];
     @Output() exportExerciseEvent = new EventEmitter<number>();
+    @Output() addExerciseToCollectionEvent = new EventEmitter<number>();
 
     exportExercise(idx: number) {
         this.exportExerciseEvent.emit(idx);
+    }
+
+    addExerciseToCollection(idx: number) {
+        this.addExerciseToCollectionEvent.emit(idx);
     }
 }
