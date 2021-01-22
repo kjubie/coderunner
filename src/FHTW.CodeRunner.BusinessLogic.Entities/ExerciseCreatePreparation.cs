@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
@@ -11,6 +12,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     /// <summary>
     /// Entity that describes necesary data for the frontend when creating an exercise.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class ExerciseCreatePreparation
     {
         /// <summary>

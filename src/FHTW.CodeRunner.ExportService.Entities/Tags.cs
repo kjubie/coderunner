@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Xml.Serialization;
 
 namespace FHTW.CodeRunner.ExportService.Entities
@@ -10,6 +11,7 @@ namespace FHTW.CodeRunner.ExportService.Entities
     /// <summary>
     /// Entity that describes tags.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [XmlRoot(ElementName = "tags")]
     public class Tags
     {
