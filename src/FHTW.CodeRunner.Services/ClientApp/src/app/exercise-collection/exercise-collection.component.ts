@@ -9,6 +9,7 @@ import { FormBuilder } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CollectionDataService } from './exercise-collection.data.service';
 import { CollectionExercise } from '../data-objects/exercise-collection/collection-exercise';
+import { Author } from '../data-objects/author';
 
 @Component({
   selector: 'app-exercise-collection',
@@ -25,7 +26,7 @@ export class ExerciseCollectionComponent implements OnInit{
   collection: Collection = new Collection();
   showHeadDiv = true;
   availableLangs: WrittenLanguage[] = [{id: 1, name: "English"}];
-  collectionLangsList: CollectionLanguage[] = [{id: 0, fullTitle: "", shortTitle: "", introduction: "", writtenLanguage: {id: 0, name: "English"}}];
+  collectionLangsList: CollectionLanguage[] = [{id: 0, fullTitle: "", shortTitle: "", introduction: "", writtenLanguage: {id: 1, name: "English"}}];
   exerciseList: ExerciseHome[];
   collectionExerciseList: CollectionExercise[] = [];
 
@@ -50,11 +51,23 @@ export class ExerciseCollectionComponent implements OnInit{
   }
 
   saveCollection() {
+    this.collection.user = new Author();
+    this.collection.user.id = (localStorage.getItem('user_id') !== null) ? parseInt(localStorage.getItem('user_id')) : 0;
+    this.collection.user.name = localStorage.getItem('name');
     this.collection.collectionExerciseList = this.collectionExerciseList;
     this.collection.collectionLanguageList = this.collectionLangsList;
-    this.collection.collectionTagList = null;
 
     console.log(this.collection);
+
+    this.collectionDataService.saveCollection(this.collection).subscribe(this.createCollectionObserver);
+  }
+
+  createCollectionObserver = {
+    next: x => { this.saveCollection = x },
+    error: err => console.error('Observer got an error: ' + err),
+    complete: () => {
+      console.log("Collection was saved to database")
+    }
   }
   
   collapseList(listName: string) {

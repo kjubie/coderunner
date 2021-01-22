@@ -6,6 +6,7 @@ import { CollectionLanguage } from "./collection-language";
 export class Collection {
     constructor() {
         this.id = 0;
+        this.user = new Author();
         this.collectionTagList = [];
         this.collectionLanguageList = [];
         this.collectionExerciseList = [];

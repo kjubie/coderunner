@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ExerciseHome } from '../data-objects/exercise-home';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import {catchError, tap} from "rxjs/operators";
-import { Exercise } from '../data-objects/create-exercise/exercise';
-import { PrepareCreateExercise } from '../data-objects/create-exercise/prepare-create-exercise';
+import { catchError, tap } from "rxjs/operators";
 import { Collection } from '../data-objects/exercise-collection/collection';
 
 @Injectable()
@@ -19,11 +17,11 @@ export class CollectionDataService {
     ) { }
 
     saveCollection(collection: Collection): Observable<Collection> {
-        return this.http.post<Collection>(this.createCollectionUrl, collection)
-            .pipe(
-                tap((createdCollection: Collection) => console.log("collection saved to database: " + createdCollection)),
-                catchError(this.handleError<Collection>('saveCollection', collection))
-            );
+      return this.http.post<Collection>(this.createCollectionUrl, collection)
+        .pipe(
+          tap((createdCollection: Collection) => console.log("collection saved to database: " + createdCollection)),
+          catchError(this.handleError<Collection>('saveCollection', collection))
+      );
     }
 
     /**

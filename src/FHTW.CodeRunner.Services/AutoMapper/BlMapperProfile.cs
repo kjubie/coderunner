@@ -1,4 +1,5 @@
-﻿// <copyright file="BlMapperProfile.cs" company="FHTW CodeRunner">
+﻿using System.Runtime.CompilerServices;
+// <copyright file="BlMapperProfile.cs" company="FHTW CodeRunner">
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
@@ -39,6 +40,8 @@ namespace FHTW.CodeRunner.Services.AutoMapper
 
             this.CreateMap<SvcEntities.CollectionTag, BlEntities.CollectionTag>()
                 .ReverseMap();
+
+            this.CreateMap<SvcEntities.ExerciseIds, BlEntities.CollectionExercise>();
 
             this.CreateMap<SvcEntities.Comment, BlEntities.Comment>()
                 .ReverseMap();

@@ -1,5 +1,4 @@
 import { Author } from "../author";
-import { Tag } from "../tag";
 import { ExerciseTag } from "./exercise-tags";
 import { ExerciseVersion } from "./exercise-version";
 
