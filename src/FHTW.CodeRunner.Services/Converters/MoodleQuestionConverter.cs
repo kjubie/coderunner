@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FHTW.CodeRunner.Services.Helpers;
 using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
 using EsEntities = FHTW.CodeRunner.ExportService.Entities;
 
@@ -20,6 +21,7 @@ namespace FHTW.CodeRunner.Services.Converters
         /// <inheritdoc/>
         public BlEntities.Exercise Convert(BlEntities.ImportData source, BlEntities.Exercise destination, ResolutionContext context)
         {
+            MarkdownHtmlHandler markdownHtmlHandler = new MarkdownHtmlHandler();
             int x; // TODO: Test it!
 
             if (source?.Question == null)
@@ -89,7 +91,7 @@ namespace FHTW.CodeRunner.Services.Converters
             var exerciseBody = new BlEntities.ExerciseBody
             {
                 Id = 0,
-                Description = question.Questiontext?.Text,
+                Description = markdownHtmlHandler.HtmlToMarkdown(question.Questiontext?.Text),
                 Hint = string.Empty, // TODO: Hint?
                 FieldLines = int.TryParse(question.Answerboxlines, out x) ? x : 0,
                 GradingFlag = question.Allornothing == "1" ? true : false,
@@ -98,7 +100,7 @@ namespace FHTW.CodeRunner.Services.Converters
                 IdNum = int.TryParse(question.Idnumber, out x) ? x : 0,
                 Solution = question.Answer,
                 Prefill = question.Answerpreload,
-                Feedback = question.Generalfeedback?.Text,
+                Feedback = markdownHtmlHandler.HtmlToMarkdown(question.Generalfeedback?.Text),
                 AllowFiles = int.TryParse(question.Attachments, out x) ? x : 0,
                 FilesRequired = int.TryParse(question.Attachmentsrequired, out x) ? x : 0,
                 FilesRegex = question.Filenamesregex,
