@@ -46,7 +46,7 @@ input[type=text], input[type=number], textarea, select {
  }
 
  div.scrollable {
-    height: 550px;
+    max-height: 550px;
     overflow: auto;
     text-align: justify;
  }
@@ -97,4 +97,10 @@ input[type=text], input[type=number], textarea, select {
 .author {
    color:  #0098e0;
    font-weight: normal;
+}
+
+.errMsg {
+   color: rgb(255, 92, 92);
+   background-color: rgb(255, 222, 222);
+   padding: 10px;
 }

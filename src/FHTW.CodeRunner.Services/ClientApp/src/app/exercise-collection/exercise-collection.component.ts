@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ExerciseHome } from '../data-objects/exercise-home';
 import { CollectionLanguage } from '../data-objects/exercise-collection/collection-language';
 import { Collection } from '../data-objects/exercise-collection/collection';
@@ -10,6 +10,9 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CollectionDataService } from './exercise-collection.data.service';
 import { CollectionExercise } from '../data-objects/exercise-collection/collection-exercise';
 import { Author } from '../data-objects/author';
+import { PrepareCreateExercise } from '../data-objects/create-exercise/prepare-create-exercise';
+import { CreateExerciseService } from '../services/create-exercise.service';
+import { ProgrammingLanguage } from '../data-objects/programming-language';
 
 @Component({
   selector: 'app-exercise-collection',
@@ -17,37 +20,42 @@ import { Author } from '../data-objects/author';
   styleUrls: ['./exercise-collection.component.css']
 })
 export class ExerciseCollectionComponent implements OnInit{
-
-  // @Input() collectionExerciseList: ExerciseHome[];
-  @Output() removeWrittenLangEvent = new EventEmitter<WrittenLanguage>();
-  @Output() addWrittenLangEvent = new EventEmitter<WrittenLanguage>();
-  @Output() removeExerciseEvent = new EventEmitter<ExerciseHome>();
-
+  
+  // TODO: Global Settings
+  
   collection: Collection = new Collection();
-  showHeadDiv = true;
-  availableLangs: WrittenLanguage[] = [{id: 1, name: "English"}];
-  collectionLangsList: CollectionLanguage[] = [{id: 0, fullTitle: "", shortTitle: "", introduction: "", writtenLanguage: {id: 1, name: "English"}}];
   exerciseList: ExerciseHome[];
+  availableLangs: WrittenLanguage[] = [{id: 1, name: "English"}];
+  globalLangs: WrittenLanguage[];
+  globalProgLangs: ProgrammingLanguage[];
+  collectionLangsList: CollectionLanguage[] = [{id: 0, fullTitle: "", shortTitle: "", introduction: "", writtenLanguage: {id: 1, name: "English"}}];
   collectionExerciseList: CollectionExercise[] = [];
-
+  showHeadDiv = true;
   isLangAvailable = true;
+  
+  dataLists: PrepareCreateExercise;
 
+  existingTags: Tag[];
+  newTagForm;
+  existingTagForm;
+
+  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private collectionDataService: CollectionDataService, private createExerciseService: CreateExerciseService) {
+    this.newTagForm = formBuilder.group({
+        tagName: ''
+    });
+
+    this.existingTagForm = formBuilder.group({
+        tag: new Tag()
+    });
+}
+  
   ngOnInit() {
+    this.createExerciseService.prepareExercise().subscribe(this.prepareExerciseObserver);
     this.exerciseList = this.collectionDataService.sharedExerciseList;
 
     this.exerciseList.forEach(exercise => {
       this.collectionExerciseList.push(new CollectionExercise(exercise.id));
     });
-
-    this.existingTags = [];
-
-    for (let i=0; i<5; i++) {
-        let tag = new Tag();
-        tag.id = i+1;
-        tag.name = 'Test ' + tag.id.toString();
-
-        this.existingTags.push(tag);
-    }
   }
 
   saveCollection() {
@@ -60,6 +68,26 @@ export class ExerciseCollectionComponent implements OnInit{
     console.log(this.collection);
 
     this.collectionDataService.saveCollection(this.collection).subscribe(this.createCollectionObserver);
+  }
+
+  prepareExerciseObserver = {
+    next: x => { this.dataLists = x},
+    error: err => console.error('Observer got an error: ' + err),
+    complete: () => {
+      this.availableLangs = this.dataLists.writtenLanguageList;
+      this.globalLangs = [...this.dataLists.writtenLanguageList];
+      this.globalProgLangs = this.dataLists.programmingLanguageList;
+      this.existingTags = this.dataLists.tagList;
+      console.log(this.dataLists.tagList);
+      console.log(this.dataLists.writtenLanguageList);
+
+      for (let idx = 0; idx < this.availableLangs.length; idx++) {
+        // remove default written lang:
+        if (this.availableLangs[idx].name == "English") {
+          this.availableLangs.splice(idx, 1);
+        }
+      }
+    }
   }
 
   createCollectionObserver = {
@@ -94,7 +122,7 @@ export class ExerciseCollectionComponent implements OnInit{
         let newColLang = new CollectionLanguage;
         newColLang.writtenLanguage = lang;
         this.collectionLangsList.push(newColLang);
-        this.addWrittenLangEvent.emit(lang);
+        // this.addWrittenLangEvent.emit(lang);
     }
   }
 
@@ -106,31 +134,17 @@ export class ExerciseCollectionComponent implements OnInit{
         if (!this.isLangAvailable) {
             this.isLangAvailable = true;
         }
-        this.removeWrittenLangEvent.emit(lang.writtenLanguage);
+        // this.removeWrittenLangEvent.emit(lang.writtenLanguage);
     }
   }
 
   removeExercise(ex: ExerciseHome) {
     let id = this.exerciseList.indexOf(ex);
     this.exerciseList.splice(id, 1);
-    this.removeExerciseEvent.emit(ex);
+    // this.removeExerciseEvent.emit(ex);
   }
 
   // TAGS
-  existingTags: Tag[];
-  newTagForm;
-  existingTagForm;
-
-  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private collectionDataService: CollectionDataService) {
-      this.newTagForm = formBuilder.group({
-          tagName: ''
-      });
-
-      this.existingTagForm = formBuilder.group({
-          tag: new Tag()
-      });
-  }
-
   createNewTag(modalContent) {
       // open Modal for new Tags
       this.modalService.open(modalContent, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -147,10 +161,10 @@ export class ExerciseCollectionComponent implements OnInit{
       tag.id = 0;
       tag.name = formData.tagName;
 
-      let exerciseTag = new CollectionTag();
-      exerciseTag.tag = tag;
+      let collectionTag = new CollectionTag();
+      collectionTag.tag = tag;
 
-      this.collection.collectionTagList.push(exerciseTag);
+      this.collection.collectionTagList.push(collectionTag);
       this.modalService.dismissAll('New Tag added');
   }
 
@@ -168,10 +182,10 @@ export class ExerciseCollectionComponent implements OnInit{
   }
 
   addExistingTag(formData) {
-      let exerciseTag = new CollectionTag();
-      exerciseTag.tag = formData.tag;
+      let collectionTag = new CollectionTag();
+      collectionTag.tag = formData.tag;
 
-      this.collection.collectionTagList.push(exerciseTag);
+      this.collection.collectionTagList.push(collectionTag);
       this.modalService.dismissAll('Existing Tag added');
   }
 

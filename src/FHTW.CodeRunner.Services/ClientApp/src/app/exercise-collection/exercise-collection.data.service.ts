@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ExerciseHome } from '../data-objects/exercise-home';
-
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from "rxjs/operators";
@@ -11,6 +10,8 @@ export class CollectionDataService {
     sharedExerciseList: ExerciseHome[] = [];
 
     private createCollectionUrl = "https://localhost:5001/api/collection";
+    private prepareExerciseUrl = "https://localhost:5001/api/exercise/prepare";
+
   
     constructor(
       private http: HttpClient,

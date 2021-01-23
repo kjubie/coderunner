@@ -58,18 +58,21 @@
     <div class="row mt-3 col-12 mb-5">
       <select name="langFilter" id="langFilter" class="form-control col-2 mr-1">
         <option value="" disabled selected hidden>Language</option>
-        <option value="0">English</option>
+        <option *ngFor="let lang of globalLangs" ngValue="{{lang.id}}">{{lang.name}}</option>
       </select>
     
       <select name="progFilter" id="progFilter" class="form-control col-3 ml-1">
         <option value="" disabled selected hidden>Programming Language</option>
-        <option value="0">C++</option>
+        <option *ngFor="let pLang of globalProgLangs" ngValue="{{pLang.id}}">{{pLang.name}}</option>
       </select>
 
       <label class="ml-2">Use latest Version: <input type="checkbox" name="useLatest" id="useLatest" class="checkbox"></label>
     </div>
 
-    <div class="scrollable">
+    <div class="text-center" *ngIf="exerciseList.length == 0">
+      <p class="errMsg">Please add at least one Exercise to you Collection!</p>
+    </div>
+    <div *ngIf="exerciseList.length != 0" class="scrollable">
       <ul class="list-group">
         <li *ngFor="let ex of exerciseList; let i = index" class="list-group-item colItem mb-1">
           <div class="row col-12 p-1">
@@ -79,17 +82,17 @@
             </div>
             <div class="row col-9">
               <select [(ngModel)]="collectionExerciseList[i].version" name="verFilter" id="verFilter" class="form-control col-3 ml-1">
-                <option value="0" disabled selected hidden>Version</option>
-                <option *ngFor="let ver of ex.versionList" ngValue="{{ver}}">{{ver}}</option>
+                <option value="1" disabled selected hidden>Version</option>
+                <option *ngFor="let ver of ex.versionList" ngValue="{{ver}}">version {{ver}}</option>
               </select>
 
               <select [(ngModel)]="collectionExerciseList[i].writtenLanguageId" name="langFilter" id="langFilter" class="form-control col-3 ml-1 mr-1">
-                <option value="0" disabled selected hidden>Language</option>
+                <option value="1" disabled selected hidden>Language</option>
                 <option *ngFor="let lang of ex.writtenLanguageList" ngValue="{{lang.id}}">{{lang.name}}</option>
               </select>
           
               <select [(ngModel)]="collectionExerciseList[i].programmingLanguageId" name="progFilter" id="progFilter" class="form-control col-4 ml-1">
-                <option value="0" disabled selected hidden>Programming Language</option>
+                <option value="1" disabled selected hidden>Programming Language</option>
                 <option *ngFor="let progLang of ex.programmingLanguageList" ngValue="{{progLang.id}}">{{progLang.name}}</option>
               </select>
             </div>
@@ -100,11 +103,13 @@
     </div>
   </div>
 
-  <button (click)="saveCollection()">Save</button>
+  <div class="text-center">
+    <button class="btn btn-primary col-1 mb-5" [disabled]="exerciseList.length == 0" (click)="saveCollection()">Save</button>
+  </div>
 
 </div>
 
-<!-- modal for creating new tags -->
+<!-- Create Tags Modal -->
 <ng-template #createTagModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Create a new Tag</h4>
@@ -128,7 +133,7 @@
   </div>
 </ng-template>
 
-<!-- modal for creating new tags -->
+<!-- Existing Tags Modal -->
 <ng-template #existingTagModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Add existing Tag</h4>
