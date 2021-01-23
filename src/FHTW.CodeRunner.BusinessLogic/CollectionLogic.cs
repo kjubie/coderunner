@@ -40,6 +40,15 @@ namespace FHTW.CodeRunner.BusinessLogic
         }
 
         /// <inheritdoc/>
+        public List<BlEntities.MinimalCollection> GetMinimalCollectionList()
+        {
+            var dalCollectionList = this.collectionRepository.GetMinimalCollections();
+            var blCollectionList = this.mapper.Map<List<BlEntities.MinimalCollection>>(dalCollectionList);
+
+            return blCollectionList;
+        }
+
+        /// <inheritdoc/>
         public void SaveCollection(BlEntities.Collection collection)
         {
             if (collection == null)

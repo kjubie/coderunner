@@ -43,19 +43,22 @@ namespace FHTW.CodeRunner.Services.Converters
             };
 
             var tags = question.Tags?.Tag;
-            foreach (var tag in tags) // TODO: Check null
+            if (tags != null)
             {
-                var exerciseTag = new BlEntities.ExerciseTag
+                foreach (var tag in tags)
                 {
-                    Id = 0,
-                    FkTag = new BlEntities.Tag
+                    var exerciseTag = new BlEntities.ExerciseTag
                     {
                         Id = 0,
-                        Name = tag.Text,
-                    },
-                };
+                        FkTag = new BlEntities.Tag
+                        {
+                            Id = 0,
+                            Name = tag.Text,
+                        },
+                    };
 
-                exercise.ExerciseTag.Add(exerciseTag);
+                    exercise.ExerciseTag.Add(exerciseTag);
+                }
             }
 
             var exerciseVersion = new BlEntities.ExerciseVersion
@@ -125,24 +128,28 @@ namespace FHTW.CodeRunner.Services.Converters
             };
 
             var testCases = question.Testcases?.Testcase;
-            foreach (var testCase in testCases)
+            if (testCases != null)
             {
-                var exerciseTestCase = new BlEntities.TestCase
+                foreach (var testCase in testCases)
                 {
-                    Id = 0,
-                    OrderUsed = 0, // TODO: OrderUsed?
-                    TestCode = testCase.Testcode?.Text,
-                    StandardInput = testCase.Stdin?.Text,
-                    ExpectedOutput = testCase.Expected?.Text,
-                    AdditionalData = testCase.Extra?.Text,
-                    Points = int.TryParse(testCase.Mark, out x) ? x : null,
-                    UseAsExampleFlag = testCase.Useasexample == "1" ? true : false,
-                    HideOnFailFlag = testCase.Hiderestiffail == "1" ? true : false,
-                    DisplayType = testCase.Display?.Text,
-                };
+                    var exerciseTestCase = new BlEntities.TestCase
+                    {
+                        Id = 0,
+                        OrderUsed = 0, // TODO: OrderUsed?
+                        TestCode = testCase.Testcode?.Text,
+                        StandardInput = testCase.Stdin?.Text,
+                        ExpectedOutput = testCase.Expected?.Text,
+                        AdditionalData = testCase.Extra?.Text,
+                        Points = int.TryParse(testCase.Mark, out x) ? x : null,
+                        UseAsExampleFlag = testCase.Useasexample == "1" ? true : false,
+                        HideOnFailFlag = testCase.Hiderestiffail == "1" ? true : false,
+                        DisplayType = testCase.Display?.Text,
+                    };
 
-                testSuite.TestCase.Add(exerciseTestCase);
+                    testSuite.TestCase.Add(exerciseTestCase);
+                }
             }
+            
 
             exerciseBody.FkTestSuite = testSuite;
             exerciseLanguage.ExerciseBody.Add(exerciseBody);

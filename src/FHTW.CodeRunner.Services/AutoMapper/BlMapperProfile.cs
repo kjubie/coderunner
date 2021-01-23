@@ -96,6 +96,8 @@ namespace FHTW.CodeRunner.Services.AutoMapper
 
             this.CreateMap<SvcEntities.CollectionKeys, BlEntities.CollectionKeys>();
 
+            this.CreateMap<BlEntities.MinimalCollection, SvcEntities.MinimalCollection>();
+
             this.CreateMap<SvcEntities.ExerciseKeys, BlEntities.CollectionExercise>();
 
             this.CreateMap<SvcEntities.ImportData, BlEntities.ImportData>()
