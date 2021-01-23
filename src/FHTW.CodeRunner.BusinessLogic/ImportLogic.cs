@@ -85,16 +85,15 @@ namespace FHTW.CodeRunner.BusinessLogic
                 foreach (var question in quiz.Question)
                 {
                     importData.Question = question;
-                    importData.ProgrammingLanguage = new BlEntities.ProgrammingLanguage
+                    if (question.Coderunnertype == null)
                     {
-                        Id = 1,
-                        Name = "C++",
-                    };
-                    importData.QuestionType = new BlEntities.QuestionType
-                    {
-                        Id = 1,
-                        Name = "c++_question_type",
-                    };
+                        // TODO: Errorhandling.
+                    }
+
+                    var dalQuestionType = this.exerciseRepository.GetQuestionType(question.Coderunnertype);
+
+                    importData.ProgrammingLanguage = this.mapper.Map<BlEntities.ProgrammingLanguage>(dalQuestionType.FkProgrammingLanguage);
+                    importData.QuestionType = this.mapper.Map<BlEntities.QuestionType>(dalQuestionType);
 
                     var blExercise = this.mapper.Map<BlEntities.Exercise>(importData);
 

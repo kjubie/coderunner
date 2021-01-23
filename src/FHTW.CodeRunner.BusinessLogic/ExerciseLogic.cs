@@ -77,9 +77,9 @@ namespace FHTW.CodeRunner.BusinessLogic
         }
 
         /// <inheritdoc/>
-        public BlEntities.Exercise GetTestExercise(int id)
+        public BlEntities.Exercise GetExerciseById(int id, int version)
         {
-            var dalExercise = this.exerciseRepository.GetById(id);
+            var dalExercise = this.exerciseRepository.GetById(id, version);
             var blExercise = this.mapper.Map<BlEntities.Exercise>(dalExercise);
 
             return blExercise;

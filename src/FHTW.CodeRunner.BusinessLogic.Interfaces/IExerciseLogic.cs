@@ -18,8 +18,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
         /// Function for retrieving a full exercise.
         /// </summary>
         /// <param name="id">The id of the exercise.</param>
+        /// <param name="version">The version of the exercise.</param>
         /// <returns>The found exercise.</returns>
-        Exercise GetTestExercise(int id);
+        Exercise GetExerciseById(int id, int version);
 
         /// <summary>
         /// Function for retrieving data needed in the GUI when creating an exercise.
