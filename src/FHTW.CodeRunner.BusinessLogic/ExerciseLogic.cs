@@ -71,7 +71,8 @@ namespace FHTW.CodeRunner.BusinessLogic
             var dalQuestionTypes = this.uiRepository.GetQuestionTypes();
             exerciseCreatePreparation.QuestionTypes = this.mapper.Map<List<BlEntities.QuestionType>>(dalQuestionTypes);
 
-            exerciseCreatePreparation.Tags = new List<BlEntities.Tag>();
+            var dalTags = this.uiRepository.GetTags();
+            exerciseCreatePreparation.Tags = this.mapper.Map<List<BlEntities.Tag>>(dalTags);
 
             return exerciseCreatePreparation;
         }
