@@ -1,10 +1,34 @@
 [
-  { // Collection 1, English, C++
+  { // Collection 1, English
     "Id": 1,
     "FullTitle": "FullTitle_1",
     "ShortTitle": "ShortTitle_1",
     "Introduction": "Introduction_1",
     "FkCollectionId": 1,
     "FkWrittenLanguageId": 1
+  },
+  { // Collection 2, English, German
+    "Id": 2,
+    "FullTitle": "FullTitle_2",
+    "ShortTitle": "ShortTitle_2",
+    "Introduction": "Introduction_2",
+    "FkCollectionId": 2,
+    "FkWrittenLanguageId": 1
+  },
+  { // Collection 2, English, German
+    "Id": 3,
+    "FullTitle": "Voller_Titel_2",
+    "ShortTitle": "Kurzer_Titel_2",
+    "Introduction": "Einführung_2",
+    "FkCollectionId": 2,
+    "FkWrittenLanguageId": 2
+  },
+  { // Collection 3, German
+    "Id": 4,
+    "FullTitle": "Voller_Titel_2",
+    "ShortTitle": "Kurzer_Titel_2",
+    "Introduction": "Einführung_2",
+    "FkCollectionId": 3,
+    "FkWrittenLanguageId": 2
   }
 ]

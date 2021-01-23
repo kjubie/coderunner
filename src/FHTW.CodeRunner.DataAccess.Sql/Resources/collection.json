@@ -1,8 +1,20 @@
 [
-  { // Collection 1, English, German, C++, C#, V1, V2, V3
+  { // Collection 1, English
     "Id": 1,
     "Title": "Title_1",
     "Created": "2020-08-23T18:25:43.51",
+    "FkUserId": 1
+  },
+  { // Collection 2, English, German
+    "Id": 2,
+    "Title": "Title_2",
+    "Created": "2019-08-23T18:25:43.51",
+    "FkUserId": 1
+  },
+  { // Collection 3, German
+    "Id": 3,
+    "Title": "Title_3",
+    "Created": "2020-06-20T18:25:43.51",
     "FkUserId": 1
   }
 ]

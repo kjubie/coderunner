@@ -14,5 +14,37 @@
     "FkExerciseId": 2,
     "FkProgrammingLanguageId": 6,
     "FkWrittenLanguageId": 1
+  },
+  { // Collection 2, Exercise 1
+    "Id": 3,
+    "FkCollectionId": 2,
+    "VersionNumber": 2,
+    "FkExerciseId": 1,
+    "FkProgrammingLanguageId": 1,
+    "FkWrittenLanguageId": 1
+  },
+  { // Collection 2, Exercise 2
+    "Id": 4,
+    "FkCollectionId": 2,
+    "VersionNumber": 1,
+    "FkExerciseId": 2,
+    "FkProgrammingLanguageId": 6,
+    "FkWrittenLanguageId": 1
+  },
+  { // Collection 2, Exercise 3
+    "Id": 5,
+    "FkCollectionId": 2,
+    "VersionNumber": 1,
+    "FkExerciseId": 3,
+    "FkProgrammingLanguageId": 5,
+    "FkWrittenLanguageId": 1
+  },
+  { // Collection 3, Exercise 3
+    "Id": 6,
+    "FkCollectionId": 3,
+    "VersionNumber": 1,
+    "FkExerciseId": 3,
+    "FkProgrammingLanguageId": 5,
+    "FkWrittenLanguageId": 1
   }
 ]

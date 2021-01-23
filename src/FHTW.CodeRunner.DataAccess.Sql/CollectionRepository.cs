@@ -163,35 +163,36 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         }
 
         /// <inheritdoc/>
-        public Collection GetById(int id, Mode mode)
+        public Collection GetById(int id)
         {
-            return mode switch
-            {
-                Mode.ReadOnly =>
-                    this.context.Collection
-                        .AsNoTracking()
-                        .Include(c => c.CollectionLanguage)
-                            .ThenInclude(cl => cl.FkWrittenLanguage)
-                        .Include(c => c.CollectionTag)
-                            .ThenInclude(ct => ct.FkTag)
-                        .Include(c => c.CollectionExercise)
-                            .ThenInclude(ce => ce.FkProgrammingLanguage)
-                        .Include(c => c.CollectionExercise)
-                            .ThenInclude(ce => ce.FkWrittenLanguage)
-                        .SingleOrDefault(c => c.Id == id),
-                Mode.WriteRead =>
-                    this.context.Collection
-                         .Include(c => c.CollectionLanguage)
-                             .ThenInclude(cl => cl.FkWrittenLanguage)
-                         .Include(c => c.CollectionTag)
-                             .ThenInclude(ct => ct.FkTag)
-                         .Include(c => c.CollectionExercise)
-                             .ThenInclude(ce => ce.FkProgrammingLanguage)
-                         .Include(c => c.CollectionExercise)
-                             .ThenInclude(ce => ce.FkWrittenLanguage)
-                         .SingleOrDefault(c => c.Id == id),
-                _ => throw new ArgumentOutOfRangeException($"enum value {mode} not handled")
-            };
+            return this.context.Collection
+                .AsNoTracking()
+                .Include(c => c.CollectionLanguage)
+                    .ThenInclude(cl => cl.FkWrittenLanguage)
+                .Include(c => c.CollectionTag)
+                    .ThenInclude(ct => ct.FkTag)
+                .Include(c => c.CollectionExercise)
+                    .ThenInclude(ce => ce.FkProgrammingLanguage)
+                .Include(c => c.CollectionExercise)
+                    .ThenInclude(ce => ce.FkWrittenLanguage)
+                .SingleOrDefault(c => c.Id == id);
+        }
+
+        /// <inheritdoc/>
+        public List<MinimalCollection> GetMinimalCollections()
+        {
+            return this.context.Collection.AsNoTracking()
+                .Select(c => new MinimalCollection
+                {
+                    Id = c.Id,
+                    Title = c.Title,
+                    Created = c.Created,
+                    ExerciseCount = c.CollectionExercise.Count,
+                    User = c.FkUser,
+                    WrittenLanguageList = c.CollectionLanguage.Select(cl => cl.FkWrittenLanguage).ToList(),
+                    TagList = c.CollectionTag.Select(ct => ct.FkTag).ToList(),
+                })
+                .ToList();
         }
     }
 }

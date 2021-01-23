@@ -62,11 +62,12 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {   // Collection 1, English, German, C++, C#, V1, V2, V3
-        ///        &quot;Title&quot;: &quot;Title_1&quot;,
-        ///        &quot;Created&quot;: &quot;2020-08-23T18:25:43.51&quot;,
-        ///        &quot;FkUserId&quot;: 1
-        ///    }
+        ///  { // Collection 1, English, German, C++, C#, V1, V2, V3
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;Title&quot;: &quot;Title_1&quot;,
+        ///    &quot;Created&quot;: &quot;2020-08-23T18:25:43.51&quot;,
+        ///    &quot;FkUserId&quot;: 1
+        ///  }
         ///].
         /// </summary>
         internal static string collection {
@@ -78,6 +79,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         /// <summary>
         ///   Looks up a localized string similar to [
         ///  { // Collection 1, Exercise 1, English, C++
+        ///    &quot;Id&quot;: 1,
         ///    &quot;FkCollectionId&quot;: 1,
         ///    &quot;VersionNumber&quot;: 1,
         ///    &quot;FkExerciseId&quot;: 1,
@@ -85,6 +87,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         ///    &quot;FkWrittenLanguageId&quot;: 1
         ///  },
         ///  { // Collection 1, Exercise 2, English, C++
+        ///    &quot;Id&quot;: 2,
         ///    &quot;FkCollectionId&quot;: 1,
         ///    &quot;VersionNumber&quot;: 1,
         ///    &quot;FkExerciseId&quot;: 2,
@@ -101,13 +104,14 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {   // Collection 1, English, C++
-        ///        &quot;FullTitle&quot;: &quot;FullTitle_1&quot;,
-        ///        &quot;ShortTitle&quot;: &quot;ShortTitle_1&quot;,
-        ///        &quot;Introduction&quot;: &quot;Introduction_1&quot;,
-        ///        &quot;FkCollectionId&quot;: 1,
-        ///        &quot;FkWrittenLanguageId&quot;: 1
-        ///    }
+        ///  { // Collection 1, English, C++
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;FullTitle&quot;: &quot;FullTitle_1&quot;,
+        ///    &quot;ShortTitle&quot;: &quot;ShortTitle_1&quot;,
+        ///    &quot;Introduction&quot;: &quot;Introduction_1&quot;,
+        ///    &quot;FkCollectionId&quot;: 1,
+        ///    &quot;FkWrittenLanguageId&quot;: 1
+        ///  }
         ///].
         /// </summary>
         internal static string collection_language {
@@ -117,28 +121,42 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string collection_tag {
+            get {
+                return ResourceManager.GetString("collection_tag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {
-        ///        &quot;Message&quot;: &quot;Message_1&quot;,
-        ///        &quot;Created&quot;: &quot;2013-05-23T18:28:43.51&quot;,
-        ///        &quot;FkExerciseId&quot;: 1,
-        ///        &quot;FkUserId&quot;: 1
-        ///    },
-        ///    {
-        ///        &quot;Message&quot;: &quot;Message_2&quot;,
-        ///        &quot;Created&quot;: &quot;2012-05-23T18:28:43.51&quot;,
-        ///        &quot;FkExerciseId&quot;: 1,
-        ///        &quot;FkUserId&quot;: 2
-        ///    },
-        ///    {
-        ///        &quot;Message&quot;: &quot;Message_3&quot;,
-        ///        &quot;Created&quot;: &quot;2018-05-23T18:28:43.51&quot;,
-        ///        &quot;FkExerciseId&quot;: 1,
-        ///        &quot;FkUserId&quot;: 4
-        ///    },
-        ///    {
-        ///        &quot;Message&quot;: &quot;Message_4&quot;,
-        ///        &quot;Created&quot;: &quot;2019-05-23T18: [rest of string was truncated]&quot;;.
+        ///  {
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;Message&quot;: &quot;Message_1&quot;,
+        ///    &quot;Created&quot;: &quot;2013-05-23T18:28:43.51&quot;,
+        ///    &quot;FkExerciseId&quot;: 1,
+        ///    &quot;FkUserId&quot;: 1
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 2,
+        ///    &quot;Message&quot;: &quot;Message_2&quot;,
+        ///    &quot;Created&quot;: &quot;2012-05-23T18:28:43.51&quot;,
+        ///    &quot;FkExerciseId&quot;: 1,
+        ///    &quot;FkUserId&quot;: 2
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 3,
+        ///    &quot;Message&quot;: &quot;Message_3&quot;,
+        ///    &quot;Created&quot;: &quot;2018-05-23T18:28:43.51&quot;,
+        ///    &quot;FkExerciseId&quot;: 1,
+        ///    &quot;FkUserId&quot;: 4
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 4,
+        ///    &quot;Message&quot;: &quot;Message_4&quot;,
+        ///    &quot;Created&quot;: &quot;2019-05-23T18:28:43.51&quot;,
+        ///   [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string comment {
             get {
@@ -148,26 +166,30 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {
-        ///        &quot;Number&quot;: 2,
-        ///        &quot;FkExerciseId&quot;: 1,
-        ///        &quot;FkUserId&quot;: 2
-        ///    },
-        ///    {
-        ///        &quot;Number&quot;: 4,
-        ///        &quot;FkExerciseId&quot;: 1,
-        ///        &quot;FkUserId&quot;: 3
-        ///    },
-        ///    {
-        ///        &quot;Number&quot;: 1,
-        ///        &quot;FkExerciseId&quot;: 1,
-        ///        &quot;FkUserId&quot;: 4
-        ///    },
-        ///    {
-        ///        &quot;Number&quot;: 5,
-        ///        &quot;FkExerciseId&quot;: 2,
-        ///        &quot;FkUserId&quot;: 1
-        ///    }
+        ///  {
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;Number&quot;: 2,
+        ///    &quot;FkExerciseId&quot;: 1,
+        ///    &quot;FkUserId&quot;: 2
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 2,
+        ///    &quot;Number&quot;: 4,
+        ///    &quot;FkExerciseId&quot;: 1,
+        ///    &quot;FkUserId&quot;: 3
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 3,
+        ///    &quot;Number&quot;: 1,
+        ///    &quot;FkExerciseId&quot;: 1,
+        ///    &quot;FkUserId&quot;: 4
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 4,
+        ///    &quot;Number&quot;: 5,
+        ///    &quot;FkExerciseId&quot;: 2,
+        ///    &quot;FkUserId&quot;: 1
+        ///  }
         ///].
         /// </summary>
         internal static string difficulty {
@@ -178,21 +200,24 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {   // Exercise 1, English, German, C++, C#, V1, V2, V3
-        ///        &quot;Title&quot;: &quot;Title_1&quot;,
-        ///        &quot;Created&quot;: &quot;2020-04-23T18:25:43.51&quot;,
-        ///        &quot;FkUserId&quot;: 1
-        ///    },
-        ///    {   // Exercise 2, English, German, Python, Java, V1
-        ///        &quot;Title&quot;: &quot;Title_2&quot;,
-        ///        &quot;Created&quot;: &quot;2019-06-13T17:15:33.34&quot;,
-        ///        &quot;FkUserId&quot;: 1
-        ///    },
-        ///    {   // Exercise 3, German, C, V1
-        ///        &quot;Title&quot;: &quot;Title_3&quot;,
-        ///        &quot;Created&quot;: &quot;2018-11-27T10:22:46.51&quot;,
-        ///        &quot;FkUserId&quot;: 3
-        ///    }
+        ///  { // Exercise 1, English, German, C++, C#, V1, V2, V3
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;Title&quot;: &quot;Title_1&quot;,
+        ///    &quot;Created&quot;: &quot;2020-04-23T18:25:43.51&quot;,
+        ///    &quot;FkUserId&quot;: 1
+        ///  },
+        ///  { // Exercise 2, English, German, Python, Java, V1
+        ///    &quot;Id&quot;: 2,
+        ///    &quot;Title&quot;: &quot;Title_2&quot;,
+        ///    &quot;Created&quot;: &quot;2019-06-13T17:15:33.34&quot;,
+        ///    &quot;FkUserId&quot;: 1
+        ///  },
+        ///  { // Exercise 3, German, C, V1
+        ///    &quot;Id&quot;: 3,
+        ///    &quot;Title&quot;: &quot;Title_3&quot;,
+        ///    &quot;Created&quot;: &quot;2018-11-27T10:22:46.51&quot;,
+        ///    &quot;FkUserId&quot;: 3
+        ///  }
         ///].
         /// </summary>
         internal static string exercise {
@@ -203,21 +228,23 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {   // Exercise 1, English, C++, V1
-        ///        &quot;FkProgrammingLanguageId&quot;: 1,
-        ///        &quot;Description&quot;: &quot;Description_c++_V1&quot;,
-        ///        &quot;Hint&quot;: &quot;Hint_c++_V1&quot;,
-        ///        &quot;FkExerciseLanguageId&quot;: 1,
-        ///        &quot;FkTestSuiteId&quot;: 1,
-        ///        &quot;FieldLines&quot;: 18,
-        ///        &quot;GradingFlag&quot;: true,
-        ///        &quot;SubtractSystem&quot;: &quot;10, 20, ..._c++_V1&quot;,
-        ///        &quot;ObtainablePoints&quot;: 10,
-        ///        &quot;IdNum&quot;: 123,
-        ///        &quot;Solution&quot;: &quot;n_Solution_c++_V1&quot;,
-        ///        &quot;Prefill&quot;: &quot;n_Prefill_c++_V1&quot;,
-        ///        &quot;Feedback&quot;: &quot;Feedback_c++_V1&quot;,
-        ///   [rest of string was truncated]&quot;;.
+        ///  { // Exercise 1, English, C++, V1
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;FkProgrammingLanguageId&quot;: 1,
+        ///    &quot;Description&quot;: &quot;Description_c++_V1&quot;,
+        ///    &quot;Hint&quot;: &quot;Hint_c++_V1&quot;,
+        ///    &quot;FkExerciseLanguageId&quot;: 1,
+        ///    &quot;FkTestSuiteId&quot;: 1,
+        ///    &quot;FieldLines&quot;: 18,
+        ///    &quot;GradingFlag&quot;: true,
+        ///    &quot;SubtractSystem&quot;: &quot;10, 20, ..._c++_V1&quot;,
+        ///    &quot;ObtainablePoints&quot;: 10,
+        ///    &quot;IdNum&quot;: 123,
+        ///    &quot;Solution&quot;: &quot;n_Solution_c++_V1&quot;,
+        ///    &quot;Prefill&quot;: &quot;n_Prefill_c++_V1&quot;,
+        ///    &quot;Feedback&quot;: &quot;Feedback_c++_V1&quot;,
+        ///    &quot;AllowFiles&quot;: 0,
+        ///    &quot;FilesRequired&quot;: 0 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string exercise_body {
             get {
@@ -227,20 +254,24 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {   // Exercise 1, English, V1
-        ///        &quot;FullTitle&quot;: &quot;Full_Title_1_V1&quot;,
-        ///        &quot;Introduction&quot;: &quot;Introduction_1_V1&quot;,
-        ///        &quot;FkUserId&quot;: 1,
-        ///        &quot;TemplateParam&quot;: &quot;template_param_1_V1&quot;,
-        ///        &quot;TemplateParamLiftFlag&quot;: false,
-        ///        &quot;TwigAllFlag&quot;: true
-        ///    },
-        ///    {   // Exercise 1, German, V1
-        ///        &quot;FullTitle&quot;: &quot;Voller_Titel_1_V1&quot;,
-        ///        &quot;Introduction&quot;: &quot;Einleitung_1_V1&quot;,
-        ///        &quot;FkUserId&quot;: 1,
-        ///        &quot;TemplateParam&quot;: &quot;template_param_1_V1&quot;,
-        ///        &quot;TemplateParamLiftFlag&quot;: false,        /// [rest of string was truncated]&quot;;.
+        ///  { // Exercise 1, English, V1
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;FullTitle&quot;: &quot;Full_Title_1_V1&quot;,
+        ///    &quot;Introduction&quot;: &quot;Introduction_1_V1&quot;,
+        ///    &quot;FkUserId&quot;: 1,
+        ///    &quot;TemplateParam&quot;: &quot;template_param_1_V1&quot;,
+        ///    &quot;TemplateParamLiftFlag&quot;: false,
+        ///    &quot;TwigAllFlag&quot;: true
+        ///  },
+        ///  { // Exercise 1, German, V1
+        ///    &quot;Id&quot;: 2,
+        ///    &quot;FullTitle&quot;: &quot;Voller_Titel_1_V1&quot;,
+        ///    &quot;Introduction&quot;: &quot;Einleitung_1_V1&quot;,
+        ///    &quot;FkUserId&quot;: 1,
+        ///    &quot;TemplateParam&quot;: &quot;template_param_1_V1&quot;,
+        ///    &quot;TemplateParamLiftFlag&quot;: false,
+        ///    &quot;TwigAllFlag&quot;: true
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string exercise_header {
             get {
@@ -250,23 +281,28 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {   // Exercise 1, English, V1
-        ///        &quot;FkWrittenLanguageId&quot;: 1,
-        ///        &quot;FkExerciseVersionId&quot;: 1,
-        ///        &quot;FkExerciseHeaderId&quot;: 1
-        ///    },
-        ///    {   // Exercise 1, German, V1
-        ///        &quot;FkWrittenLanguageId&quot;: 2,
-        ///        &quot;FkExerciseVersionId&quot;: 1,
-        ///        &quot;FkExerciseHeaderId&quot;: 2
-        ///    },
-        ///    {   // Exercise 1, English, V2
-        ///        &quot;FkWrittenLanguageId&quot;: 1,
-        ///        &quot;FkExerciseVersionId&quot;: 2,
-        ///        &quot;FkExerciseHeaderId&quot;: 3
-        ///    },
-        ///    {   // Exercise 1, German, V2
-        ///        &quot;FkWrittenLanguageId&quot;: 2,        /// [rest of string was truncated]&quot;;.
+        ///  { // Exercise 1, English, V1
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;FkWrittenLanguageId&quot;: 1,
+        ///    &quot;FkExerciseVersionId&quot;: 1,
+        ///    &quot;FkExerciseHeaderId&quot;: 1
+        ///  },
+        ///  { // Exercise 1, German, V1
+        ///    &quot;Id&quot;: 2,
+        ///    &quot;FkWrittenLanguageId&quot;: 2,
+        ///    &quot;FkExerciseVersionId&quot;: 1,
+        ///    &quot;FkExerciseHeaderId&quot;: 2
+        ///  },
+        ///  { // Exercise 1, English, V2
+        ///    &quot;Id&quot;: 3,
+        ///    &quot;FkWrittenLanguageId&quot;: 1,
+        ///    &quot;FkExerciseVersionId&quot;: 2,
+        ///    &quot;FkExerciseHeaderId&quot;: 3
+        ///  },
+        ///  { // Exercise 1, German, V2
+        ///    &quot;Id&quot;: 4,
+        ///    &quot;FkWrittenLanguageId&quot;: 2,
+        ///    &quot; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string exercise_language {
             get {
@@ -276,37 +312,45 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {
-        ///        &quot;FkTagId&quot;: 1,
-        ///        &quot;FkExerciseId&quot;: 1
-        ///    },
-        ///    {
-        ///        &quot;FkTagId&quot;: 2,
-        ///        &quot;FkExerciseId&quot;: 1
-        ///    },
-        ///    {
-        ///        &quot;FkTagId&quot;: 3,
-        ///        &quot;FkExerciseId&quot;: 1
-        ///    },
-        ///    {
-        ///        &quot;FkTagId&quot;: 2,
-        ///        &quot;FkExerciseId&quot;: 2
-        ///    },
-        ///    {
-        ///        &quot;FkTagId&quot;: 4,
-        ///        &quot;FkExerciseId&quot;: 1
-        ///    },
-        ///    {
-        ///        &quot;FkTagId&quot;: 5,
-        ///        &quot;FkExerciseId&quot;: 1
-        ///    },
-        ///    {
-        ///        &quot;FkTagId&quot;: 5,
-        ///        &quot;FkExerciseId&quot;: 2
-        ///    },
-        ///    {
-        ///        &quot;FkTagId&quot;: 6,
-        ///        &quot;FkExerciseId&quot;:  [rest of string was truncated]&quot;;.
+        ///  {
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;FkTagId&quot;: 1,
+        ///    &quot;FkExerciseId&quot;: 1
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 2,
+        ///    &quot;FkTagId&quot;: 2,
+        ///    &quot;FkExerciseId&quot;: 1
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 3,
+        ///    &quot;FkTagId&quot;: 3,
+        ///    &quot;FkExerciseId&quot;: 1
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 4,
+        ///    &quot;FkTagId&quot;: 2,
+        ///    &quot;FkExerciseId&quot;: 2
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 5,
+        ///    &quot;FkTagId&quot;: 4,
+        ///    &quot;FkExerciseId&quot;: 1
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 6,
+        ///    &quot;FkTagId&quot;: 5,
+        ///    &quot;FkExerciseId&quot;: 1
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 7,
+        ///    &quot;FkTagId&quot;: 5,
+        ///    &quot;FkExerciseId&quot;: 2
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 8,
+        ///    &quot;FkTagId&quot;: 6,
+        ///   [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string exercise_tag {
             get {
@@ -316,25 +360,29 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {   // Exercise 1, V1
-        ///        &quot;VersionNumber&quot;: 1,
-        ///        &quot;CreatorRating&quot;: 3,
-        ///        &quot;CreatorDifficulty&quot;: 4,
-        ///        &quot;LastModified&quot;: &quot;2020-04-23T18:28:43.51&quot;,
-        ///        &quot;ValidState&quot;: 1,
-        ///        &quot;FkUserId&quot;: 1,
-        ///        &quot;FkExerciseId&quot;: 1
-        ///    },
-        ///    {   // Exercise 1, V2
-        ///        &quot;VersionNumber&quot;: 2,
-        ///        &quot;CreatorRating&quot;: 4,
-        ///        &quot;CreatorDifficulty&quot;: 5,
-        ///        &quot;LastModified&quot;: &quot;2020-05-14T18:28:43.51&quot;,
-        ///        &quot;ValidState&quot;: 1,
-        ///        &quot;FkUserId&quot;: 1,
-        ///        &quot;FkExerciseId&quot;: 1
-        ///    },
-        ///  [rest of string was truncated]&quot;;.
+        ///  { // Exercise 1, V1
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;VersionNumber&quot;: 1,
+        ///    &quot;CreatorRating&quot;: 3,
+        ///    &quot;CreatorDifficulty&quot;: 4,
+        ///    &quot;LastModified&quot;: &quot;2020-04-23T18:28:43.51&quot;,
+        ///    &quot;ValidState&quot;: 1,
+        ///    &quot;FkUserId&quot;: 1,
+        ///    &quot;FkExerciseId&quot;: 1
+        ///  },
+        ///  { // Exercise 1, V2
+        ///    &quot;Id&quot;: 2,
+        ///    &quot;VersionNumber&quot;: 2,
+        ///    &quot;CreatorRating&quot;: 4,
+        ///    &quot;CreatorDifficulty&quot;: 5,
+        ///    &quot;LastModified&quot;: &quot;2020-05-14T18:28:43.51&quot;,
+        ///    &quot;ValidState&quot;: 1,
+        ///    &quot;FkUserId&quot;: 1,
+        ///    &quot;FkExerciseId&quot;: 1
+        ///  },
+        ///  { // Exercise 1, V3
+        ///    &quot;Id&quot;: 3,
+        ///     [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string exercise_version {
             get {
@@ -344,27 +392,34 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {
-        ///        &quot;Name&quot;: &quot;C++&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;C#&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;Java&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;Rust&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;C&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;Python&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;JavaScript&quot;
-        ///    }
+        ///  {
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;Name&quot;: &quot;C++&quot;
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 2,
+        ///    &quot;Name&quot;: &quot;C#&quot;
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 3,
+        ///    &quot;Name&quot;: &quot;Java&quot;
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 4,
+        ///    &quot;Name&quot;: &quot;Rust&quot;
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 5,
+        ///    &quot;Name&quot;: &quot;C&quot;
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 6,
+        ///    &quot;Name&quot;: &quot;Python&quot;
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 7,
+        ///    &quot;Name&quot;: &quot;JavaScript&quot;
+        ///  }
         ///].
         /// </summary>
         internal static string programming_language {
@@ -375,21 +430,31 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {
-        ///        &quot;Name&quot;: &quot;c++_question_type&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;c#_question_type&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;python_question_type&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;java_question_type&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;c_question_type&quot;
-        ///    }
+        ///  {
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;Name&quot;: &quot;c++_question_type&quot;,
+        ///    &quot;FkProgrammingLanuageId&quot;: 1
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 2,
+        ///    &quot;Name&quot;: &quot;c#_question_type&quot;,
+        ///    &quot;FkProgrammingLanuageId&quot;: 2
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 3,
+        ///    &quot;Name&quot;: &quot;python_question_type&quot;,
+        ///    &quot;FkProgrammingLanuageId&quot;: 6
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 4,
+        ///    &quot;Name&quot;: &quot;java_question_type&quot;,
+        ///    &quot;FkProgrammingLanuageId&quot;: 3
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 5,
+        ///    &quot;Name&quot;: &quot;c_question_type&quot;,
+        ///    &quot;FkProgrammingLanuageId&quot;: 5
+        ///  }
         ///].
         /// </summary>
         internal static string questiontype {
@@ -400,26 +465,30 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {
-        ///        &quot;Number&quot;: 4,
-        ///        &quot;FkExerciseId&quot;: 1,
-        ///        &quot;FkUserId&quot;: 2
-        ///    },
-        ///    {
-        ///        &quot;Number&quot;: 5,
-        ///        &quot;FkExerciseId&quot;: 1,
-        ///        &quot;FkUserId&quot;: 3
-        ///    },
-        ///    {
-        ///        &quot;Number&quot;: 3,
-        ///        &quot;FkExerciseId&quot;: 1,
-        ///        &quot;FkUserId&quot;: 4
-        ///    },
-        ///    {
-        ///        &quot;Number&quot;: 1,
-        ///        &quot;FkExerciseId&quot;: 2,
-        ///        &quot;FkUserId&quot;: 1
-        ///    }
+        ///  {
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;Number&quot;: 4,
+        ///    &quot;FkExerciseId&quot;: 1,
+        ///    &quot;FkUserId&quot;: 2
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 2,
+        ///    &quot;Number&quot;: 5,
+        ///    &quot;FkExerciseId&quot;: 1,
+        ///    &quot;FkUserId&quot;: 3
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 3,
+        ///    &quot;Number&quot;: 3,
+        ///    &quot;FkExerciseId&quot;: 1,
+        ///    &quot;FkUserId&quot;: 4
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 4,
+        ///    &quot;Number&quot;: 1,
+        ///    &quot;FkExerciseId&quot;: 2,
+        ///    &quot;FkUserId&quot;: 1
+        ///  }
         ///].
         /// </summary>
         internal static string rating {
@@ -430,27 +499,34 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {
-        ///        &quot;Name&quot;: &quot;algorithms&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;unit tests&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;tree&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;linked list&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;ml&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;oop&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;game&quot;
-        ///    }
+        ///  {
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;Name&quot;: &quot;algorithms&quot;
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 2,
+        ///    &quot;Name&quot;: &quot;unit tests&quot;
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 3,
+        ///    &quot;Name&quot;: &quot;tree&quot;
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 4,
+        ///    &quot;Name&quot;: &quot;linked list&quot;
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 5,
+        ///    &quot;Name&quot;: &quot;ml&quot;
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 6,
+        ///    &quot;Name&quot;: &quot;oop&quot;
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 7,
+        ///    &quot;Name&quot;: &quot;game&quot;
+        ///  }
         ///].
         /// </summary>
         internal static string tag {
@@ -461,21 +537,23 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {   // Exercise 1, Testcase 1, C++, V1
-        ///        &quot;OrderUsed&quot;: 1,
-        ///        &quot;TestCode&quot;: &quot;test_code_1_c++_V1&quot;,
-        ///        &quot;StandardInput&quot;: &quot;standard_input_1_c++_V1&quot;,
-        ///        &quot;ExpectedOutput&quot;: &quot;expected_output_1_c++_V1&quot;,
-        ///        &quot;AdditionalData&quot;: &quot;additional_data_1_c++_V1&quot;,
-        ///        &quot;Points&quot;: 2,
-        ///        &quot;FkTestSuiteId&quot;: 1,
-        ///        &quot;UseAsExampleFlag&quot;: false,
-        ///        &quot;HideOnFailFlag&quot;: true,
-        ///        &quot;DisplayType&quot;: &quot;HIDE&quot;
-        ///    },
-        ///    {   // Exercise 1, Testcase 2, C++, V1
-        ///        &quot;OrderUsed&quot;: 2,
-        ///       [rest of string was truncated]&quot;;.
+        ///  { // Exercise 1, Testcase 1, C++, V1
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;OrderUsed&quot;: 1,
+        ///    &quot;TestCode&quot;: &quot;test_code_1_c++_V1&quot;,
+        ///    &quot;StandardInput&quot;: &quot;standard_input_1_c++_V1&quot;,
+        ///    &quot;ExpectedOutput&quot;: &quot;expected_output_1_c++_V1&quot;,
+        ///    &quot;AdditionalData&quot;: &quot;additional_data_1_c++_V1&quot;,
+        ///    &quot;Points&quot;: 2,
+        ///    &quot;FkTestSuiteId&quot;: 1,
+        ///    &quot;UseAsExampleFlag&quot;: false,
+        ///    &quot;HideOnFailFlag&quot;: true,
+        ///    &quot;DisplayType&quot;: &quot;HIDE&quot;
+        ///  },
+        ///  { // Exercise 1, Testcase 2, C++, V1
+        ///    &quot;Id&quot;: 2,
+        ///    &quot;OrderUsed&quot;: 2,
+        ///    &quot;TestCode&quot;: &quot;test_code_2_c++ [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string testcase {
             get {
@@ -485,21 +563,23 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {   // Exercise 1, C++, V1
-        ///        &quot;FkQuestionTypeId&quot;: 1,
-        ///        &quot;TemplateDebugFlag&quot;: true,
-        ///        &quot;TestOnSaveFlag&quot;: false,
-        ///        &quot;GlobalExtraParam&quot;: &quot;global_extra_param_c++_V1&quot;,
-        ///        &quot;RuntimeData&quot;: &quot;runtime_data_c++_V1&quot;,
-        ///        &quot;PreCheck&quot;: 0,
-        ///        &quot;GeneralFeedbackDisplay&quot;: 1
-        ///    },
-        ///    {   // Exercise 1, C#, V1
-        ///        &quot;FkQuestionTypeId&quot;: 2,
-        ///        &quot;TemplateDebugFlag&quot;: true,
-        ///        &quot;TestOnSaveFlag&quot;: false,
-        ///        &quot;GlobalExtraParam&quot;: &quot;global_extra_param_c#_V1&quot;,
-        ///        &quot;Ru [rest of string was truncated]&quot;;.
+        ///  { // Exercise 1, C++, V1
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;FkQuestionTypeId&quot;: 1,
+        ///    &quot;TemplateDebugFlag&quot;: true,
+        ///    &quot;TestOnSaveFlag&quot;: false,
+        ///    &quot;GlobalExtraParam&quot;: &quot;global_extra_param_c++_V1&quot;,
+        ///    &quot;RuntimeData&quot;: &quot;runtime_data_c++_V1&quot;,
+        ///    &quot;PreCheck&quot;: 0,
+        ///    &quot;GeneralFeedbackDisplay&quot;: 1
+        ///  },
+        ///  { // Exercise 1, C#, V1
+        ///    &quot;Id&quot;: 2,
+        ///    &quot;FkQuestionTypeId&quot;: 2,
+        ///    &quot;TemplateDebugFlag&quot;: true,
+        ///    &quot;TestOnSaveFlag&quot;: false,
+        ///    &quot;GlobalExtraParam&quot;: &quot;global_extra_param_c#_V1&quot;,
+        ///    &quot;RuntimeData&quot;: &quot;runtime_data_c#_V [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string testsuite {
             get {
@@ -509,17 +589,20 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {
-        ///        &quot;Name&quot;: &quot;fhtw&quot;,
-        ///        &quot;Password&quot;: &quot;1a998df5fcdda7a891b54846dd8377df64286d3244c17e47dfb37c8d39d4a6469942367715e5c72cf98c0054cb2eb42238cd42b6d46f36fe65d34d7d5a133f95&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;sabrina&quot;,
-        ///        &quot;Password&quot;: &quot;3544e2e8cdfc2c8d1bb44ab4e80679d0d9cabaa57c5de30500a763e72382242f750027fd553913013f41b113594010a57d990e8a989c098d1e4e45af9b13ad15&quot;
-        ///    },
-        ///    {
-        ///      &quot;Name&quot;: &quot;michi&quot;,
-        ///      &quot;Password&quot;: &quot;05da9778da007b171a01250742119aa8b5116afbdc1539df9f28f97cbe1bfe8252dfd26b [rest of string was truncated]&quot;;.
+        ///  {
+        ///    &quot;Id&quot;:  1,
+        ///    &quot;Name&quot;: &quot;fhtw&quot;,
+        ///    &quot;Password&quot;: &quot;1a998df5fcdda7a891b54846dd8377df64286d3244c17e47dfb37c8d39d4a6469942367715e5c72cf98c0054cb2eb42238cd42b6d46f36fe65d34d7d5a133f95&quot;
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 2,
+        ///    &quot;Name&quot;: &quot;sabrina&quot;,
+        ///    &quot;Password&quot;: &quot;3544e2e8cdfc2c8d1bb44ab4e80679d0d9cabaa57c5de30500a763e72382242f750027fd553913013f41b113594010a57d990e8a989c098d1e4e45af9b13ad15&quot;
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 3,
+        ///    &quot;Name&quot;: &quot;michi&quot;,
+        ///    &quot;Password&quot;: &quot;05da9778da007b171a01250742119aa8b5116afbdc1539df9f28f97cbe1 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string user {
             get {
@@ -529,12 +612,14 @@ namespace FHTW.CodeRunner.DataAccess.Sql.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    {
-        ///        &quot;Name&quot;: &quot;English&quot;
-        ///    },
-        ///    {
-        ///        &quot;Name&quot;: &quot;German&quot;
-        ///    }
+        ///  {
+        ///    &quot;Id&quot;: 1,
+        ///    &quot;Name&quot;: &quot;English&quot;
+        ///  },
+        ///  {
+        ///    &quot;Id&quot;: 2,
+        ///    &quot;Name&quot;: &quot;German&quot;
+        ///  }
         ///].
         /// </summary>
         internal static string written_language {

@@ -10,23 +10,6 @@ using FHTW.CodeRunner.DataAccess.Entities;
 namespace FHTW.CodeRunner.DataAccess.Interfaces
 {
     /// <summary>
-    /// An enum indicating how the entity wants to be accessed.
-    /// </summary>
-    public enum Mode
-    {
-        /// <summary>
-        /// The entity is retrieved with not tracking and therefore readonly.
-        /// Useful when handling two instances of the same entity.
-        /// </summary>
-        ReadOnly,
-
-        /// <summary>
-        /// The entity can be edited and changes are persisted in the db.
-        /// </summary>
-        WriteRead,
-    }
-
-    /// <summary>
     /// The interface for the collection repository.
     /// </summary>
     public interface ICollectionRepository
@@ -74,8 +57,13 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// Retrieves the collection with the corresponding id.
         /// </summary>
         /// <param name="id">A valid id of an existing collection.</param>
-        /// <param name="query_mode">An enum indicating how the entity wants to be accessed.</param>
         /// <returns>The collection with the corresponding id.</returns>
-        Collection GetById(int id, Mode query_mode);
+        Collection GetById(int id);
+
+        /// <summary>
+        /// Retrieves a list of minimal collections.
+        /// </summary>
+        /// <returns>list of minimal collections.</returns>
+        List<MinimalCollection> GetMinimalCollections();
     }
 }
