@@ -29,6 +29,11 @@
       </div>
     </div>
 
+    <div class="btn-group" role="group" aria-label="Show Exercises/Collections" (click)="switchLists()">
+      <button type="button" class="btn btn-md btn-primary" *ngIf="showExercises">Show Collections</button>
+      <button type="button" class="btn btn-md btn-primary" *ngIf="!showExercises">Show Exercises</button>
+    </div>
+
     <div class="float-right">
       <div class="btn-group" id="views">
         <button type="button" class="btn btn-secondary blue" [ngClass]="{'activeView' : viewSelected == 'list'}" (click)="selectView('list')"><img src="../../assets/img/list_view.png" alt="list_view"></button>
@@ -40,14 +45,15 @@
 
   <!-- ToDo: get data from db, implement filters, different display options -->
   <div class="container">
-    <h2>Exercises</h2>
-    <list-view *ngIf="viewSelected == 'list'" [exerciseList]="exerciseList" (addExerciseToCollectionEvent)="addExerciseToCollection($event)" (exportExerciseEvent)="exportSingleExercise($event, exportModal)"></list-view>
+    <h2 *ngIf="showExercises">Exercises</h2>
+    <h2 *ngIf="!showExercises">Collections</h2>
+    <list-view *ngIf="viewSelected == 'list'" [exerciseList]="exerciseList" [collectionList]="collectionList" [showExercises]="showExercises" (addExerciseToCollectionEvent)="addExerciseToCollection($event)" (exportExerciseEvent)="exportSingleExercise($event, exportModal)" (exportCollectionEvent)="exportSingleCollection($event, exportCollectionModal)"></list-view>
     <grid-big-view *ngIf="viewSelected == 'grid_big'"></grid-big-view>
     <grid-small-view *ngIf="viewSelected == 'grid_small'"></grid-small-view>
   </div>
 </div>
 
-<!-- modal for export -->
+<!-- modal for exercise export -->
 <ng-template #exportModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Export Exercise '{{ selectedExercise.title }}'</h4>
@@ -81,6 +87,35 @@
         </div>
         <div class="text-right">
           <button type="submit" class="btn btn-primary">Export Exercise</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close')">Close</button>
+  </div>
+</ng-template>
+
+<!-- modal for collection export -->
+<ng-template #exportCollectionModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Export Collection '{{ selectedCollection.title }}'</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="exportCollection()">
+      <div class="form-group">
+        <label for="writtenLang"><strong>Language:</strong></label>
+        <select class="form-control" id="writtenLang" name="writtenLang" [(ngModel)]="collectionForExport.writtenLanguage">
+          <option *ngFor="let wLang of selectedCollection.writtenLanguageList" [ngValue]="wLang.name">{{ wLang.name }}</option>
+        </select>
+        <div *ngIf="wLangInvalid" class="alert alert-danger">
+          Language is required.
+        </div>
+        <div class="text-right">
+          <button type="submit" class="btn btn-primary">Export Collection</button>
         </div>
       </div>
     </form>
