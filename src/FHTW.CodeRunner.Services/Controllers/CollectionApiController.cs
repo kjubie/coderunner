@@ -68,5 +68,22 @@ namespace FHTW.CodeRunner.Services.Controllers
             this.collectionLogic.SaveCollection(blCollection);
             return this.Ok();
         }
+
+        /// <summary>
+        /// Gets a list of collections.
+        /// </summary>
+        /// <returns>A list of collections in a minmal format.</returns>
+        [HttpGet]
+        [Route("collection/minimal")]
+        [SwaggerOperation("GetMinimalCollection")]
+        [SwaggerResponse(statusCode: 200, type: typeof(SvcEntities.MinimalCollection), description: "Successful response")]
+        [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
+        public virtual IActionResult GetMinimalCollection()
+        {
+            List<BlEntities.MinimalCollection> blMinimalCollections = this.collectionLogic.GetMinimalCollectionList();
+            var svcMinimalCollections = this.mapper.Map<List<SvcEntities.MinimalCollection>>(blMinimalCollections);
+
+            return this.Ok(svcMinimalCollections);
+        }
     }
 }

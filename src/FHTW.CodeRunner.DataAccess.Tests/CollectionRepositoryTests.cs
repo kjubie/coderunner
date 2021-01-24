@@ -64,6 +64,23 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         }
 
         [Test]
+        public void ShouldGetMinimalCollections()
+        {
+            // Cannot be tested with sqlite
+            this.SetupDatabaseReal(DbTestController.State.SEEDEDJSON);
+            using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
+            {
+                ICollectionRepository rep = new CollectionRepository(context);
+
+                var list = rep.GetMinimalCollections();
+
+                Assert.NotNull(list);
+            }
+
+            Assert.True(true);
+        }
+
+        [Test]
         public void ShouldCreateNewCollection()
         {
             this.SetupDatabaseInMemory(DbTestController.State.SEEDEDJSON);

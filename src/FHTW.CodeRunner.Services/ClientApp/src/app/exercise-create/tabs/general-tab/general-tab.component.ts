@@ -29,14 +29,15 @@ export class GeneralTabComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.existingTags = [];
+        if (this.existingTags === undefined || this.existingTags.length == 0) {
+            this.existingTags = [];
+            for (let i=0; i<5; i++) {
+                let tag = new Tag();
+                tag.id = i+1;
+                tag.name = 'Test ' + tag.id.toString();
 
-        for (let i=0; i<5; i++) {
-            let tag = new Tag();
-            tag.id = i+1;
-            tag.name = 'Test ' + tag.id.toString();
-
-            this.existingTags.push(tag);
+                this.existingTags.push(tag);
+            }
         }
     }
 

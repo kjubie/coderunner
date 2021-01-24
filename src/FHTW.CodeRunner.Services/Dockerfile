@@ -4,6 +4,9 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
+EXPOSE 4200
+EXPOSE 5000
+EXPOSE 5001
 RUN apt-get update -yq \
     && apt-get -yq install curl gnupg ca-certificates \
     && curl -L https://deb.nodesource.com/setup_12.x | bash \

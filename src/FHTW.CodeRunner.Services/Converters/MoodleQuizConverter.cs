@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FHTW.CodeRunner.Services.Helpers;
 using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
 using EsEntities = FHTW.CodeRunner.ExportService.Entities;
 
@@ -20,6 +21,8 @@ namespace FHTW.CodeRunner.Services.Converters
         /// <inheritdoc/>
         public EsEntities.Quiz Convert(BlEntities.CollectionInstance source, EsEntities.Quiz destination, ResolutionContext context)
         {
+            MarkdownHtmlHandler markdownHtmlHandler = new MarkdownHtmlHandler();
+
             if (source == null)
             {
                 return null;
@@ -57,9 +60,10 @@ namespace FHTW.CodeRunner.Services.Converters
                 {
                     question.Questiontext.Format = "html";
                     question.Questiontext.Text += body.Description;
+                    question.Questiontext.Text = markdownHtmlHandler.MarkdownToHtml(question.Questiontext.Text);
 
                     question.Generalfeedback.Format = "html";
-                    question.Generalfeedback.Text = body.Feedback;
+                    question.Generalfeedback.Text = markdownHtmlHandler.MarkdownToHtml(body.Feedback);
 
                     question.Defaultgrade = body.ObtainablePoints.ToString();
                     question.Idnumber = body.IdNum.ToString();

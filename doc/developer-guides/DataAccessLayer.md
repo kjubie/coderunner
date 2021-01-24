@@ -1,6 +1,6 @@
 # DataAcces Layer
 
-Nachfolgend werden einzelne Besonderheiten des Service Layer erläutert. Die zugehörigen Projekte beginnen mit `FHTW.CodeRunner.DataAccess`.
+Nachfolgend werden einzelne Besonderheiten des Data Access Layer erläutert. Die zugehörigen Projekte beginnen mit `FHTW.CodeRunner.DataAccess`.
 
 ## Entity Framework Core
 
@@ -11,7 +11,7 @@ Die Entities wurden mittels der Database-First Methode erstellt und vom Framewor
 ## PostgreSQL DB
 
 Die PostgreSQL Datenbank wurde von dem Herrn Alexander Sus vorgegeben.
-Sie läuft in einem einem Docker Container und kann deswegen während der Entwicklung leicht neu aufgesetzt werden, sollte es zu Problemen kommen. Genaueres zum aufsetzen der Datenbank mit Docker steht im Setup Guide.
+Sie läuft in einem einem Docker Container und kann deswegen während der Entwicklung leicht neu aufgesetzt werden, sollte es zu Problemen kommen. Genaueres zum Aufsetzen der Datenbank mit Docker steht im Setup Guide.
 
 - PostgreSQL Version: 13
 - Port: 5432 (Default)
@@ -21,17 +21,17 @@ Sie läuft in einem einem Docker Container und kann deswegen während der Entwic
 
 ## Repository Pattern
 
-Der Data Access wurde mit dem Repository Pattern umgesetzt. Alle DB queries laufen über die Repositories ab und sind auch somit das Interface zum BusinessLayer. Die Interfaces zu den Repositories befinden sich im `FHTW.CodeRunner.DataAccess.Interfaces` Project und die dazu gehörigen Implementierungen im `FHTW.CodeRunner.DataAccess.Sql` Projekt.
+Der Data Access wurde mit dem Repository Pattern umgesetzt. Alle DB queries laufen über die Repositories ab und sie sind auch somit das Interface zum BusinessLayer. Die Interfaces zu den Repositories befinden sich im `FHTW.CodeRunner.DataAccess.Interfaces` Project und die dazu gehörigen Implementierungen im `FHTW.CodeRunner.DataAccess.Sql` Projekt.
 
 ## Entities
 
-Die Entities befinden sich im `FHTW.CodeRunner.DataAccess.Entities` Projekt. Weil die Entities automatisch generiert wurden gibt es mehr navigational Properties als eigentlich gebraucht sind. Diese Properties wurden behalten wegen der Möglichkeit, dass sie später noch verwendet werden.
+Die Entities befinden sich im `FHTW.CodeRunner.DataAccess.Entities` Projekt. Weil die Entities automatisch generiert wurden, gibt es mehr Navigational Properties als eigentlich gebraucht sind. Diese Properties wurden behalten wegen der Möglichkeit, dass sie später noch verwendet werden könnten.
 
-Genauere Informationen zu den Aufbau der Entities befinden sich im Datenstruktur Dokument.
+Genauere Informationen zu dem Aufbau der Entities befinden sich im Datenstruktur Dokument.
 
 ## Tests
 
-Zum leichteren testen des DataAccess Layer wurde ein Test Project hinzugefügt (`FHTW.CodeRunner.DataAccess.Tests`). Getestet wird in einer in-memory SQLite Database. Allerdings sind nicht alle Datenbankoperation, welche benötigt werden, von SQLite unterstützt. Deswegen wurde eine zweite Containerinstanz zum zusätzlichen testen erstellt und die mit SQLite nicht testbaren Testfälle auskommentiert. Wenn diese Testfälle getestet werden sollen muss zuerst die Test Datenbank hochgefahren werden. Genauere Information dazu befinden sich im Setup Guide.
+Zum leichteren Testen des DataAccess Layers wurde ein Test Project hinzugefügt (`FHTW.CodeRunner.DataAccess.Tests`). Getestet wird in einer in-memory SQLite Database. Allerdings sind nicht alle Datenbankoperation, welche benötigt werden, von SQLite unterstützt. Deswegen wurde eine zweite Containerinstanz zum zusätzlichen testen erstellt und die mit SQLite nicht testbaren Testfälle auskommentiert. Wenn diese Testfälle getestet werden sollen muss zuerst die Test Datenbank hochgefahren werden. Genauere Information dazu befinden sich im Setup Guide.
 
 Die uns bekannte Limitierung von SQLite ist das fehlen der APPLY Operation. Die APPLY Funktion wird von EF Core bei Projektionen verwendet. Deshalb können jene Queries welche Projection verwenden nicht mit SQLite getestet werden.
 
@@ -46,12 +46,12 @@ Die Logic zum seeden ist in `FHTW.CodeRunner.DataAccess.Sql.CodeRunnerContextExt
 
 !! Das folgende Problem wurde mittlereweile gelöst. Zur Informationszwecken und für den Fall, dass es nochmal auftritt wurde die Erklärung des Problems in der Dokumentation beibehalten.
 
-Beim seeden der Datenbank ist es vorgekommen, dass die von PostgreSQL generierten Ids nach dem seeden nichtmehr mit den Ids der Daten synchronisiert waren. Deswegen mussten die fixen Ids aus den Testdaten entfernt werden. Deswegen kann vor dem seeden nichtmehr einfach überprüft werden ob die Testdaten bereits in der Datenbank sind. Aufgrund dessen muss die Datenbank beim neuen Aufsetzen explicit geseeded werden. Genauere Information dazu befinden sich im Setup Guide.
+Beim seeden der Datenbank ist es vorgekommen, dass die von PostgreSQL generierten Ids nach dem seeden nichtmehr mit den Ids der Daten synchronisiert waren. Deswegen mussten die fixen Ids aus den Testdaten entfernt werden. Deswegen kann vor dem seeden nich tmehr einfach überprüft werden, ob die Testdaten bereits in der Datenbank sind. Aufgrund dessen muss die Datenbank beim neuen Aufsetzen explizit geseeded werden. Genauere Information dazu befinden sich im Setup Guide.
 
 #### Lösung
 
-Das Problem wurde gelöst in dem nach dem seeden die id sequence explizit geupdated wird.
+Das Problem wurde gelöst indem nach dem seeden die id sequence explizit geupdated wird.
 
 ## Migrationen
 
-Falls es gewollt ist, dass die Daten in der Datenbank beim ändern des Daten Schemas behaltet werden wurde die Erstellung von Migrationen eingerichtet. Die Migrationen befinden sich im `FHTW.CodeRunner.Migrations` Projekt.
+Falls es gewollt ist, dass die Daten in der Datenbank beim ändern des Daten Schemas behaltet werden, wurde die Erstellung von Migrationen eingerichtet. Die Migrationen befinden sich im `FHTW.CodeRunner.Migrations` Projekt.

@@ -45,12 +45,7 @@ namespace FHTW.CodeRunner.BusinessLogic
         /// <inheritdoc/>
         public List<BlEntities.ExerciseShort> GetExerciseShortList()
         {
-            /* var dalExercise = this.exerciseRepository.GetById(1);
-            var blExerciseShort = this.mapper.Map<BlEntities.ExerciseShort>(dalExercise);
-
-            var list = new List<BlEntities.ExerciseShort>();
-            list.Add(blExerciseShort); */
-
+            // TODO: Rename
             var dalExerciseList = this.exerciseRepository.GetMinimalList();
             var blExerciseList = this.mapper.Map<List<BlEntities.ExerciseShort>>(dalExerciseList);
 
@@ -71,15 +66,16 @@ namespace FHTW.CodeRunner.BusinessLogic
             var dalQuestionTypes = this.uiRepository.GetQuestionTypes();
             exerciseCreatePreparation.QuestionTypes = this.mapper.Map<List<BlEntities.QuestionType>>(dalQuestionTypes);
 
-            exerciseCreatePreparation.Tags = new List<BlEntities.Tag>();
+            var dalTags = this.uiRepository.GetTags();
+            exerciseCreatePreparation.Tags = this.mapper.Map<List<BlEntities.Tag>>(dalTags);
 
             return exerciseCreatePreparation;
         }
 
         /// <inheritdoc/>
-        public BlEntities.Exercise GetTestExercise(int id)
+        public BlEntities.Exercise GetExerciseById(int id, int version)
         {
-            var dalExercise = this.exerciseRepository.GetById(id);
+            var dalExercise = this.exerciseRepository.GetById(id, version);
             var blExercise = this.mapper.Map<BlEntities.Exercise>(dalExercise);
 
             return blExercise;

@@ -127,6 +127,9 @@
   <data name="collection_language" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\collection_language.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="collection_tag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\collection_tag.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="comment" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\comment.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>

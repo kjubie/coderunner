@@ -31,8 +31,8 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { ProgrammingLanguageElementComponent } from './side-menu/menu-elements/programming-language/programming-language-element.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularMarkdownEditorModule } from 'angular-markdown-editor';
-import { MarkdownModule } from 'ngx-markdown';
 import { CollectionDataService } from './exercise-collection/exercise-collection.data.service';
+import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
 
 @NgModule({
   exports: [
@@ -104,11 +104,23 @@ export class MaterialModule {}
     AuthModule,
     MaterialModule,
     NgbModule,
-    AngularMarkdownEditorModule.forRoot({
-      iconlibrary: 'fa'
-    }),
     MarkdownModule.forRoot({
-      loader: HttpClient
+      markedOptions: {
+        provide: MarkedOptions,
+        useValue: {
+          renderer: new MarkedRenderer(),
+          gfm: true,
+          tables: true,
+          breaks: false,
+          pedantic: false,
+          sanitize: false,
+          smartLists: true,
+          smartypants: false,
+        }
+      },
+    }),
+    AngularMarkdownEditorModule.forRoot({
+      iconlibrary: 'glyph'
     })
   ],
   providers: [

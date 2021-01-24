@@ -44,18 +44,38 @@ namespace FHTW.CodeRunner.Services.Controllers
         }
 
         /// <summary>
-        /// Gets a test exercise.
+        /// Gets an exercise by id.
         /// </summary>
-        /// <param name="id">The Id of the test exercise.</param>
+        /// <param name="id">The Id of the exercise.</param>
         /// <returns>One exercise.</returns>
         [HttpGet]
         [Route("exercise/{id}")]
-        [SwaggerOperation("GetTestExercise")]
+        [SwaggerOperation("GetExerciseById")]
         [SwaggerResponse(statusCode: 200, type: typeof(SvcEntities.Exercise), description: "Successful response")]
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
-        public virtual IActionResult GetTestExercise(int id)
+        public virtual IActionResult GetExerciseById(int id)
         {
-            BlEntities.Exercise blExercise = this.exerciseLogic.GetTestExercise(id);
+            int version = -1;
+            BlEntities.Exercise blExercise = this.exerciseLogic.GetExerciseById(id, version);
+            var svcExercise = this.mapper.Map<SvcEntities.Exercise>(blExercise);
+
+            return this.Ok(svcExercise);
+        }
+
+        /// <summary>
+        /// Gets an exercise by id and version.
+        /// </summary>
+        /// <param name="id">The Id of the exercise.</param>
+        /// <param name="version">The version of the exercise.</param>
+        /// <returns>One exercise.</returns>
+        [HttpGet]
+        [Route("exercise/{id}/{version}")]
+        [SwaggerOperation("GetExerciseById")]
+        [SwaggerResponse(statusCode: 200, type: typeof(SvcEntities.Exercise), description: "Successful response")]
+        [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
+        public virtual IActionResult GetExerciseById(int id, int version)
+        {
+            BlEntities.Exercise blExercise = this.exerciseLogic.GetExerciseById(id, version);
             var svcExercise = this.mapper.Map<SvcEntities.Exercise>(blExercise);
 
             return this.Ok(svcExercise);

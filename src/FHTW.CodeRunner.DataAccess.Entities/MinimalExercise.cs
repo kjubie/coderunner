@@ -16,6 +16,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     /// This Entity is not mapped and therefore not managed by the ef core.
     /// All modifications made to the entities will not be persistet.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [NotMapped]
     public class MinimalExercise
     {

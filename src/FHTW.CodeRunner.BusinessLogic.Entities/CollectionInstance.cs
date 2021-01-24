@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace FHTW.CodeRunner.BusinessLogic.Entities
@@ -11,6 +12,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     /// <summary>
     /// Enity for exporting the collection.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class CollectionInstance
     {
         /// <summary>

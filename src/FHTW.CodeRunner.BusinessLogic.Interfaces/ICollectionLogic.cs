@@ -15,6 +15,12 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
     public interface ICollectionLogic
     {
         /// <summary>
+        /// Function retrieving a list of minimal collections.
+        /// </summary>
+        /// <returns>The list of minimal collections.</returns>
+        public List<MinimalCollection> GetMinimalCollectionList();
+
+        /// <summary>
         /// Function for saving a collection.
         /// </summary>
         /// <param name="collection">The incoming collection.</param>

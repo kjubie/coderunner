@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FHTW.CodeRunner.Services.Helpers;
 using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
 using EsEntities = FHTW.CodeRunner.ExportService.Entities;
 
@@ -20,6 +21,7 @@ namespace FHTW.CodeRunner.Services.Converters
         /// <inheritdoc/>
         public BlEntities.Exercise Convert(BlEntities.ImportData source, BlEntities.Exercise destination, ResolutionContext context)
         {
+            MarkdownHtmlHandler markdownHtmlHandler = new MarkdownHtmlHandler();
             int x; // TODO: Test it!
 
             if (source?.Question == null)
@@ -41,19 +43,22 @@ namespace FHTW.CodeRunner.Services.Converters
             };
 
             var tags = question.Tags?.Tag;
-            foreach (var tag in tags) // TODO: Check null
+            if (tags != null)
             {
-                var exerciseTag = new BlEntities.ExerciseTag
+                foreach (var tag in tags)
                 {
-                    Id = 0,
-                    FkTag = new BlEntities.Tag
+                    var exerciseTag = new BlEntities.ExerciseTag
                     {
                         Id = 0,
-                        Name = tag.Text,
-                    },
-                };
+                        FkTag = new BlEntities.Tag
+                        {
+                            Id = 0,
+                            Name = tag.Text,
+                        },
+                    };
 
-                exercise.ExerciseTag.Add(exerciseTag);
+                    exercise.ExerciseTag.Add(exerciseTag);
+                }
             }
 
             var exerciseVersion = new BlEntities.ExerciseVersion
@@ -89,7 +94,7 @@ namespace FHTW.CodeRunner.Services.Converters
             var exerciseBody = new BlEntities.ExerciseBody
             {
                 Id = 0,
-                Description = question.Questiontext?.Text,
+                Description = markdownHtmlHandler.HtmlToMarkdown(question.Questiontext?.Text),
                 Hint = string.Empty, // TODO: Hint?
                 FieldLines = int.TryParse(question.Answerboxlines, out x) ? x : 0,
                 GradingFlag = question.Allornothing == "1" ? true : false,
@@ -98,7 +103,7 @@ namespace FHTW.CodeRunner.Services.Converters
                 IdNum = int.TryParse(question.Idnumber, out x) ? x : 0,
                 Solution = question.Answer,
                 Prefill = question.Answerpreload,
-                Feedback = question.Generalfeedback?.Text,
+                Feedback = markdownHtmlHandler.HtmlToMarkdown(question.Generalfeedback?.Text),
                 AllowFiles = int.TryParse(question.Attachments, out x) ? x : 0,
                 FilesRequired = int.TryParse(question.Attachmentsrequired, out x) ? x : 0,
                 FilesRegex = question.Filenamesregex,
@@ -123,24 +128,28 @@ namespace FHTW.CodeRunner.Services.Converters
             };
 
             var testCases = question.Testcases?.Testcase;
-            foreach (var testCase in testCases)
+            if (testCases != null)
             {
-                var exerciseTestCase = new BlEntities.TestCase
+                foreach (var testCase in testCases)
                 {
-                    Id = 0,
-                    OrderUsed = 0, // TODO: OrderUsed?
-                    TestCode = testCase.Testcode?.Text,
-                    StandardInput = testCase.Stdin?.Text,
-                    ExpectedOutput = testCase.Expected?.Text,
-                    AdditionalData = testCase.Extra?.Text,
-                    Points = int.TryParse(testCase.Mark, out x) ? x : null,
-                    UseAsExampleFlag = testCase.Useasexample == "1" ? true : false,
-                    HideOnFailFlag = testCase.Hiderestiffail == "1" ? true : false,
-                    DisplayType = testCase.Display?.Text,
-                };
+                    var exerciseTestCase = new BlEntities.TestCase
+                    {
+                        Id = 0,
+                        OrderUsed = 0, // TODO: OrderUsed?
+                        TestCode = testCase.Testcode?.Text,
+                        StandardInput = testCase.Stdin?.Text,
+                        ExpectedOutput = testCase.Expected?.Text,
+                        AdditionalData = testCase.Extra?.Text,
+                        Points = int.TryParse(testCase.Mark, out x) ? x : null,
+                        UseAsExampleFlag = testCase.Useasexample == "1" ? true : false,
+                        HideOnFailFlag = testCase.Hiderestiffail == "1" ? true : false,
+                        DisplayType = testCase.Display?.Text,
+                    };
 
-                testSuite.TestCase.Add(exerciseTestCase);
+                    testSuite.TestCase.Add(exerciseTestCase);
+                }
             }
+            
 
             exerciseBody.FkTestSuite = testSuite;
             exerciseLanguage.ExerciseBody.Add(exerciseBody);

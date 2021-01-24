@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using EsEntities = FHTW.CodeRunner.ExportService.Entities;
 
@@ -12,6 +13,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     /// <summary>
     /// Entity that describes the needed data for the import of a collection.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class ImportData
     {
         /// <summary>

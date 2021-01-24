@@ -3,6 +3,7 @@
 // </copyright>
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -11,6 +12,7 @@ namespace FHTW.CodeRunner.ExportService.Entities
     /// <summary>
     /// Entity that describes a category.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [XmlRoot(ElementName = "category")]
     public class Category
     {
