@@ -13,6 +13,8 @@ import { Author } from '../data-objects/author';
 import { PrepareCreateExercise } from '../data-objects/create-exercise/prepare-create-exercise';
 import { CreateExerciseService } from '../services/create-exercise.service';
 import { ProgrammingLanguage } from '../data-objects/programming-language';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-exercise-collection',
@@ -22,6 +24,7 @@ import { ProgrammingLanguage } from '../data-objects/programming-language';
 export class ExerciseCollectionComponent implements OnInit{
   
   // TODO: Global Settings
+  // TODO: Finish Summary
   
   collection: Collection = new Collection();
   exerciseList: ExerciseHome[];
@@ -32,6 +35,9 @@ export class ExerciseCollectionComponent implements OnInit{
   collectionExerciseList: CollectionExercise[] = [];
   showHeadDiv = true;
   isLangAvailable = true;
+
+  selectedGlobalLang: number;
+  selectedGlobalProgLang: number;
   
   dataLists: PrepareCreateExercise;
 
@@ -39,7 +45,13 @@ export class ExerciseCollectionComponent implements OnInit{
   newTagForm;
   existingTagForm;
 
-  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private collectionDataService: CollectionDataService, private createExerciseService: CreateExerciseService) {
+  constructor(
+    private modalService: NgbModal,
+    private formBuilder: FormBuilder,
+    private collectionDataService: CollectionDataService,
+    private createExerciseService: CreateExerciseService,
+    private router: Router
+    ) {
     this.newTagForm = formBuilder.group({
         tagName: ''
     });
@@ -56,6 +68,11 @@ export class ExerciseCollectionComponent implements OnInit{
     this.exerciseList.forEach(exercise => {
       this.collectionExerciseList.push(new CollectionExercise(exercise.id));
     });
+  }
+
+  test() {
+    console.log(this.selectedGlobalLang);
+    console.log(this.selectedGlobalProgLang);
   }
 
   saveCollection() {
@@ -95,6 +112,9 @@ export class ExerciseCollectionComponent implements OnInit{
     error: err => console.error('Observer got an error: ' + err),
     complete: () => {
       console.log("Collection was saved to database")
+      this.collectionDataService.sharedExerciseList = [];
+      this.collection = null;
+      this.router.navigate(['/']);
     }
   }
   
