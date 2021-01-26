@@ -1,4 +1,4 @@
-<ul class="list-group">
+<ul class="list-group" *ngIf="showExercises">
     <li *ngFor="let exercise of exerciseList; index as i" class="list-group-item d-flex justify-content-between align-items-center blackLine">
         <div class="container">
             <div class="row">
@@ -8,9 +8,9 @@
                     <div>Creation Date: {{ exercise.created }}</div>
                 </div>
                 <div class="col-5 text-right">
-                    <span *ngFor="let tag of exerciseList[i].tagList" class="badge badge-pill tag">{{ tag.name }}</span>
-                    <span *ngFor="let wLang of exerciseList[i].writtenLanguageList" class="badge badge-pill tag-red">{{ wLang.name }}</span>
-                    <span *ngFor="let pLang of exerciseList[i].programmingLanguageList" class="badge badge-pill tag-green">{{ pLang.name }}</span>
+                    <span *ngFor="let tag of exercise.tagList" class="badge badge-pill tag">{{ tag.name }}</span>
+                    <span *ngFor="let wLang of exercise.writtenLanguageList" class="badge badge-pill tag-red">{{ wLang.name }}</span>
+                    <span *ngFor="let pLang of exercise.programmingLanguageList" class="badge badge-pill tag-green">{{ pLang.name }}</span>
                 </div>
                 <div class="col-1 btn-alignment">
                     <ng-template #optionPopoverBody>
@@ -21,6 +21,36 @@
                     </ng-template>
                     <button type="button" class="btn mr-2" placement="right"
                             [ngbPopover]="optionPopoverBody" popoverTitle="Options">
+                        <img src="../../../../assets/img/option_dots.png" alt="vertical dots" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    </li>
+  </ul>
+
+  <ul class="list-group" *ngIf="!showExercises">
+    <li *ngFor="let collection of collectionList; index as i" class="list-group-item d-flex justify-content-between align-items-center blueLine">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h4><strong>{{ collection.title }}</strong></h4>
+                    <div class="colour-blue">By {{ collection.user.name }}</div>
+                    <div>Creation Date: {{ collection.created }}</div>
+                    <div>Exercise Count: {{ collection.exerciseCount }}</div>
+                </div>
+                <div class="col-5 text-right">
+                    <span *ngFor="let tag of collection.tagList" class="badge badge-pill tag">{{ tag.name }}</span>
+                    <span *ngFor="let wLang of collection.writtenLanguageList" class="badge badge-pill tag-red">{{ wLang.name }}</span>
+                </div>
+                <div class="col-1 btn-alignment">
+                    <ng-template #optionPopoverBodyCollection>
+                        <ul id="exercisePopover">
+                            <li (click)="exportCollection(i)">Export</li>
+                        </ul>
+                    </ng-template>
+                    <button type="button" class="btn mr-2" placement="right"
+                            [ngbPopover]="optionPopoverBodyCollection" popoverTitle="Options">
                         <img src="../../../../assets/img/option_dots.png" alt="vertical dots" />
                     </button>
                 </div>

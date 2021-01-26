@@ -5,6 +5,8 @@ import { ExerciseHome } from '../data-objects/exercise-home';
 import { ExerciseListHomeService } from '../services/exercise-list-home.service';
 import { ExerciseExportService } from '../services/exercise-export.service';
 import { CollectionDataService } from '../exercise-collection/exercise-collection.data.service';
+import { CollectionHome } from '../data-objects/collection-home';
+import { CollectionExport } from '../data-objects/collection-export';
 
 @Component({
   selector: 'app-home',
@@ -17,8 +19,11 @@ export class HomeComponent implements OnInit {
   xmlExportString: string;
 
   exerciseList: ExerciseHome[];
+  collectionList: CollectionHome[];
   selectedExercise: ExerciseHome;
+  selectedCollection: CollectionHome;
   exerciseForExport: ExerciseExport = new ExerciseExport();
+  collectionForExport: CollectionExport = new CollectionExport();
   languages = ['English', 'German'];
   programmingLangs = ['C#', 'Java'];
 
@@ -26,10 +31,13 @@ export class HomeComponent implements OnInit {
   wLangInvalid = false;
   pLangInvalid = false;
 
+  showExercises = true;
+
   constructor(private exerciseListHomeService: ExerciseListHomeService, private modalService: NgbModal, private exportService: ExerciseExportService, private collectionDataService: CollectionDataService) {}
 
   ngOnInit() {
     this.exerciseListHomeService.getAllExercies().subscribe(this.loadAllExercisesObserver);
+    this.exerciseListHomeService.getAllCollections().subscribe(this.loadAllCollectionsObserver);
   }
 
   languageDropdown() {
@@ -58,13 +66,30 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  loadAllCollectionsObserver = {
+    next: x => { this.collectionList = x },
+    error: err => { console.log('Observer got an error: ' + err) },
+    complete: () => {
+      console.log(this.collectionList);
+    }
+  }
+
   exportExerciseObserver = {
     next: x => { this.xmlExportString = x },
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
       console.log('download xml file');
-      // console.log(this.xmlExportString);
-      this.downloadXMLFile();
+      this.downloadXMLFile('ExportExercise');
+    }
+  }
+
+  exportCollectionObserver = {
+    next: x => { this.xmlExportString = x },
+    error: err => { console.log('Observer got an error: ' + err) },
+    complete: () => {
+      console.log('download xml file');
+      console.log(this.xmlExportString);
+      this.downloadXMLFile('ExportCollection');
     }
   }
 
@@ -72,6 +97,19 @@ export class HomeComponent implements OnInit {
     this.selectedExercise = this.exerciseList[idx];
 
     // open Modal for exercise
+    this.modalService.open(modalContent, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      console.log('Closed with ' + result);
+    }, (reason) => {
+      console.log('Dismissed ' + this.getDismissReason(reason));
+    });
+
+    this.resetForm();
+  }
+
+  exportSingleCollection(idx: number, modalContent) {
+    this.selectedCollection = this.collectionList[idx];
+
+    // open Modal for collection
     this.modalService.open(modalContent, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       console.log('Closed with ' + result);
     }, (reason) => {
@@ -109,15 +147,32 @@ export class HomeComponent implements OnInit {
     }    
   }
 
+  exportCollection() {
+    // validate modal
+    this.wLangInvalid = (this.collectionForExport.writtenLanguage == undefined);
+
+    if (!this.wLangInvalid) {
+      this.collectionForExport.id = this.selectedCollection.id;
+      console.log('collection is ready for export');
+      console.log(this.collectionForExport);
+      this.exportService.exportCollection(this.collectionForExport).subscribe(this.exportCollectionObserver);
+      this.modalService.dismissAll('Collection exported');
+    }
+    else {
+      console.log('Oops, something went wrong. Needed parameters were not set...');
+    } 
+  }
+
   resetForm() {
     this.versionInvalid = false;
     this.wLangInvalid = false;
     this.pLangInvalid = false;
     this.exerciseForExport = new ExerciseExport();
+    this.collectionForExport = new CollectionExport();
   }
 
-  private downloadXMLFile() {
-    const filename = 'ExerciseExport.xml';
+  private downloadXMLFile(name: string) {
+    const filename = name + '.xml';
     const blob = new Blob([this.xmlExportString], {type: 'text/xml'});
     if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE
       window.navigator.msSaveOrOpenBlob(blob, filename);
@@ -135,5 +190,9 @@ export class HomeComponent implements OnInit {
 
   addExerciseToCollection(idx: number) {
     this.collectionDataService.sharedExerciseList.push(this.exerciseList[idx]);
+  }
+
+  switchLists() {
+    this.showExercises = !this.showExercises;
   }
 }

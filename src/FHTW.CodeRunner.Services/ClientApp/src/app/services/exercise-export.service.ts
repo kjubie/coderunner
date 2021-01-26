@@ -2,21 +2,31 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
+import { CollectionExport } from "../data-objects/collection-export";
 import { ExerciseExport } from "../data-objects/exercise-export";
 
 @Injectable({ providedIn: 'root' })
 export class ExerciseExportService {
     private exportExerciseUrl = "https://localhost:5001/api/export/exercise";
+    private exportCollectionUrl = "https://localhost:5001/api/export/collection";
 
     constructor(
         private http: HttpClient,
     ) { }
 
     // POST exercise for export
-    exportExercise(exercise: ExerciseExport): Observable<any> {
-      return this.http.post<any>(this.exportExerciseUrl, exercise, { responseType: 'text' as 'json' }).pipe(
+    exportExercise(exercise: ExerciseExport): Observable<ExerciseExport> {
+      return this.http.post<ExerciseExport>(this.exportExerciseUrl, exercise, { responseType: 'text' as 'json' }).pipe(
         tap(_ => console.log('exercise was exported')),
-        catchError(this.handleError<any>('exportExercise'))
+        catchError(this.handleError<ExerciseExport>('exportExercise'))
+      );
+    }
+
+    // POST collection for export
+    exportCollection(collection: CollectionExport): Observable<CollectionExport> {
+      return this.http.post<CollectionExport>(this.exportCollectionUrl, collection, { responseType: 'text' as 'json' }).pipe(
+        tap(_ => console.log('collection was exported')),
+        catchError(this.handleError<CollectionExport>('exportCollection'))
       );
     }
 
