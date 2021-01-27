@@ -1,9 +1,9 @@
 <div class="container">
   <!-- Search Bar  -->
   <div class="input-group md-form form-sm form-2 pl-0">
-    <input class="form-control my-0 py-1 blue-border" type="text" placeholder="Search for an exercise..." aria-label="Search">
+    <input [(ngModel)]="searchFilter.searchTerm" class="form-control my-0 py-1 blue-border" type="text" placeholder="Search for an exercise..." aria-label="Search">
     <div class="input-group-append">
-      <span class="input-group-text lighten-3 searchIcon"><img src="../../assets/img/search.png" alt="search"></span>
+      <span (click)="search()" class="input-group-text lighten-3 searchIcon"><img src="../../assets/img/search.png" alt="search"></span>
     </div>
   </div>
 
@@ -29,11 +29,6 @@
       </div>
     </div>
 
-    <div class="btn-group" role="group" aria-label="Show Exercises/Collections" (click)="switchLists()">
-      <button type="button" class="btn btn-md btn-primary" *ngIf="showExercises">Show Collections</button>
-      <button type="button" class="btn btn-md btn-primary" *ngIf="!showExercises">Show Exercises</button>
-    </div>
-
     <div class="float-right">
       <div class="btn-group" id="views">
         <button type="button" class="btn btn-secondary blue" [ngClass]="{'activeView' : viewSelected == 'list'}" (click)="selectView('list')"><img src="../../assets/img/list_view.png" alt="list_view"></button>
@@ -45,8 +40,13 @@
 
   <!-- ToDo: get data from db, implement filters, different display options -->
   <div class="container">
-    <h2 *ngIf="showExercises">Exercises</h2>
-    <h2 *ngIf="!showExercises">Collections</h2>
+    <div *ngIf="showExercises" class="text-center">
+        <h2><span class="isSelected">Exercises</span>  |  <span class="isInactive" (click)="switchLists()">Collections</span></h2>
+    </div>
+    <div *ngIf="!showExercises" class="text-center">
+      <h2><span class="isInactive" (click)="switchLists()">Exercises</span>  |  <span class="isSelected">Collections</span></h2>
+    </div>
+
     <list-view *ngIf="viewSelected == 'list'" [exerciseList]="exerciseList" [collectionList]="collectionList" [showExercises]="showExercises" (addExerciseToCollectionEvent)="addExerciseToCollection($event)" (exportExerciseEvent)="exportSingleExercise($event, exportModal)" (exportCollectionEvent)="exportSingleCollection($event, exportCollectionModal)"></list-view>
     <grid-big-view *ngIf="viewSelected == 'grid_big'"></grid-big-view>
     <grid-small-view *ngIf="viewSelected == 'grid_small'"></grid-small-view>

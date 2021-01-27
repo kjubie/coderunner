@@ -16,7 +16,7 @@
         </li>
         <li (click)="setSelectedElement('Programming' + idx + '_TestSuit')">
             <i (click)="collapseList('testSuitList', idx)" class="arrow down" [attr.id]="'arrowTestSuitList' + idx"></i>
-            <a [ngClass]="{'active' : selectedElement == ('Programming'+idx+'_TestSuit')}"> Test Suit</a>
+            <a [ngClass]="{'active' : selectedElement == ('Programming'+idx+'_TestSuit')}"> Test Suite</a>
         </li>
         <li *ngIf="showTestSuitList">
             <ul class="thirdUl">

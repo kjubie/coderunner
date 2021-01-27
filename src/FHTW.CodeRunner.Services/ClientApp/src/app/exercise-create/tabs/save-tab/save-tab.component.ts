@@ -23,4 +23,8 @@ export class SaveTabComponent {
     saveExercise() {
         this.saveExerciseEvent.emit(this.exercise);
     }
+
+    test() {
+        console.log(this.exercise);
+    }
 }

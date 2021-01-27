@@ -7,6 +7,7 @@ import { ExerciseExportService } from '../services/exercise-export.service';
 import { CollectionDataService } from '../services/exercise-collection.data.service';
 import { CollectionHome } from '../data-objects/collection-home';
 import { CollectionExport } from '../data-objects/collection-export';
+import { SearchFilter } from '../data-objects/search-filter';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit {
 
   viewSelected: string = "list";
   xmlExportString: string;
-
+  searchFilter: SearchFilter = new SearchFilter();
   exerciseList: ExerciseHome[];
   collectionList: CollectionHome[];
   selectedExercise: ExerciseHome;
@@ -90,6 +91,14 @@ export class HomeComponent implements OnInit {
       console.log('download xml file');
       console.log(this.xmlExportString);
       this.downloadXMLFile('ExportCollection');
+    }
+  }
+
+  searchFilterObserver = {
+    next: x => { this.exerciseList = x },
+    error: err => { console.log('Observer got an error: ' + err) },
+    complete: () => {
+      console.log(this.exerciseList);
     }
   }
 
@@ -194,5 +203,9 @@ export class HomeComponent implements OnInit {
 
   switchLists() {
     this.showExercises = !this.showExercises;
+  }
+
+  search() {
+    this.exerciseListHomeService.search(this.searchFilter).subscribe(this.searchFilterObserver);
   }
 }

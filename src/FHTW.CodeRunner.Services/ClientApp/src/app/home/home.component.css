@@ -18,6 +18,15 @@ div.btn-group {
     margin: 20px 0;
 }
 
+.isSelected {
+    color: rgb(53, 171, 240);
+}
+
+.isInactive:hover {
+    color: rgb(112, 203, 255);
+    cursor: pointer;
+}
+
 .blue {
     background-color: rgb(53, 171, 240);
     border-color: #0098e0;

@@ -4,11 +4,13 @@ import { Observable, of } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { CollectionHome } from "../data-objects/collection-home";
 import { ExerciseHome } from "../data-objects/exercise-home";
+import { SearchFilter } from "../data-objects/search-filter";
 
 @Injectable({ providedIn: 'root' })
 export class ExerciseListHomeService {
-    private getAllExercisesUrl = "https://localhost:5001/api/exercise/short";
+    private getAllExercisesUrl = "https://localhost:5001/api/exercise/minimal";
     private getAllCollectionsUrl = "https://localhost:5001/api/collection/minimal";
+    private searchFilterUrl = "https://localhost:5001/api/exercise/search";
 
     constructor(
         private http: HttpClient,
@@ -27,7 +29,15 @@ export class ExerciseListHomeService {
       return this.http.get<CollectionHome[]>(this.getAllCollectionsUrl).pipe(
         tap(_ => console.log('fetched all collections from db')),
         catchError(this.handleError<CollectionHome[]>('getAllCollections'))
-    );
+      );
+    }
+
+    search(searchFilter: SearchFilter): Observable<ExerciseHome[]> {
+      return this.http.post<ExerciseHome[]>(this.searchFilterUrl, searchFilter)
+      .pipe(
+        tap(_ => console.log("fetched exercises from db for filter")),
+        catchError(this.handleError<ExerciseHome[]>('search'))
+      ); 
     }
 
     /**
