@@ -4,6 +4,10 @@
    padding-left: 0;
    color:  rgb(53, 171, 240);
  }
+
+ .subheading {
+    color: rgb(53, 171, 240);
+ }
  
  .breadcrumb li+li::before {
    color:  rgb(53, 171, 240);
