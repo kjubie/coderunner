@@ -1,0 +1,25 @@
+<h1>Import Collection</h1>
+<div class="contentSeperator container">
+  <form action="">
+    <div class="col-12 content-group">
+      <label for="title" class="col-form-label">Collection Title: </label>
+      <input required [(ngModel)]="importCollection.title" type="text" name="title" id="title" class="col-12 form-control-plaintext mb-2">
+  
+      <label for="lang" class="col-form-label">Written Language: </label>
+      <select required name="lang" id="lang" class="form-control col-2" [(ngModel)]="importCollection.writtenLanguage">
+        <option *ngFor="let lang of writtenLangs" [ngValue]="lang">{{lang.name}}</option>
+      </select>
+  
+      <label for="fileDrop" class="col-form-label">File Drop: </label>
+      <input (change)="upload($event.target.files)" type="file" name="fileDrop" id="fileDrop" class="form-control-file">
+  
+      <div *ngIf="!validFile" class="mt-2 text-center">
+        <p class="errMsg">Filetype is not supported! Please only upload valid .xml Files!</p>
+      </div>
+    </div>
+  </form>
+  <div class="text-center mt-3">
+    <button class="btn btn-secondary mr-2" (click)="cancel()">Cancel</button>
+    <button class="btn btn-primary ml-2" [disabled]="!validFile || !importCollection.writtenLanguage || !importCollection.title || !fileContent" (click)="import()">Import</button>
+  </div>
+</div>

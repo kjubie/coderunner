@@ -4,7 +4,7 @@ import { ExerciseExport } from '../data-objects/exercise-export';
 import { ExerciseHome } from '../data-objects/exercise-home';
 import { ExerciseListHomeService } from '../services/exercise-list-home.service';
 import { ExerciseExportService } from '../services/exercise-export.service';
-import { CollectionDataService } from '../exercise-collection/exercise-collection.data.service';
+import { CollectionDataService } from '../services/exercise-collection.data.service';
 import { CollectionHome } from '../data-objects/collection-home';
 import { CollectionExport } from '../data-objects/collection-export';
 

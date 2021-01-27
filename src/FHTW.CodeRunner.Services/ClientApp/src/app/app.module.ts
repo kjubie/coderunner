@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ImportComponent } from './import/import.component';
 import { ExerciseCollectionComponent } from './exercise-collection/exercise-collection.component';
 import { ExerciseCreateComponent } from './exercise-create/exercise-create.component';
 import { SaveTabComponent } from './exercise-create/tabs/save-tab/save-tab.component';
@@ -31,7 +32,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { ProgrammingLanguageElementComponent } from './side-menu/menu-elements/programming-language/programming-language-element.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularMarkdownEditorModule } from 'angular-markdown-editor';
-import { CollectionDataService } from './exercise-collection/exercise-collection.data.service';
+import { CollectionDataService } from './services/exercise-collection.data.service';
 import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
 
 @NgModule({
@@ -77,6 +78,7 @@ export class MaterialModule {}
     AppComponent,
     NavMenuComponent,
     LoginComponent,
+    ImportComponent,
     HomeComponent,
     StarRatingComponent,
     ListViewComponent,
