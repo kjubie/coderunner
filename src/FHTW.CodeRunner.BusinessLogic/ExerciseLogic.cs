@@ -123,12 +123,6 @@ namespace FHTW.CodeRunner.BusinessLogic
                         exercise.Created = DateTime.Now;
                     }
 
-                    /*if (exercise.ExerciseVersion != null)
-                    {
-                        exercise.ExerciseVersion.FirstOrDefault().LastModified = DateTime.Now;
-                        exercise.ExerciseVersion.FirstOrDefault().ValidState = BlEntities.ValidState.Valid;
-                    }*/
-
                     var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
                     this.exerciseRepository.CreateAndUpdate(dalExercise);
                     this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
@@ -138,6 +132,24 @@ namespace FHTW.CodeRunner.BusinessLogic
                     this.logger.LogError("BL received invalid Exercise in SaveExercise with Title: " + exercise.Title);
                     throw new ValidationException("exercise " + validationResult.Errors.Select(err => err.ErrorMessage).ToString());
                 }
+            }
+        }
+
+        /// <inheritdoc/>
+        public List<BlEntities.ExerciseShort> SearchAndFilter(BlEntities.ExerciseSearch exerciseSearch)
+        {
+            if (exerciseSearch == null)
+            {
+                this.logger.LogError("Exercise Search is null");
+                throw new BlValidationException("Exercise Search is null", null);
+            }
+            else
+            {
+                this.logger.LogInformation($"BL searching for Exercises, Search Term {exerciseSearch.SearchTerm}, Programming Language {exerciseSearch.ProgrammingLanguage} and Written Language {exerciseSearch.WrittenLanguage}.");
+                var dalExerciseList = this.exerciseRepository.SearchAndFilter(exerciseSearch.SearchTerm, exerciseSearch.ProgrammingLanguage, exerciseSearch.WrittenLanguage);
+                var blExerciseList = this.mapper.Map<List<BlEntities.ExerciseShort>>(dalExerciseList);
+
+                return blExerciseList;
             }
         }
     }

@@ -76,7 +76,7 @@ namespace FHTW.CodeRunner.Services.Controllers
         [HttpGet]
         [Route("collection/minimal")]
         [SwaggerOperation("GetMinimalCollection")]
-        [SwaggerResponse(statusCode: 200, type: typeof(SvcEntities.MinimalCollection), description: "Successful response")]
+        [SwaggerResponse(statusCode: 200, type: typeof(List<SvcEntities.MinimalCollection>), description: "Successful response")]
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
         public virtual IActionResult GetMinimalCollection()
         {

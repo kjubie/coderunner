@@ -1,12 +1,11 @@
-﻿using System.Runtime.CompilerServices;
-// <copyright file="BlMapperProfile.cs" company="FHTW CodeRunner">
+﻿// <copyright file="BlMapperProfile.cs" company="FHTW CodeRunner">
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using AutoMapper;
 using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
@@ -102,6 +101,9 @@ namespace FHTW.CodeRunner.Services.AutoMapper
             this.CreateMap<BlEntities.MinimalCollection, SvcEntities.MinimalCollection>();
 
             this.CreateMap<SvcEntities.ExerciseKeys, BlEntities.CollectionExercise>();
+
+            this.CreateMap<SvcEntities.ExerciseSearch, BlEntities.ExerciseSearch>()
+                .ForAllMembers(x => x.NullSubstitute(string.Empty));
 
             this.CreateMap<SvcEntities.ImportData, BlEntities.ImportData>()
                 .ForMember(p => p.XmlString, p => p.ConvertUsing<Converters.Base64Converter, string>(p => p.Base64XmlString));
