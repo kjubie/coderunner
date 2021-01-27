@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="btn-group">
+      <div *ngIf="showExercises" class="btn-group">
         <button type="button" class="btn btn-secondary btn-md dropdown-toggle btn-dropdown blue" data-toggle="dropdown" (click)="programmingDropdown()">
           Programming Language
         </button>

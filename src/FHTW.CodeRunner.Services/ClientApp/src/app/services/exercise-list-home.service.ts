@@ -40,6 +40,14 @@ export class ExerciseListHomeService {
       ); 
     }
 
+    searchCollection(searchFilter: SearchFilter): Observable<CollectionHome[]> {
+      return this.http.post<CollectionHome[]>(this.searchFilterUrl, searchFilter)
+      .pipe(
+        tap(_ => console.log("fetched collections from db for filter")),
+        catchError(this.handleError<CollectionHome[]>('search'))
+      ); 
+    }
+
     /**
    * Handle Http operation that failed.
    * Let the app continue.

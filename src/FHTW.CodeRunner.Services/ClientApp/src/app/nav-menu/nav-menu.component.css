@@ -29,3 +29,19 @@ html {
 a {
   cursor: pointer;
 }
+
+.exerciseCounter {
+  text-align: center;
+  background-color: rgb(53, 171, 240);
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  top: -10px;
+  left: -5px;
+  position: relative;
+  vertical-align: middle;
+  justify-content: center;
+  font-size: .8em;
+  font-weight: bold;
+}

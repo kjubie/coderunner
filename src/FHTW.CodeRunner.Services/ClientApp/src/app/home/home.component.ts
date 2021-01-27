@@ -102,6 +102,14 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  searchCollectionFilterObserver = {
+    next: x => { this.collectionList = x },
+    error: err => { console.log('Observer got an error: ' + err) },
+    complete: () => {
+      console.log(this.collectionList);
+    }
+  }
+
   exportSingleExercise(idx: number, modalContent) {
     this.selectedExercise = this.exerciseList[idx];
 
@@ -199,6 +207,7 @@ export class HomeComponent implements OnInit {
 
   addExerciseToCollection(idx: number) {
     this.collectionDataService.sharedExerciseList.push(this.exerciseList[idx]);
+    this.collectionDataService.increaseExerciseCounter();
   }
 
   switchLists() {
@@ -206,6 +215,10 @@ export class HomeComponent implements OnInit {
   }
 
   search() {
-    this.exerciseListHomeService.search(this.searchFilter).subscribe(this.searchFilterObserver);
+    if (this.showExercises) {
+      this.exerciseListHomeService.search(this.searchFilter).subscribe(this.searchFilterObserver);
+    } else {
+      this.exerciseListHomeService.searchCollection(this.searchFilter).subscribe(this.searchCollectionFilterObserver);
+    }
   }
 }

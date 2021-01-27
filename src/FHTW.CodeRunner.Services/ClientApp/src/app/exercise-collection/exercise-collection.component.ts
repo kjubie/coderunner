@@ -153,6 +153,7 @@ export class ExerciseCollectionComponent implements OnInit{
   removeExercise(ex: ExerciseHome) {
     let id = this.exerciseList.indexOf(ex);
     this.exerciseList.splice(id, 1);
+    this.collectionDataService.decreaseExerciseCounter();
     // this.removeExerciseEvent.emit(ex);
   }
 

@@ -9,6 +9,7 @@ import { ImportCollection } from '../data-objects/import-collection/import-colle
 @Injectable()
 export class CollectionDataService {
     sharedExerciseList: ExerciseHome[] = [];
+    exerciseCounter: number = 0;
 
     private createCollectionUrl = "https://localhost:5001/api/collection";
     private importCollectionUrl = "https://localhost:5001/api/import/collection";
@@ -17,6 +18,14 @@ export class CollectionDataService {
     constructor(
       private http: HttpClient,
     ) { }
+
+    increaseExerciseCounter() {
+      this.exerciseCounter += 1;
+    }
+
+    decreaseExerciseCounter() {
+      this.exerciseCounter -= 1;
+    }
 
     saveCollection(collection: Collection): Observable<Collection> {
       return this.http.post<Collection>(this.createCollectionUrl, collection)

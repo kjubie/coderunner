@@ -1,5 +1,6 @@
 import { Component, forwardRef, Inject, Input, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
+import { CollectionDataService } from '../services/exercise-collection.data.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -10,7 +11,11 @@ export class NavMenuComponent {
   isExpanded = false;
   @Input() username: string;
 
-  constructor(private appComponent: AppComponent) { }
+  constructor(private appComponent: AppComponent, public collectionDataService: CollectionDataService) { }
+
+/*   ngOnInit() {
+    this.exerciseCounter = this.collectionDataService.exerciseCounter;
+  } */
 
   collapse() {
     this.isExpanded = false;
