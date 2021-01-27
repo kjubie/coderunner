@@ -87,7 +87,7 @@ namespace FHTW.CodeRunner.Services.AutoMapper
             this.CreateMap<SvcEntities.QuestionType, BlEntities.QuestionType>()
                 .ReverseMap();
 
-            this.CreateMap<SvcEntities.ExerciseShort, BlEntities.ExerciseShort>()
+            this.CreateMap<SvcEntities.MinimalExercise, BlEntities.MinimalExercise>()
                 .ReverseMap();
 
             this.CreateMap<SvcEntities.UserAuthentication, BlEntities.User>();
@@ -102,7 +102,7 @@ namespace FHTW.CodeRunner.Services.AutoMapper
 
             this.CreateMap<SvcEntities.ExerciseKeys, BlEntities.CollectionExercise>();
 
-            this.CreateMap<SvcEntities.ExerciseSearch, BlEntities.ExerciseSearch>()
+            this.CreateMap<SvcEntities.SearchExercise, BlEntities.SearchObject>()
                 .ForAllMembers(x => x.NullSubstitute(string.Empty));
 
             this.CreateMap<SvcEntities.ImportData, BlEntities.ImportData>()

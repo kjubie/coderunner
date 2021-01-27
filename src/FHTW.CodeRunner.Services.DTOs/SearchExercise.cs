@@ -15,7 +15,7 @@ namespace FHTW.CodeRunner.Services.DTOs
     /// </summary>
     [DataContract]
     [ExcludeFromCodeCoverage]
-    public class ExerciseSearch
+    public class SearchExercise
     {
         /// <summary>
         /// Gets or sets the search term.

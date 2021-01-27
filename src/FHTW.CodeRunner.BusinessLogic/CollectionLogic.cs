@@ -69,5 +69,24 @@ namespace FHTW.CodeRunner.BusinessLogic
                 this.logger.LogInformation("BL passing Collection with Title: " + collection.Title + " to DAL.");
             }
         }
+
+        /// <inheritdoc/>
+        public List<BlEntities.MinimalCollection> SearchAndFilter(BlEntities.SearchObject searchObject)
+        {
+            if (searchObject == null)
+            {
+                this.logger.LogError("Search Object is null");
+                throw new BlValidationException("Search Object is null", null);
+            }
+            else
+            {
+                this.logger.LogInformation($"BL searching for Collections, Search Term {searchObject.SearchTerm} and Written Language {searchObject.WrittenLanguage}.");
+                var dalCollectionList = new List<DalEntities.MinimalCollection>();
+                // var dalCollectionList = this.collectionRepository.SearchAndFilter(searchObject.SearchTerm, searchObject.ProgrammingLanguage, searchObject.WrittenLanguage);
+                var blCollectionList = this.mapper.Map<List<BlEntities.MinimalCollection>>(dalCollectionList);
+
+                return blCollectionList;
+            }
+        }
     }
 }

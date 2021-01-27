@@ -34,7 +34,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             IMapper mapper = new Mapper(
                 new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<DalEntities.MinimalExercise, BlEntities.ExerciseShort>();
+                    cfg.CreateMap<DalEntities.MinimalExercise, BlEntities.MinimalExercise>();
                 }));
 
             var exerciseShortList = new System.Collections.Generic.List<DalEntities.MinimalExercise>(Builder<DalEntities.MinimalExercise>
@@ -52,7 +52,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
             IExerciseLogic logic = new ExerciseLogic(logger, mapper, exerciseRepo, uiRepo);
 
             // Act
-            var result = logic.GetExerciseShortList();
+            var result = logic.GetMinimalExerciseList();
 
             // Assert
             Assert.AreEqual(count, result.Count);
