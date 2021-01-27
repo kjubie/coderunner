@@ -99,9 +99,7 @@ namespace FHTW.CodeRunner.BusinessLogic
                 try
                 {
                     this.logger.LogInformation($"BL searching for Collections, Search Term {searchObject.SearchTerm} and Written Language {searchObject.WrittenLanguage}.");
-                    var dalCollectionList = new List<DalEntities.MinimalCollection>();
-
-                    // var dalCollectionList = this.collectionRepository.SearchAndFilter(searchObject.SearchTerm, searchObject.ProgrammingLanguage, searchObject.WrittenLanguage);
+                    var dalCollectionList = this.collectionRepository.SearchAndFilter(searchObject.SearchTerm, searchObject.WrittenLanguage);
                     var blCollectionList = this.mapper.Map<List<BlEntities.MinimalCollection>>(dalCollectionList);
 
                     return blCollectionList;
