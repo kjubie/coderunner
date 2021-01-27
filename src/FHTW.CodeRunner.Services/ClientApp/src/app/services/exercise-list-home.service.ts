@@ -8,7 +8,7 @@ import { SearchFilter } from "../data-objects/search-filter";
 
 @Injectable({ providedIn: 'root' })
 export class ExerciseListHomeService {
-    private getAllExercisesUrl = "https://localhost:5001/api/exercise/short";
+    private getAllExercisesUrl = "https://localhost:5001/api/exercise/minimal";
     private getAllCollectionsUrl = "https://localhost:5001/api/collection/minimal";
     private searchFilterUrl = "https://localhost:5001/api/exercise/search";
 
