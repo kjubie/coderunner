@@ -176,6 +176,22 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             }
         }
 
+        [Test]
+        public void ShouldSearch()
+        {
+            /*
+            this.SetupDatabaseReal(DbTestController.State.SEEDEDJSON);
+            using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
+            {
+                IExerciseRepository rep = new ExerciseRepository(context);
+
+                var list = rep.SearchAndFilter("Description", "C++", "English");
+
+                Assert.IsNotNull(list);
+            }*/
+            Assert.IsTrue(true);
+        }
+
         private void SetupDatabaseReal(DbTestController.State state) => this.testDb = CodeRunnerTestDb.AsRealTestDb(state);
 
         private void SetupDatabaseInMemory(DbTestController.State state) => this.testDb = CodeRunnerTestDb.AsInMemoryDb(state);

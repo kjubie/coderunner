@@ -9,6 +9,7 @@ using FHTW.CodeRunner.DataAccess.Entities;
 using FHTW.CodeRunner.DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using NinjaNye.SearchExtensions;
 
 namespace FHTW.CodeRunner.DataAccess.Sql
 {
@@ -166,42 +167,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         public List<MinimalExercise> GetMinimalList()
         {
             return this.context.Exercise.AsNoTracking()
-                .Select(m => new MinimalExercise
-                {
-                    Id = m.Id,
-                    Title = m.Title,
-                    Created = m.Created,
-                    User = m.FkUser,
-                    TagList = m.ExerciseTag
-                        .Select(et => new Tag()
-                        {
-                            Id = et.FkTagId,
-                            Name = et.FkTag.Name,
-                        })
-                        .ToList(),
-                    WrittenLanguageList = m.ExerciseVersion
-                        .Where(v => v.VersionNumber == m.ExerciseVersion.Max(vn => vn.VersionNumber))
-                        .FirstOrDefault().ExerciseLanguage
-                        .Select(el => new WrittenLanguage()
-                        {
-                            Id = el.FkWrittenLanguageId,
-                            Name = el.FkWrittenLanguage.Name,
-                        })
-                        .ToList(),
-                    ProgrammingLanguageList = m.ExerciseVersion
-                        .Where(v => v.VersionNumber == m.ExerciseVersion.Max(vn => vn.VersionNumber))
-                        .FirstOrDefault().ExerciseLanguage
-                        .SelectMany(el => el.ExerciseBody.Select(eb => new ProgrammingLanguage()
-                        {
-                            Id = eb.FkProgrammingLanguageId,
-                            Name = eb.FkProgrammingLanguage.Name,
-                        }))
-                        .ToHashSet(new ProgrammingLanguageComparator())
-                        .ToList(),
-                    VersionList = m.ExerciseVersion
-                        .Select(v => v.VersionNumber)
-                        .ToList(),
-                })
+                .Select(MinimalExercise.Projection)
                 .ToList();
         }
 
@@ -309,6 +275,37 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                     .AsNoTracking()
                     .Include(qt => qt.FkProgrammingLanguage)
                     .SingleOrDefault(qt => qt.Name == questiontype);
+        }
+
+        /// <inheritdoc/>
+        public List<MinimalExercise> SearchAndFilter(string searchTerm, string programming_language, string written_language)
+        {
+            if (searchTerm is null || programming_language is null || written_language is null)
+            {
+                throw new ArgumentNullException("searchterms and filters should not be null, use \"\" for wildcard search");
+            }
+
+            HashSet<int> ids = this.context.ExerciseBody.AsNoTracking()
+                .Search(b => b.Description, b => b.Feedback, b => b.Hint)
+                    .Containing(searchTerm)
+                .Search(b => b.FkProgrammingLanguage.Name)
+                    .Containing(programming_language)
+                .Search(b => b.FkExerciseLanguage.FkWrittenLanguage.Name)
+                    .Containing(written_language)
+                .Select(v => v.FkExerciseLanguage.FkExerciseVersion.FkExerciseId)
+                .ToHashSet();
+
+            if (ids.Count > 0)
+            {
+                return this.context.Exercise.AsNoTracking()
+                .Where(e => ids.Contains(e.Id))
+                .Select(MinimalExercise.Projection)
+                .ToList();
+            }
+            else
+            {
+                return new List<MinimalExercise>();
+            }
         }
     }
 }
