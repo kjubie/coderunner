@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="SearchObject.cs" company="FHTW CodeRunner">
+// Copyright (c) FHTW CodeRunner. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
@@ -6,10 +10,10 @@ using System.Text;
 namespace FHTW.CodeRunner.BusinessLogic.Entities
 {
     /// <summary>
-    /// Entity that describes the needed information for a search for exercises in the database.
+    /// Entity that describes the needed information for a search in the database.
     /// </summary>
     [ExcludeFromCodeCoverage]
-    public class ExerciseSearch
+    public class SearchObject
     {
         /// <summary>
         /// Gets or sets the search term.

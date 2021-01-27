@@ -25,5 +25,12 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
         /// </summary>
         /// <param name="collection">The incoming collection.</param>
         public void SaveCollection(Collection collection);
+
+        /// <summary>
+        /// Function for filtering collections.
+        /// </summary>
+        /// <param name="searchObject">The search options for filtering.</param>
+        /// <returns>List of collections in a minmal version.</returns>
+        public List<MinimalCollection> SearchAndFilter(SearchObject searchObject);
     }
 }

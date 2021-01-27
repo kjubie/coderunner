@@ -155,14 +155,14 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// </summary>
         /// <returns>A list of exercises in a minmal format.</returns>
         [HttpGet]
-        [Route("exercise/short")]
-        [SwaggerOperation("GetExerciseShort")]
-        [SwaggerResponse(statusCode: 200, type: typeof(List<SvcEntities.ExerciseShort>), description: "Successful response")]
+        [Route("exercise/minimal")]
+        [SwaggerOperation("GetMinimalExercise")]
+        [SwaggerResponse(statusCode: 200, type: typeof(List<SvcEntities.MinimalExercise>), description: "Successful response")]
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
-        public virtual IActionResult GetExerciseShort()
+        public virtual IActionResult GetMinimalExercise()
         {
-            List<BlEntities.ExerciseShort> blExerciseShort = this.exerciseLogic.GetExerciseShortList();
-            var svcExerciseShort = this.mapper.Map<List<SvcEntities.ExerciseShort>>(blExerciseShort);
+            List<BlEntities.MinimalExercise> blExerciseShort = this.exerciseLogic.GetMinimalExerciseList();
+            var svcExerciseShort = this.mapper.Map<List<SvcEntities.MinimalExercise>>(blExerciseShort);
 
             return this.Ok(svcExerciseShort);
         }
@@ -175,23 +175,23 @@ namespace FHTW.CodeRunner.Services.Controllers
         [HttpPost]
         [Route("exercise/search")]
         [SwaggerOperation("SearchAndFilterExercises")]
-        [SwaggerResponse(statusCode: 200, type: typeof(List<SvcEntities.ExerciseShort>), description: "Successful response")]
+        [SwaggerResponse(statusCode: 200, type: typeof(List<SvcEntities.MinimalExercise>), description: "Successful response")]
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
-        public virtual IActionResult SearchAndFilterExercises([FromBody] SvcEntities.ExerciseSearch body)
+        public virtual IActionResult SearchAndFilterExercises([FromBody] SvcEntities.SearchExercise body)
         {
             if (body == null)
             {
                 return this.BadRequest(new SvcEntities.Error
                 {
-                    ErrorMessage = "Exercise Search should not be null",
+                    ErrorMessage = "Search for Exercise should not be null",
                 });
             }
 
-            var blExerciseSearch = this.mapper.Map<BlEntities.ExerciseSearch>(body);
-            List<BlEntities.ExerciseShort> blExerciseShort = this.exerciseLogic.SearchAndFilter(blExerciseSearch);
-            var svcExerciseShort = this.mapper.Map<List<SvcEntities.ExerciseShort>>(blExerciseShort);
+            var blSearchObject = this.mapper.Map<BlEntities.SearchObject>(body);
+            List<BlEntities.MinimalExercise> blMinimalExerciseList = this.exerciseLogic.SearchAndFilter(blSearchObject);
+            var svcMinimalExerciseList = this.mapper.Map<List<SvcEntities.MinimalExercise>>(blMinimalExerciseList);
 
-            return this.Ok(svcExerciseShort);
+            return this.Ok(svcMinimalExerciseList);
         }
     }
 }

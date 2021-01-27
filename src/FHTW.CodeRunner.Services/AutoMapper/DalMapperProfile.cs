@@ -108,13 +108,13 @@ namespace FHTW.CodeRunner.Services.AutoMapper
 
             this.CreateMap<BlEntities.ExerciseKeys, DalEntities.CollectionExercise>().ReverseMap();
 
-            this.CreateMap<DalEntities.MinimalExercise, BlEntities.ExerciseShort>()
+            this.CreateMap<DalEntities.MinimalExercise, BlEntities.MinimalExercise>()
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.TagList))
                 .ForMember(dest => dest.WrittenLanguages, opt => opt.MapFrom(src => src.WrittenLanguageList))
                 .ForMember(dest => dest.ProgrammingLanguages, opt => opt.MapFrom(src => src.ProgrammingLanguageList))
                 .ForMember(dest => dest.FkUser, opt => opt.MapFrom(src => src.User));
 
-            this.CreateMap<DalEntities.Exercise, BlEntities.ExerciseShort>()
+            this.CreateMap<DalEntities.Exercise, BlEntities.MinimalExercise>()
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.ExerciseTag.Select(et => et.FkTag).ToList()))
                 .ForMember(dest => dest.WrittenLanguages, opt => opt.MapFrom(src => src.ExerciseVersion.SelectMany(ev => ev.ExerciseLanguage.Select(el => el.FkWrittenLanguage)).Distinct().ToList()))
                 .ForMember(dest => dest.ProgrammingLanguages, opt => opt.MapFrom(src => src.ExerciseVersion.SelectMany(ev => ev.ExerciseLanguage.SelectMany(el => el.ExerciseBody.Select(eb => eb.FkProgrammingLanguage))).Distinct().ToList()));

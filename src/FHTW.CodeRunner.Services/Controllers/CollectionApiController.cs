@@ -85,5 +85,32 @@ namespace FHTW.CodeRunner.Services.Controllers
 
             return this.Ok(svcMinimalCollections);
         }
+
+        /// <summary>
+        /// Searches and filters for a list of collections.
+        /// </summary>
+        /// <param name="body">Options for filtering.</param>
+        /// <returns>A list of collections in a minmal format.</returns>
+        [HttpPost]
+        [Route("collection/search")]
+        [SwaggerOperation("SearchAndFilterCollections")]
+        [SwaggerResponse(statusCode: 200, type: typeof(List<SvcEntities.MinimalCollection>), description: "Successful response")]
+        [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
+        public virtual IActionResult SearchAndFilterCollections([FromBody] SvcEntities.SearchCollection body)
+        {
+            if (body == null)
+            {
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = "Search for Collection should not be null",
+                });
+            }
+
+            var blSearchObject = this.mapper.Map<BlEntities.SearchObject>(body);
+            List<BlEntities.MinimalCollection> blMinimalCollectionList = this.collectionLogic.SearchAndFilter(blSearchObject);
+            var svcMinimalCollectionList = this.mapper.Map<List<SvcEntities.MinimalCollection>>(blMinimalCollectionList);
+
+            return this.Ok(svcMinimalCollectionList);
+        }
     }
 }

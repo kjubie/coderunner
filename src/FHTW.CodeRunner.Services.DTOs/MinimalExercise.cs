@@ -15,7 +15,7 @@ namespace FHTW.CodeRunner.Services.DTOs
     /// </summary>
     [DataContract]
     [ExcludeFromCodeCoverage]
-    public class ExerciseShort
+    public class MinimalExercise
     {
         /// <summary>
         /// Gets or sets the id.

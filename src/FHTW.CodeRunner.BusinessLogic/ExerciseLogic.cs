@@ -43,11 +43,10 @@ namespace FHTW.CodeRunner.BusinessLogic
         }
 
         /// <inheritdoc/>
-        public List<BlEntities.ExerciseShort> GetExerciseShortList()
+        public List<BlEntities.MinimalExercise> GetMinimalExerciseList()
         {
-            // TODO: Rename
             var dalExerciseList = this.exerciseRepository.GetMinimalList();
-            var blExerciseList = this.mapper.Map<List<BlEntities.ExerciseShort>>(dalExerciseList);
+            var blExerciseList = this.mapper.Map<List<BlEntities.MinimalExercise>>(dalExerciseList);
 
             return blExerciseList;
         }
@@ -136,18 +135,18 @@ namespace FHTW.CodeRunner.BusinessLogic
         }
 
         /// <inheritdoc/>
-        public List<BlEntities.ExerciseShort> SearchAndFilter(BlEntities.ExerciseSearch exerciseSearch)
+        public List<BlEntities.MinimalExercise> SearchAndFilter(BlEntities.SearchObject searchObject)
         {
-            if (exerciseSearch == null)
+            if (searchObject == null)
             {
-                this.logger.LogError("Exercise Search is null");
-                throw new BlValidationException("Exercise Search is null", null);
+                this.logger.LogError("Search Object is null");
+                throw new BlValidationException("Search Object is null", null);
             }
             else
             {
-                this.logger.LogInformation($"BL searching for Exercises, Search Term {exerciseSearch.SearchTerm}, Programming Language {exerciseSearch.ProgrammingLanguage} and Written Language {exerciseSearch.WrittenLanguage}.");
-                var dalExerciseList = this.exerciseRepository.SearchAndFilter(exerciseSearch.SearchTerm, exerciseSearch.ProgrammingLanguage, exerciseSearch.WrittenLanguage);
-                var blExerciseList = this.mapper.Map<List<BlEntities.ExerciseShort>>(dalExerciseList);
+                this.logger.LogInformation($"BL searching for Exercises, Search Term {searchObject.SearchTerm}, Programming Language {searchObject.ProgrammingLanguage} and Written Language {searchObject.WrittenLanguage}.");
+                var dalExerciseList = this.exerciseRepository.SearchAndFilter(searchObject.SearchTerm, searchObject.ProgrammingLanguage, searchObject.WrittenLanguage);
+                var blExerciseList = this.mapper.Map<List<BlEntities.MinimalExercise>>(dalExerciseList);
 
                 return blExerciseList;
             }

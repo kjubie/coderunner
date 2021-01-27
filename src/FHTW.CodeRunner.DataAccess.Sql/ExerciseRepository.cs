@@ -286,22 +286,48 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             }
 
             // caseinsensitive search not available for iqueryiable
-            HashSet<int> ids = this.context.ExerciseBody.AsNoTracking()
-                .Search(b => b.Description.ToLower(), b => b.Feedback.ToLower(), b => b.Hint.ToLower())
+            // because of tolower is used, but is probably inefficient
+            HashSet<int> ids = this.context.ExerciseBody
+                .Search(
+                        b => b.Description.ToLower(),
+                        b => b.Feedback.ToLower(),
+                        b => b.Hint.ToLower(),
+                        b => b.FkExerciseLanguage.FkExerciseVersion.FkUser.Name.ToLower(),
+                        b => b.FkExerciseLanguage.FkExerciseVersion.FkExercise.Title.ToLower())
                     .Containing(searchTerm.ToLower())
-                .Search(b => b.FkProgrammingLanguage.Name)
-                    .Containing(programming_language)
-                .Search(b => b.FkExerciseLanguage.FkWrittenLanguage.Name)
-                    .Containing(written_language)
                 .Select(v => v.FkExerciseLanguage.FkExerciseVersion.FkExerciseId)
                 .ToHashSet();
 
+            HashSet<int> exercise_ids_from_tag_search = this.context.ExerciseTag
+                .Search(t => t.FkTag.Name.ToLower())
+                    .Containing(searchTerm.ToLower())
+                .Select(et => et.FkExerciseId)
+                .ToHashSet();
+
+            // both search in exercise and tags are part of the text search
+            ids.UnionWith(exercise_ids_from_tag_search);
+
+            // apply filter only if values are set
+            if (programming_language != string.Empty && written_language != string.Empty)
+            {
+                HashSet<int> filter_ids = this.context.ExerciseBody
+                    .Search(b => b.FkProgrammingLanguage.Name)
+                        .Containing(programming_language)
+                    .Search(b => b.FkExerciseLanguage.FkWrittenLanguage.Name)
+                        .Containing(written_language)
+                    .Select(v => v.FkExerciseLanguage.FkExerciseVersion.FkExerciseId)
+                    .ToHashSet();
+
+                // filters are applied
+                ids.IntersectWith(filter_ids);
+            }
+
             if (ids.Count > 0)
             {
-                return this.context.Exercise.AsNoTracking()
-                .Where(e => ids.Contains(e.Id))
-                .Select(MinimalExercise.Projection)
-                .ToList();
+                return this.context.Exercise
+                    .Where(e => ids.Contains(e.Id))
+                    .Select(MinimalExercise.Projection)
+                    .ToList();
             }
             else
             {

@@ -32,7 +32,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
         /// Function for retrieving a list of exercises.
         /// </summary>
         /// <returns>List of exercises in a minmal version.</returns>
-        List<ExerciseShort> GetExerciseShortList();
+        List<MinimalExercise> GetMinimalExerciseList();
 
         /// <summary>
         /// Function for saving an exercise.
@@ -49,8 +49,8 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
         /// <summary>
         /// Function for filtering exercises.
         /// </summary>
-        /// <param name="exerciseSearch">The search options for filtering.</param>
+        /// <param name="searchObject">The search options for filtering.</param>
         /// <returns>List of exercises in a minmal version.</returns>
-        public List<ExerciseShort> SearchAndFilter(ExerciseSearch exerciseSearch);
+        public List<MinimalExercise> SearchAndFilter(SearchObject searchObject);
     }
 }
