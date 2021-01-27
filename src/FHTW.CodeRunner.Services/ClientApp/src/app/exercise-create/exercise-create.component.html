@@ -1,4 +1,4 @@
-<side-menu [availableLangsW]="writtenLangs" [availableLangsP]="programmingLangs" [selectedElement]="selectedElement" (selectElementEvent)="setSelectedElement($event)" (addWrittenLangEvent)="addWrittenLang($event)" (addProgrammingLangEvent)="addProgrammingLang($event)" (removeWrittenLangEvent)="removeWLang($event)" (removeProgrammingLangEvent)="removePLang($event)" (addTestCaseEvent)="addNewTest($event)"></side-menu>
+<side-menu [availableLangsW]="writtenLangs" [availableLangsP]="programmingLangs" [selectedElement]="selectedElement" (selectElementEvent)="setSelectedElement($event)" (addWrittenLangEvent)="addWrittenLang($event)" (addProgrammingLangEvent)="addProgrammingLang($event)" (removeWrittenLangEvent)="removeWLang($event)" (removeProgrammingLangEvent)="removePLang($event)" (addTestCaseEvent)="addNewTest($event)" (removeTestCaseEvent)="removeTestCase($event)"></side-menu>
 
 <div class="content">
     <general-tab *ngIf="selectedElement == 'General'" [exercise]="exercise" [existingTags]="tagList"></general-tab>

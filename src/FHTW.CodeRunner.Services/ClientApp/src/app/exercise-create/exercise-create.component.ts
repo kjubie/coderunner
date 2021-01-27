@@ -86,6 +86,8 @@ export class ExerciseCreateComponent implements OnInit {
       if (this.selectedElement.includes('TestCase')) {
         split = this.selectedElement.split('TestCase');
         this.testIdx = parseInt(split[1]);
+
+        console.log(this.testIdx);
       }
       else if (this.selectedElement.includes('Lang')) {
         split = this.selectedElement.split('Lang');
@@ -105,6 +107,20 @@ export class ExerciseCreateComponent implements OnInit {
 
   addNewTest(test: TestCase) {
     this.exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[this.programmingLangIdx].testSuite.testCaseList.push(test);
+
+    console.log(this.exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[this.programmingLangIdx].testSuite.testCaseList);
+  }
+
+  removeTestCase(idx: number) {
+    if (this.selectedElement.includes('TestCase') && this.testIdx == idx) {
+      console.log('set to prev. testcase...')
+      this.testIdx -= 1;
+      let split = this.selectedElement.split("_");
+      let newIdx = 'TestCase' + this.testIdx.toString();
+      this.selectedElement = split[0] + '_' + newIdx;
+    }
+
+    this.exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[this.programmingLangIdx].testSuite.testCaseList.pop();
   }
 
   saveExercise() {
