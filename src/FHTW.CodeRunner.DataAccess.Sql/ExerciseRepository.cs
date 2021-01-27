@@ -167,7 +167,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         public List<MinimalExercise> GetMinimalList()
         {
             return this.context.Exercise.AsNoTracking()
-                .Select(MinimalExercise.Projection)
+                .Select(MinimalExercise.FromExercise)
                 .ToList();
         }
 
@@ -322,17 +322,21 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 ids.IntersectWith(filter_ids);
             }
 
+            List<MinimalExercise> result;
+
             if (ids.Count > 0)
             {
-                return this.context.Exercise
+                result = this.context.Exercise
                     .Where(e => ids.Contains(e.Id))
-                    .Select(MinimalExercise.Projection)
+                    .Select(MinimalExercise.FromExercise)
                     .ToList();
             }
             else
             {
-                return new List<MinimalExercise>();
+                result = new List<MinimalExercise>();
             }
+
+            return result;
         }
     }
 }

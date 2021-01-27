@@ -105,6 +105,9 @@ namespace FHTW.CodeRunner.Services.AutoMapper
             this.CreateMap<SvcEntities.SearchExercise, BlEntities.SearchObject>()
                 .ForAllMembers(x => x.NullSubstitute(string.Empty));
 
+            this.CreateMap<SvcEntities.SearchCollection, BlEntities.SearchObject>()
+                .ForAllMembers(x => x.NullSubstitute(string.Empty));
+
             this.CreateMap<SvcEntities.ImportData, BlEntities.ImportData>()
                 .ForMember(p => p.XmlString, p => p.ConvertUsing<Converters.Base64Converter, string>(p => p.Base64XmlString));
 
