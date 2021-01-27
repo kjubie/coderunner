@@ -92,7 +92,7 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <param name="body">Options for filtering.</param>
         /// <returns>A list of collections in a minmal format.</returns>
         [HttpPost]
-        [Route("exercise/search")]
+        [Route("collection/search")]
         [SwaggerOperation("SearchAndFilterCollections")]
         [SwaggerResponse(statusCode: 200, type: typeof(List<SvcEntities.MinimalCollection>), description: "Successful response")]
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
