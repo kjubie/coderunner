@@ -7,7 +7,7 @@ import { WrittenLanguage } from '../data-objects/written-language';
 import { Tag } from '../data-objects/tag';
 import { FormBuilder } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CollectionDataService } from './exercise-collection.data.service';
+import { CollectionDataService } from '../services/exercise-collection.data.service';
 import { CollectionExercise } from '../data-objects/exercise-collection/collection-exercise';
 import { Author } from '../data-objects/author';
 import { PrepareCreateExercise } from '../data-objects/create-exercise/prepare-create-exercise';
@@ -24,7 +24,6 @@ import { Router } from '@angular/router';
 export class ExerciseCollectionComponent implements OnInit{
   
   // TODO: Global Settings
-  // TODO: Finish Summary
   
   collection: Collection = new Collection();
   exerciseList: ExerciseHome[];
@@ -52,14 +51,14 @@ export class ExerciseCollectionComponent implements OnInit{
     private createExerciseService: CreateExerciseService,
     private router: Router
     ) {
-    this.newTagForm = formBuilder.group({
-        tagName: ''
-    });
+      this.newTagForm = formBuilder.group({
+          tagName: ''
+      });
 
-    this.existingTagForm = formBuilder.group({
-        tag: new Tag()
-    });
-}
+      this.existingTagForm = formBuilder.group({
+          tag: new Tag()
+      });
+    }
   
   ngOnInit() {
     this.createExerciseService.prepareExercise().subscribe(this.prepareExerciseObserver);
@@ -68,11 +67,6 @@ export class ExerciseCollectionComponent implements OnInit{
     this.exerciseList.forEach(exercise => {
       this.collectionExerciseList.push(new CollectionExercise(exercise.id));
     });
-  }
-
-  test() {
-    console.log(this.selectedGlobalLang);
-    console.log(this.selectedGlobalProgLang);
   }
 
   saveCollection() {
@@ -95,8 +89,6 @@ export class ExerciseCollectionComponent implements OnInit{
       this.globalLangs = [...this.dataLists.writtenLanguageList];
       this.globalProgLangs = this.dataLists.programmingLanguageList;
       this.existingTags = this.dataLists.tagList;
-      console.log(this.dataLists.tagList);
-      console.log(this.dataLists.writtenLanguageList);
 
       for (let idx = 0; idx < this.availableLangs.length; idx++) {
         // remove default written lang:

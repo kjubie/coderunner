@@ -4,13 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from "rxjs/operators";
 import { Collection } from '../data-objects/exercise-collection/collection';
+import { ImportCollection } from '../data-objects/import-collection/import-collection';
 
 @Injectable()
 export class CollectionDataService {
     sharedExerciseList: ExerciseHome[] = [];
 
     private createCollectionUrl = "https://localhost:5001/api/collection";
-    private prepareExerciseUrl = "https://localhost:5001/api/exercise/prepare";
+    private importCollectionUrl = "https://localhost:5001/api/import/collection";
 
   
     constructor(
@@ -23,6 +24,14 @@ export class CollectionDataService {
           tap((createdCollection: Collection) => console.log("collection saved to database: " + createdCollection)),
           catchError(this.handleError<Collection>('saveCollection', collection))
       );
+    }
+
+    importCollection(importCollection): Observable<ImportCollection> {
+      return this.http.post<ImportCollection>(this.importCollectionUrl, importCollection)
+        .pipe(
+          tap((createdCollection: ImportCollection) => console.log("collection saved to database: " + createdCollection)),
+          catchError(this.handleError<ImportCollection>('saveCollection', importCollection))
+      );      
     }
 
     /**

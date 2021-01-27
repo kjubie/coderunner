@@ -1,0 +1,26 @@
+h1 {
+    text-align: center;
+ }
+
+.contentSeperator {
+    border-top: rgb(53, 171, 240) solid 3px;
+    padding-top: 20px;
+ }
+
+input[type=text], input[type=number], textarea, select {
+    border-radius: 0px;
+    background-color: white;
+    border: rgb(129, 129, 129) solid 1.5px;
+    padding-left: 5px;
+ }
+
+.content-group {
+    background-color: #E4E4E4;
+    padding-bottom: 15px;
+}
+
+.errMsg {
+    color: rgb(255, 92, 92);
+    background-color: rgb(255, 222, 222);
+    padding: 10px;
+}
