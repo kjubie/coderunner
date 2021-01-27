@@ -45,5 +45,12 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
         /// </summary>
         /// <param name="exercise">The incoming exercise.</param>
         public void ValidateExercise(Exercise exercise);
+
+        /// <summary>
+        /// Function for filtering exercises.
+        /// </summary>
+        /// <param name="exerciseSearch">The search options for filtering.</param>
+        /// <returns>List of exercises in a minmal version.</returns>
+        public List<ExerciseShort> SearchAndFilter(ExerciseSearch exerciseSearch);
     }
 }

@@ -157,11 +157,38 @@ namespace FHTW.CodeRunner.Services.Controllers
         [HttpGet]
         [Route("exercise/short")]
         [SwaggerOperation("GetExerciseShort")]
-        [SwaggerResponse(statusCode: 200, type: typeof(SvcEntities.ExerciseShort), description: "Successful response")]
+        [SwaggerResponse(statusCode: 200, type: typeof(List<SvcEntities.ExerciseShort>), description: "Successful response")]
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
         public virtual IActionResult GetExerciseShort()
         {
             List<BlEntities.ExerciseShort> blExerciseShort = this.exerciseLogic.GetExerciseShortList();
+            var svcExerciseShort = this.mapper.Map<List<SvcEntities.ExerciseShort>>(blExerciseShort);
+
+            return this.Ok(svcExerciseShort);
+        }
+
+        /// <summary>
+        /// Searches and filters for a list of exercises.
+        /// </summary>
+        /// <param name="body">Options for filtering.</param>
+        /// <returns>A list of exercises in a minmal format.</returns>
+        [HttpPost]
+        [Route("exercise/search")]
+        [SwaggerOperation("SearchAndFilterExercises")]
+        [SwaggerResponse(statusCode: 200, type: typeof(List<SvcEntities.ExerciseShort>), description: "Successful response")]
+        [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
+        public virtual IActionResult SearchAndFilterExercises([FromBody] SvcEntities.ExerciseSearch body)
+        {
+            if (body == null)
+            {
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = "Exercise Search should not be null",
+                });
+            }
+
+            var blExerciseSearch = this.mapper.Map<BlEntities.ExerciseSearch>(body);
+            List<BlEntities.ExerciseShort> blExerciseShort = this.exerciseLogic.SearchAndFilter(blExerciseSearch);
             var svcExerciseShort = this.mapper.Map<List<SvcEntities.ExerciseShort>>(blExerciseShort);
 
             return this.Ok(svcExerciseShort);
