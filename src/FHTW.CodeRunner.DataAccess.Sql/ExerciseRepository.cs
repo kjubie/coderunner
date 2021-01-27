@@ -287,7 +287,11 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             // caseinsensitive search not available for iqueryiable
             HashSet<int> ids = this.context.ExerciseBody.AsNoTracking()
-                .Search(b => b.Description.ToLower(), b => b.Feedback.ToLower(), b => b.Hint.ToLower())
+                .Search(
+                        b => b.Description.ToLower(),
+                        b => b.Feedback.ToLower(),
+                        b => b.Hint.ToLower(),
+                        b => b.FkExerciseLanguage.FkExerciseVersion.FkUser.Name)
                     .Containing(searchTerm.ToLower())
                 .Search(b => b.FkProgrammingLanguage.Name)
                     .Containing(programming_language)
