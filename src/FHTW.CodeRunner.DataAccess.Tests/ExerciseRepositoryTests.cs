@@ -185,7 +185,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             {
                 IExerciseRepository rep = new ExerciseRepository(context);
 
-                var list = rep.SearchAndFilter("fhtw", "C++", "English");
+                var list = rep.SearchAndFilter("unit", "C++", "German");
 
                 Assert.IsNotNull(list);
             }*/
