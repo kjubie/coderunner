@@ -285,9 +285,10 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 throw new ArgumentNullException("searchterms and filters should not be null, use \"\" for wildcard search");
             }
 
+            // caseinsensitive search not available for iqueryiable
             HashSet<int> ids = this.context.ExerciseBody.AsNoTracking()
-                .Search(b => b.Description, b => b.Feedback, b => b.Hint)
-                    .Containing(searchTerm)
+                .Search(b => b.Description.ToLower(), b => b.Feedback.ToLower(), b => b.Hint.ToLower())
+                    .Containing(searchTerm.ToLower())
                 .Search(b => b.FkProgrammingLanguage.Name)
                     .Containing(programming_language)
                 .Search(b => b.FkExerciseLanguage.FkWrittenLanguage.Name)
