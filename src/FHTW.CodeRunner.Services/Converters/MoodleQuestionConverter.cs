@@ -22,7 +22,7 @@ namespace FHTW.CodeRunner.Services.Converters
         public BlEntities.Exercise Convert(BlEntities.ImportData source, BlEntities.Exercise destination, ResolutionContext context)
         {
             MarkdownHtmlHandler markdownHtmlHandler = new MarkdownHtmlHandler();
-            int x; // TODO: Test it!
+            int x;
 
             if (source?.Question == null)
             {
@@ -149,7 +149,6 @@ namespace FHTW.CodeRunner.Services.Converters
                     testSuite.TestCase.Add(exerciseTestCase);
                 }
             }
-            
 
             exerciseBody.FkTestSuite = testSuite;
             exerciseLanguage.ExerciseBody.Add(exerciseBody);
