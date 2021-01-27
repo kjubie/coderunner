@@ -42,10 +42,18 @@ namespace FHTW.CodeRunner.BusinessLogic
         /// <inheritdoc/>
         public List<BlEntities.MinimalCollection> GetMinimalCollectionList()
         {
-            var dalCollectionList = this.collectionRepository.GetMinimalCollections();
-            var blCollectionList = this.mapper.Map<List<BlEntities.MinimalCollection>>(dalCollectionList);
+            try
+            {
+                var dalCollectionList = this.collectionRepository.GetMinimalCollections();
+                var blCollectionList = this.mapper.Map<List<BlEntities.MinimalCollection>>(dalCollectionList);
 
-            return blCollectionList;
+                return blCollectionList;
+            }
+            catch (Exception e)
+            {
+                this.logger.LogError(e.Message);
+                throw new BlDataAccessException("Unable to retrieve a list of collections from the DAL!", e);
+            }
         }
 
         /// <inheritdoc/>
@@ -58,15 +66,23 @@ namespace FHTW.CodeRunner.BusinessLogic
             }
             else
             {
-                if (collection.Created == null)
+                try
                 {
-                    collection.Created = DateTime.Now;
+                    if (collection.Created == null)
+                    {
+                        collection.Created = DateTime.Now;
+                    }
+
+                    var dalCollection = this.mapper.Map<DalEntities.Collection>(collection);
+
+                    this.collectionRepository.CreateOrUpdate(dalCollection);
+                    this.logger.LogInformation("BL passing Collection with Title: " + collection.Title + " to DAL.");
                 }
-
-                var dalCollection = this.mapper.Map<DalEntities.Collection>(collection);
-
-                this.collectionRepository.CreateOrUpdate(dalCollection);
-                this.logger.LogInformation("BL passing Collection with Title: " + collection.Title + " to DAL.");
+                catch (Exception e)
+                {
+                    this.logger.LogError(e.Message);
+                    throw new BlDataAccessException("Unable to save the collection " + collection.Title, e);
+                }
             }
         }
 
@@ -80,12 +96,21 @@ namespace FHTW.CodeRunner.BusinessLogic
             }
             else
             {
-                this.logger.LogInformation($"BL searching for Collections, Search Term {searchObject.SearchTerm} and Written Language {searchObject.WrittenLanguage}.");
-                var dalCollectionList = new List<DalEntities.MinimalCollection>();
-                // var dalCollectionList = this.collectionRepository.SearchAndFilter(searchObject.SearchTerm, searchObject.ProgrammingLanguage, searchObject.WrittenLanguage);
-                var blCollectionList = this.mapper.Map<List<BlEntities.MinimalCollection>>(dalCollectionList);
+                try
+                {
+                    this.logger.LogInformation($"BL searching for Collections, Search Term {searchObject.SearchTerm} and Written Language {searchObject.WrittenLanguage}.");
+                    var dalCollectionList = new List<DalEntities.MinimalCollection>();
 
-                return blCollectionList;
+                    // var dalCollectionList = this.collectionRepository.SearchAndFilter(searchObject.SearchTerm, searchObject.ProgrammingLanguage, searchObject.WrittenLanguage);
+                    var blCollectionList = this.mapper.Map<List<BlEntities.MinimalCollection>>(dalCollectionList);
+
+                    return blCollectionList;
+                }
+                catch (Exception e)
+                {
+                    this.logger.LogError(e.Message);
+                    throw new BlDataAccessException("Unable to search and filter for collections", e);
+                }
             }
         }
     }

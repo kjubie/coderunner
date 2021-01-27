@@ -12,8 +12,17 @@ using Microsoft.Extensions.Logging;
 
 namespace FHTW.CodeRunner.Services.Helpers
 {
+    /// <summary>
+    /// Handler for the styling and creation od html code blocks.
+    /// </summary>
     public class HtmlCodeBlockHandler
     {
+        /// <summary>
+        /// Function for creating the html code block.
+        /// </summary>
+        /// <param name="codeString">The unstyled html code string.</param>
+        /// <param name="lexer">The lexer for the correct styling (https://pygments.org/docs/lexers/).</param>
+        /// <returns>The formatted code block.</returns>
         public string CreateHtmlCodeBlock(string codeString, string lexer)
         {
             string baseUrl = @"http://hilite.me/api";
