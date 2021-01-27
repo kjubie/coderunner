@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
 namespace FHTW.CodeRunner.DataAccess.Entities
@@ -20,6 +22,52 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     [NotMapped]
     public class MinimalExercise
     {
+        /// <summary>
+        /// Gets the projection for MinimalExercise from Exercise.
+        /// </summary>
+        public static Expression<Func<Exercise, MinimalExercise>> Projection
+        {
+            get
+            {
+                return m => new MinimalExercise()
+                {
+                    Id = m.Id,
+                    Title = m.Title,
+                    Created = m.Created,
+                    User = m.FkUser,
+                    TagList = m.ExerciseTag
+                            .Select(et => new Tag()
+                            {
+                                Id = et.FkTagId,
+                                Name = et.FkTag.Name,
+                            })
+                            .ToList(),
+                    WrittenLanguageList = m.ExerciseVersion
+                            .Where(v => v.VersionNumber == m.ExerciseVersion.Max(vn => vn.VersionNumber))
+                            .FirstOrDefault().ExerciseLanguage
+                            .Select(el => new WrittenLanguage()
+                            {
+                                Id = el.FkWrittenLanguageId,
+                                Name = el.FkWrittenLanguage.Name,
+                            })
+                            .ToList(),
+                    ProgrammingLanguageList = m.ExerciseVersion
+                            .Where(v => v.VersionNumber == m.ExerciseVersion.Max(vn => vn.VersionNumber))
+                            .FirstOrDefault().ExerciseLanguage
+                            .SelectMany(el => el.ExerciseBody.Select(eb => new ProgrammingLanguage()
+                            {
+                                Id = eb.FkProgrammingLanguageId,
+                                Name = eb.FkProgrammingLanguage.Name,
+                            }))
+                            .ToHashSet(new ProgrammingLanguageComparator())
+                            .ToList(),
+                    VersionList = m.ExerciseVersion
+                            .Select(v => v.VersionNumber)
+                            .ToList(),
+                };
+            }
+        }
+
         /// <summary>
         /// Gets the id of the exercise.
         /// </summary>

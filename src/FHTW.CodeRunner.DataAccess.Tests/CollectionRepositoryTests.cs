@@ -144,7 +144,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 
                 rep.CreateOrUpdate(collection);
 
-                var added = rep.GetById(2, Mode.ReadOnly);
+                var added = rep.GetById(2);
 
                 Assert.IsNotNull(added, "This tests assumes that only one exercise with the id = 1 is in the seeded testdb");
                 Assert.IsNotNull(added.CollectionExercise);
@@ -219,11 +219,11 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 
                 var collection = JsonSerializer.Deserialize<Collection>(json, options);
 
-                var old = rep.GetById(1, Mode.ReadOnly);
+                var old = rep.GetById(1);
 
                 rep.CreateOrUpdate(collection);
 
-                var new_c = rep.GetById(1, Mode.ReadOnly);
+                var new_c = rep.GetById(1);
 
                 Assert.IsNotNull(new_c);
                 Assert.IsNotNull(new_c.CollectionExercise);
@@ -295,7 +295,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
 
                 rep.CreateOrUpdate(collection);
 
-                var added = rep.GetById(2, Mode.ReadOnly);
+                var added = rep.GetById(2);
 
                 Assert.IsNotNull(added, "This tests assumes that only one exercise with the id = 1 is in the seeded testdb");
                 Assert.IsNotNull(added.CollectionExercise);

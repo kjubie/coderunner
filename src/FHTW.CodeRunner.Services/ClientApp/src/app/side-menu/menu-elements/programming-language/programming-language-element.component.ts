@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { TestCase } from "src/app/data-objects/create-exercise/test-case";
 import { ProgrammingLanguage } from "src/app/data-objects/programming-language";
 
 @Component({
@@ -15,6 +16,8 @@ export class ProgrammingLanguageElementComponent implements OnInit {
 
     @Output() selectElementEvent = new EventEmitter<string>();
     @Output() removePLangEvent = new EventEmitter<ProgrammingLanguage>();
+    @Output() addNewTestCaseEvent = new EventEmitter<TestCase>();
+    @Output() removeTestCaseEvent = new EventEmitter<number>();
 
     programmingLang;
     testCases = [];
@@ -30,6 +33,7 @@ export class ProgrammingLanguageElementComponent implements OnInit {
         var index = this.testCases.length + 1;
         var testCase = 'Test ' + index.toString();
         this.testCases.push(testCase);
+        this.addNewTestCaseEvent.emit(new TestCase());
     }
 
     collapseList(listName: string, idx: string) {
@@ -80,6 +84,7 @@ export class ProgrammingLanguageElementComponent implements OnInit {
         if (this.testCases.indexOf(test) != -1) {
             let i = this.testCases.indexOf(test);
             this.testCases.splice(i, 1);
+            this.removeTestCaseEvent.emit(i);
         }
     }
 

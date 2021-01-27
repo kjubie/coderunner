@@ -31,7 +31,7 @@
     <mat-divider class="blue"></mat-divider>
     <div class="blue" *ngIf="showBodyList">
       <ul *ngFor="let lang of programmingLang; let idx = index">
-        <programming-language-element [lang]="lang" [writtenLang]="writtenLang" [idx]="idx" [selectedElement]="selectedElement" (selectElementEvent)="setSelectedElement($event)" (removePLangEvent)="removePLang($event)"></programming-language-element>
+        <programming-language-element [lang]="lang" [writtenLang]="writtenLang" [idx]="idx" [selectedElement]="selectedElement" (selectElementEvent)="setSelectedElement($event)" (removePLangEvent)="removePLang($event)" (addNewTestCaseEvent)="addTestCase($event)" (removeTestCaseEvent)="removeTestCase($event)"></programming-language-element>
       </ul>
       <div ngbDropdown class="d-inline-block" *ngIf="isProgrammingLangAvailable">
         <button class="btn" id="addProgrammingLangBtn" ngbDropdownToggle>

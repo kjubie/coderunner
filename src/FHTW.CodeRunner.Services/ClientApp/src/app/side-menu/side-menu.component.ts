@@ -20,10 +20,10 @@ export class SideMenuComponent {
     @Output() addProgrammingLangEvent = new EventEmitter<ProgrammingLanguage>();
     @Output() removeProgrammingLangEvent = new EventEmitter<ProgrammingLanguage>();
     @Output() addTestCaseEvent = new EventEmitter<TestCase>();
+    @Output() removeTestCaseEvent = new EventEmitter<number>();
 
     writtenLang = [{id: 1, name: "English"}];
     programmingLang: ProgrammingLanguage[] = [];
-    testCases = ["Test"];
 
     showHeadList = true;
     showLanguageList = true;
@@ -56,9 +56,12 @@ export class SideMenuComponent {
         }
     }
 
-    addTestCase() {
-        this.testCases.push("Test");
-        this.addTestCaseEvent.emit(new TestCase());
+    addTestCase(test: TestCase) {
+        this.addTestCaseEvent.emit(test);
+    }
+
+    removeTestCase(idx: number) {
+        this.removeTestCaseEvent.emit(idx);
     }
 
     collapseList(listName: string) {
