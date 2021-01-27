@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
 namespace FHTW.CodeRunner.DataAccess.Entities
@@ -20,6 +22,26 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     [NotMapped]
     public class MinimalCollection
     {
+        /// <summary>
+        /// Gets projection from Collection to MinimalCollection.
+        /// </summary>
+        public static Expression<Func<Collection, MinimalCollection>> FromCollection
+        {
+            get
+            {
+                return c => new MinimalCollection()
+                {
+                    Id = c.Id,
+                    Title = c.Title,
+                    Created = c.Created,
+                    ExerciseCount = c.CollectionExercise.Count,
+                    User = c.FkUser,
+                    WrittenLanguageList = c.CollectionLanguage.Select(cl => cl.FkWrittenLanguage).ToList(),
+                    TagList = c.CollectionTag.Select(ct => ct.FkTag).ToList(),
+                };
+            }
+        }
+
         /// <summary>
         /// Gets the id of the collection.
         /// </summary>

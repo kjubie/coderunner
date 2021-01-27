@@ -41,7 +41,8 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         public List<MinimalExercise> GetMinimalList();
 
         /// <summary>
-        /// Searches in exercise fields and applies programming and written lanugage filters.
+        /// Searches in titel, description, tags, user, feedback and hint.
+        /// Filters by programming and written lanugage.
         /// Throws ArgumentNullException if any parameter is null.
         /// </summary>
         /// <param name="searchTerm">The searchterm to search for.</param>

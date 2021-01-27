@@ -308,6 +308,23 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             }
         }
 
+        [Test]
+        public void ShouldSearch()
+        {
+            /*
+            this.SetupDatabaseReal(DbTestController.State.SEEDEDJSON);
+            using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
+            {
+                ICollectionRepository rep = new CollectionRepository(context);
+
+                var list = rep.SearchAndFilter("Kurz", "German");
+
+                Assert.NotNull(list);
+            }*/
+
+            Assert.True(true);
+        }
+
         private void SetupDatabaseReal(DbTestController.State state) => this.testDb = CodeRunnerTestDb.AsRealTestDb(state);
 
         private void SetupDatabaseInMemory(DbTestController.State state) => this.testDb = CodeRunnerTestDb.AsInMemoryDb(state);

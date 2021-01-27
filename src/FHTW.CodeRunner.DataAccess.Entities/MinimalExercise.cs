@@ -25,7 +25,7 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         /// <summary>
         /// Gets the projection for MinimalExercise from Exercise.
         /// </summary>
-        public static Expression<Func<Exercise, MinimalExercise>> Projection
+        public static Expression<Func<Exercise, MinimalExercise>> FromExercise
         {
             get
             {

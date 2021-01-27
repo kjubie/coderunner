@@ -9,6 +9,7 @@ using FHTW.CodeRunner.DataAccess.Entities;
 using FHTW.CodeRunner.DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using NinjaNye.SearchExtensions;
 
 namespace FHTW.CodeRunner.DataAccess.Sql
 {
@@ -182,17 +183,56 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         public List<MinimalCollection> GetMinimalCollections()
         {
             return this.context.Collection.AsNoTracking()
-                .Select(c => new MinimalCollection
-                {
-                    Id = c.Id,
-                    Title = c.Title,
-                    Created = c.Created,
-                    ExerciseCount = c.CollectionExercise.Count,
-                    User = c.FkUser,
-                    WrittenLanguageList = c.CollectionLanguage.Select(cl => cl.FkWrittenLanguage).ToList(),
-                    TagList = c.CollectionTag.Select(ct => ct.FkTag).ToList(),
-                })
+                .Select(MinimalCollection.FromCollection)
                 .ToList();
+        }
+
+        /// <inheritdoc/>
+        public List<MinimalCollection> SearchAndFilter(string search_term, string written_language)
+        {
+            HashSet<int> ids = this.context.CollectionLanguage
+                .Search(
+                        c => c.FullTitle.ToLower(),
+                        c => c.ShortTitle.ToLower(),
+                        c => c.Introduction.ToLower(),
+                        c => c.FkCollection.Title.ToLower(),
+                        c => c.FkCollection.FkUser.Name.ToLower())
+                    .Containing(search_term.ToLower())
+                .Select(c => c.FkCollectionId)
+                .ToHashSet();
+
+            HashSet<int> ids_from_tag_search = this.context.CollectionTag
+                .Search(ct => ct.FkTag.Name.ToLower())
+                    .Containing(search_term.ToLower())
+                .Select(c => c.FkCollectionId)
+                .ToHashSet();
+
+            if (written_language != string.Empty)
+            {
+                HashSet<int> ids_from_filters = this.context.CollectionLanguage
+                    .Search(cl => cl.FkWrittenLanguage.Name)
+                        .Containing(written_language)
+                    .Select(c => c.FkCollectionId)
+                    .ToHashSet();
+
+                ids.IntersectWith(ids_from_filters);
+            }
+
+            List<MinimalCollection> result;
+
+            if (ids.Count > 0)
+            {
+                result = this.context.Collection
+                    .Where(c => ids.Contains(c.Id))
+                    .Select(MinimalCollection.FromCollection)
+                    .ToList();
+            }
+            else
+            {
+                result = new List<MinimalCollection>();
+            }
+
+            return result;
         }
     }
 }

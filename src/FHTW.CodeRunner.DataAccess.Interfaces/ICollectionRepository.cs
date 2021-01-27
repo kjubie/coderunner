@@ -65,5 +65,17 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// </summary>
         /// <returns>list of minimal collections.</returns>
         List<MinimalCollection> GetMinimalCollections();
+
+        /// <summary>
+        /// Searches in tags, titles and introduction of the exercise.
+        /// Filters by written language of the collection.
+        /// </summary>
+        /// <param name="search_term">the term to search for.</param>
+        /// <param name="written_language">
+        ///     the written language to filter by.
+        ///     use string.Empty to not use filter.
+        /// </param>
+        /// <returns>list of minimal collections.</returns>
+        List<MinimalCollection> SearchAndFilter(string search_term, string written_language);
     }
 }
