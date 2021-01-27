@@ -13,7 +13,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
     /// Gets or sets a minmal version of an exercise.
     /// </summary>
     [ExcludeFromCodeCoverage]
-    public class ExerciseShort
+    public class MinimalExercise
     {
         /// <summary>
         /// Gets or sets the id.
