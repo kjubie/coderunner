@@ -21,34 +21,35 @@ namespace FHTW.CodeRunner.DataAccess.Entities
     /// </summary>
     [ExcludeFromCodeCoverage]
     [NotMapped]
-    public class CollectionView
+    public class MinimalCollectionExercise
     {
         /// <summary>
-        /// Gets projection from Collection to MinimalCollection.
+        /// Gets projection from Collection to MinimalCollectionExercise.
         /// </summary>
-        public static Expression<Func<Collection, CollectionView>> FromCollection
+        public static Expression<Func<CollectionExercise, MinimalCollectionExercise>> FromCollectionExercise
         {
             get
             {
-                return c => new CollectionView()
+                return c => new MinimalCollectionExercise()
                 {
-                    Id = c.Id,
-                    Title = c.Title,
-                    Created = c.Created,
-                    User = c.FkUser,
-                    CollectionLanguages = c.CollectionLanguage.ToList(),
-                    TagList = c.CollectionTag.Select(ct => ct.FkTag).ToList(),
+                    ExerciseId = c.FkExerciseId,
+                    Title = c.FkExercise.Title,
+                    Created = c.FkExercise.Created,
+                    User = c.FkExercise.FkUser,
+                    WrittenLanguage = c.FkWrittenLanguage.Name,
+                    ProgrammingLanguage = c.FkProgrammingLanguage.Name,
+                    Version = c.VersionNumber,
                 };
             }
         }
 
         /// <summary>
-        /// Gets the id of the collection.
+        /// Gets the id of the exercise.
         /// </summary>
-        public int Id { get; init; }
+        public int ExerciseId { get; init; }
 
         /// <summary>
-        /// Gets the title of the collection.
+        /// Gets the title of the exercise.
         /// </summary>
         public string Title { get; init; }
 
@@ -63,18 +64,18 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         public User User { get; init; }
 
         /// <summary>
-        /// Gets the collection lanugages.
+        /// Gets the selected written language.
         /// </summary>
-        public List<CollectionLanguage> CollectionLanguages { get; init; }
+        public string WrittenLanguage { get; init; }
 
         /// <summary>
-        /// Gets a list of tags.
+        /// Gets the selected programming language.
         /// </summary>
-        public List<Tag> TagList { get; init; }
+        public string ProgrammingLanguage { get; init; }
 
         /// <summary>
-        /// Gets or Sets the collection exercises.
+        /// Gets the selected version.
         /// </summary>
-        public List<MinimalCollectionExercise> MinimalCollectionExercises { get; set; }
+        public int Version { get; init; }
     }
 }

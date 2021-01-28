@@ -46,7 +46,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         [Test]
         public void ShouldGetCollectionView()
         {
-            /*
+            
             // Cannot be tested with sqlite
             this.SetupDatabaseReal(DbTestController.State.SEEDEDJSON);
             using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
@@ -56,7 +56,7 @@ namespace FHTW.CodeRunner.DataAccess.Tests
                 var list = rep.GetCollectionView(1);
 
                 Assert.NotNull(list);
-            }*/
+            }
 
             Assert.True(true);
         }
