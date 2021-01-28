@@ -14,49 +14,49 @@
         <div class="from-group content-group row">
             <label for="testcase" class="col-2 col-form-label">Testcase</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="testcase" name="testcase" rows="5" [(ngModel)]="testCase.testCode"></textarea>
+                <textarea class="form-control-plaintext" id="testcase" name="testcase" rows="5" [(ngModel)]="testCase.testCode" (ngModelUpdate)="this.testCaseChangeEvent.emit(this.testCase)"></textarea>
             </div>
 
             <label for="orderUsed" class="col-2 col-form-label">Order Used</label>
             <div class="col-10">
-                <input type="number" class="form-control-plaintext" id="orderUsed" name="orderUsed" [(ngModel)]="testCase.orderUsed">
+                <input type="number" class="form-control-plaintext" id="orderUsed" name="orderUsed" [(ngModel)]="testCase.orderUsed" (ngModelUpdate)="this.testCaseChangeEvent.emit(this.testCase)">
             </div>
 
             <label for="stdin" class="col-2 col-form-label">Standard Input</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="stdin" name="stdin" rows="5" [(ngModel)]="testCase.standardInput"></textarea>
+                <textarea class="form-control-plaintext" id="stdin" name="stdin" rows="5" [(ngModel)]="testCase.standardInput" (ngModelUpdate)="this.testCaseChangeEvent.emit(this.testCase)"></textarea>
             </div>
 
             <label for="output" class="col-2 col-form-label">Expected Output</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="output" name="output" rows="5" [(ngModel)]="testCase.expectedOutput"></textarea>
+                <textarea class="form-control-plaintext" id="output" name="output" rows="5" [(ngModel)]="testCase.expectedOutput" (ngModelUpdate)="this.testCaseChangeEvent.emit(this.testCase)"></textarea>
             </div>
 
             <label for="additionalData" class="col-2 col-form-label">Extra Data</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="additionalData" name="additionalData" rows="5" [(ngModel)]="testCase.additionalData"></textarea>
+                <textarea class="form-control-plaintext" id="additionalData" name="additionalData" rows="5" [(ngModel)]="testCase.additionalData" (ngModelUpdate)="this.testCaseChangeEvent.emit(this.testCase)"></textarea>
             </div>
 
             <label for="show" class="col-2 col-form-label">Display</label>
             <div class="col-10">
-                <select class="form-control col-2" id="show" name="show" [(ngModel)]="testCase.displayType">
+                <select class="form-control col-2" id="show" name="show" [(ngModel)]="testCase.displayType" (ngModelUpdate)="this.testCaseChangeEvent.emit(this.testCase)">
                     <option *ngFor="let type of displayTypes" [ngValue]="type.value">{{ type.key }}</option>
                 </select>
             </div>
 
             <label for="useAsExample" class="col-2 col-form-label">Use as Example</label>
             <div class="col-10">
-                <input type="checkbox" id="useAsExample" name="useAsExample" [(ngModel)]="testCase.useAsExampleFlag">
+                <input type="checkbox" id="useAsExample" name="useAsExample" [(ngModel)]="testCase.useAsExampleFlag" (ngModelUpdate)="this.testCaseChangeEvent.emit(this.testCase)">
             </div>
 
             <label for="hideOnFail" class="col-2 col-form-label">Hide Rest if Fail</label>
             <div class="col-10">
-                <input type="checkbox" id="hideOnFail" name="hideOnFail" [(ngModel)]="testCase.hideOnFailFlag">
+                <input type="checkbox" id="hideOnFail" name="hideOnFail" [(ngModel)]="testCase.hideOnFailFlag" (ngModelUpdate)="this.testCaseChangeEvent.emit(this.testCase)">
             </div>
 
             <label for="points" class="col-2 col-form-label">Points</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-2" id="points" name="points" [(ngModel)]="testCase.points">
+                <input type="text" class="form-control-plaintext col-2" id="points" name="points" [(ngModel)]="testCase.points" (ngModelUpdate)="this.testCaseChangeEvent.emit(this.testCase)">
             </div>
         </div>
     </form>

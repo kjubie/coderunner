@@ -41,7 +41,7 @@ export class ImportComponent implements OnInit {
   }
 
   importCollectionObserver = {
-    next: x => { this.import = x },
+    next: x => { this.Import = x },
     error: err => console.error('Observer got an error: ' + err),
     complete: () => {
       console.log("Collection was saved to database")
@@ -49,7 +49,7 @@ export class ImportComponent implements OnInit {
     }
   }
 
-  import() {
+  Import() {
     this.importCollection.base64XmlString = this.fileContent;
     this.importCollection.user = new Author();
     this.importCollection.user.id = (localStorage.getItem('user_id') !== null) ? parseInt(localStorage.getItem('user_id')) : 0;
@@ -76,7 +76,7 @@ export class ImportComponent implements OnInit {
     }
   }
 
-  cancel() {
+  Cancel() {
     this.router.navigate(['/']);
   }
 

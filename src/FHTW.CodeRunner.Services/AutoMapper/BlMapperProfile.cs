@@ -102,6 +102,8 @@ namespace FHTW.CodeRunner.Services.AutoMapper
 
             this.CreateMap<BlEntities.CollectionView, SvcEntities.CollectionView>();
 
+            this.CreateMap<BlEntities.MinimalCollectionExercise, SvcEntities.MinimalCollectionExercise>();
+
             this.CreateMap<SvcEntities.ExerciseKeys, BlEntities.CollectionExercise>();
 
             this.CreateMap<SvcEntities.SearchExercise, BlEntities.SearchObject>()

@@ -239,6 +239,8 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         public CollectionView GetCollectionView(int id)
         {
             CollectionView collection_view = this.context.Collection.AsNoTracking()
+                .Include(c => c.CollectionLanguage)
+                    .ThenInclude(cl => cl.FkWrittenLanguage)
                 .Where(c => c.Id == id)
                 .Select(CollectionView.FromCollection)
                 .SingleOrDefault();
@@ -248,11 +250,10 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 throw new DalException($"GetCollectionView failed, no collection with id = {id} exists");
             }
 
-            ExerciseRepository exerciseRepository = new ExerciseRepository(this.context);
-
-            var exercise_ids = collection_view.CollectionExercises.Select(ce => ce.FkExerciseId).ToList();
-
-            collection_view.MinimalExercises = exerciseRepository.GetMinimalList(exercise_ids);
+            collection_view.MinimalCollectionExercises = this.context.CollectionExercise.AsNoTracking()
+                .Where(c => c.FkCollectionId == id)
+                .Select(MinimalCollectionExercise.FromCollectionExercise)
+                .ToList();
 
             return collection_view;
         }

@@ -12,22 +12,22 @@
         <div class="from-group content-group row">
             <label for="title" class="col-2 col-form-label">Title</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext" id="title" name="title" [(ngModel)]="exercise.title">
+                <input type="text" class="form-control-plaintext" id="title" name="title" [(ngModel)]="exercise.title" (ngModelUpdate)="this.exerciseChangeEvent.emit(this.exercise)">
             </div>
 
             <label for="param" class="col-2 col-form-label">Template Parameters</label>
             <div class="col-10">
-                <textarea type="text" class="form-control-plaintext" rows="4" id="param" name="param" placeholder="Template Parameters" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParam"></textarea>
+                <textarea type="text" class="form-control-plaintext" rows="4" id="param" name="param" placeholder="Template Parameters" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParam" (ngModelUpdate)="this.exerciseChangeEvent.emit(this.exercise)"></textarea>
             </div>
 
             <label for="twig" class="col-2 col-form-label">Twig Control</label>
             <div class="col-10 form-inline">
                 <div class="form-group col-3">
-                    <input type="checkbox" id="liftParam" name="liftParam" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParamLiftFlag">
+                    <input type="checkbox" id="liftParam" name="liftParam" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParamLiftFlag" (ngModelUpdate)="this.exerciseChangeEvent.emit(this.exercise)">
                     <p class="ml-3">Lift Template Parameters</p>
                 </div>
                 <div class="form-group col-3">
-                    <input type="checkbox" id="twigAll" name="twigAll" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.twigAllFlag">
+                    <input type="checkbox" id="twigAll" name="twigAll" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.twigAllFlag" (ngModelUpdate)="this.exerciseChangeEvent.emit(this.exercise)">
                     <p class="ml-3">Twig for All</p>
                 </div>
             </div>
