@@ -104,3 +104,7 @@ input[type=text], input[type=number], textarea, select {
    background-color: rgb(255, 222, 222);
    padding: 10px;
 }
+
+.redBorder {
+   border-color: rgb(255, 92, 92);
+}

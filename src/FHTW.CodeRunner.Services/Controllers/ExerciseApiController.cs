@@ -166,6 +166,53 @@ namespace FHTW.CodeRunner.Services.Controllers
         }
 
         /// <summary>
+        /// Saves an exercise to the system temporarily.
+        /// </summary>
+        /// <param name="body">An exercise.</param>
+        /// <returns>A Statuscode.</returns>
+        [HttpPost]
+        [Route("exercise/temporary")]
+        [SwaggerOperation("TemporarySaveExercise")]
+        [SwaggerResponse(statusCode: 200, type: typeof(SvcEntities.Exercise), description: "Successfully saved the exercise temporarily")]
+        [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "The operation failed due to an error.")]
+        public virtual IActionResult TemporarySaveExercise([FromBody] SvcEntities.Exercise body)
+        {
+            if (body == null)
+            {
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = "Exercise should not be null",
+                });
+            }
+
+            try
+            {
+                var blExercise = this.mapper.Map<BlEntities.Exercise>(body);
+
+                var blNewExercise = this.exerciseLogic.TemporarySaveExercise(blExercise);
+                var svcNexExercise = this.mapper.Map<SvcEntities.Exercise>(blNewExercise);
+
+                return this.Ok(svcNexExercise);
+            }
+            catch (BlValidationException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+        }
+
+        /// <summary>
         /// Validates an exercise.
         /// </summary>
         /// <param name="body">An exercise.</param>

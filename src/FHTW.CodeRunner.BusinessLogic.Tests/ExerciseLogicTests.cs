@@ -127,7 +127,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
                 }));
 
             var exerciseRepoMock = new Mock<IExerciseRepository>();
-            exerciseRepoMock.Setup(p => p.CreateAndUpdate(It.IsAny<DalEntities.Exercise>()));
+            exerciseRepoMock.Setup(p => p.Save(It.IsAny<DalEntities.Exercise>()));
 
             var uiRepoMock = new Mock<IUIRepository>();
 
@@ -162,7 +162,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
                 }));
 
             var exerciseRepoMock = new Mock<IExerciseRepository>();
-            exerciseRepoMock.Setup(p => p.CreateAndUpdate(It.IsAny<DalEntities.Exercise>()));
+            exerciseRepoMock.Setup(p => p.Save(It.IsAny<DalEntities.Exercise>()));
 
             var uiRepoMock = new Mock<IUIRepository>();
 
@@ -195,7 +195,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
                 }));
 
             var exerciseRepoMock = new Mock<IExerciseRepository>();
-            exerciseRepoMock.Setup(p => p.CreateAndUpdate(It.IsAny<DalEntities.Exercise>()));
+            exerciseRepoMock.Setup(p => p.Save(It.IsAny<DalEntities.Exercise>()));
 
             var uiRepoMock = new Mock<IUIRepository>();
 
@@ -230,7 +230,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
                 }));
 
             var exerciseRepoMock = new Mock<IExerciseRepository>();
-            exerciseRepoMock.Setup(p => p.CreateAndUpdate(It.IsAny<DalEntities.Exercise>()));
+            exerciseRepoMock.Setup(p => p.Save(It.IsAny<DalEntities.Exercise>()));
 
             var uiRepoMock = new Mock<IUIRepository>();
 
