@@ -161,7 +161,7 @@
                         <div class="from-group row">
                             <label for="questionType" class="col-2 col-form-label">Question Type</label>
                             <div class="col-10">
-                                <input type="text" id="questionType" name="questionType" readonly [value]="prog.testSuite.questionType.name">
+                                <input type="text" class="form-control-plaintext" id="questionType" name="questionType" readonly [value]="prog.testSuite.questionType.name">
                             </div>
             
                             <label for="templDebugging" class="col-2 col-form-label">Template Debugging</label>
@@ -172,20 +172,20 @@
                             <label for="precheck" class="col-2 col-form-label">Precheck</label>
                             <div class="col-10">
                                 <select disabled class="form-control" id="precheck" name="precheck" disabled>
-                                    <option *ngIf="prog.testSuite.preCheck == '0'">Deactivated</option>
-                                    <option *ngIf="prog.testSuite.preCheck == '1'">Empty</option>
-                                    <option *ngIf="prog.testSuite.preCheck == '2'">Examples</option>
-                                    <option *ngIf="prog.testSuite.preCheck == '3'">Selected</option>
-                                    <option *ngIf="prog.testSuite.preCheck == '4'">All</option>
+                                    <option *ngIf="prog.testSuite.preCheck == 'deactivated'">Deactivated</option>
+                                    <option *ngIf="prog.testSuite.preCheck == 'empty'">Empty</option>
+                                    <option *ngIf="prog.testSuite.preCheck == 'examples'">Examples</option>
+                                    <option *ngIf="prog.testSuite.preCheck == 'selected'">Selected</option>
+                                    <option *ngIf="prog.testSuite.preCheck == 'all'">All</option>
                                 </select>
                             </div>
             
                             <label for="feedback" class="col-2 col-form-label">Display Feedback</label>
                             <div class="col-10">
                                 <select disabled class="form-control" id="feedback" name="feedback" disabled>
-                                    <option *ngIf="prog.testSuite.generalFeedbackDisplay == '0'">Set by Test</option>
-                                    <option *ngIf="prog.testSuite.generalFeedbackDisplay == '1'">Force Show</option>
-                                    <option *ngIf="prog.testSuite.generalFeedbackDisplay == '2'">Force Hide</option>
+                                    <option *ngIf="prog.testSuite.generalFeedbackDisplay == 'setFromTest'">Set by Test</option>
+                                    <option *ngIf="prog.testSuite.generalFeedbackDisplay == 'forceDisplay'">Force Show</option>
+                                    <option *ngIf="prog.testSuite.generalFeedbackDisplay == 'forceHide'">Force Hide</option>
                                 </select>
                             </div>
             

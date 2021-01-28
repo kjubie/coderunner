@@ -124,31 +124,26 @@ export class CreateExerciseHelperService {
   } 
 
   copyBodyData(exercise: Exercise): Exercise {
-    let bodyToCopy: ExerciseBody = null;
+    let latestVersion = exercise.exerciseVersionList.length - 1;
+    let bodiesToCopy = exercise.exerciseVersionList[latestVersion].exerciseLanguageList[0].exerciseBody;
 
-    exercise.exerciseVersionList[0].exerciseLanguageList.forEach(el => {
-      if (bodyToCopy === null || !(el.exerciseBody[0].programmingLanguage === bodyToCopy.programmingLanguage)) {
-        bodyToCopy = el.exerciseBody[0];
+    console.log(bodiesToCopy);
+    console.log(exercise.exerciseVersionList[latestVersion].exerciseLanguageList.length);
+
+    for (let i = 1; i < exercise.exerciseVersionList[latestVersion].exerciseLanguageList.length; i++) {
+      console.log(exercise.exerciseVersionList[latestVersion].exerciseLanguageList[i].exerciseBody.length);
+      for (let j = 0; j < exercise.exerciseVersionList[latestVersion].exerciseLanguageList[i].exerciseBody.length; j++) {
+        let description = exercise.exerciseVersionList[latestVersion].exerciseLanguageList[i].exerciseBody[j].description;
+        let hint = exercise.exerciseVersionList[latestVersion].exerciseLanguageList[i].exerciseBody[j].hint;
+        let feedback = exercise.exerciseVersionList[latestVersion].exerciseLanguageList[i].exerciseBody[j].feedback;
+
+        exercise.exerciseVersionList[latestVersion].exerciseLanguageList[i].exerciseBody[j] = cloneDeep(bodiesToCopy[j]);
+
+        exercise.exerciseVersionList[latestVersion].exerciseLanguageList[i].exerciseBody[j].feedback = feedback;
+        exercise.exerciseVersionList[latestVersion].exerciseLanguageList[i].exerciseBody[j].description = description;
+        exercise.exerciseVersionList[latestVersion].exerciseLanguageList[i].exerciseBody[j].hint = hint;
       }
-      else {
-        el.exerciseBody[0].testSuite = bodyToCopy.testSuite;
-        el.exerciseBody[0].programmingLanguage = bodyToCopy.programmingLanguage;
-        el.exerciseBody[0].description = bodyToCopy.description;
-        el.exerciseBody[0].hint = bodyToCopy.hint;
-        el.exerciseBody[0].fieldLines = bodyToCopy.fieldLines;
-        el.exerciseBody[0].subtractSystem = bodyToCopy.subtractSystem;
-        el.exerciseBody[0].obtainablePoints = bodyToCopy.obtainablePoints;
-        el.exerciseBody[0].idNum = bodyToCopy.idNum;
-        el.exerciseBody[0].solution = bodyToCopy.solution;
-        el.exerciseBody[0].prefill = bodyToCopy.prefill;
-        el.exerciseBody[0].allowFiles = bodyToCopy.allowFiles;
-        el.exerciseBody[0].filesRequired = bodyToCopy.filesRequired;
-        el.exerciseBody[0].filesRegex = bodyToCopy.filesRegex;
-        el.exerciseBody[0].filesDescription = bodyToCopy.filesDescription;
-        el.exerciseBody[0].filesSize = bodyToCopy.filesSize;
-        el.exerciseBody[0].example = bodyToCopy.example;
-      }
-    });
+    }
 
     return exercise;
   }
