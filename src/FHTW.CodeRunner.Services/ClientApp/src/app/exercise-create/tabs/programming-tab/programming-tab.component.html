@@ -13,32 +13,32 @@
         <div class="from-group content-group row">
             <label for="fieldLines" class="col-2 col-form-label">Answerfield Lines</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-1" id="fieldLines" name="fieldLines" placeholder="20" [(ngModel)]="exerciseBody.fieldLines">
+                <input type="text" class="form-control-plaintext col-1" id="fieldLines" name="fieldLines" placeholder="20" [(ngModel)]="exerciseBody.fieldLines" (ngModelUpdate)="this.bodyChangeEvent.emit(this.exerciseBody)">
             </div>
 
             <label for="subSystem" class="col-2 col-form-label">Penalty System</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-3" id="subSystem" name="subSystem" placeholder="10, 20, ..." [(ngModel)]="exerciseBody.subtractSystem">
+                <input type="text" class="form-control-plaintext col-3" id="subSystem" name="subSystem" placeholder="10, 20, ..." [(ngModel)]="exerciseBody.subtractSystem" (ngModelUpdate)="this.bodyChangeEvent.emit(this.exerciseBody)">
             </div>
 
             <label for="points" class="col-2 col-form-label">Obtainable Points</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-1" id="points" name="points" [(ngModel)]="exerciseBody.obtainablePoints">
+                <input type="text" class="form-control-plaintext col-1" id="points" name="points" [(ngModel)]="exerciseBody.obtainablePoints" (ngModelUpdate)="this.bodyChangeEvent.emit(this.exerciseBody)">
             </div>
 
             <label for="idNum" class="col-2 col-form-label">ID-Number</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-1" id="idNum" name="idNum" [(ngModel)]="exerciseBody.idNum">
+                <input type="text" class="form-control-plaintext col-1" id="idNum" name="idNum" [(ngModel)]="exerciseBody.idNum" (ngModelUpdate)="this.bodyChangeEvent.emit(this.exerciseBody)">
             </div>
 
             <label for="answer" class="col-2 col-form-label">Answer</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="answer" name="answer" rows="4" [(ngModel)]="exerciseBody.solution"></textarea>
+                <textarea class="form-control-plaintext" id="answer" name="answer" rows="4" [(ngModel)]="exerciseBody.solution" (ngModelUpdate)="this.bodyChangeEvent.emit(this.exerciseBody)"></textarea>
             </div>
 
             <label for="prefillAnswer" class="col-2 col-form-label">Answer Preload</label>
             <div class="col-10">
-                <textarea class="form-control-plaintext" id="prefillAnswer" name="prefillAnswer" rows="4" [(ngModel)]="exerciseBody.prefill"></textarea>
+                <textarea class="form-control-plaintext" id="prefillAnswer" name="prefillAnswer" rows="4" [(ngModel)]="exerciseBody.prefill" (ngModelUpdate)="this.bodyChangeEvent.emit(this.exerciseBody)"></textarea>
             </div>
         </div>
 
@@ -47,7 +47,7 @@
 
             <label for="allowAttachments" class="col-2 col-form-label">Allow Attachments</label>
             <div class="col-10">
-                <select class="form-control col-3" name="allowAttachments" id="allowAttachments" [(ngModel)]="exerciseBody.allowFiles">
+                <select class="form-control col-3" name="allowAttachments" id="allowAttachments" [(ngModel)]="exerciseBody.allowFiles" (ngModelUpdate)="this.bodyChangeEvent.emit(this.exerciseBody)">
                     <option [ngValue]="0">No</option>
                     <option [ngValue]="1">1</option>
                     <option [ngValue]="2">2</option>
@@ -58,7 +58,7 @@
 
             <label for="neededAttachments" class="col-2 col-form-label">Required Attachments</label>
             <div class="col-10">
-                <select class="form-control col-3" name="neededAttachments" id="neededAttachments" [(ngModel)]="exerciseBody.filesRequired">
+                <select class="form-control col-3" name="neededAttachments" id="neededAttachments" [(ngModel)]="exerciseBody.filesRequired" (ngModelUpdate)="this.bodyChangeEvent.emit(this.exerciseBody)">
                     <option [ngValue]="0">Attachments are optional</option>
                     <option [ngValue]="1">1</option>
                     <option [ngValue]="2">2</option>
@@ -68,18 +68,18 @@
 
             <label for="regex" class="col-2 col-form-label">Regular Expression</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-3" name="regex" id="regex" [(ngModel)]="exerciseBody.filesRegex">
+                <input type="text" class="form-control-plaintext col-3" name="regex" id="regex" [(ngModel)]="exerciseBody.filesRegex" (ngModelUpdate)="this.bodyChangeEvent.emit(this.exerciseBody)">
             </div>
 
             <label for="regexDescription" class="col-2 col-form-label">RegEx Description</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext col-3" name="regexDescription" id="regexDescription" [(ngModel)]="exerciseBody.filesDescription">
+                <input type="text" class="form-control-plaintext col-3" name="regexDescription" id="regexDescription" [(ngModel)]="exerciseBody.filesDescription" (ngModelUpdate)="this.bodyChangeEvent.emit(this.exerciseBody)">
             </div>
 
             <!-- TODO: add filesizes -->
             <label for="maxDataSize" class="col-2 col-form-label">Max Filesize</label>
             <div class="col-10">
-                <select class="form-control col-3" name="fileSize" id="fileSize" [(ngModel)]="exerciseBody.filesSize">
+                <select class="form-control col-3" name="fileSize" id="fileSize" [(ngModel)]="exerciseBody.filesSize" (ngModelUpdate)="this.bodyChangeEvent.emit(this.exerciseBody)">
                     <option [ngValue]="0">10kB</option>
                 </select>
             </div>

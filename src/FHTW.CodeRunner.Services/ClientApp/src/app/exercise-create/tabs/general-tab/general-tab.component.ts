@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, Output, EventEmitter, DoCheck } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Exercise } from "src/app/data-objects/create-exercise/exercise";
@@ -10,10 +10,12 @@ import { Tag } from "src/app/data-objects/tag";
     templateUrl: './general-tab.component.html',
     styleUrls: ['../../exercise-create.component.css']
 })
-export class GeneralTabComponent implements OnInit {
+export class GeneralTabComponent {
 
     @Input() exercise: Exercise;
     @Input() existingTags: Tag[];
+
+    @Output() exerciseChangeEvent = new EventEmitter<Exercise>();
 
     newTagForm;
     existingTagForm;
@@ -26,19 +28,6 @@ export class GeneralTabComponent implements OnInit {
         this.existingTagForm = formBuilder.group({
             tag: new Tag()
         });
-    }
-
-    ngOnInit() {
-        if (this.existingTags === undefined || this.existingTags.length == 0) {
-            this.existingTags = [];
-            for (let i=0; i<5; i++) {
-                let tag = new Tag();
-                tag.id = i+1;
-                tag.name = 'Test ' + tag.id.toString();
-
-                this.existingTags.push(tag);
-            }
-        }
     }
 
     createNewTag(modalContent) {

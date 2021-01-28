@@ -66,13 +66,7 @@ export class CreateExerciseHelperService {
   addProgrammingLang(lang: ProgrammingLanguage, exercise: Exercise): Exercise {        
     // add programming lang for all written langs
     exercise.exerciseVersionList[0].exerciseLanguageList.forEach(el => {
-      // check if a programming lang already exists
-      if (el.exerciseBody[0].programmingLanguage.name == undefined) {
-        el.exerciseBody[0] = this.createNewBody(lang);
-      }
-      else {
-        el.exerciseBody.push(this.createNewBody(lang));
-      }
+      el.exerciseBody.push(this.createNewBody(lang));
     });
 
     return exercise;

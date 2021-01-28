@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, DoCheck, EventEmitter, Input, Output } from "@angular/core";
 import { ExerciseBody } from "src/app/data-objects/create-exercise/exercise-body";
 
 @Component({
@@ -9,4 +9,6 @@ import { ExerciseBody } from "src/app/data-objects/create-exercise/exercise-body
 export class ProgrammingTabComponent {
 
     @Input() exerciseBody: ExerciseBody;
+
+    @Output() bodyChangeEvent = new EventEmitter<ExerciseBody>();
 }
