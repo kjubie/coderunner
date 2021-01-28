@@ -217,4 +217,50 @@ export class ExerciseCollectionComponent implements OnInit{
         return `with: ${reason}`;
       }
     }
+
+  getClass(idx: number) {
+    if (this.selectedGlobalLang !== undefined && this.collectionExerciseList[idx].writtenLanguageId !== this.selectedGlobalLang) {
+      return 'redBorder';
+    }
+
+    return '';
+  }
+
+  getClassProg(idx: number) {
+    if (this.selectedGlobalProgLang !== undefined && this.collectionExerciseList[idx].programmingLanguageId !== this.selectedGlobalProgLang) {
+      return 'redBorder';
+    }
+
+    return '';
+  }
+
+  languageChangeEvent() {
+    for (let i = 0; i < this.exerciseList.length; i++) {
+      let found = false;
+      this.exerciseList[i].writtenLanguageList.forEach(lang => {
+        if (lang.id === this.selectedGlobalLang) {
+          found = true;
+        }
+      });
+
+      if (found) {
+        this.collectionExerciseList[i].writtenLanguageId = this.selectedGlobalLang;
+      }
+    }
+  }
+
+  pLanguageChangeEvent() {
+    for (let i = 0; i < this.exerciseList.length; i++) {
+      let found = false;
+      this.exerciseList[i].programmingLanguageList.forEach(lang => {
+        if (lang.id === this.selectedGlobalProgLang) {
+          found = true;
+        }
+      });
+
+      if (found) {
+        this.collectionExerciseList[i].programmingLanguageId = this.selectedGlobalProgLang;
+      }
+    }
+  }
 }

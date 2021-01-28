@@ -27,7 +27,10 @@ export class ExerciseListHomeService {
     // GET all collections from db (minimal)
     getAllCollections(): Observable<CollectionHome[]> {
       return this.http.get<CollectionHome[]>(this.getAllCollectionsUrl).pipe(
-        tap(_ => console.log('fetched all collections from db')),
+        tap(res => {
+          console.log(res);
+          console.log('fetched all collections from db')
+        }),
         catchError(this.handleError<CollectionHome[]>('getAllCollections'))
       );
     }
