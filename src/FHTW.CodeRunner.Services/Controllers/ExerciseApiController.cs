@@ -215,14 +215,16 @@ namespace FHTW.CodeRunner.Services.Controllers
         /// <summary>
         /// Validates an exercise.
         /// </summary>
+        /// <param name="id">The id of the exercise.</param>
+        /// <param name="version">The version of the exercise.</param>
         /// <param name="body">An exercise.</param>
         /// <returns>A Statuscode.</returns>
         [HttpPost]
-        [Route("exercise/validate")]
+        [Route("exercise/validate/{id}/{version}")]
         [SwaggerOperation("ValidateExercise")]
         [SwaggerResponse(statusCode: 200, description: "Successfully validated")]
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "The operation failed due to an error.")]
-        public virtual IActionResult ValidateExercise([FromBody] SvcEntities.Exercise body)
+        public virtual IActionResult ValidateExercise(int id, int version, [FromBody] SvcEntities.Exercise body)
         {
             if (body == null)
             {
@@ -236,7 +238,7 @@ namespace FHTW.CodeRunner.Services.Controllers
             {
                 var blExercise = this.mapper.Map<BlEntities.Exercise>(body);
 
-                this.exerciseLogic.ValidateExercise(blExercise);
+                this.exerciseLogic.ValidateExercise(blExercise, id, version);
                 return this.Ok();
             }
             catch (BlValidationException e)
