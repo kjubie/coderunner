@@ -14,6 +14,7 @@ export class CollectionDataService {
     collectionToShow: ShowCollection;
 
     private createCollectionUrl = "https://localhost:5001/api/collection";
+    private getCollectionUrl = "https://localhost:5001/api/collection/";
     private importCollectionUrl = "https://localhost:5001/api/import/collection";
 
   
@@ -45,8 +46,9 @@ export class CollectionDataService {
       );      
     }
 
-    showCollection(id: number): Observable<ShowCollection> {
-      return this.http.get<ShowCollection>("getCollectionUrl").pipe(
+    getCollection(id: number): Observable<ShowCollection> {
+      return this.http.get<ShowCollection>(this.getCollectionUrl + id)
+      .pipe(
         tap(_ => console.log("fetched collectio to show")),
         catchError(this.handleError<ShowCollection>('getCollection'))
       );

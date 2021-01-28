@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CollectionDataService } from '../../services/exercise-collection.data.service';
-import { CreateExerciseService } from '../../services/create-exercise.service';
 import { Router } from '@angular/router';
 import { ShowCollection } from 'src/app/data-objects/exercise-collection/show-collection';
 

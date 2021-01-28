@@ -150,9 +150,10 @@ export class HomeComponent implements OnInit {
   }
 
   viewCollectionObserver = {
-    next: x => { this.collectionDataService.showCollection = x },
+    next: x => { this.collectionDataService.collectionToShow = x },
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
+      console.log(this.collectionDataService.collectionToShow);
       this.router.navigate(['/show-collection']);
     }
   }
@@ -268,7 +269,8 @@ export class HomeComponent implements OnInit {
   }
 
   viewCollection(idx: number) {
-    this.collectionDataService.showCollection(this.collectionList[idx].id).subscribe(this.viewCollectionObserver);
+    idx += 1;
+    this.collectionDataService.getCollection(idx).subscribe(this.viewCollectionObserver);
   }
 
   switchLists() {
