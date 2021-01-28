@@ -10,6 +10,7 @@ using FHTW.CodeRunner.BusinessLogic.Exceptions;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using FHTW.CodeRunner.DataAccess.Interfaces;
 using FHTW.CodeRunner.DataAccess.Sql;
+using FHTW.CodeRunner.ExportService.Exceptions;
 using FHTW.CodeRunner.ExportService.Interfaces;
 using Microsoft.Extensions.Logging;
 using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
@@ -68,7 +69,12 @@ namespace FHTW.CodeRunner.BusinessLogic
 
                 return this.moodleXmlService.ExportMoodleXml(quiz);
             }
-            catch (DalException e)
+            catch (ExportXmlConversionException e)
+            {
+                this.logger.LogError(e.Message);
+                throw new BlDataAccessException("BL unable to export collection with id " + collectionKeys.Id + ".", e);
+            }
+            catch (Exception e)
             {
                 this.logger.LogError(e.Message);
                 throw new BlDataNotFoundException("Getting Collection Instance failed for Collection with Id: " + collectionKeys.Id, e);
@@ -105,7 +111,12 @@ namespace FHTW.CodeRunner.BusinessLogic
 
                 return this.moodleXmlService.ExportMoodleXml(quiz);
             }
-            catch (DalException e)
+            catch (ExportXmlConversionException e)
+            {
+                this.logger.LogError(e.Message);
+                throw new BlDataAccessException("BL unable to export Exercise with id " + exerciseKeys.Id + ".", e);
+            }
+            catch (Exception e)
             {
                 this.logger.LogError(e.Message);
                 throw new BlDataNotFoundException("Getting Exercise Instance failed for Exercise with Id: " + exerciseKeys.Id, e);

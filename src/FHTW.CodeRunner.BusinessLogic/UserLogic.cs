@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
+using FHTW.CodeRunner.BusinessLogic.Exceptions;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using FHTW.CodeRunner.DataAccess.Interfaces;
 using Microsoft.Extensions.Logging;
@@ -39,10 +40,24 @@ namespace FHTW.CodeRunner.BusinessLogic
         /// <inheritdoc/>
         public int? AuthenticateUser(BlEntities.User user)
         {
-            var dalUser = this.mapper.Map<DalEntities.User>(user);
-            int? result = this.userRepository.Authenticate(dalUser);
+            if (user == null)
+            {
+                this.logger.LogError("USer is null");
+                throw new BlValidationException("User is null", null);
+            }
 
-            return result;
+            try
+            {
+                var dalUser = this.mapper.Map<DalEntities.User>(user);
+                int? result = this.userRepository.Authenticate(dalUser);
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                this.logger.LogError(e.Message);
+                throw new BlDataAccessException("Unable to authenticate user " + user.Name, e);
+            }
         }
     }
 }

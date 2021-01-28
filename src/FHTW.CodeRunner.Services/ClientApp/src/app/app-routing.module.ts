@@ -4,6 +4,7 @@ import { AuthGuardService } from "./auth/authgard.service";
 import { ExerciseCollectionComponent } from "./exercise-collection/exercise-collection.component";
 import { ShowCollectionComponent } from "./exercise-collection/show-collection/show-collection.component";
 import { ExerciseCreateComponent } from "./exercise-create/exercise-create.component";
+import { SaveTabComponent } from "./exercise-create/tabs/save-tab/save-tab.component";
 import { HomeComponent } from "./home/home.component";
 import { ImportComponent } from "./import/import.component";
 import { LoginComponent } from "./login/login.component";
@@ -14,6 +15,7 @@ const appRoutes: Routes = [
     { path: 'show-collection', component: ShowCollectionComponent },
     { path: 'exercise-collection', component: ExerciseCollectionComponent, canActivate: [AuthGuardService] },
     { path: 'exercise-create', component: ExerciseCreateComponent, canActivate: [AuthGuardService] },
+    { path: 'exercise-view', component: SaveTabComponent, canActivate: [AuthGuardService] },
     { path: '**', component: HomeComponent, canActivate: [AuthGuardService] }
 ];
 

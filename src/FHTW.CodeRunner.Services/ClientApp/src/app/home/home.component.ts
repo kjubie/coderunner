@@ -12,6 +12,7 @@ import { CreateExerciseService } from '../services/create-exercise.service';
 import { Exercise } from '../data-objects/create-exercise/exercise';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { ExerciseCreateComponent } from '../exercise-create/exercise-create.component';
+import { PrepareCreateExercise } from '../data-objects/create-exercise/prepare-create-exercise';
 
 
 const routes: Routes = [
@@ -42,8 +43,9 @@ export class HomeComponent implements OnInit {
   exerciseForExport: ExerciseExport = new ExerciseExport();
   collectionForExport: CollectionExport = new CollectionExport();
   exerciseToEdit: Exercise = new Exercise();
-  languages = ['English', 'German'];
-  programmingLangs = ['C#', 'Java'];
+  languageData: PrepareCreateExercise;
+  languages: string[] = [];
+  programmingLangs: string[] = [];
 
   versionInvalid = false;
   wLangInvalid = false;
@@ -54,27 +56,28 @@ export class HomeComponent implements OnInit {
   constructor(private exerciseListHomeService: ExerciseListHomeService, private modalService: NgbModal, private exportService: ExerciseExportService, private collectionDataService: CollectionDataService, private createExerciseService: CreateExerciseService, private router: Router) {}
 
   ngOnInit() {
+    this.createExerciseService.prepareExercise().subscribe(this.prepareObserver);
     this.exerciseListHomeService.getAllExercies().subscribe(this.loadAllExercisesObserver);
     this.exerciseListHomeService.getAllCollections().subscribe(this.loadAllCollectionsObserver);
     this.createExerciseService.editExercise = undefined;
   }
 
-  languageDropdown() {
-    document.getElementById("languageDropdown").classList.toggle("show");
-    document.getElementById("languageDropdown").onmouseleave = function close() {
-      document.getElementById("languageDropdown").classList.toggle("show", false);
-    }
-  }
-
-  programmingDropdown() {
-    document.getElementById("programmingDropdown").classList.toggle("show");
-    document.getElementById("programmingDropdown").onmouseleave = function close() {
-      document.getElementById("programmingDropdown").classList.toggle("show", false);
-    }
-  }
-
   selectView(view: string) {
     this.viewSelected = view;
+  }
+
+  prepareObserver = {
+    next: x => { this.languageData = x },
+    error: err => { console.log('Observer got an error: ' + err) },
+    complete: () => {
+      this.languageData.writtenLanguageList.forEach(lang => {
+        this.languages.push(lang.name);
+      });
+
+      this.languageData.programmingLanguageList.forEach(lang => {
+        this.programmingLangs.push(lang.name);
+      });
+    }
   }
 
   loadAllExercisesObserver = {
@@ -138,7 +141,15 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  showCollectionObserver = {
+  viewExerciseObserver = {
+    next: x => { this.createExerciseService.viewExercise = x },
+    error: err => { console.log('Observer got an error: ' + err) },
+    complete: () => {
+      this.router.navigate(['/exercise-view']);
+    }
+  }
+
+  viewCollectionObserver = {
     next: x => { this.collectionDataService.showCollection = x },
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
@@ -248,16 +259,28 @@ export class HomeComponent implements OnInit {
 
   editExercise(idx: number) {
     idx += 1;
-    console.log('load complete exercise from the database');
     this.createExerciseService.getExercise(idx).subscribe(this.getExerciseObserver);
   }
 
-  showCollection(idx: number) {
+  viewExercise(idx: number) {
+    idx += 1;
+    this.createExerciseService.getExercise(idx).subscribe(this.viewExerciseObserver);
+  }
+
+  viewCollection(idx: number) {
     this.collectionDataService.showCollection(this.collectionList[idx].id).subscribe(this.showCollectionObserver);
   }
 
   switchLists() {
     this.showExercises = !this.showExercises;
+  }
+
+  setFilterLang(lang: string) {
+    this.searchFilter.writtenLanguage = lang;
+  }
+
+  setFilterPLang(lang: string) {
+    this.searchFilter.programmingLanguage = lang;
   }
 
   search() {
