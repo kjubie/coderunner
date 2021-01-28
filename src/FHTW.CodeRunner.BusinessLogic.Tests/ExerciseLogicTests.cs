@@ -195,7 +195,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
                 }));
 
             var exerciseRepoMock = new Mock<IExerciseRepository>();
-            exerciseRepoMock.Setup(p => p.Save(It.IsAny<DalEntities.Exercise>()));
+            exerciseRepoMock.Setup(p => p.UpdateValidState(It.IsAny<int>(), It.IsAny<int>(), DalEntities.ValidState.NotValid));
 
             var uiRepoMock = new Mock<IUIRepository>();
 
@@ -209,9 +209,12 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
                 .With(e => e.FkUser = new BlEntities.User() { Name = "Hans" })
                 .Build();
 
+            var exerciseId = 0;
+            var exerciseVersion = 0;
+
             // Act
             // Assert
-            Assert.DoesNotThrow(() => logic.ValidateExercise(validExercise));
+            Assert.DoesNotThrow(() => logic.ValidateExercise(validExercise, exerciseId, exerciseVersion));
         }
 
         /// <summary>
@@ -230,7 +233,7 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
                 }));
 
             var exerciseRepoMock = new Mock<IExerciseRepository>();
-            exerciseRepoMock.Setup(p => p.Save(It.IsAny<DalEntities.Exercise>()));
+            exerciseRepoMock.Setup(p => p.UpdateValidState(It.IsAny<int>(), It.IsAny<int>(), DalEntities.ValidState.NotValid));
 
             var uiRepoMock = new Mock<IUIRepository>();
 
@@ -241,9 +244,12 @@ namespace FHTW.CodeRunner.BusinessLogic.Tests
 
             BlEntities.Exercise nullExercise = null;
 
+            var exerciseId = 0;
+            var exerciseVersion = 0;
+
             // Act
             // Assert
-            Assert.Throws<BlValidationException>(() => logic.ValidateExercise(nullExercise));
+            Assert.Throws<BlValidationException>(() => logic.ValidateExercise(nullExercise, exerciseId, exerciseVersion));
         }
     }
 }
