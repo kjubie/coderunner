@@ -124,13 +124,45 @@ namespace FHTW.CodeRunner.BusinessLogic
 
                     var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
 
-                    this.exerciseRepository.CreateAndUpdate(dalExercise);
+                    this.exerciseRepository.Save(dalExercise);
                     this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
                 }
                 catch (Exception e)
                 {
                     this.logger.LogError(e.Message);
                     throw new BlDataAccessException("Unable to save Exercise with Title: " + exercise.Title + " to DAL.", e);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public BlEntities.Exercise TemporarySaveExercise(BlEntities.Exercise exercise)
+        {
+            if (exercise == null)
+            {
+                this.logger.LogError("Exercise is null");
+                throw new BlValidationException("Exercise is null", null);
+            }
+            else
+            {
+                try
+                {
+                    if (exercise.Created == null)
+                    {
+                        exercise.Created = DateTime.Now;
+                    }
+
+                    var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
+
+                    this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
+                    var dalNewExercise = this.exerciseRepository.TemporarySave(dalExercise);
+                    var blNewExercise = this.mapper.Map<BlEntities.Exercise>(dalNewExercise);
+                    return blNewExercise;
+                }
+                catch (Exception e)
+                {
+                    this.logger.LogError(e.Message);
+                    throw new BlDataAccessException("Unable to temporarily save Exercise with Title: " + exercise.Title + " to DAL.", e);
                 }
             }
         }
@@ -158,7 +190,9 @@ namespace FHTW.CodeRunner.BusinessLogic
                         }
 
                         var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
-                        this.exerciseRepository.CreateAndUpdate(dalExercise);
+
+                        // TODO: Own function.
+                        // this.exerciseRepository.TemporarySave(dalExercise);
                         this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
                     }
                     else

@@ -18,17 +18,6 @@ namespace FHTW.CodeRunner.ExportService
     /// </summary>
     public class MoodleXmlService : IMoodleXmlService
     {
-        // private readonly ILogger logger;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MoodleXmlService"/> class.
-        /// </summary>
-        /// <param name="logger">The injected logger.</param>
-        //public MoodleXmlService(ILogger logger)
-        //{
-        //    this.logger = logger;
-        //}
-
         /// <inheritdoc/>
         public string ExportMoodleXml(Quiz quiz)
         {

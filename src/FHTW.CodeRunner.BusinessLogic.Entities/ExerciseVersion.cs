@@ -72,6 +72,11 @@ namespace FHTW.CodeRunner.BusinessLogic.Entities
         public ValidState ValidState { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether an exercise is temporary.
+        /// </summary>
+        public bool TemporaryFlag { get; set; }
+
+        /// <summary>
         /// Gets or sets the Foreign Key for the user.
         /// </summary>
         public int FkUserId { get; set; }

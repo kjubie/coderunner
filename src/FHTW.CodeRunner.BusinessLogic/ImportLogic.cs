@@ -101,7 +101,7 @@ namespace FHTW.CodeRunner.BusinessLogic
                     var blExercise = this.mapper.Map<BlEntities.Exercise>(importData);
 
                     var dalExercise = this.mapper.Map<DalEntities.Exercise>(blExercise);
-                    var savedDalExercise = this.exerciseRepository.CreateAndUpdate(dalExercise);
+                    var savedDalExercise = this.exerciseRepository.Save(dalExercise);
 
                     var collectionExercise = new BlEntities.CollectionExercise
                     {

@@ -41,6 +41,13 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
         public void SaveExercise(Exercise exercise);
 
         /// <summary>
+        /// Function for saving an exercise temporarily.
+        /// </summary>
+        /// <param name="exercise">The incoming exercise.</param>
+        /// <returns>The found exercise.</returns>
+        public Exercise TemporarySaveExercise(Exercise exercise);
+
+        /// <summary>
         /// Function for validating an exercise.
         /// </summary>
         /// <param name="exercise">The incoming exercise.</param>
