@@ -1,0 +1,66 @@
+<!-- ToDo: Databindings + Tags -->
+<h1>Inspect Collection</h1>
+<div class="contentSeperator container">
+  <label for="collectionTitle" class="col-form-label">Collection Title: </label>
+  <input disabled [(ngModel)]="showCollection.title" type="text" name="collectionTitle" id="collectionTitle" class="col-12 form-control-plaintext mb-2">
+
+  <div class="mb-5">
+    <p>Tags: </p>
+    <div>
+        <span *ngFor="let tag of showCollection.collectionTagList; let idx = index" class="badge badge-pill tag">{{ tag.tag.name }}</span>
+    </div>
+  </div>
+  
+  <h2 (click)="collapseList('headDiv')"><i id="arrowHeadList" class="arrow down"></i> Collection Header</h2>
+  <div id="colHeader" name="colHeader" class="contentSeperator mb-5">
+    <div id="colHeaderContent" name="colHeaderContent" *ngIf="showHeadDiv">
+      <div *ngFor="let lang of showCollection.collectionLangsList" class="mb-3">
+        <div class="row col-12">
+          <h3>{{lang.writtenLanguage.name}}</h3>
+        </div>
+
+        <label for="colFullTitle_{{lang.writtenLanguage.name}}" class="col-form-label">Full Title: </label>
+        <input disabled [value]="lang.fullTitle" type="text" name="colFullTitle_{{lang.writtenLanguage.name}}" id="colFullTitle_{{lang.writtenLanguage.name}}" class="col-12 form-control-plaintext">
+        
+        <label for="colShortTitle_{{lang.writtenLanguage.name}}" class="col-form-label">Short Title: </label>
+        <input disabled [value]="lang.shortTitle" type="text" name="colShortTitle_{{lang.writtenLanguage.name}}" id="colShortTitle_{{lang.writtenLanguage.name}}" class="col-12 form-control-plaintext">
+      
+        <label for="colIntro" class="col-form-label">Introduction: </label>
+        <textarea disabled [value]="lang.introduction" name="colIntro" id="colIntro" cols="30" rows="10" class="col-12 form-control-plaintext"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <h2>Exercise List</h2>
+  <div class="contentSeperator mb-5">
+    <div *ngIf="showCollection.collectionExerciseHomeList.length != 0" class="scrollable">
+      <ul class="list-group">
+        <li *ngFor="let ex of showCollection.collectionExerciseHomeList; let i = index" class="list-group-item colItem mb-1">
+          <div class="row col-12 p-1">
+            <div class="col">
+              <p class="col-3 col-md-3 colItemHeading">{{ex.title}}<br><span class="author">{{ex.user.name}}</span></p>
+            </div>
+            <div class="row col-9">
+              <select disabled [(ngModel)]="ex.version" name="verFilter" id="verFilter" class="form-control col-3 ml-1">
+                <option [ngValue]="ex.version">version {{ex.version}}</option>
+              </select>
+
+              <select disabled [(ngModel)]="ex.writtenLanguageId" name="langFilter" id="langFilter" class="form-control col-3 ml-1 mr-1">
+                <option *ngFor="let lang of ex.writtenLanguageList" [ngValue]="lang.id" [selected]="lang.id === selectedGlobalLang">{{lang.name}}</option>
+              </select>
+          
+              <select disabled [(ngModel)]="ex.collectionExerciseHomeList.programmingLanguageId" name="progFilter" id="progFilter" class="form-control col-4 ml-1">
+                <option *ngFor="let progLang of ex.programmingLanguageList" [ngValue]="progLang.id">{{progLang.name}}</option>
+              </select>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button class="btn btn-primary col-1 mb-5" (click)="done()">Done</button>
+  </div>
+
+</div>

@@ -13,6 +13,7 @@ export class CreateExerciseService {
   viewExercise: Exercise;
 
   private createExerciseUrl = "https://localhost:5001/api/exercise";
+  private createTempExerciseUrl = "https://localhost:5001/api/exercise/temporary";
   private prepareExerciseUrl = "https://localhost:5001/api/exercise/prepare";
 
   constructor(private http: HttpClient) {
@@ -31,6 +32,15 @@ export class CreateExerciseService {
   // POST Request -> Save new Exercise to DB
   saveExercise(exercise: Exercise): Observable<Exercise> {
     return this.http.post<Exercise>(this.createExerciseUrl, exercise)
+      .pipe(
+        tap((createdExercise: Exercise) => console.log("exercise saved to database: " + createdExercise)),
+        catchError(this.handleError<Exercise>('saveExercise', exercise))
+      );
+  }
+
+  // POST Request -> Save new Exercise to DB
+  saveTempExercise(exercise: Exercise): Observable<Exercise> {
+    return this.http.post<Exercise>(this.createTempExerciseUrl, exercise)
       .pipe(
         tap((createdExercise: Exercise) => console.log("exercise saved to database: " + createdExercise)),
         catchError(this.handleError<Exercise>('saveExercise', exercise))

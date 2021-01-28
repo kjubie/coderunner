@@ -5,11 +5,13 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from "rxjs/operators";
 import { Collection } from '../data-objects/exercise-collection/collection';
 import { ImportCollection } from '../data-objects/import-collection/import-collection';
+import { ShowCollection } from '../data-objects/exercise-collection/show-collection';
 
 @Injectable()
 export class CollectionDataService {
     sharedExerciseList: ExerciseHome[] = [];
     exerciseCounter: number = 0;
+    collectionToShow: ShowCollection;
 
     private createCollectionUrl = "https://localhost:5001/api/collection";
     private importCollectionUrl = "https://localhost:5001/api/import/collection";
@@ -35,12 +37,19 @@ export class CollectionDataService {
       );
     }
 
-    importCollection(importCollection): Observable<ImportCollection> {
+    importCollection(importCollection: ImportCollection): Observable<ImportCollection> {
       return this.http.post<ImportCollection>(this.importCollectionUrl, importCollection)
         .pipe(
           tap((createdCollection: ImportCollection) => console.log("collection saved to database: " + createdCollection)),
           catchError(this.handleError<ImportCollection>('saveCollection', importCollection))
       );      
+    }
+
+    showCollection(id: number): Observable<ShowCollection> {
+      return this.http.get<ShowCollection>("getCollectionUrl").pipe(
+        tap(_ => console.log("fetched collectio to show")),
+        catchError(this.handleError<ShowCollection>('getCollection'))
+      );
     }
 
     /**

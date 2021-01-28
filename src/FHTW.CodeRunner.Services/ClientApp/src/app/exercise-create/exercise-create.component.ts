@@ -8,6 +8,7 @@ import { PrepareCreateExercise } from '../data-objects/create-exercise/prepare-c
 import { QuestionType } from '../data-objects/question-type';
 import { CreateExerciseHelperService } from './create-exercise-helper.service';
 import { TestCase } from '../data-objects/create-exercise/test-case';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-exercise-create',
@@ -36,13 +37,22 @@ export class ExerciseCreateComponent implements OnInit {
   latestVersion: number = 0;
   testCases: number[] = [];
 
-  constructor(private createExerciseService: CreateExerciseService, private helper: CreateExerciseHelperService) {}
+  constructor(private createExerciseService: CreateExerciseService, private helper: CreateExerciseHelperService, private router: Router) {}
 
   createExerciseObserver = {
     next: x => { this.saveExercise = x },
     error: err => console.error('Observer got an error: ' + err),
     complete: () => {
       console.log("exercise was saved to database")
+      this.router.navigate(['/']);
+    }
+  }
+
+  createTempExerciseObserver = {
+    next: x => { this.saveTempExercise = x; this.exercise = x },
+    error: err => console.error('Observer got an error: ' + err),
+    complete: () => {
+      console.log("temporary exercise was saved to database")
     }
   }
 
@@ -171,6 +181,14 @@ export class ExerciseCreateComponent implements OnInit {
     console.log(this.exercise);
 
     this.createExerciseService.saveExercise(this.exercise).subscribe(this.createExerciseObserver);
+    this.createExerciseService.editExercise = undefined;
+  }
+
+  saveTempExercise() {
+    this.exercise = this.helper.copyBodyData(this.exercise);
+    console.log(this.exercise);
+
+    this.createExerciseService.saveTempExercise(this.exercise).subscribe(this.createTempExerciseObserver);
     this.createExerciseService.editExercise = undefined;
   }
 

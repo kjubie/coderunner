@@ -149,6 +149,14 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  viewCollectionObserver = {
+    next: x => { this.collectionDataService.showCollection = x },
+    error: err => { console.log('Observer got an error: ' + err) },
+    complete: () => {
+      this.router.navigate(['/show-collection']);
+    }
+  }
+
   exportSingleExercise(idx: number, modalContent) {
     this.selectedExercise = this.exerciseList[idx];
 
@@ -259,6 +267,10 @@ export class HomeComponent implements OnInit {
     this.createExerciseService.getExercise(idx).subscribe(this.viewExerciseObserver);
   }
 
+  viewCollection(idx: number) {
+    this.collectionDataService.showCollection(this.collectionList[idx].id).subscribe(this.viewCollectionObserver);
+  }
+
   switchLists() {
     this.showExercises = !this.showExercises;
   }
@@ -277,5 +289,13 @@ export class HomeComponent implements OnInit {
     } else {
       this.exerciseListHomeService.searchCollection(this.searchFilter).subscribe(this.searchCollectionFilterObserver);
     }
+  }
+
+  resetFilter() {
+    this.searchFilter.programmingLanguage = null;
+    this.searchFilter.writtenLanguage = null;
+    this.searchFilter.searchTerm = null;
+
+    this.search();
   }
 }
