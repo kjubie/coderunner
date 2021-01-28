@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import {catchError, tap} from "rxjs/operators";
@@ -9,25 +9,23 @@ import { PrepareCreateExercise } from '../data-objects/create-exercise/prepare-c
 
 @Injectable({ providedIn: 'root' })
 export class CreateExerciseService {
+  editExercise: Exercise;
 
   private createExerciseUrl = "https://localhost:5001/api/exercise";
   private prepareExerciseUrl = "https://localhost:5001/api/exercise/prepare";
 
-  constructor(
-    private http: HttpClient,
-  ) { }
+  constructor(private http: HttpClient) {
+    this.editExercise = undefined;
+  }
 
   // GET Request -> fetch written, programming Lang etc. for create
   prepareExercise(): Observable<PrepareCreateExercise> {
-    return this.http.get<PrepareCreateExercise>(this.prepareExerciseUrl/*, this.requestOptions*/).pipe(
+    return this.http.get<PrepareCreateExercise>(this.prepareExerciseUrl).pipe(
       tap(_ => console.log("languages and question types fetched from db")),
       catchError(this.handleError<PrepareCreateExercise>('prepareExercise'))
     );
-    
-    
   }
 
-  // ToDo:
   // POST Request -> Save new Exercise to DB
   saveExercise(exercise: Exercise): Observable<Exercise> {
     return this.http.post<Exercise>(this.createExerciseUrl, exercise)
@@ -35,6 +33,15 @@ export class CreateExerciseService {
         tap((createdExercise: Exercise) => console.log("exercise saved to database: " + createdExercise)),
         catchError(this.handleError<Exercise>('saveExercise', exercise))
       );
+  }
+
+  // GET Request -> get complete exercise from DB
+  getExercise(idx: number): Observable<Exercise> {
+    let getExerciseUrl = "https://localhost:5001/api/exercise/" + idx.toString();
+    return this.http.get<Exercise>(getExerciseUrl).pipe(
+      tap(_ => console.log("fetched exercise for editing")),
+      catchError(this.handleError<Exercise>('getExercise'))
+    );
   }
 
   /**

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Exercise } from '../data-objects/create-exercise/exercise';
 import { CreateExerciseService } from '../services/create-exercise.service';
 import { Tag } from '../data-objects/tag';
@@ -24,6 +24,11 @@ export class ExerciseCreateComponent implements OnInit {
   programmingLangs: ProgrammingLanguage[];
   questionTypes: QuestionType[];
   tagList: Tag[];
+
+  usedWLangs: WrittenLanguage[] = [];
+  usedPLangs: ProgrammingLanguage[] = [];
+  langsAvailable = true;
+  pLangsAvailable = true;
 
   writtenLangIdx: number;
   programmingLangIdx: number;
@@ -52,7 +57,37 @@ export class ExerciseCreateComponent implements OnInit {
         // remove default written lang:
         if (this.writtenLangs[idx].name == "English") {
           this.exercise.exerciseVersionList[0].exerciseLanguageList[0].writtenLanguage = this.writtenLangs[idx];
+          this.usedWLangs.push(this.writtenLangs[idx]);
           this.writtenLangs.splice(idx, 1);
+        }
+      }
+
+      if (this.exercise.title !== undefined && this.exercise.title !== "") {
+        // remove already used written and programming langs
+        let latestVersion = this.exercise.exerciseVersionList.length - 1;
+        this.exercise.exerciseVersionList[latestVersion].exerciseLanguageList.forEach(exerciseLang => {
+          let writtenLang = exerciseLang.writtenLanguage;
+          if (this.writtenLangs.find(e => e.name === writtenLang.name) !== undefined) {
+            let element = this.writtenLangs.find(e => e.name === writtenLang.name);
+            this.usedWLangs.push(element);
+            let idx = this.writtenLangs.indexOf(element);
+            this.writtenLangs.splice(idx, 1);
+          }
+        });
+        this.exercise.exerciseVersionList[latestVersion].exerciseLanguageList[0].exerciseBody.forEach(body => {
+          let programmingLang = body.programmingLanguage;
+          if (this.programmingLangs.find(e => e.name === programmingLang.name) !== undefined) {
+            let element = this.programmingLangs.find(e => e.name === programmingLang.name);
+            this.usedPLangs.push(element);
+            let idx = this.programmingLangs.indexOf(element);
+            this.programmingLangs.splice(idx, 1);
+          }
+        });
+        if (this.writtenLangs.length == 0) {
+          this.langsAvailable = false;
+        }
+        if (this.programmingLangs.length == 0) {
+          this.pLangsAvailable = false;
         }
       }
     }
@@ -60,8 +95,14 @@ export class ExerciseCreateComponent implements OnInit {
 
   ngOnInit() {
     this.createExerciseService.prepareExercise().subscribe(this.prepareExerciseObserver);
+    this.exercise = this.createExerciseService.editExercise;
 
-    this.exercise = this.helper.createNewExercise();
+    console.log(this.exercise);
+
+    if (this.exercise === undefined) {
+      console.log('creating new exercise - not editing one...');
+      this.exercise = this.helper.createNewExercise();
+    }
     this.writtenLangIdx = 0;
     this.programmingLangIdx = 0;
     this.testIdx = 0;
@@ -86,8 +127,6 @@ export class ExerciseCreateComponent implements OnInit {
       if (this.selectedElement.includes('TestCase')) {
         split = this.selectedElement.split('TestCase');
         this.testIdx = parseInt(split[1]);
-
-        console.log(this.testIdx);
       }
       else if (this.selectedElement.includes('Lang')) {
         split = this.selectedElement.split('Lang');
@@ -107,8 +146,6 @@ export class ExerciseCreateComponent implements OnInit {
 
   addNewTest(test: TestCase) {
     this.exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[this.programmingLangIdx].testSuite.testCaseList.push(test);
-
-    console.log(this.exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[this.programmingLangIdx].testSuite.testCaseList);
   }
 
   removeTestCase(idx: number) {
@@ -124,13 +161,11 @@ export class ExerciseCreateComponent implements OnInit {
   }
 
   saveExercise() {
-    // this.exercise.created = new Date().toISOString();
-    // this.exercise.exerciseVersion[0].lastModified = this.exercise.created;
-
     this.exercise = this.helper.copyBodyData(this.exercise);
     console.log(this.exercise);
 
     this.createExerciseService.saveExercise(this.exercise).subscribe(this.createExerciseObserver);
+    this.createExerciseService.editExercise = undefined;
   }
 
   removeWLang(lang: WrittenLanguage) {

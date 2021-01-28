@@ -13,6 +13,10 @@ export class SideMenuComponent {
     @Input() availableLangsW: WrittenLanguage[];
     @Input() availableLangsP: ProgrammingLanguage[];
     @Input() selectedElement: string;
+    @Input() writtenLang: WrittenLanguage[];
+    @Input() programmingLang: ProgrammingLanguage[];
+    @Input() isLangAvailable;
+    @Input() isProgrammingLangAvailable;
 
     @Output() selectElementEvent = new EventEmitter<string>();
     @Output() addWrittenLangEvent = new EventEmitter<WrittenLanguage>();
@@ -22,15 +26,9 @@ export class SideMenuComponent {
     @Output() addTestCaseEvent = new EventEmitter<TestCase>();
     @Output() removeTestCaseEvent = new EventEmitter<number>();
 
-    writtenLang = [{id: 1, name: "English"}];
-    programmingLang: ProgrammingLanguage[] = [];
-
     showHeadList = true;
     showLanguageList = true;
     showBodyList = true;
-    
-    isLangAvailable = true;
-    isProgrammingLangAvailable = true;
 
     addLanguage(lang: WrittenLanguage) {
         if (this.availableLangsW.indexOf(lang) != -1) {

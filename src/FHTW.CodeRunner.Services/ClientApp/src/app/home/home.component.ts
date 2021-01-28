@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ExerciseExport } from '../data-objects/exercise-export';
 import { ExerciseHome } from '../data-objects/exercise-home';
@@ -8,11 +8,27 @@ import { CollectionDataService } from '../services/exercise-collection.data.serv
 import { CollectionHome } from '../data-objects/collection-home';
 import { CollectionExport } from '../data-objects/collection-export';
 import { SearchFilter } from '../data-objects/search-filter';
+import { CreateExerciseService } from '../services/create-exercise.service';
+import { Exercise } from '../data-objects/create-exercise/exercise';
+import { Router, RouterModule, Routes } from '@angular/router';
+import { ExerciseCreateComponent } from '../exercise-create/exercise-create.component';
 
+
+const routes: Routes = [
+  { path: 'exercise-create', component: ExerciseCreateComponent },
+];
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
+})
+@NgModule({
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
+  exports: [
+    RouterModule
+  ]
 })
 export class HomeComponent implements OnInit {
 
@@ -25,6 +41,7 @@ export class HomeComponent implements OnInit {
   selectedCollection: CollectionHome;
   exerciseForExport: ExerciseExport = new ExerciseExport();
   collectionForExport: CollectionExport = new CollectionExport();
+  exerciseToEdit: Exercise = new Exercise();
   languages = ['English', 'German'];
   programmingLangs = ['C#', 'Java'];
 
@@ -34,11 +51,12 @@ export class HomeComponent implements OnInit {
 
   showExercises = true;
 
-  constructor(private exerciseListHomeService: ExerciseListHomeService, private modalService: NgbModal, private exportService: ExerciseExportService, private collectionDataService: CollectionDataService) {}
+  constructor(private exerciseListHomeService: ExerciseListHomeService, private modalService: NgbModal, private exportService: ExerciseExportService, private collectionDataService: CollectionDataService, private createExerciseService: CreateExerciseService, private router: Router) {}
 
   ngOnInit() {
     this.exerciseListHomeService.getAllExercies().subscribe(this.loadAllExercisesObserver);
     this.exerciseListHomeService.getAllCollections().subscribe(this.loadAllCollectionsObserver);
+    this.createExerciseService.editExercise = undefined;
   }
 
   languageDropdown() {
@@ -107,6 +125,16 @@ export class HomeComponent implements OnInit {
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
       console.log(this.collectionList);
+    }
+  }
+
+  getExerciseObserver = {
+    next: x => { this.exerciseToEdit = x },
+    error: err => { console.log('Observer got an error: ' + err) },
+    complete: () => {
+      this.createExerciseService.editExercise = this.exerciseToEdit;
+
+      this.router.navigate(['/exercise-create']);
     }
   }
 
@@ -208,6 +236,12 @@ export class HomeComponent implements OnInit {
   addExerciseToCollection(idx: number) {
     this.collectionDataService.sharedExerciseList.push(this.exerciseList[idx]);
     this.collectionDataService.increaseExerciseCounter();
+  }
+
+  editExercise(idx: number) {
+    idx += 1;
+    console.log('load complete exercise from the database');
+    this.createExerciseService.getExercise(idx).subscribe(this.getExerciseObserver);
   }
 
   switchLists() {
