@@ -356,6 +356,35 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             return result;
         }
 
+        /// <inheritdoc/>
+        public void UpdateValidState(int exercise_id, int version_number, ValidState valid_state)
+        {
+            try
+            {
+                ExerciseVersion exercise_version = this.context.ExerciseVersion
+                    .Where(ev => ev.FkExerciseId == exercise_id && ev.VersionNumber == version_number)
+                    .SingleOrDefault();
+
+                if (exercise_version == null)
+                {
+                    throw new DbUpdateException($"No exercise version exists. id = {exercise_id} version = {version_number} new_state = {valid_state}");
+                }
+                else
+                {
+                    exercise_version.ValidState = valid_state;
+                    this.context.SaveChanges();
+                }
+            }
+            catch (DbUpdateException e)
+            {
+                throw new DalUpdateException($"Exception while updateing exercise valid state. id = {exercise_id} version = {version_number} new_state = {valid_state}", e);
+            }
+            catch (Exception e)
+            {
+                throw new DalException($"Unexpected Exception while updateing exercise valid state. id = {exercise_id} version = {version_number} new_state = {valid_state}", e);
+            }
+        }
+
         private Exercise CreateAndUpdate(Exercise exercise)
         {
             var version = exercise.ExerciseVersion;
