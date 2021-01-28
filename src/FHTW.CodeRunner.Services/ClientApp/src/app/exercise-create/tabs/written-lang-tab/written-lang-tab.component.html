@@ -13,11 +13,11 @@
         <div class="from-group content-group row">
             <label for="fullTitle" class="col-2 col-form-label">Exercise Title</label>
             <div class="col-10">
-                <input type="text" class="form-control-plaintext" id="fullTitle" name="fullTitle" placeholder="Full Title" [(ngModel)]="exerciseLanguage.exerciseHeader.fullTitle" (ngModelUpdate)="this.exerciseLangChangeEvent.emit(this.testCase)">
+                <input type="text" class="form-control-plaintext" id="fullTitle" name="fullTitle" placeholder="Full Title" [(ngModel)]="exerciseLanguage.exerciseHeader.fullTitle" (ngModelUpdate)="this.exerciseLangChangeEvent.emit(this.exerciseLanguage)">
             </div>
             <label for="introduction" class="col-2 col-form-label">Exercise Introduction</label>
             <div class="col-10">
-                <angular-markdown-editor [options]="editorOptions" class="ng-untouched ng-pristine ng-valid line-numbers" textareaId="introduction" rows="8" name="introduction" [(ngModel)]="exerciseLanguage.exerciseHeader.introduction" (ngModelUpdate)="this.exerciseLangChangeEvent.emit(this.testCase)">
+                <angular-markdown-editor [options]="editorOptions" class="ng-untouched ng-pristine ng-valid line-numbers" textareaId="introduction" rows="8" name="introduction" [(ngModel)]="exerciseLanguage.exerciseHeader.introduction" (ngModelUpdate)="this.exerciseLangChangeEvent.emit(this.exerciseLanguage)">
                 </angular-markdown-editor>
             </div>
         </div>
