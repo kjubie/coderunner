@@ -67,6 +67,11 @@ namespace FHTW.CodeRunner.Services.Helpers
             doc.LoadHtml(rawHtml);
 
             IEnumerable<HtmlNode> nodes = doc.DocumentNode.SelectNodes("//code[contains(@class, 'language')]");
+            if (nodes == null)
+            {
+                return new XCData(rawHtml).ToString();
+            }
+
             foreach (var node in nodes)
             {
                 string lexer = null;
