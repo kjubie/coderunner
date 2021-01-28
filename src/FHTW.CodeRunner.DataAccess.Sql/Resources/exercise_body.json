@@ -43,7 +43,7 @@
   },
   { // Exercise 1, English, C#, V1
     "Id": 3,
-    "FkProgrammingLanguageId": 1,
+    "FkProgrammingLanguageId": 2,
     "Description": "Description_c#_V1",
     "Hint": "Hint_c#_V1",
     "FkExerciseLanguageId": 1,
@@ -127,7 +127,7 @@
   },
   { // Exercise 1, English, C#, V2
     "Id": 7,
-    "FkProgrammingLanguageId": 1,
+    "FkProgrammingLanguageId": 2,
     "Description": "Description_c#_V2",
     "Hint": "Hint_c#_V2",
     "FkExerciseLanguageId": 3,
@@ -211,7 +211,7 @@
   },
   { // Exercise 1, English, C#, V3
     "Id": 11,
-    "FkProgrammingLanguageId": 1,
+    "FkProgrammingLanguageId": 2,
     "Description": "Description_c#_V3",
     "Hint": "Hint_c#_V3",
     "FkExerciseLanguageId": 5,
