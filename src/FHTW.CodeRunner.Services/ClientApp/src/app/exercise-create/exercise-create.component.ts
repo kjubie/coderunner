@@ -43,11 +43,11 @@ export class ExerciseCreateComponent implements OnInit {
   constructor(private createExerciseService: CreateExerciseService, private helper: CreateExerciseHelperService, private router: Router) {}
 
   createExerciseObserver = {
-    next: x => { this.exercise = x },
+    next: x => { this.SaveExercise = x },
     error: err => console.error('Observer got an error: ' + err),
     complete: () => {
       console.log("exercise was saved to database")
-      //this.router.navigate(['/']);
+      this.router.navigate(['/']);
     }
   }
 
