@@ -26,5 +26,25 @@
   {
     "Id": 7,
     "Name": "JavaScript"
+  },
+  {
+    "Id": 8,
+    "Name": "MultiLanguage"
+  },
+  {
+    "Id": 9,
+    "Name": "Octave"
+  },
+  {
+    "Id": 10,
+    "Name": "Pascal"
+  },
+  {
+    "Id": 11,
+    "Name": "PHP"
+  },
+  {
+    "Id": 12,
+    "Name": "SQL"
   }
 ]

@@ -1,27 +1,117 @@
 [
   {
     "Id": 1,
-    "Name": "c++_question_type",
+    "Name": "cpp_function",
     "FkProgrammingLanuageId": 1
   },
   {
     "Id": 2,
-    "Name": "c#_question_type",
-    "FkProgrammingLanuageId": 2
+    "Name": "c_function",
+    "FkProgrammingLanuageId": 5
   },
   {
     "Id": 3,
-    "Name": "python_question_type",
-    "FkProgrammingLanuageId": 6
+    "Name": "c_program",
+    "FkProgrammingLanuageId": 5
   },
   {
     "Id": 4,
-    "Name": "java_question_type",
-    "FkProgrammingLanuageId": 3
+    "Name": "cpp_program",
+    "FkProgrammingLanuageId": 1
   },
   {
     "Id": 5,
-    "Name": "c_question_type",
+    "Name": "csharpmono_via_python",
+    "FkProgrammingLanuageId": 6
+  },
+  {
+    "Id": 6,
+    "Name": "directed_graph",
+    "FkProgrammingLanuageId": 6
+  },
+  {
+    "Id": 7,
+    "Name": "java_class",
+    "FkProgrammingLanuageId": 3
+  },
+  {
+    "Id": 8,
+    "Name": "java_method",
+    "FkProgrammingLanuageId": 3
+  },
+  {
+    "Id": 9 ,
+    "Name": "java_program",
+    "FkProgrammingLanuageId": 3
+  },
+  {
+    "Id": 10,
+    "Name": "multilanguage",
+    "FkProgrammingLanuageId": 8
+  },
+  {
+    "Id": 11,
+    "Name": "nodejs",
+    "FkProgrammingLanuageId": 7
+  },
+  {
+    "Id": 12,
+    "Name": "octave_compare",
+    "FkProgrammingLanuageId": 9
+  },
+  {
+    "Id": 13,
+    "Name": "octave_function",
+    "FkProgrammingLanuageId": 9
+  },
+  {
+    "Id": 14,
+    "Name": "pascal_function",
+    "FkProgrammingLanuageId": 10
+  },
+  {
+    "Id": 15,
+    "Name": "pascal_program",
+    "FkProgrammingLanuageId": 10
+  },
+  {
+    "Id": 16,
+    "Name": "php",
+    "FkProgrammingLanuageId": 11
+  },
+  {
+    "Id": 17,
+    "Name": "psp_c_program_via_python",
     "FkProgrammingLanuageId": 5
+  },
+  {
+    "Id": 18,
+    "Name": "python2",
+    "FkProgrammingLanuageId": 6
+  },
+  {
+    "Id": 19,
+    "Name": "python3",
+    "FkProgrammingLanuageId": 6
+  },
+  {
+    "Id": 20,
+    "Name": "python3_w_input",
+    "FkProgrammingLanuageId": 6
+  },
+  {
+    "Id": 21,
+    "Name": "sql",
+    "FkProgrammingLanuageId": 12
+  },
+  {
+    "Id": 22,
+    "Name": "undirected_graph",
+    "FkProgrammingLanuageId": 6
+  },
+  {
+    "Id": 23,
+    "Name": "",
+    "FkProgrammingLanuageId":
   }
 ]
