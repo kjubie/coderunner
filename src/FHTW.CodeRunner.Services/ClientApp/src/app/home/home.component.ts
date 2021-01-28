@@ -89,8 +89,8 @@ export class HomeComponent implements OnInit {
   }
 
   loadAllCollectionsObserver = {
-    next: x => { this.collectionList = x },
-    error: err => { console.log('Observer got an error: ' + err) },
+    next: x => { this.collectionList = x.body; },
+    error: err => { console.log('Observer got an error: ' + err); },
     complete: () => {
       console.log(this.collectionList);
     }

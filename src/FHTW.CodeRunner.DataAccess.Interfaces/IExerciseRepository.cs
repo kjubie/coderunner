@@ -94,5 +94,13 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// <param name="questiontype">The questiontype.</param>
         /// <returns>The questiontype entity.</returns>
         public QuestionType GetQuestionType(string questiontype);
+
+        /// <summary>
+        /// Update the valid state of an exercise version.
+        /// </summary>
+        /// <param name="exercise_id">the exercise id.</param>
+        /// <param name="version_number">the version number.</param>
+        /// <param name="valid_state">the state that should be set.</param>
+        public void UpdateValidState(int exercise_id, int version_number, ValidState valid_state);
     }
 }
