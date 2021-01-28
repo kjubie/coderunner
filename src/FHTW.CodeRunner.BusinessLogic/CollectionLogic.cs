@@ -111,5 +111,22 @@ namespace FHTW.CodeRunner.BusinessLogic
                 }
             }
         }
+
+        /// <inheritdoc/>
+        public BlEntities.CollectionView GetCollectionView(int id)
+        {
+            try
+            {
+                var dalCollectionView = this.collectionRepository.GetCollectionView(id);
+                var blCollectionView = this.mapper.Map<BlEntities.CollectionView>(dalCollectionView);
+
+                return blCollectionView;
+            }
+            catch (Exception e)
+            {
+                this.logger.LogError(e.Message);
+                throw new BlDataAccessException("Unable to retrieve the collection view from the DAL!", e);
+            }
+        }
     }
 }
