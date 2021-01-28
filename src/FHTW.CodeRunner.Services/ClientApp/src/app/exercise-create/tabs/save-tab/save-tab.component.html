@@ -1,4 +1,5 @@
-<h4 class="tabHeading">Overview</h4>
+<div class="container">
+    <h4 class="tabHeading">Overview</h4>
 <h6 class="description">Overview of Exercise before Saving</h6>
 <div class="contentSeperator">
     <form>
@@ -8,27 +9,27 @@
             <div class="from-group row content-group mb-3">
                 <label for="title" class="col-2 col-form-label">Title</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext" id="title" readonly name="title" [(ngModel)]="exercise.title">
+                    <input type="text" class="form-control-plaintext" id="title" readonly name="title" [value]="exercise.title">
                 </div>
 
                 <label for="user" class="col-2 col-form-label">Author</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext" id="user" readonly name="user" [(ngModel)]="exercise.user.name">
+                    <input type="text" class="form-control-plaintext" id="user" readonly name="user" [value]="exercise.user.name">
                 </div>
 
                 <label for="param" class="col-2 col-form-label">Template Parameters</label>
                 <div class="col-10">
-                    <textarea type="text" class="form-control-plaintext" rows="4" id="param" name="param" readonly [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParam"></textarea>
+                    <textarea type="text" class="form-control-plaintext" rows="4" id="param" name="param" readonly [value]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParam"></textarea>
                 </div>
 
                 <label for="twig" class="col-2 col-form-label">Twig Control</label>
                 <div class="col-10 form-inline">
                     <div class="form-group col-3">
-                        <input type="checkbox" id="liftParam" name="liftParam" (click)="$event.preventDefault()" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParamLiftFlag">
+                        <input type="checkbox" id="liftParam" name="liftParam" readonly (click)="$event.preventDefault()" [value]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParamLiftFlag">
                         <p class="ml-3">Lift Template Parameters</p>
                     </div>
                     <div class="form-group col-3">
-                        <input type="checkbox" id="twigAll" name="twigAll" (click)="$event.preventDefault()" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.twigAllFlag">
+                        <input type="checkbox" id="twigAll" name="twigAll" readonly (click)="$event.preventDefault()" [value]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.twigAllFlag">
                         <p class="ml-3">Twig for All</p>
                     </div>
                 </div>
@@ -45,17 +46,17 @@
                     <h5 class="col-12">{{ lang.writtenLanguage.name }}</h5>
                     <label for="fullTitle" class="col-2 col-form-label">Exercise Title</label>
                     <div class="col-10">
-                        <input type="text" class="form-control-plaintext" id="fullTitle" readonly name="fullTitle" [(ngModel)]="lang.exerciseHeader.fullTitle">
+                        <input type="text" class="form-control-plaintext" id="fullTitle" readonly name="fullTitle" [value]="lang.exerciseHeader.fullTitle">
                     </div>
     
                     <label for="shortTitle" class="col-2 col-form-label">Short Title</label>
                     <div class="col-10">
-                        <input type="text" class="form-control-plaintext" id="shortTitle" readonly name="shortTitle" [(ngModel)]="lang.exerciseHeader.shortTitle">
+                        <input type="text" class="form-control-plaintext" id="shortTitle" readonly name="shortTitle" [value]="lang.exerciseHeader.shortTitle">
                     </div>
     
                     <label for="introduction" class="col-2 col-form-label">Exercise Introduction</label>
                     <div class="col-10">
-                        <textarea class="form-control-plaintext" id="introduction" readonly name="introduction" rows="4" [(ngModel)]="lang.exerciseHeader.introduction"></textarea>
+                        <textarea class="form-control-plaintext" id="introduction" readonly name="introduction" rows="4" [value]="lang.exerciseHeader.introduction"></textarea>
                     </div>
                 </div>
             </div>
@@ -64,41 +65,41 @@
         <!-- TODO: Show for each ProgLang -->
         <h5 class="subheading">Bodies</h5>
         <div class="contentSeperator mb-3">
-            <div *ngFor="let prog of exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody; let i = index" class="from-group row mb-1 content-group">
+            <div *ngFor="let prog of exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody" class="from-group row mb-1 content-group">
                 <h5 class="col-12">{{ prog.programmingLanguage.name }}</h5>
                 <label for="programmingLang" class="col-2 col-form-label">Language</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext" id="programmingLang" readonly name="name" [(ngModel)]="prog.programmingLanguage.name">
+                    <input type="text" class="form-control-plaintext" id="programmingLang" readonly name="name" [value]="prog.programmingLanguage.name">
                 </div>
 
                 <label for="fieldLines" class="col-2 col-form-label">Answerfield Lines</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext" id="fieldLines" name="fieldLines" readonly [(ngModel)]="prog.fieldLines">
+                    <input type="text" class="form-control-plaintext" id="fieldLines" name="fieldLines" readonly [value]="prog.fieldLines">
                 </div>
 
                 <label for="subSystem" class="col-2 col-form-label">Penalty System</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext" id="subSystem" name="subSystem" readonly [(ngModel)]="prog.subtractSystem">
+                    <input type="text" class="form-control-plaintext" id="subSystem" name="subSystem" readonly [value]="prog.subtractSystem">
                 </div>
 
                 <label for="points" class="col-2 col-form-label">Obtainable Points</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext" id="points" name="points" readonly [(ngModel)]="prog.obtainablePoints">
+                    <input type="text" class="form-control-plaintext" id="points" name="points" readonly [value]="prog.obtainablePoints">
                 </div>
 
                 <label for="idNum" class="col-2 col-form-label">ID-Number</label>
                 <div class="col-10">
-                    <input type="text" class="form-control-plaintext" id="idNum" name="idNum" readonly [(ngModel)]="prog.idNum">
+                    <input type="text" class="form-control-plaintext" id="idNum" name="idNum" readonly [value]="prog.idNum">
                 </div>
 
                 <label for="answer" class="col-2 col-form-label">Answer</label>
                 <div class="col-10">
-                    <textarea class="form-control-plaintext" id="answer" name="answer" rows="4" readonly [(ngModel)]="prog.solution"></textarea>
+                    <textarea class="form-control-plaintext" id="answer" name="answer" rows="4" readonly [value]="prog.solution"></textarea>
                 </div>
 
                 <label for="prefillAnswer" class="col-2 col-form-label">Answer Preload</label>
                 <div class="col-10">
-                    <textarea class="form-control-plaintext" id="prefillAnswer" name="prefillAnswer" rows="4" readonly [(ngModel)]="prog.prefill"></textarea>
+                    <textarea class="form-control-plaintext" id="prefillAnswer" name="prefillAnswer" rows="4" readonly [value]="prog.prefill"></textarea>
                 </div>
 
                 <div *ngFor="let lang of exercise.exerciseVersionList[0].exerciseLanguageList" class="col-12 row mt-1">
@@ -106,7 +107,7 @@
                     <h4 class="col-12">{{ lang.writtenLanguage.name }}</h4>
                     <label for="genFeedback" class="col-2 col-form-label">General Feedback</label>
                     <div class="col-10">
-                        <textarea class="form-control-plaintext" id="genFeedback" name="genFeedback" rows="9" readonly [(ngModel)]="prog.feedback"></textarea>
+                        <textarea class="form-control-plaintext" id="genFeedback" name="genFeedback" rows="9" readonly [value]="prog.feedback"></textarea>
                     </div>
                 </div>
 
@@ -115,40 +116,40 @@
                     <div class="row">
                         <label for="allowAttachments" class="col-2 col-form-label">Allow Attachments</label>
                         <div class="col-10">
-                            <select disabled class="form-control" name="allowAttachments" id="allowAttachments" [(ngModel)]="prog.allowFiles">
-                                <option [ngValue]="0">No</option>
-                                <option [ngValue]="1">1</option>
-                                <option [ngValue]="2">2</option>
-                                <option [ngValue]="3">3</option>
-                                <option [ngValue]="4">Unlimited</option>
+                            <select disabled class="form-control" name="allowAttachments" id="allowAttachments" disabled>
+                                <option *ngIf="prog.allowFiles == '0'">No</option>
+                                <option *ngIf="prog.allowFiles == '1'">1</option>
+                                <option *ngIf="prog.allowFiles == '2'">2</option>
+                                <option *ngIf="prog.allowFiles == '3'">3</option>
+                                <option *ngIf="prog.allowFiles == '4'">Unlimited</option>
                             </select>
                         </div>
             
                         <label for="neededAttachments" class="col-2 col-form-label">Required Attachments</label>
                         <div class="col-10">
-                            <select disabled class="form-control" name="neededAttachments" id="neededAttachments" [(ngModel)]="prog.filesRequired">
-                                <option [ngValue]="0">Attachments are optional</option>
-                                <option [ngValue]="1">1</option>
-                                <option [ngValue]="2">2</option>
-                                <option [ngValue]="3">3</option>
+                            <select disabled class="form-control" name="neededAttachments" id="neededAttachments" disabled>
+                                <option *ngIf="prog.filesRequired == '0'">Attachments are optional</option>
+                                <option *ngIf="prog.filesRequired == '1'">1</option>
+                                <option *ngIf="prog.filesRequired == '2'">2</option>
+                                <option *ngIf="prog.filesRequired == '3'">3</option>
                             </select>
                         </div>
             
                         <label for="regex" class="col-2 col-form-label">Regular Expression</label>
                         <div class="col-10">
-                            <input type="text" class="form-control-plaintext" name="regex" id="regex" [(ngModel)]="prog.filesRegex">
+                            <input type="text" class="form-control-plaintext" name="regex" id="regex" readonly [value]="prog.filesRegex">
                         </div>
             
                         <label for="regexDescription" class="col-2 col-form-label">RegEx Description</label>
                         <div class="col-10">
-                            <input type="text" class="form-control-plaintext" name="regexDescription" id="regexDescription" [(ngModel)]="prog.filesDescription">
+                            <input type="text" class="form-control-plaintext" name="regexDescription" id="regexDescription" readonly [value]="prog.filesDescription">
                         </div>
             
                         <!-- TODO: add filesizes -->
                         <label for="maxDataSize" class="col-2 col-form-label">Max Filesize</label>
                         <div class="col-10">
-                            <select disabled class="form-control" name="fileSize" id="fileSize" [(ngModel)]="prog.filesSize">
-                                <option [ngValue]="0">10kB</option>
+                            <select disabled class="form-control" name="fileSize" id="fileSize" disabled>
+                                <option *ngIf="prog.filesSize == '0'">10kB</option>
                             </select>
                         </div>
                     </div>
@@ -160,49 +161,47 @@
                         <div class="from-group row">
                             <label for="questionType" class="col-2 col-form-label">Question Type</label>
                             <div class="col-10">
-                                <select disabled class="form-control" name="questionType" [(ngModel)]="prog.testSuite.questionType">
-                                    <option *ngFor="let q of questionTypes" [ngValue]="q">{{ q.name }}</option>
-                                </select>
+                                <input type="text" id="questionType" name="questionType" readonly [value]="prog.testSuite.questionType.name">
                             </div>
             
                             <label for="templDebugging" class="col-2 col-form-label">Template Debugging</label>
                             <div class="col-10">
-                                <input type="checkbox" id="templDebugging" name="templDebugging" (click)="$event.preventDefault()" [(ngModel)]="prog.testSuite.templateDebugFlag">
+                                <input type="checkbox" id="templDebugging" name="templDebugging" readonly (click)="$event.preventDefault()" [value]="prog.testSuite.templateDebugFlag">
                             </div>
             
                             <label for="precheck" class="col-2 col-form-label">Precheck</label>
                             <div class="col-10">
-                                <select disabled class="form-control" id="precheck" name="precheck" [(ngModel)]="prog.testSuite.preCheck">
-                                    <option [ngValue]="0">Deactivated</option>
-                                    <option [ngValue]="1">Empty</option>
-                                    <option [ngValue]="2">Examples</option>
-                                    <option [ngValue]="3">Selected</option>
-                                    <option [ngValue]="4">All</option>
+                                <select disabled class="form-control" id="precheck" name="precheck" disabled>
+                                    <option *ngIf="prog.testSuite.preCheck == '0'">Deactivated</option>
+                                    <option *ngIf="prog.testSuite.preCheck == '1'">Empty</option>
+                                    <option *ngIf="prog.testSuite.preCheck == '2'">Examples</option>
+                                    <option *ngIf="prog.testSuite.preCheck == '3'">Selected</option>
+                                    <option *ngIf="prog.testSuite.preCheck == '4'">All</option>
                                 </select>
                             </div>
             
                             <label for="feedback" class="col-2 col-form-label">Display Feedback</label>
                             <div class="col-10">
-                                <select disabled class="form-control" id="feedback" name="feedback" [(ngModel)]="prog.testSuite.generalFeedbackDisplay">
-                                    <option [ngValue]="0">Set by Test</option>
-                                    <option [ngValue]="1">Force Show</option>
-                                    <option [ngValue]="2">Force Hide</option>
+                                <select disabled class="form-control" id="feedback" name="feedback" disabled>
+                                    <option *ngIf="prog.testSuite.generalFeedbackDisplay == '0'">Set by Test</option>
+                                    <option *ngIf="prog.testSuite.generalFeedbackDisplay == '1'">Force Show</option>
+                                    <option *ngIf="prog.testSuite.generalFeedbackDisplay == '2'">Force Hide</option>
                                 </select>
                             </div>
             
                             <label for="globalExtra" class="col-2 col-form-label">Global Extra</label>
                             <div class="col-10">
-                                <textarea class="form-control-plaintext" id="globalExtra" name="globalExtra" rows="5" readonly [(ngModel)]="prog.testSuite.globalExtraParam"></textarea>
+                                <textarea class="form-control-plaintext" id="globalExtra" name="globalExtra" rows="5" readonly [value]="prog.testSuite.globalExtraParam"></textarea>
                             </div>
             
                             <label for="runtimeData" class="col-2 col-form-label">Runtime Data</label>
                             <div class="col-10">
-                                <textarea class="form-control-plaintext" id="runtimeData" name="runtimeData" rows="5" readonly [(ngModel)]="prog.testSuite.runtimeData"></textarea>
+                                <textarea class="form-control-plaintext" id="runtimeData" name="runtimeData" rows="5" readonly [value]="prog.testSuite.runtimeData"></textarea>
                             </div>
             
                             <label for="testOnSave" class="col-2 col-form-label">Test on Save</label>
                             <div class="col-10">
-                                <input type="checkbox" id="testOnSave" name="testOnSave" (click)="$event.preventDefault()" [(ngModel)]="prog.testSuite.testOnSaveFlag">
+                                <input type="checkbox" id="testOnSave" name="testOnSave" readonly (click)="$event.preventDefault()" [value]="prog.testSuite.testOnSaveFlag">
                             </div>
                         </div>
                     </div>
@@ -214,49 +213,47 @@
                         <div *ngFor="let test of prog.testSuite.testCaseList; let i = index" class="content-group row mb-1">
                             <label for="testcase" class="col-2 col-form-label">Testcase {{i + 1}}</label>
                             <div class="col-10">
-                                <textarea class="form-control-plaintext" id="testcase" name="testcase" rows="5" readonly [(ngModel)]="test.testCode"></textarea>
+                                <textarea class="form-control-plaintext" id="testcase" name="testcase" rows="5" readonly [value]="test.testCode"></textarea>
                             </div>
                 
                             <label for="orderUsed" class="col-2 col-form-label">Order Used</label>
                             <div class="col-10">
-                                <input type="number" class="form-control-plaintext" id="orderUsed" name="orderUsed" readonly [(ngModel)]="test.orderUsed">
+                                <input type="number" class="form-control-plaintext" id="orderUsed" name="orderUsed" readonly [value]="test.orderUsed">
                             </div>
                 
                             <label for="stdin" class="col-2 col-form-label">Standard Input</label>
                             <div class="col-10">
-                                <textarea class="form-control-plaintext" id="stdin" name="stdin" rows="5" readonly [(ngModel)]="test.standardInput"></textarea>
+                                <textarea class="form-control-plaintext" id="stdin" name="stdin" rows="5" readonly [value]="test.standardInput"></textarea>
                             </div>
                 
                             <label for="output" class="col-2 col-form-label">Expected Output</label>
                             <div class="col-10">
-                                <textarea class="form-control-plaintext" id="output" name="output" rows="5" readonly [(ngModel)]="test.expectedOutput"></textarea>
+                                <textarea class="form-control-plaintext" id="output" name="output" rows="5" readonly [value]="test.expectedOutput"></textarea>
                             </div>
                 
                             <label for="additionalData" class="col-2 col-form-label">Extra Data</label>
                             <div class="col-10">
-                                <textarea class="form-control-plaintext" id="additionalData" name="additionalData" rows="5" readonly [(ngModel)]="test.additionalData"></textarea>
+                                <textarea class="form-control-plaintext" id="additionalData" name="additionalData" rows="5" readonly [value]="test.additionalData"></textarea>
                             </div>
                 
                             <label for="show" class="col-2 col-form-label">Display</label>
                             <div class="col-10">
-                                <select disabled class="form-control" id="show" name="show"  [(ngModel)]="test.displayType">
-                                    <option *ngFor="let type of displayTypes" [ngValue]="type.value">{{ type.key }}</option>
-                                </select>
+                                <input type="text" id="show" name="show" readonly (click)="$event.preventDefault()" [value]="test.displayType">
                             </div>
                 
                             <label for="useAsExample" class="col-2 col-form-label">Use as Example</label>
                             <div class="col-10">
-                                <input type="checkbox" id="useAsExample" name="useAsExample" (click)="$event.preventDefault()" [(ngModel)]="test.useAsExampleFlag">
+                                <input type="checkbox" id="useAsExample" name="useAsExample" readonly (click)="$event.preventDefault()" [value]="test.useAsExampleFlag">
                             </div>
                 
                             <label for="hideOnFail" class="col-2 col-form-label">Hide Rest if Fail</label>
                             <div class="col-10">
-                                <input type="checkbox" id="hideOnFail" name="hideOnFail" (click)="$event.preventDefault()" [(ngModel)]="test.hideOnFailFlag">
+                                <input type="checkbox" id="hideOnFail" name="hideOnFail" readonly (click)="$event.preventDefault()" [value]="test.hideOnFailFlag">
                             </div>
                 
                             <label for="points" class="col-2 col-form-label">Points</label>
                             <div class="col-10">
-                                <input type="text" class="form-control-plaintext" id="points" name="points" readonly [(ngModel)]="test.points">
+                                <input type="text" class="form-control-plaintext" id="points" name="points" readonly [value]="test.points">
                             </div>
                         </div>
                     </div>
@@ -264,5 +261,5 @@
             </div>
         </div>
     </form>
-    <button (click)="test()" class="btn btn-secondary">Test</button>
+</div>
 </div>

@@ -10,12 +10,14 @@ import { PrepareCreateExercise } from '../data-objects/create-exercise/prepare-c
 @Injectable({ providedIn: 'root' })
 export class CreateExerciseService {
   editExercise: Exercise;
+  viewExercise: Exercise;
 
   private createExerciseUrl = "https://localhost:5001/api/exercise";
   private prepareExerciseUrl = "https://localhost:5001/api/exercise/prepare";
 
   constructor(private http: HttpClient) {
     this.editExercise = undefined;
+    this.viewExercise = new Exercise();
   }
 
   // GET Request -> fetch written, programming Lang etc. for create
