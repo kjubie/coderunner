@@ -108,10 +108,5 @@
     "Id": 22,
     "Name": "undirected_graph",
     "FkProgrammingLanuageId": 6
-  },
-  {
-    "Id": 23,
-    "Name": "",
-    "FkProgrammingLanuageId":
   }
 ]
