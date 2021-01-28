@@ -1,4 +1,4 @@
-﻿// <copyright file="ExerciseShort.cs" company="FHTW CodeRunner">
+﻿// <copyright file="MinimalExercise.cs" company="FHTW CodeRunner">
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 

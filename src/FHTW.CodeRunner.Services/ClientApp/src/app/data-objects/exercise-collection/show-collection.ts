@@ -1,7 +1,7 @@
 import { Author } from "../author";
-import { CollectionTag } from "./collection-tag";
+import { Tag } from "../tag";
 import { CollectionLanguage } from "./collection-language";
-import { ExerciseHome } from "../exercise-home";
+import { MinimalCollectionExercise } from "./minimal-collection-exercise";
 
 export class ShowCollection {
     constructor() {
@@ -9,7 +9,7 @@ export class ShowCollection {
         this.user = new Author();
         this.collectionTagList = [];
         this.collectionLanguageList = [];
-        this.collectionExerciseHomeList = [];
+        this.minimalCollectionExerciseList = [];
     }
 
     id: number;
@@ -17,6 +17,6 @@ export class ShowCollection {
     created: Date;
     user: Author;
     collectionLanguageList: CollectionLanguage[];
-    collectionTagList: CollectionTag[];
-    collectionExerciseHomeList: ExerciseHome[];
+    collectionTagList: Tag[];
+    minimalCollectionExerciseList: MinimalCollectionExercise[];
 }

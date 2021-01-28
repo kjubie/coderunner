@@ -53,7 +53,7 @@
       <h2><span class="isInactive" (click)="switchLists()">Exercises</span>  |  <span class="isSelected">Collections</span></h2>
     </div>
 
-    <list-view *ngIf="viewSelected == 'list'" [exerciseList]="exerciseList" [collectionList]="collectionList" [showExercises]="showExercises" (addExerciseToCollectionEvent)="addExerciseToCollection($event)" (exportExerciseEvent)="exportSingleExercise($event, exportModal)" (exportCollectionEvent)="exportSingleCollection($event, exportCollectionModal)" (editExerciseEvent)="editExercise($event)" (viewExerciseEvent)="viewExercise($event)"></list-view>
+    <list-view *ngIf="viewSelected == 'list'" [exerciseList]="exerciseList" [collectionList]="collectionList" [showExercises]="showExercises" (addExerciseToCollectionEvent)="addExerciseToCollection($event)" (exportExerciseEvent)="exportSingleExercise($event, exportModal)" (exportCollectionEvent)="exportSingleCollection($event, exportCollectionModal)" (editExerciseEvent)="editExercise($event)" (viewExerciseEvent)="viewExercise($event)" (viewCollectionEvent)="viewCollection($event)"></list-view>
     <grid-big-view *ngIf="viewSelected == 'grid_big'"></grid-big-view>
     <grid-small-view *ngIf="viewSelected == 'grid_small'"></grid-small-view>
   </div>

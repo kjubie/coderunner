@@ -9,6 +9,9 @@ import { QuestionType } from '../data-objects/question-type';
 import { CreateExerciseHelperService } from './create-exercise-helper.service';
 import { TestCase } from '../data-objects/create-exercise/test-case';
 import { Router } from '@angular/router';
+import { ExerciseLanguage } from '../data-objects/create-exercise/exercise-language';
+import { TestSuite } from '../data-objects/create-exercise/test-suite';
+import { ExerciseBody } from '../data-objects/create-exercise/exercise-body';
 
 @Component({
   selector: 'app-exercise-create',
@@ -40,11 +43,11 @@ export class ExerciseCreateComponent implements OnInit {
   constructor(private createExerciseService: CreateExerciseService, private helper: CreateExerciseHelperService, private router: Router) {}
 
   createExerciseObserver = {
-    next: x => { this.exercise = x },
+    next: x => { this.SaveExercise = x },
     error: err => console.error('Observer got an error: ' + err),
     complete: () => {
       console.log("exercise was saved to database")
-      //this.router.navigate(['/']);
+      this.router.navigate(['/']);
     }
   }
 
@@ -198,5 +201,29 @@ export class ExerciseCreateComponent implements OnInit {
 
   removePLang(lang: ProgrammingLanguage) {
     this.exercise = this.helper.removePLang(lang, this.exercise);
+  }
+
+  exerciseChanged(ex: Exercise) {
+    this.exercise = ex;
+  }
+
+  wLangChanged(exerciseLang: ExerciseLanguage) {
+    this.exercise.exerciseVersionList[this.latestVersion].exerciseLanguageList[this.writtenLangIdx] = exerciseLang;
+  }
+
+  bodyChanged(body: ExerciseBody) {
+    this.exercise.exerciseVersionList[this.latestVersion].exerciseLanguageList[0].exerciseBody[this.programmingLangIdx] = body;
+  }
+
+  wLangBodyChanged(body: ExerciseBody) {
+    this.exercise.exerciseVersionList[this.latestVersion].exerciseLanguageList[0].exerciseBody[this.programmingLangIdx] = body;
+  }
+
+  testSuiteChanged(suite: TestSuite) {
+    this.exercise.exerciseVersionList[this.latestVersion].exerciseLanguageList[0].exerciseBody[this.programmingLangIdx].testSuite = suite;
+  }
+
+  testCaseChanged(test: TestCase) {
+    this.exercise.exerciseVersionList[this.latestVersion].exerciseLanguageList[0].exerciseBody[this.programmingLangIdx].testSuite.testCaseList[this.testIdx] = test;
   }
 }

@@ -153,6 +153,7 @@ export class HomeComponent implements OnInit {
     next: x => { this.collectionDataService.collectionToShow = x },
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
+      console.log(this.collectionDataService.collectionToShow);
       this.router.navigate(['/show-collection']);
     }
   }
@@ -258,8 +259,8 @@ export class HomeComponent implements OnInit {
   }
 
   editExercise(idx: number) {
-    idx += 1;
-    this.createExerciseService.getExercise(idx).subscribe(this.getExerciseObserver);
+    let id = this.exerciseList[idx].id;
+    this.createExerciseService.getExercise(id).subscribe(this.getExerciseObserver);
   }
 
   viewExercise(idx: number) {
@@ -268,7 +269,8 @@ export class HomeComponent implements OnInit {
   }
 
   viewCollection(idx: number) {
-    this.collectionDataService.showCollection(this.collectionList[idx].id).subscribe(this.viewCollectionObserver);
+    idx += 1;
+    this.collectionDataService.getCollection(idx).subscribe(this.viewCollectionObserver);
   }
 
   switchLists() {

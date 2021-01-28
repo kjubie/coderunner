@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { TestSuite } from "src/app/data-objects/create-exercise/test-suite";
 import { QuestionType } from "src/app/data-objects/question-type";
 
@@ -7,12 +7,10 @@ import { QuestionType } from "src/app/data-objects/question-type";
     templateUrl: './test-suit-tab.component.html',
     styleUrls: ['../../exercise-create.component.css']
 })
-export class TestSuitTabComponent implements OnInit {
+export class TestSuitTabComponent  {
 
     @Input() testSuite: TestSuite;
     @Input() questionTypes: QuestionType[];
 
-    ngOnInit() {
-        this.testSuite.questionType = new QuestionType();
-    }
+    @Output() testSuiteChangeEvent = new EventEmitter<TestSuite>();
 }

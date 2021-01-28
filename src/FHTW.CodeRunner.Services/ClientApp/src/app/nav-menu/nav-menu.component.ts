@@ -13,10 +13,6 @@ export class NavMenuComponent {
 
   constructor(private appComponent: AppComponent, public collectionDataService: CollectionDataService) { }
 
-/*   ngOnInit() {
-    this.exerciseCounter = this.collectionDataService.exerciseCounter;
-  } */
-
   collapse() {
     this.isExpanded = false;
   }

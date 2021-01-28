@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, DoCheck, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from "@angular/core";
 import { EditorInstance, EditorOption } from "angular-markdown-editor";
 import { MarkdownService } from "ngx-markdown";
 import { ExerciseLanguage } from "src/app/data-objects/create-exercise/exercise-language";
@@ -12,6 +12,8 @@ import { ExerciseLanguage } from "src/app/data-objects/create-exercise/exercise-
 export class WrittenLangTabComponent implements OnInit {
 
     @Input() exerciseLanguage: ExerciseLanguage;
+
+    @Output() exerciseLangChangeEvent = new EventEmitter<ExerciseLanguage>();
 
     bsEditorInstance: EditorInstance;
     editorOptions: EditorOption;

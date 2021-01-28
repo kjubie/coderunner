@@ -15,17 +15,17 @@
         <div class="from-group content-group row">
             <label for="genFeedback" class="col-2 col-form-label">General Feedback</label>
             <div class="col-10">
-                <angular-markdown-editor [options]="editorOptions" class="ng-untouched ng-pristine ng-valid line-numbers" textareaId="genFeedback" rows="9" name="genFeedback" [(ngModel)]="exerciseBody.feedback">
+                <angular-markdown-editor [options]="editorOptions" class="ng-untouched ng-pristine ng-valid line-numbers" textareaId="genFeedback" rows="9" name="genFeedback" [(ngModel)]="exerciseBody.feedback" (ngModelUpdate)="this.bodyChangeEvent.emit(this.exerciseBody)">
                 </angular-markdown-editor>
             </div>
             <label for="genFeedback" class="col-2 col-form-label">Description</label>
             <div class="col-10">
-                <angular-markdown-editor [options]="editorOptions" class="ng-untouched ng-pristine ng-valid line-numbers" textareaId="description" rows="9" name="description" [(ngModel)]="exerciseBody.description">
+                <angular-markdown-editor [options]="editorOptions" class="ng-untouched ng-pristine ng-valid line-numbers" textareaId="description" rows="9" name="description" [(ngModel)]="exerciseBody.description" (ngModelUpdate)="this.bodyChangeEvent.emit(this.exerciseBody)">
                 </angular-markdown-editor>
             </div>
             <label for="genFeedback" class="col-2 col-form-label">Hints</label>
             <div class="col-10">
-                <angular-markdown-editor [options]="editorOptions" class="ng-untouched ng-pristine ng-valid line-numbers" textareaId="hint" rows="5" name="hint" [(ngModel)]="exerciseBody.hint">
+                <angular-markdown-editor [options]="editorOptions" class="ng-untouched ng-pristine ng-valid line-numbers" textareaId="hint" rows="5" name="hint" [(ngModel)]="exerciseBody.hint" (ngModelUpdate)="this.bodyChangeEvent.emit(this.exerciseBody)">
                 </angular-markdown-editor>
             </div>
         </div>

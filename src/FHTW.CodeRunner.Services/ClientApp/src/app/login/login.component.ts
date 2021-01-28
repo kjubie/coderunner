@@ -17,16 +17,12 @@ import { LoginService } from '../services/login.service';
   exports: [],
   bootstrap: []
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   constructor(private loginService: LoginService, private router: Router, private appComponent: AppComponent) { }
 
   @Input() public success: boolean;
   @Input() public name: string;
-
-
-  ngOnInit() {
-  }
 
   // Create observer object
   myObserver = {

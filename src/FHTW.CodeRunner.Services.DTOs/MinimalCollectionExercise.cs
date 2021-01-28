@@ -1,4 +1,4 @@
-﻿// <copyright file="CollectionView.cs" company="FHTW CodeRunner">
+﻿// <copyright file="MinimalCollectionExercise.cs" company="FHTW CodeRunner">
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
@@ -16,16 +16,16 @@ namespace FHTW.CodeRunner.Services.DTOs
     /// </summary>
     [DataContract]
     [ExcludeFromCodeCoverage]
-    public class CollectionView
+    public class MinimalCollectionExercise
     {
         /// <summary>
-        /// Gets or sets the id of the collection.
+        /// Gets or sets the id of the exercise.
         /// </summary>
-        [DataMember(Name = "id")]
-        public int Id { get; set; }
+        [DataMember(Name = "exerciseId")]
+        public int ExerciseId { get; set; }
 
         /// <summary>
-        /// Gets or sets the title of the collection.
+        /// Gets or sets the title of the exercise.
         /// </summary>
         [DataMember(Name = "title")]
         public string Title { get; set; }
@@ -43,21 +43,21 @@ namespace FHTW.CodeRunner.Services.DTOs
         public User User { get; set; }
 
         /// <summary>
-        /// Gets or sets the collection lanugages.
+        /// Gets or sets the selected written language.
         /// </summary>
-        [DataMember(Name = "collectionLanguageList")]
-        public List<CollectionLanguage> CollectionLanguages { get; set; }
+        [DataMember(Name = "writtenLanguage")]
+        public string WrittenLanguage { get; set; }
 
         /// <summary>
-        /// Gets or sets a list of tags.
+        /// Gets or sets the selected programming language.
         /// </summary>
-        [DataMember(Name = "collectionTagList")]
-        public List<Tag> TagList { get; set; }
+        [DataMember(Name = "programmingLanguage")]
+        public string ProgrammingLanguage { get; set; }
 
         /// <summary>
-        /// Gets or sets the collection exercises.
+        /// Gets or sets the selected version.
         /// </summary>
-        [DataMember(Name = "minimalCollectionExerciseList")]
-        public List<MinimalCollectionExercise> MinimalCollectionExercises { get; set; }
+        [DataMember(Name = "version")]
+        public int Version { get; set; }
     }
 }
