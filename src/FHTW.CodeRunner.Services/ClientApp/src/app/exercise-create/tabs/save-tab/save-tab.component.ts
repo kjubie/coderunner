@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Exercise } from 'src/app/data-objects/create-exercise/exercise';
+import { CreateExerciseService } from 'src/app/services/create-exercise.service';
 
 @Component({
     selector: 'save-tab',
@@ -9,9 +10,10 @@ import { Exercise } from 'src/app/data-objects/create-exercise/exercise';
 export class SaveTabComponent {
 
     @Input() exercise: Exercise;
-    @Output() saveExerciseEvent = new EventEmitter<Exercise>();
 
-    questionTypes = [];
+    constructor(private createExerciseService: CreateExerciseService) {
+        this.exercise = this.createExerciseService.viewExercise;
+    }
 
     displayTypes = [
         { key: 'Show', value: 'SHOW' },
@@ -19,12 +21,4 @@ export class SaveTabComponent {
         { key: 'Hide if fail', value: 'HIDE_IF_FAIL' },
         { key: 'Hide if succeed', value: 'HIDE_IF_SUCCEED' }
     ];
-
-    saveExercise() {
-        this.saveExerciseEvent.emit(this.exercise);
-    }
-
-    test() {
-        console.log(this.exercise);
-    }
 }

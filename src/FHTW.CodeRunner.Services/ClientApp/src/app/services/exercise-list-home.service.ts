@@ -33,6 +33,7 @@ export class ExerciseListHomeService {
     }
 
     search(searchFilter: SearchFilter): Observable<ExerciseHome[]> {
+      console.log(searchFilter);
       return this.http.post<ExerciseHome[]>(this.searchFilterUrl, searchFilter)
       .pipe(
         tap(_ => console.log("fetched exercises from db for filter")),

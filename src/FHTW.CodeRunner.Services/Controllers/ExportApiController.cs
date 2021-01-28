@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FHTW.CodeRunner.BusinessLogic.Exceptions;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -62,16 +63,35 @@ namespace FHTW.CodeRunner.Services.Controllers
                 });
             }
 
-            var blExerciseKeys = this.mapper.Map<BlEntities.ExerciseKeys>(body);
-
-            string xmlString = this.exportLogic.ExportExercise(blExerciseKeys);
-
-            return new ContentResult
+            try
             {
-                ContentType = "application/xml",
-                Content = xmlString,
-                StatusCode = 200,
-            };
+                var blExerciseKeys = this.mapper.Map<BlEntities.ExerciseKeys>(body);
+
+                string xmlString = this.exportLogic.ExportExercise(blExerciseKeys);
+
+                return new ContentResult
+                {
+                    ContentType = "application/xml",
+                    Content = xmlString,
+                    StatusCode = 200,
+                };
+            }
+            catch (BlValidationException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
         }
 
         /// <summary>
@@ -94,16 +114,35 @@ namespace FHTW.CodeRunner.Services.Controllers
                 });
             }
 
-            var blCollectionKeys = this.mapper.Map<BlEntities.CollectionKeys>(body);
-
-            string xmlString = this.exportLogic.ExportCollection(blCollectionKeys);
-
-            return new ContentResult
+            try
             {
-                ContentType = "application/xml",
-                Content = xmlString,
-                StatusCode = 200,
-            };
+                var blCollectionKeys = this.mapper.Map<BlEntities.CollectionKeys>(body);
+
+                string xmlString = this.exportLogic.ExportCollection(blCollectionKeys);
+
+                return new ContentResult
+                {
+                    ContentType = "application/xml",
+                    Content = xmlString,
+                    StatusCode = 200,
+                };
+            }
+            catch (BlValidationException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
         }
     }
 }

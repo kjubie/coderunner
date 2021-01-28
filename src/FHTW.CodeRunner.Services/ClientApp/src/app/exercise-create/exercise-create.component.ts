@@ -33,6 +33,8 @@ export class ExerciseCreateComponent implements OnInit {
   writtenLangIdx: number;
   programmingLangIdx: number;
   testIdx: number;
+  latestVersion: number = 0;
+  testCases: number[] = [];
 
   constructor(private createExerciseService: CreateExerciseService, private helper: CreateExerciseHelperService) {}
 
@@ -64,8 +66,8 @@ export class ExerciseCreateComponent implements OnInit {
 
       if (this.exercise.title !== undefined && this.exercise.title !== "") {
         // remove already used written and programming langs
-        let latestVersion = this.exercise.exerciseVersionList.length - 1;
-        this.exercise.exerciseVersionList[latestVersion].exerciseLanguageList.forEach(exerciseLang => {
+        this.latestVersion = this.exercise.exerciseVersionList.length - 1;
+        this.exercise.exerciseVersionList[this.latestVersion].exerciseLanguageList.forEach(exerciseLang => {
           let writtenLang = exerciseLang.writtenLanguage;
           if (this.writtenLangs.find(e => e.name === writtenLang.name) !== undefined) {
             let element = this.writtenLangs.find(e => e.name === writtenLang.name);
@@ -74,7 +76,7 @@ export class ExerciseCreateComponent implements OnInit {
             this.writtenLangs.splice(idx, 1);
           }
         });
-        this.exercise.exerciseVersionList[latestVersion].exerciseLanguageList[0].exerciseBody.forEach(body => {
+        this.exercise.exerciseVersionList[this.latestVersion].exerciseLanguageList[0].exerciseBody.forEach(body => {
           let programmingLang = body.programmingLanguage;
           if (this.programmingLangs.find(e => e.name === programmingLang.name) !== undefined) {
             let element = this.programmingLangs.find(e => e.name === programmingLang.name);
@@ -82,6 +84,10 @@ export class ExerciseCreateComponent implements OnInit {
             let idx = this.programmingLangs.indexOf(element);
             this.programmingLangs.splice(idx, 1);
           }
+
+          let testAmount = body.testSuite.testCaseList.length;
+
+          this.testCases.push(testAmount);
         });
         if (this.writtenLangs.length == 0) {
           this.langsAvailable = false;
@@ -100,7 +106,6 @@ export class ExerciseCreateComponent implements OnInit {
     console.log(this.exercise);
 
     if (this.exercise === undefined) {
-      console.log('creating new exercise - not editing one...');
       this.exercise = this.helper.createNewExercise();
     }
     this.writtenLangIdx = 0;
@@ -142,6 +147,7 @@ export class ExerciseCreateComponent implements OnInit {
 
   addProgrammingLang(lang: ProgrammingLanguage) {
     this.exercise = this.helper.addProgrammingLang(lang, this.exercise);
+    console.log(this.exercise);
   }
 
   addNewTest(test: TestCase) {

@@ -10,21 +10,21 @@
   <div class="clearfix">
     <!-- Filter options (ToDo: get data from DB, Improve Toggle function!) -->
     <div class="float-left">
-      <div class="btn-group">
-        <button type="button" class="btn btn-secondary btn-md dropdown-toggle btn-dropdown blue" data-toggle="dropdown" (click)="languageDropdown()">
-          Language
+      <div ngbDropdown class="d-inline-block btn-group">
+        <button class="btn btn-secondary btn-md btn-dropdown blue" id="languageDropdown" ngbDropdownToggle>
+          {{ searchFilter.writtenLanguage != undefinded && searchFilter.writtenLanguage != "" ? searchFilter.writtenLanguage : 'Language' }}
         </button>
-        <div class="dropdown-menu" id="languageDropdown">
-          <a class="dropdown-item" *ngFor="let lang of languages">{{ lang }}</a>
+        <div ngbDropdownMenu aria-labelledby="languageDropdown">
+          <button ngbDropdownItem *ngFor="let l of languages" (click)="setFilterLang(l)">{{ l }}</button>
         </div>
       </div>
 
-      <div *ngIf="showExercises" class="btn-group">
-        <button type="button" class="btn btn-secondary btn-md dropdown-toggle btn-dropdown blue" data-toggle="dropdown" (click)="programmingDropdown()">
-          Programming Language
+      <div *ngIf="showExercises" ngbDropdown class="d-inline-block btn-group">
+        <button class="btn btn-secondary btn-md btn-dropdown blue" id="programmingDropdown" ngbDropdownToggle>
+          {{ searchFilter.programmingLanguage != undefinded && searchFilter.programmingLanguage != "" ? searchFilter.programmingLanguage : 'Programming Language' }}
         </button>
-        <div class="dropdown-menu" id="programmingDropdown">
-          <a class="dropdown-item" *ngFor="let lang of programmingLangs">{{ lang }}</a>
+        <div ngbDropdownMenu aria-labelledby="programmingDropdown">
+          <button ngbDropdownItem *ngFor="let l of programmingLangs" (click)="setFilterPLang(l)">{{ l }}</button>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
       <h2><span class="isInactive" (click)="switchLists()">Exercises</span>  |  <span class="isSelected">Collections</span></h2>
     </div>
 
-    <list-view *ngIf="viewSelected == 'list'" [exerciseList]="exerciseList" [collectionList]="collectionList" [showExercises]="showExercises" (addExerciseToCollectionEvent)="addExerciseToCollection($event)" (exportExerciseEvent)="exportSingleExercise($event, exportModal)" (exportCollectionEvent)="exportSingleCollection($event, exportCollectionModal)" (editExerciseEvent)="editExercise($event)"></list-view>
+    <list-view *ngIf="viewSelected == 'list'" [exerciseList]="exerciseList" [collectionList]="collectionList" [showExercises]="showExercises" (addExerciseToCollectionEvent)="addExerciseToCollection($event)" (exportExerciseEvent)="exportSingleExercise($event, exportModal)" (exportCollectionEvent)="exportSingleCollection($event, exportCollectionModal)" (editExerciseEvent)="editExercise($event)" (viewExerciseEvent)="viewExercise($event)"></list-view>
     <grid-big-view *ngIf="viewSelected == 'grid_big'"></grid-big-view>
     <grid-small-view *ngIf="viewSelected == 'grid_small'"></grid-small-view>
   </div>

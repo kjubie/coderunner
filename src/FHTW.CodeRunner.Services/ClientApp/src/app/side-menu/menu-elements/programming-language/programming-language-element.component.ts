@@ -13,6 +13,7 @@ export class ProgrammingLanguageElementComponent implements OnInit {
     @Input() writtenLang;
     @Input() idx;
     @Input() selectedElement;
+    @Input() testCasesAmount;
 
     @Output() selectElementEvent = new EventEmitter<string>();
     @Output() removePLangEvent = new EventEmitter<ProgrammingLanguage>();
@@ -26,7 +27,10 @@ export class ProgrammingLanguageElementComponent implements OnInit {
     showWrittenLanguageList = true;
 
     ngOnInit() {
-        this.testCases.push('Test 1');
+        for (let i = 0; i < this.testCasesAmount; i++) {
+            let n = i + 1;
+            this.testCases.push('Test ' + n.toString());
+        }
     }
 
     addTestCase() {
