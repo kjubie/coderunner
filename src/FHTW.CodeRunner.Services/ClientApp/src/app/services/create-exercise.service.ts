@@ -51,7 +51,7 @@ export class CreateExerciseService {
   getExercise(idx: number): Observable<Exercise> {
     let getExerciseUrl = "https://localhost:5001/api/exercise/" + idx.toString();
     return this.http.get<Exercise>(getExerciseUrl).pipe(
-      tap(_ => console.log("fetched exercise for editing")),
+      tap(resp => console.log(resp)),
       catchError(this.handleError<Exercise>('getExercise'))
     );
   }
