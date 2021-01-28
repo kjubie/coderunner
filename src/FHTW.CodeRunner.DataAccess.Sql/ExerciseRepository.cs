@@ -27,104 +27,121 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         public ExerciseRepository(CodeRunnerContext dbcontext) => this.context = dbcontext;
 
         /// <inheritdoc/>
-        public Exercise CreateAndUpdate(Exercise exercise)
+        public Exercise Save(Exercise exercise)
         {
-            var version = exercise.ExerciseVersion;
+            this.TemporarySave(exercise);
 
-            if (exercise.FkUserId == 0)
-            {
-                throw new DalException("exercise userid must be set");
-            }
+            var version = exercise.ExerciseVersion.FirstOrDefault();
 
             if (version == null)
             {
-                throw new DalException("at least one version entity should be present");
+                throw new DalException("No exercise version to update");
             }
 
-            if (version.Count != 1)
-            {
-                throw new DalException($"only one version should be present when updating exercise. Count = {version.Count}");
-            }
+            version.TemporaryFlag = false;
 
-            try
-            {
-                using var transaction = this.context.Database.BeginTransaction();
-
-                // set ids of existing questiontypes with no id.
-                // this can happen if an exercise imported from moodle has the same questiontype, but of course no id.
-                exercise.ExerciseVersion.ToList().ForEach(ev =>
-                {
-                    ev.ExerciseLanguage.ToList().ForEach(el =>
-                    {
-                        el.ExerciseBody.ToList().ForEach(eb =>
-                        {
-                            if (eb.FkTestSuite != null)
-                            {
-                                if (eb.FkTestSuite.FkQuestionType != null)
-                                {
-                                    // get id if question type exists.
-                                    var questionType = this.context.QuestionType
-                                        .AsNoTracking()
-                                        .SingleOrDefault(qt => qt.Name == eb.FkTestSuite.FkQuestionType.Name);
-
-                                    if (questionType != null)
-                                    {
-                                        eb.FkTestSuite.FkQuestionType.Id = questionType.Id;
-                                        eb.FkTestSuite.FkQuestionType.FkProgrammingLanuageId = questionType.FkProgrammingLanuageId;
-                                    }
-                                }
-                            }
-                        });
-                    });
-                });
-
-                exercise.ExerciseTag.ToList().ForEach(et =>
-                {
-                    if (et.FkTag != null)
-                    {
-                        int? id = this.context.Tag.AsNoTracking().SingleOrDefault(t => t.Name == et.FkTag.Name)?.Id;
-                        if (id != null)
-                        {
-                            et.FkTagId = (int)id;
-                            et.FkTag = null;
-                        }
-                    }
-                });
-
-                // add everything new
-                this.context.ChangeTracker.TrackGraph(exercise, e =>
-                {
-                    if (e.Entry.IsKeySet)
-                    {
-                        e.Entry.State = EntityState.Unchanged;
-                    }
-                    else
-                    {
-                        e.Entry.State = EntityState.Added;
-                    }
-                });
-
-                this.context.SaveChanges();
-
-                // update existing
-                this.context.ChangeTracker.TrackGraph(exercise, e =>
-                {
-                    if (e.Entry.IsKeySet)
-                    {
-                        e.Entry.State = EntityState.Modified;
-                    }
-                });
-
-                this.context.SaveChanges();
-
-                transaction.Commit();
-            }
-            catch (Exception e)
-            {
-                throw new DalException("Updating exercise failed", e);
-            }
+            this.context.SaveChanges();
 
             return exercise;
+        }
+
+        /// <inheritdoc/>
+        public Exercise TemporarySave(Exercise exercise)
+        {
+            int latest_version = this.GetLatestVersionNumber(exercise.Id);
+
+            var version = exercise.ExerciseVersion.FirstOrDefault();
+
+            if (version == null)
+            {
+                throw new DalException("No exercise version to update");
+            }
+
+            if (version.VersionNumber != latest_version)
+            {
+                throw new DalException($"TemporarySave only allowed for latest version. latest_version = {latest_version} version requested to be saved = {version.VersionNumber}");
+            }
+
+            bool is_temporary = this.context.ExerciseVersion
+                    .Where(ev => ev.Id == exercise.ExerciseVersion.FirstOrDefault().Id)
+                    .Select(ev => ev.TemporaryFlag)
+                    .ToList()
+                    .DefaultIfEmpty(true)
+                    .First();
+
+            // create new temporary version / reset ids
+            if (!is_temporary || version.VersionNumber == 0)
+            {
+                version.Id = 0;
+                version.VersionNumber += 1;
+                version.ValidState = ValidState.NotChecked;
+                version.TemporaryFlag = true;
+                foreach (var el in version.ExerciseLanguage)
+                {
+                    el.Id = 0;
+                    el.FkExerciseVersionId = 0;
+                    el.FkExerciseHeaderId = 0;
+                    el.FkExerciseHeader.Id = 0;
+                    foreach (var eb in el.ExerciseBody)
+                    {
+                        eb.Id = 0;
+                        eb.FkExerciseLanguageId = 0;
+                        eb.FkTestSuiteId = 0;
+                        eb.FkTestSuite.Id = 0;
+                        foreach (var tc in eb.FkTestSuite.TestCase)
+                        {
+                            tc.Id = 0;
+                            tc.FkTestSuiteId = 0;
+                        }
+                    }
+                }
+            }
+
+            return this.CreateAndUpdate(exercise);
+        }
+
+        private void ResolveValueConflicts(Exercise exercise)
+        {
+            // set ids of existing questiontypes with no id.
+            // this can happen if an exercise imported from moodle has the same questiontype, but of course no id.
+            exercise.ExerciseVersion.ToList().ForEach(ev =>
+            {
+                ev.ExerciseLanguage.ToList().ForEach(el =>
+                {
+                    el.ExerciseBody.ToList().ForEach(eb =>
+                    {
+                        if (eb.FkTestSuite != null)
+                        {
+                            if (eb.FkTestSuite.FkQuestionType != null)
+                            {
+                                // get id if question type exists.
+                                var questionType = this.context.QuestionType
+                                    .AsNoTracking()
+                                    .SingleOrDefault(qt => qt.Name == eb.FkTestSuite.FkQuestionType.Name);
+
+                                if (questionType != null)
+                                {
+                                    eb.FkTestSuite.FkQuestionType.Id = questionType.Id;
+                                    eb.FkTestSuite.FkQuestionType.FkProgrammingLanuageId = questionType.FkProgrammingLanuageId;
+                                }
+                            }
+                        }
+                    });
+                });
+            });
+
+            exercise.ExerciseTag.ToList().ForEach(et =>
+            {
+                if (et.FkTag != null)
+                {
+                    int? id = this.context.Tag.AsNoTracking().SingleOrDefault(t => t.Name == et.FkTag.Name)?.Id;
+                    if (id != null)
+                    {
+                        et.FkTagId = (int)id;
+                        et.FkTag = null;
+                    }
+                }
+            });
         }
 
         /// <inheritdoc/>
@@ -177,7 +194,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             var query = this.context.ExerciseVersion
                 .Where(e => e.FkExerciseId == id);
 
-            return query.Any() ? query.Max(e => e.VersionNumber) : throw new DalException($"No versions for exercise id = {id} found");
+            return query.Any() ? query.Max(e => e.VersionNumber) : 0;
         }
 
         /// <inheritdoc/>
@@ -337,6 +354,67 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             }
 
             return result;
+        }
+
+        private Exercise CreateAndUpdate(Exercise exercise)
+        {
+            var version = exercise.ExerciseVersion;
+
+            if (exercise.FkUserId == 0)
+            {
+                throw new DalException("exercise userid must be set");
+            }
+
+            if (version == null)
+            {
+                throw new DalException("at least one version entity should be present");
+            }
+
+            if (version.Count != 1)
+            {
+                throw new DalException($"only one version should be present when updating exercise. Count = {version.Count}");
+            }
+
+            try
+            {
+                using var transaction = this.context.Database.BeginTransaction();
+
+                this.ResolveValueConflicts(exercise);
+
+                // add everything new
+                this.context.ChangeTracker.TrackGraph(exercise, e =>
+                {
+                    if (e.Entry.IsKeySet)
+                    {
+                        e.Entry.State = EntityState.Unchanged;
+                    }
+                    else
+                    {
+                        e.Entry.State = EntityState.Added;
+                    }
+                });
+
+                this.context.SaveChanges();
+
+                // update existing
+                this.context.ChangeTracker.TrackGraph(exercise, e =>
+                {
+                    if (e.Entry.IsKeySet)
+                    {
+                        e.Entry.State = EntityState.Modified;
+                    }
+                });
+
+                this.context.SaveChanges();
+
+                transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                throw new DalException("Updating exercise failed", e);
+            }
+
+            return exercise;
         }
     }
 }

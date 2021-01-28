@@ -6,6 +6,7 @@
     "CreatorDifficulty": 4,
     "LastModified": "2020-04-23T18:28:43.51",
     "ValidState": 1,
+    "TemporaryFlag": false,
     "FkUserId": 1,
     "FkExerciseId": 1
   },
@@ -16,6 +17,7 @@
     "CreatorDifficulty": 5,
     "LastModified": "2020-05-14T18:28:43.51",
     "ValidState": 1,
+    "TemporaryFlag": false,
     "FkUserId": 1,
     "FkExerciseId": 1
   },
@@ -26,6 +28,7 @@
     "CreatorDifficulty": 5,
     "LastModified": "2020-06-17T18:28:43.51",
     "ValidState": 1,
+    "TemporaryFlag": false,
     "FkUserId": 1,
     "FkExerciseId": 1
   },
@@ -36,6 +39,7 @@
     "CreatorDifficulty": 3,
     "LastModified": "2020-09-23T18:28:43.51",
     "ValidState": 1,
+    "TemporaryFlag": false,
     "FkUserId": 1,
     "FkExerciseId": 2
   },
@@ -46,6 +50,7 @@
     "CreatorDifficulty": 5,
     "LastModified": "2020-02-23T18:28:43.51",
     "ValidState": 1,
+    "TemporaryFlag": false,
     "FkUserId": 3,
     "FkExerciseId": 3
   }
