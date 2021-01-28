@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
     console.log("ToDo: save credentials / check with data in db...");
   }
 
-  passBack(credentials) {
+  PassBack(credentials) {
     this.loginService.login(credentials.name, credentials.password)
     .subscribe(this.myObserver);
   }

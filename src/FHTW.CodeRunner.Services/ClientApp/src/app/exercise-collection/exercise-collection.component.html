@@ -94,7 +94,7 @@
                 <option *ngFor="let progLang of ex.programmingLanguageList" [ngValue]="progLang.id" [selected]="progLang.id === selectedGlobalProgLang">{{progLang.name}}</option>
               </select>
             </div>
-            <button (click)="removeExercise(ex)" class="deleteBtn btn ml-3 colItemSettings">&#x2715;</button>
+            <button (click)="RemoveExercise(ex)" class="deleteBtn btn ml-3 colItemSettings">&#x2715;</button>
           </div>
         </li>
       </ul>
@@ -102,7 +102,7 @@
   </div>
 
   <div class="text-center">
-    <button class="btn btn-primary col-1 mb-5" [disabled]="exerciseList.length == 0" (click)="saveCollection()">Save</button>
+    <button class="btn btn-primary col-1 mb-5" [disabled]="exerciseList.length == 0" (click)="SaveCollection()">Save</button>
   </div>
 
 </div>
