@@ -22,15 +22,15 @@
                     <textarea type="text" class="form-control-plaintext" rows="4" id="param" name="param" readonly [value]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParam"></textarea>
                 </div>
 
-                <label for="twig" class="col-2 col-form-label">Twig Control</label>
+                <label for="liftParam" class="col-2 col-form-label">Twig Control</label>
                 <div class="col-10 form-inline">
                     <div class="form-group col-3">
-                        <input type="checkbox" id="liftParam" name="liftParam" readonly (click)="$event.preventDefault()" [value]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParamLiftFlag">
-                        <p class="ml-3">Lift Template Parameters</p>
+                        <input type="checkbox" id="liftParam" name="liftParam" (click)="$event.preventDefault()" [checked]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParamLiftFlag">
+                        <p class="checkboxText">Lift Template Parameters</p>
                     </div>
                     <div class="form-group col-3">
-                        <input type="checkbox" id="twigAll" name="twigAll" readonly (click)="$event.preventDefault()" [value]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.twigAllFlag">
-                        <p class="ml-3">Twig for All</p>
+                        <input type="checkbox" id="twigAll" name="twigAll" (click)="$event.preventDefault()" [checked]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.twigAllFlag">
+                        <p class="checkboxText">Twig for All</p>
                     </div>
                 </div>
 
@@ -166,7 +166,7 @@
             
                             <label for="templDebugging" class="col-2 col-form-label">Template Debugging</label>
                             <div class="col-10">
-                                <input type="checkbox" id="templDebugging" name="templDebugging" readonly (click)="$event.preventDefault()" [value]="prog.testSuite.templateDebugFlag">
+                                <input type="checkbox" id="templDebugging" name="templDebugging" (click)="$event.preventDefault()" [checked]="prog.testSuite.templateDebugFlag">
                             </div>
             
                             <label for="precheck" class="col-2 col-form-label">Precheck</label>
@@ -201,7 +201,7 @@
             
                             <label for="testOnSave" class="col-2 col-form-label">Test on Save</label>
                             <div class="col-10">
-                                <input type="checkbox" id="testOnSave" name="testOnSave" readonly (click)="$event.preventDefault()" [value]="prog.testSuite.testOnSaveFlag">
+                                <input type="checkbox" id="testOnSave" name="testOnSave" (click)="$event.preventDefault()" [checked]="prog.testSuite.testOnSaveFlag">
                             </div>
                         </div>
                     </div>
@@ -243,12 +243,12 @@
                 
                             <label for="useAsExample" class="col-2 col-form-label">Use as Example</label>
                             <div class="col-10">
-                                <input type="checkbox" id="useAsExample" name="useAsExample" readonly (click)="$event.preventDefault()" [value]="test.useAsExampleFlag">
+                                <input type="checkbox" id="useAsExample" name="useAsExample" (click)="$event.preventDefault()" [checked]="test.useAsExampleFlag">
                             </div>
                 
                             <label for="hideOnFail" class="col-2 col-form-label">Hide Rest if Fail</label>
                             <div class="col-10">
-                                <input type="checkbox" id="hideOnFail" name="hideOnFail" readonly (click)="$event.preventDefault()" [value]="test.hideOnFailFlag">
+                                <input type="checkbox" id="hideOnFail" name="hideOnFail" (click)="$event.preventDefault()" [checked]="test.hideOnFailFlag">
                             </div>
                 
                             <label for="points" class="col-2 col-form-label">Points</label>

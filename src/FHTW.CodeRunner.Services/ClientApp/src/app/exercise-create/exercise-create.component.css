@@ -97,3 +97,8 @@
 .modalForm input[type=text], .modalForm select {
    border-radius: 5px;
 }
+
+.checkboxText {
+   margin-left: 10px;
+   margin-top: 15px
+}
