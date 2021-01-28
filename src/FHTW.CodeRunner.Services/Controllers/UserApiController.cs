@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FHTW.CodeRunner.BusinessLogic.Exceptions;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -64,22 +65,41 @@ namespace FHTW.CodeRunner.Services.Controllers
                 });
             }
 
-            var blUser = this.mapper.Map<BlEntities.User>(body);
-
-            int? result = this.userLogic.AuthenticateUser(blUser);
-
-            if (result.HasValue)
+            try
             {
-                return this.Ok(new SvcEntities.AuthenticateOk
+                var blUser = this.mapper.Map<BlEntities.User>(body);
+
+                int? result = this.userLogic.AuthenticateUser(blUser);
+
+                if (result.HasValue)
                 {
-                    Id = result.Value,
-                });
+                    return this.Ok(new SvcEntities.AuthenticateOk
+                    {
+                        Id = result.Value,
+                    });
+                }
+                else
+                {
+                    return this.BadRequest(new SvcEntities.Error
+                    {
+                        ErrorMessage = "Username or password is incorrect",
+                    });
+                }
             }
-            else
+            catch (BlValidationException e)
             {
+                this.logger.LogError(e.Message);
                 return this.BadRequest(new SvcEntities.Error
                 {
-                    ErrorMessage = "Username or password is incorrect",
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
                 });
             }
         }

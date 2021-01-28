@@ -56,6 +56,9 @@ namespace FHTW.CodeRunner.DataAccess.Entities
         [Column("valid_state")]
         public ValidState ValidState { get; set; }
 
+        [Column("temporary_flag")]
+        public bool TemporaryFlag { get; set; }
+
         [Column("fk_user_id")]
         public int FkUserId { get; set; }
 

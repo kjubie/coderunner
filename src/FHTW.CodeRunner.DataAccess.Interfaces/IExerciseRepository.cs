@@ -24,12 +24,19 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         Exercise GetById(int id, int version = -1);
 
         /// <summary>
-        /// Creates and updates a new exercise.
-        /// If the exercise id is set only update is called.
+        /// Saves the exercise as a new TEMPORARY version.
+        /// This means that subsequent save don't increase the version.
         /// </summary>
         /// <param name="exercise">the exercise.</param>
         /// <returns>returns inserted exercise.</returns>
-        public Exercise CreateAndUpdate(Exercise exercise);
+        public Exercise TemporarySave(Exercise exercise);
+
+        /// <summary>
+        /// Saves the exercise as a new version.
+        /// </summary>
+        /// <param name="exercise">the exercise.</param>
+        /// <returns>returns inserted exercise.</returns>
+        public Exercise Save(Exercise exercise);
 
         /// <summary>
         /// Gets a list of exercises containing:

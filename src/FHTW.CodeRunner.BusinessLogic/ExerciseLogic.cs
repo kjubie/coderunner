@@ -45,39 +45,64 @@ namespace FHTW.CodeRunner.BusinessLogic
         /// <inheritdoc/>
         public List<BlEntities.MinimalExercise> GetMinimalExerciseList()
         {
-            var dalExerciseList = this.exerciseRepository.GetMinimalList();
-            var blExerciseList = this.mapper.Map<List<BlEntities.MinimalExercise>>(dalExerciseList);
+            try
+            {
+                var dalExerciseList = this.exerciseRepository.GetMinimalList();
+                var blExerciseList = this.mapper.Map<List<BlEntities.MinimalExercise>>(dalExerciseList);
 
-            return blExerciseList;
+                return blExerciseList;
+            }
+            catch (Exception e)
+            {
+                this.logger.LogError(e.Message);
+                throw new BlDataAccessException("Unable to retrieve a list of minimal exercises from the DAL!", e);
+            }
         }
 
         /// <inheritdoc/>
         public BlEntities.ExerciseCreatePreparation GetExerciseCreatePreparation()
         {
-            BlEntities.ExerciseCreatePreparation exerciseCreatePreparation = new BlEntities.ExerciseCreatePreparation();
+            try
+            {
+                BlEntities.ExerciseCreatePreparation exerciseCreatePreparation = new BlEntities.ExerciseCreatePreparation();
 
-            var dalProgrammingLanguages = this.uiRepository.GetProgrammingLanguages();
-            exerciseCreatePreparation.ProgrammingLanguages = this.mapper.Map<List<BlEntities.ProgrammingLanguage>>(dalProgrammingLanguages);
+                var dalProgrammingLanguages = this.uiRepository.GetProgrammingLanguages();
+                exerciseCreatePreparation.ProgrammingLanguages = this.mapper.Map<List<BlEntities.ProgrammingLanguage>>(dalProgrammingLanguages);
 
-            var dalWrittenLanguages = this.uiRepository.GetWrittenLanguages();
-            exerciseCreatePreparation.WrittenLanguages = this.mapper.Map<List<BlEntities.WrittenLanguage>>(dalWrittenLanguages);
+                var dalWrittenLanguages = this.uiRepository.GetWrittenLanguages();
+                exerciseCreatePreparation.WrittenLanguages = this.mapper.Map<List<BlEntities.WrittenLanguage>>(dalWrittenLanguages);
 
-            var dalQuestionTypes = this.uiRepository.GetQuestionTypes();
-            exerciseCreatePreparation.QuestionTypes = this.mapper.Map<List<BlEntities.QuestionType>>(dalQuestionTypes);
+                var dalQuestionTypes = this.uiRepository.GetQuestionTypes();
+                exerciseCreatePreparation.QuestionTypes = this.mapper.Map<List<BlEntities.QuestionType>>(dalQuestionTypes);
 
-            var dalTags = this.uiRepository.GetTags();
-            exerciseCreatePreparation.Tags = this.mapper.Map<List<BlEntities.Tag>>(dalTags);
+                var dalTags = this.uiRepository.GetTags();
+                exerciseCreatePreparation.Tags = this.mapper.Map<List<BlEntities.Tag>>(dalTags);
 
-            return exerciseCreatePreparation;
+                return exerciseCreatePreparation;
+            }
+            catch (Exception e)
+            {
+                this.logger.LogError(e.Message);
+                throw new BlDataAccessException("Unable to retrieve data for the creation of an exercise from the DAL!", e);
+            }
         }
 
         /// <inheritdoc/>
         public BlEntities.Exercise GetExerciseById(int id, int version)
         {
-            var dalExercise = this.exerciseRepository.GetById(id, version);
-            var blExercise = this.mapper.Map<BlEntities.Exercise>(dalExercise);
+            try
+            {
+                // TODO: Data not found Exception.
+                var dalExercise = this.exerciseRepository.GetById(id, version);
+                var blExercise = this.mapper.Map<BlEntities.Exercise>(dalExercise);
 
-            return blExercise;
+                return blExercise;
+            }
+            catch (Exception e)
+            {
+                this.logger.LogError(e.Message);
+                throw new BlDataAccessException("Unable to retrieve an exercis by from the DAL!", e);
+            }
         }
 
         /// <inheritdoc/>
@@ -90,15 +115,23 @@ namespace FHTW.CodeRunner.BusinessLogic
             }
             else
             {
-                if (exercise.Created == null)
+                try
                 {
-                    exercise.Created = DateTime.Now;
+                    if (exercise.Created == null)
+                    {
+                        exercise.Created = DateTime.Now;
+                    }
+
+                    var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
+
+                    this.exerciseRepository.CreateAndUpdate(dalExercise);
+                    this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
                 }
-
-                var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
-
-                this.exerciseRepository.CreateAndUpdate(dalExercise);
-                this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
+                catch (Exception e)
+                {
+                    this.logger.LogError(e.Message);
+                    throw new BlDataAccessException("Unable to save Exercise with Title: " + exercise.Title + " to DAL.", e);
+                }
             }
         }
 
@@ -112,24 +145,37 @@ namespace FHTW.CodeRunner.BusinessLogic
             }
             else
             {
-                IValidator<BlEntities.Exercise> validator = new ExerciseValidator();
-                var validationResult = validator.Validate(exercise);
-
-                if (validationResult.IsValid)
+                try
                 {
-                    if (exercise.Created == null)
+                    IValidator<BlEntities.Exercise> validator = new ExerciseValidator();
+                    var validationResult = validator.Validate(exercise);
+
+                    if (validationResult.IsValid)
                     {
-                        exercise.Created = DateTime.Now;
-                    }
+                        if (exercise.Created == null)
+                        {
+                            exercise.Created = DateTime.Now;
+                        }
 
-                    var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
-                    this.exerciseRepository.CreateAndUpdate(dalExercise);
-                    this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
+                        var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
+                        this.exerciseRepository.CreateAndUpdate(dalExercise);
+                        this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
+                    }
+                    else
+                    {
+                        this.logger.LogError("BL received invalid Exercise in SaveExercise with Title: " + exercise.Title);
+                        throw new ValidationException("exercise " + validationResult.Errors.Select(err => err.ErrorMessage).ToString());
+                    }
                 }
-                else
+                catch (ValidationException e)
                 {
-                    this.logger.LogError("BL received invalid Exercise in SaveExercise with Title: " + exercise.Title);
-                    throw new ValidationException("exercise " + validationResult.Errors.Select(err => err.ErrorMessage).ToString());
+                    this.logger.LogError(e.Message);
+                    throw new BlValidationException("BL received invalid Exercise with Title : " + exercise.Title, e);
+                }
+                catch (Exception e)
+                {
+                    this.logger.LogError(e.Message);
+                    throw new BlDataAccessException("Unable to validate Exercise with Title: " + exercise.Title + " to DAL.", e);
                 }
             }
         }
@@ -144,11 +190,19 @@ namespace FHTW.CodeRunner.BusinessLogic
             }
             else
             {
-                this.logger.LogInformation($"BL searching for Exercises, Search Term {searchObject.SearchTerm}, Programming Language {searchObject.ProgrammingLanguage} and Written Language {searchObject.WrittenLanguage}.");
-                var dalExerciseList = this.exerciseRepository.SearchAndFilter(searchObject.SearchTerm, searchObject.ProgrammingLanguage, searchObject.WrittenLanguage);
-                var blExerciseList = this.mapper.Map<List<BlEntities.MinimalExercise>>(dalExerciseList);
+                try
+                {
+                    this.logger.LogInformation($"BL searching for Exercises, Search Term {searchObject.SearchTerm}, Programming Language {searchObject.ProgrammingLanguage} and Written Language {searchObject.WrittenLanguage}.");
+                    var dalExerciseList = this.exerciseRepository.SearchAndFilter(searchObject.SearchTerm, searchObject.ProgrammingLanguage, searchObject.WrittenLanguage);
+                    var blExerciseList = this.mapper.Map<List<BlEntities.MinimalExercise>>(dalExerciseList);
 
-                return blExerciseList;
+                    return blExerciseList;
+                }
+                catch (Exception e)
+                {
+                    this.logger.LogError(e.Message);
+                    throw new BlDataAccessException($"Unable to search for exercises with Search Term {searchObject.SearchTerm}, Programming Language {searchObject.ProgrammingLanguage} and Written Language {searchObject.WrittenLanguage}.", e);
+                }
             }
         }
     }

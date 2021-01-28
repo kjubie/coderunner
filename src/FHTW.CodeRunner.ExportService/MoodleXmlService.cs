@@ -8,6 +8,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 using FHTW.CodeRunner.ExportService.Entities;
+using FHTW.CodeRunner.ExportService.Exceptions;
 using FHTW.CodeRunner.ExportService.Interfaces;
 
 namespace FHTW.CodeRunner.ExportService
@@ -17,30 +18,57 @@ namespace FHTW.CodeRunner.ExportService
     /// </summary>
     public class MoodleXmlService : IMoodleXmlService
     {
+        // private readonly ILogger logger;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MoodleXmlService"/> class.
+        /// </summary>
+        /// <param name="logger">The injected logger.</param>
+        //public MoodleXmlService(ILogger logger)
+        //{
+        //    this.logger = logger;
+        //}
+
         /// <inheritdoc/>
         public string ExportMoodleXml(Quiz quiz)
         {
-            using (var writer = new Utf8StringWriter())
+            try
             {
-                XmlSerializer xmlSerializer = new XmlSerializer(quiz.GetType());
-                xmlSerializer.Serialize(writer, quiz);
+                using (var writer = new Utf8StringWriter())
+                {
+                    XmlSerializer xmlSerializer = new XmlSerializer(quiz.GetType());
+                    xmlSerializer.Serialize(writer, quiz);
 
-                return writer.ToString();
+                    return writer.ToString();
+                }
+            }
+            catch (Exception e)
+            {
+                // this.logger.LogError(e.Message);
+                throw new ExportXmlConversionException("Unable to convert to xml", e);
             }
         }
 
         /// <inheritdoc/>
         public Quiz ImportMoodleXml(string xml)
         {
-            Quiz quiz = new Quiz();
-
-            using (var reader = new StringReader(xml))
+            try
             {
-                XmlSerializer xmlSerializer = new XmlSerializer(quiz.GetType());
-                quiz = (Quiz)xmlSerializer.Deserialize(reader);
-            }
+                Quiz quiz = new Quiz();
 
-            return quiz;
+                using (var reader = new StringReader(xml))
+                {
+                    XmlSerializer xmlSerializer = new XmlSerializer(quiz.GetType());
+                    quiz = (Quiz)xmlSerializer.Deserialize(reader);
+                }
+
+                return quiz;
+            }
+            catch (Exception e)
+            {
+                // this.logger.LogError(e.Message);
+                throw new ExportXmlConversionException("Unable to convert xml to object", e);
+            }
         }
     }
 }

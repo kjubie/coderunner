@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FHTW.CodeRunner.BusinessLogic.Exceptions;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -62,10 +63,29 @@ namespace FHTW.CodeRunner.Services.Controllers
                 });
             }
 
-            var blImportData = this.mapper.Map<BlEntities.ImportData>(body);
-            this.importLogic.ImportCollection(blImportData);
+            try
+            {
+                var blImportData = this.mapper.Map<BlEntities.ImportData>(body);
+                this.importLogic.ImportCollection(blImportData);
 
-            return this.Ok();
+                return this.Ok();
+            }
+            catch (BlValidationException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
         }
     }
 }

@@ -19,6 +19,26 @@
     "PreCheck": 0,
     "GeneralFeedbackDisplay": 1
   },
+  { // Exercise 1, C++, V1
+    "Id": 10,
+    "FkQuestionTypeId": 1,
+    "TemplateDebugFlag": true,
+    "TestOnSaveFlag": false,
+    "GlobalExtraParam": "global_extra_param_c++_V1",
+    "RuntimeData": "runtime_data_c++_V1",
+    "PreCheck": 0,
+    "GeneralFeedbackDisplay": 1
+  },
+  { // Exercise 1, C#, V1
+    "Id": 11,
+    "FkQuestionTypeId": 2,
+    "TemplateDebugFlag": true,
+    "TestOnSaveFlag": false,
+    "GlobalExtraParam": "global_extra_param_c#_V1",
+    "RuntimeData": "runtime_data_c#_V1",
+    "PreCheck": 0,
+    "GeneralFeedbackDisplay": 1
+  },
   { // Exercise 1, C++, V2
     "Id": 3,
     "FkQuestionTypeId": 1,
@@ -31,6 +51,26 @@
   },
   { // Exercise 1, C#, V2
     "Id": 4,
+    "FkQuestionTypeId": 2,
+    "TemplateDebugFlag": true,
+    "TestOnSaveFlag": false,
+    "GlobalExtraParam": "global_extra_param_c#_V2",
+    "RuntimeData": "runtime_data_c#_V2",
+    "PreCheck": 0,
+    "GeneralFeedbackDisplay": 1
+  },
+  { // Exercise 1, C++, V2
+    "Id": 12,
+    "FkQuestionTypeId": 1,
+    "TemplateDebugFlag": true,
+    "TestOnSaveFlag": false,
+    "GlobalExtraParam": "global_extra_param_c++_V2",
+    "RuntimeData": "runtime_data_c++_V2",
+    "PreCheck": 0,
+    "GeneralFeedbackDisplay": 1
+  },
+  { // Exercise 1, C#, V2
+    "Id": 13,
     "FkQuestionTypeId": 2,
     "TemplateDebugFlag": true,
     "TestOnSaveFlag": false,
@@ -59,6 +99,26 @@
     "PreCheck": 0,
     "GeneralFeedbackDisplay": 1
   },
+  { // Exercise 1, C++, V3
+    "Id": 14,
+    "FkQuestionTypeId": 1,
+    "TemplateDebugFlag": true,
+    "TestOnSaveFlag": false,
+    "GlobalExtraParam": "global_extra_param_c++_V3",
+    "RuntimeData": "runtime_data_c++_V3",
+    "PreCheck": 0,
+    "GeneralFeedbackDisplay": 1
+  },
+  { // Exercise 1, C#, V3
+    "Id": 15,
+    "FkQuestionTypeId": 2,
+    "TemplateDebugFlag": true,
+    "TestOnSaveFlag": false,
+    "GlobalExtraParam": "global_extra_param_c#_V3",
+    "RuntimeData": "runtime_data_c#_V3",
+    "PreCheck": 0,
+    "GeneralFeedbackDisplay": 1
+  },
   { // Exercise 2, Python, V1
     "Id": 7,
     "FkQuestionTypeId": 3,
@@ -71,6 +131,26 @@
   },
   { // Exercise 2, Java, V1
     "Id": 8,
+    "FkQuestionTypeId": 4,
+    "TemplateDebugFlag": true,
+    "TestOnSaveFlag": false,
+    "GlobalExtraParam": "global_extra_param_java_V1",
+    "RuntimeData": "runtime_data_java_V1",
+    "PreCheck": 0,
+    "GeneralFeedbackDisplay": 1
+  },
+  { // Exercise 2, Python, V1
+    "Id": 16,
+    "FkQuestionTypeId": 3,
+    "TemplateDebugFlag": true,
+    "TestOnSaveFlag": false,
+    "GlobalExtraParam": "global_extra_param_py_V1",
+    "RuntimeData": "runtime_data_py_V1",
+    "PreCheck": 0,
+    "GeneralFeedbackDisplay": 1
+  },
+  { // Exercise 2, Java, V1
+    "Id": 17,
     "FkQuestionTypeId": 4,
     "TemplateDebugFlag": true,
     "TestOnSaveFlag": false,

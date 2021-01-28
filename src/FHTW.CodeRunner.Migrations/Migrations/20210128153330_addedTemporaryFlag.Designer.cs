@@ -3,15 +3,17 @@ using System;
 using FHTW.CodeRunner.DataAccess.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace FHTW.CodeRunner.Migrations.Migrations
 {
     [DbContext(typeof(CodeRunnerContext))]
-    partial class CodeRunnerContextModelSnapshot : ModelSnapshot
+    [Migration("20210128153330_addedTemporaryFlag")]
+    partial class addedTemporaryFlag
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
