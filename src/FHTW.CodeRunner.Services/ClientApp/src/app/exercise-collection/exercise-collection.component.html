@@ -57,12 +57,12 @@
     <p class="mr-2">Global Settings: </p>
     <div class="row mt-3 col-12 mb-5">
       <select [(ngModel)]="selectedGlobalLang" name="globalLangFilter" id="globalLangFilter" class="form-control col-2 mr-1" (change)="languageChangeEvent()"> 
-        <option [ngValue]="Language" disabled selected hidden>Language</option>
+        <option [ngValue]="'Language'" disabled selected hidden>Language</option>
         <option *ngFor="let lang of globalLangs" [ngValue]="lang.id">{{lang.name}}</option>
       </select>
     
       <select [(ngModel)]="selectedGlobalProgLang" name="globalProgFilter" id="globalProgFilter" class="form-control col-3 ml-1" (change)="pLanguageChangeEvent()">
-        <option [ngValue]="Programming_Language" disabled selected hidden>Programming Language</option>
+        <option [ngValue]="'Programming_Language'" disabled selected hidden>Programming Language</option>
         <option *ngFor="let pLang of globalProgLangs" [ngValue]="pLang.id">{{pLang.name}}</option>
       </select>
 
@@ -85,16 +85,16 @@
               </select>
 
               <select [(ngModel)]="collectionExerciseList[i].writtenLanguageId" name="langFilter" id="langFilter" class="form-control col-3 ml-1 mr-1" [ngClass]="getClass(i)">
-                <option [ngValue]="Language" disabled selected hidden>Language</option>
+                <option [ngValue]="'Language'" disabled selected hidden>Language</option>
                 <option *ngFor="let lang of ex.writtenLanguageList" [ngValue]="lang.id" [selected]="lang.id === selectedGlobalLang">{{lang.name}}</option>
               </select>
           
               <select [(ngModel)]="collectionExerciseList[i].programmingLanguageId" name="progFilter" id="progFilter" class="form-control col-4 ml-1" [ngClass]="getClassProg(i)">
-                <option [ngValue]="Programming_Language" disabled selected hidden>Programming Language</option>
+                <option [ngValue]="'Programming_Language'" disabled selected hidden>Programming Language</option>
                 <option *ngFor="let progLang of ex.programmingLanguageList" [ngValue]="progLang.id" [selected]="progLang.id === selectedGlobalProgLang">{{progLang.name}}</option>
               </select>
             </div>
-            <button (click)="removeExercise(ex)" class="deleteBtn btn ml-3 colItemSettings">&#x2715;</button>
+            <button (click)="RemoveExercise(ex)" class="deleteBtn btn ml-3 colItemSettings">&#x2715;</button>
           </div>
         </li>
       </ul>
@@ -102,7 +102,7 @@
   </div>
 
   <div class="text-center">
-    <button class="btn btn-primary col-1 mb-5" [disabled]="exerciseList.length == 0" (click)="saveCollection()">Save</button>
+    <button class="btn btn-primary col-1 mb-5" [disabled]="exerciseList.length == 0" (click)="SaveCollection()">Save</button>
   </div>
 
 </div>

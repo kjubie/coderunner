@@ -106,6 +106,8 @@ namespace FHTW.CodeRunner.Services.AutoMapper
 
             this.CreateMap<DalEntities.MinimalCollection, BlEntities.MinimalCollection>();
 
+            this.CreateMap<DalEntities.CollectionView, BlEntities.CollectionView>();
+
             this.CreateMap<BlEntities.ExerciseKeys, DalEntities.CollectionExercise>().ReverseMap();
 
             this.CreateMap<DalEntities.MinimalExercise, BlEntities.MinimalExercise>()

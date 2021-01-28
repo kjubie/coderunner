@@ -12,19 +12,19 @@
     <div class="float-left">
       <div ngbDropdown class="d-inline-block btn-group">
         <button class="btn btn-secondary btn-md btn-dropdown blue" id="languageDropdown" ngbDropdownToggle>
-          {{ searchFilter.writtenLanguage != undefinded && searchFilter.writtenLanguage != "" ? searchFilter.writtenLanguage : 'Language' }}
+          {{ searchFilter.writtenLanguage != null && searchFilter.writtenLanguage != "" ? searchFilter.writtenLanguage : 'Language' }}
         </button>
         <div ngbDropdownMenu aria-labelledby="languageDropdown">
-          <button ngbDropdownItem *ngFor="let l of languages" (click)="setFilterLang(l)">{{ l }}</button>
+          <button ngbDropdownItem *ngFor="let l of languages" (click)="SetFilterLang(l)">{{ l }}</button>
         </div>
       </div>
 
       <div *ngIf="showExercises" ngbDropdown class="d-inline-block btn-group">
         <button class="btn btn-secondary btn-md btn-dropdown blue" id="programmingDropdown" ngbDropdownToggle>
-          {{ searchFilter.programmingLanguage != undefinded && searchFilter.programmingLanguage != "" ? searchFilter.programmingLanguage : 'Programming Language' }}
+          {{ searchFilter.programmingLanguage != null && searchFilter.programmingLanguage != "" ? searchFilter.programmingLanguage : 'Programming Language' }}
         </button>
         <div ngbDropdownMenu aria-labelledby="programmingDropdown">
-          <button ngbDropdownItem *ngFor="let l of programmingLangs" (click)="setFilterPLang(l)">{{ l }}</button>
+          <button ngbDropdownItem *ngFor="let l of programmingLangs" (click)="SetFilterPLang(l)">{{ l }}</button>
         </div>
       </div>
 
@@ -68,7 +68,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <form (ngSubmit)="exportExercise()">
+    <form (ngSubmit)="ExportExercise()">
       <div class="form-group">
         <label for="version"><strong>Exercise Version:</strong></label>
         <select class="form-control" id="version" name="version" [(ngModel)]="exerciseForExport.version">
@@ -111,7 +111,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <form (ngSubmit)="exportCollection()">
+    <form (ngSubmit)="ExportCollection()">
       <div class="form-group">
         <label for="writtenLang"><strong>Language:</strong></label>
         <select class="form-control" id="writtenLang" name="writtenLang" [(ngModel)]="collectionForExport.writtenLanguage">

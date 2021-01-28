@@ -133,16 +133,16 @@ namespace FHTW.CodeRunner.Services.Controllers
         [HttpGet]
         [Route("collection/{id}")]
         [SwaggerOperation("GetCollectionById")]
-        [SwaggerResponse(statusCode: 200, type: typeof(SvcEntities.FullCollection), description: "Successful response")]
+        [SwaggerResponse(statusCode: 200, type: typeof(SvcEntities.CollectionView), description: "Successful response")]
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
         public virtual IActionResult GetCollectionById(int id)
         {
             try
             {
-                List<BlEntities.MinimalCollection> blMinimalCollections = this.collectionLogic.GetMinimalCollectionList();
-                var svcMinimalCollections = this.mapper.Map<List<SvcEntities.MinimalCollection>>(blMinimalCollections);
+                var blCollectionView = this.collectionLogic.GetCollectionView(id);
+                var svcCollectinView = this.mapper.Map<SvcEntities.CollectionView>(blCollectionView);
 
-                return this.Ok(svcMinimalCollections);
+                return this.Ok(svcCollectinView);
             }
             catch (BlValidationException e)
             {

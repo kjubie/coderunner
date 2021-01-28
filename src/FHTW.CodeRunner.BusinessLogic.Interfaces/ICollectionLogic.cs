@@ -32,5 +32,12 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
         /// <param name="searchObject">The search options for filtering.</param>
         /// <returns>List of collections in a minmal version.</returns>
         public List<MinimalCollection> SearchAndFilter(SearchObject searchObject);
+
+        /// <summary>
+        /// Retrieves the collectionView entity.
+        /// </summary>
+        /// <param name="id">The id of the collection.</param>
+        /// <returns>The collection view.</returns>
+        CollectionView GetCollectionView(int id);
     }
 }

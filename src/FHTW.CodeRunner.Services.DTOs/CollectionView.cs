@@ -1,4 +1,4 @@
-﻿// <copyright file="FullCollection.cs" company="FHTW CodeRunner">
+﻿// <copyright file="CollectionView.cs" company="FHTW CodeRunner">
 // Copyright (c) FHTW CodeRunner. All Rights Reserved.
 // </copyright>
 
@@ -11,52 +11,59 @@ using System.Text;
 namespace FHTW.CodeRunner.Services.DTOs
 {
     /// <summary>
-    /// Entity that holds multiple Exercises.
+    /// A view version of the collection entity.
+    /// It contains anything necessary to display the collection.
     /// </summary>
     [DataContract]
     [ExcludeFromCodeCoverage]
-    public class FullCollection
+    public class CollectionView
     {
         /// <summary>
-        /// Gets or sets the id.
+        /// Gets or sets the id of the collection.
         /// </summary>
         [DataMember(Name = "id")]
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the title.
+        /// Gets or sets the title of the collection.
         /// </summary>
         [DataMember(Name = "title")]
         public string Title { get; set; }
 
         /// <summary>
-        /// Gets or sets the creation date.
+        /// Gets or sets the creation date of the collection.
         /// </summary>
         [DataMember(Name = "created")]
         public DateTime Created { get; set; }
 
         /// <summary>
-        /// Gets or sets the author.
+        /// Gets or sets the user that created the collection.
         /// </summary>
         [DataMember(Name = "user")]
-        public User FkUser { get; set; }
+        public User User { get; set; }
 
         /// <summary>
-        /// Gets or sets multiple CollectionLanguage Entities.
+        /// Gets or sets the collection lanugages.
         /// </summary>
         [DataMember(Name = "collectionLanguageList")]
-        public ICollection<CollectionLanguage> CollectionLanguage { get; set; }
+        public List<CollectionLanguage> CollectionLanguages { get; set; }
 
         /// <summary>
-        /// Gets or sets multiple CollectionTage Entities.
+        /// Gets or sets a list of tags.
         /// </summary>
         [DataMember(Name = "collectionTagList")]
-        public ICollection<CollectionTag> CollectionTag { get; set; }
+        public List<Tag> TagList { get; set; }
 
         /// <summary>
-        /// Gets or sets multiple exercises.
+        /// Gets or sets the collection exercises.
         /// </summary>
         [DataMember(Name = "collectionExerciseList")]
-        public ICollection<MinimalExercise> CollectionExercise { get; set; }
+        public List<CollectionExercise> CollectionExercises { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the minimal exercises.
+        /// </summary>
+        [DataMember(Name = "collectionExerciseMinimalList")]
+        public List<MinimalExercise> MinimalExercises { get; set; }
     }
 }

@@ -69,7 +69,7 @@ export class ExerciseCollectionComponent implements OnInit{
     });
   }
 
-  saveCollection() {
+  SaveCollection() {
     this.collection.user = new Author();
     this.collection.user.id = (localStorage.getItem('user_id') !== null) ? parseInt(localStorage.getItem('user_id')) : 0;
     this.collection.user.name = localStorage.getItem('name');
@@ -100,7 +100,7 @@ export class ExerciseCollectionComponent implements OnInit{
   }
 
   createCollectionObserver = {
-    next: x => { this.saveCollection = x },
+    next: x => { this.SaveCollection = x },
     error: err => console.error('Observer got an error: ' + err),
     complete: () => {
       console.log("Collection was saved to database")
@@ -150,7 +150,7 @@ export class ExerciseCollectionComponent implements OnInit{
     }
   }
 
-  removeExercise(ex: ExerciseHome) {
+  RemoveExercise(ex: ExerciseHome) {
     let id = this.exerciseList.indexOf(ex);
     this.exerciseList.splice(id, 1);
     this.collectionDataService.decreaseExerciseCounter();

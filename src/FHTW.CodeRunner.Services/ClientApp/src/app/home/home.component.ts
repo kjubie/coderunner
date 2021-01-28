@@ -150,7 +150,7 @@ export class HomeComponent implements OnInit {
   }
 
   viewCollectionObserver = {
-    next: x => { this.collectionDataService.showCollection = x },
+    next: x => { this.collectionDataService.collectionToShow = x },
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
       this.router.navigate(['/show-collection']);
@@ -193,7 +193,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  exportExercise() {
+  ExportExercise() {
     // validate exercise
     this.versionInvalid = (this.exerciseForExport.version == undefined);
     this.wLangInvalid = (this.exerciseForExport.writtenLanguage == undefined);
@@ -211,7 +211,7 @@ export class HomeComponent implements OnInit {
     }    
   }
 
-  exportCollection() {
+  ExportCollection() {
     // validate modal
     this.wLangInvalid = (this.collectionForExport.writtenLanguage == undefined);
 
@@ -275,11 +275,11 @@ export class HomeComponent implements OnInit {
     this.showExercises = !this.showExercises;
   }
 
-  setFilterLang(lang: string) {
+  SetFilterLang(lang: string) {
     this.searchFilter.writtenLanguage = lang;
   }
 
-  setFilterPLang(lang: string) {
+  SetFilterPLang(lang: string) {
     this.searchFilter.programmingLanguage = lang;
   }
 

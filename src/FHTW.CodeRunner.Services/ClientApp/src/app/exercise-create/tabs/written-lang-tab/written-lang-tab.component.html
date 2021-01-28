@@ -15,10 +15,6 @@
             <div class="col-10">
                 <input type="text" class="form-control-plaintext" id="fullTitle" name="fullTitle" placeholder="Full Title" [(ngModel)]="exerciseLanguage.exerciseHeader.fullTitle">
             </div>
-            <label for="shortTitle" class="col-2 col-form-label">Short Title</label>
-            <div class="col-10">
-                <input type="text" class="form-control-plaintext" id="shortTitle" name="shortTitle" placeholder="Short Title" [(ngModel)]="exerciseLanguage.exerciseHeader.shortTitle">
-            </div>
             <label for="introduction" class="col-2 col-form-label">Exercise Introduction</label>
             <div class="col-10">
                 <angular-markdown-editor [options]="editorOptions" class="ng-untouched ng-pristine ng-valid line-numbers" textareaId="introduction" rows="8" name="introduction" [(ngModel)]="exerciseLanguage.exerciseHeader.introduction">
