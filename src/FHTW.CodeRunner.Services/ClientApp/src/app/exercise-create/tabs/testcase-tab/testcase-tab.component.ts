@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, DoCheck, EventEmitter, Input, Output } from "@angular/core";
 import { TestCase } from "src/app/data-objects/create-exercise/test-case";
 
 @Component({
@@ -10,6 +10,8 @@ export class TestCaseTabComponent {
 
     @Input() testCase: TestCase;
     @Input() pLang: string;
+
+    @Output() testCaseChangeEvent = new EventEmitter<TestCase>();
 
     displayTypes = [
         { key: 'Show', value: 'SHOW' },

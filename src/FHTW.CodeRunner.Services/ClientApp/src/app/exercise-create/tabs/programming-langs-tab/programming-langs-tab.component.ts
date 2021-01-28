@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { EditorInstance, EditorOption } from "angular-markdown-editor";
 import { MarkdownService } from "ngx-markdown";
 import { ExerciseBody } from "src/app/data-objects/create-exercise/exercise-body";
@@ -12,6 +12,8 @@ export class ProgrammingLangsTabComponent implements OnInit {
 
     @Input() exerciseBody: ExerciseBody;
     @Input() writtenLang: string;
+
+    @Output() bodyChangeEvent = new EventEmitter<ExerciseBody>();
 
     bsEditorInstance: EditorInstance;
     editorOptions: EditorOption;
