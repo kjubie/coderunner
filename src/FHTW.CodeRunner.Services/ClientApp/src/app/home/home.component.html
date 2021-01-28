@@ -27,6 +27,12 @@
           <button ngbDropdownItem *ngFor="let l of programmingLangs" (click)="setFilterPLang(l)">{{ l }}</button>
         </div>
       </div>
+
+      <div class="d-inline-block btn-group">
+        <button (click)="resetFilter()" class="btn btn-secondary btn-md btn-dropdown blue" id="programmingDropdown">
+          Reset Filter
+        </button>
+      </div>
     </div>
 
     <div class="float-right">

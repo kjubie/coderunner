@@ -268,7 +268,7 @@ export class HomeComponent implements OnInit {
   }
 
   viewCollection(idx: number) {
-    this.collectionDataService.showCollection(this.collectionList[idx].id).subscribe(this.showCollectionObserver);
+    this.collectionDataService.showCollection(this.collectionList[idx].id).subscribe(this.viewCollectionObserver);
   }
 
   switchLists() {
@@ -289,5 +289,13 @@ export class HomeComponent implements OnInit {
     } else {
       this.exerciseListHomeService.searchCollection(this.searchFilter).subscribe(this.searchCollectionFilterObserver);
     }
+  }
+
+  resetFilter() {
+    this.searchFilter.programmingLanguage = null;
+    this.searchFilter.writtenLanguage = null;
+    this.searchFilter.searchTerm = null;
+
+    this.search();
   }
 }

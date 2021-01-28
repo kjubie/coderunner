@@ -9,6 +9,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ImportComponent } from './import/import.component';
+import { ShowCollectionComponent } from './exercise-collection/show-collection/show-collection.component';
 import { ExerciseCollectionComponent } from './exercise-collection/exercise-collection.component';
 import { ExerciseCreateComponent } from './exercise-create/exercise-create.component';
 import { SaveTabComponent } from './exercise-create/tabs/save-tab/save-tab.component';
@@ -79,6 +80,7 @@ export class MaterialModule {}
     NavMenuComponent,
     LoginComponent,
     ImportComponent,
+    ShowCollectionComponent,
     HomeComponent,
     StarRatingComponent,
     ListViewComponent,
