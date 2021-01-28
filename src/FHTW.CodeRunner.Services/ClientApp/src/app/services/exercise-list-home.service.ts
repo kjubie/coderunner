@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
@@ -25,13 +25,13 @@ export class ExerciseListHomeService {
     }
 
     // GET all collections from db (minimal)
-    getAllCollections(): Observable<CollectionHome[]> {
-      return this.http.get<CollectionHome[]>(this.getAllCollectionsUrl).pipe(
-        tap(res => {
-          console.log(res);
+    getAllCollections(): Observable<HttpResponse<Object>> {
+      return this.http.get<HttpResponse<CollectionHome[]>>(this.getAllCollectionsUrl, { observe: 'response' }).pipe(
+        tap(resp => {
+          console.log(resp);
           console.log('fetched all collections from db')
         }),
-        catchError(this.handleError<CollectionHome[]>('getAllCollections'))
+        catchError(this.handleError<HttpResponse<CollectionHome[]>>('getAllCollections'))
       );
     }
 

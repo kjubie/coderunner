@@ -141,3 +141,7 @@ ul#exercisePopover {
 div.text-right {
     margin-top: 10px;
 }
+
+.clickable {
+    cursor: pointer;
+}
