@@ -8,7 +8,7 @@ import { WrittenLanguage } from "../data-objects/written-language";
     templateUrl: './side-menu.component.html',
     styleUrls: ['./side-menu.component.css']
 })
-export class SideMenuComponent {
+export class SideMenuComponent implements OnInit {
 
     @Input() availableLangsW: WrittenLanguage[];
     @Input() availableLangsP: ProgrammingLanguage[];
@@ -17,6 +17,7 @@ export class SideMenuComponent {
     @Input() programmingLang: ProgrammingLanguage[];
     @Input() isLangAvailable;
     @Input() isProgrammingLangAvailable;
+    @Input() testCases;
 
     @Output() selectElementEvent = new EventEmitter<string>();
     @Output() addWrittenLangEvent = new EventEmitter<WrittenLanguage>();
@@ -29,6 +30,12 @@ export class SideMenuComponent {
     showHeadList = true;
     showLanguageList = true;
     showBodyList = true;
+
+    ngOnInit() {
+        if (this.testCases == undefined) {
+            this.testCases = [];
+        }
+    }
 
     addLanguage(lang: WrittenLanguage) {
         if (this.availableLangsW.indexOf(lang) != -1) {
@@ -49,6 +56,7 @@ export class SideMenuComponent {
             if (this.availableLangsP.length == 0) {
                 this.isProgrammingLangAvailable = false;
             }
+            this.testCases.push(1);
             this.programmingLang.push(lang);
             this.addProgrammingLangEvent.emit(lang);
         }

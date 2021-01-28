@@ -43,6 +43,7 @@ export class CreateExerciseHelperService {
       // check if exercise already has body with pLang
       if (el.exerciseBody[0] != undefined && el.exerciseBody[0].programmingLanguage != undefined) {
         let newLang = cloneDeep(el);
+        newLang = this.resetIds(newLang);
         newLang.writtenLanguage = lang;
 
         toBeAdded.push(newLang);
@@ -100,7 +101,7 @@ export class CreateExerciseHelperService {
     exercise.exerciseVersionList[0].exerciseLanguageList.forEach(el => {
       // check each body
       el.exerciseBody.forEach(body => {
-        if (body.programmingLanguage === lang) {
+        if (body.programmingLanguage.name === lang.name) {
           let elIdx = exercise.exerciseVersionList[0].exerciseLanguageList.indexOf(el);
           let bodyIdx = el.exerciseBody.indexOf(body);
 
@@ -159,5 +160,19 @@ export class CreateExerciseHelperService {
     body.programmingLanguage = lang
 
     return body;
+  }
+
+  private resetIds(exerciseLang: ExerciseLanguage) {
+    exerciseLang.id = 0;
+    exerciseLang.exerciseHeader.id = 0;
+    exerciseLang.exerciseBody.forEach(body => {
+      body.id = 0;
+      body.testSuite.id = 0;
+      body.testSuite.testCaseList.forEach(testCase => {
+        testCase.id = 0;
+      });
+    });
+
+    return exerciseLang;
   }
 }
