@@ -44,6 +44,24 @@ namespace FHTW.CodeRunner.DataAccess.Tests
         }
 
         [Test]
+        public void ShouldGetCollectionView()
+        {
+            /*
+            // Cannot be tested with sqlite
+            this.SetupDatabaseReal(DbTestController.State.SEEDEDJSON);
+            using (var context = new CodeRunnerContext(this.testDb.ContextOptions))
+            {
+                ICollectionRepository rep = new CollectionRepository(context);
+
+                var list = rep.GetCollectionView(1);
+
+                Assert.NotNull(list);
+            }*/
+
+            Assert.True(true);
+        }
+
+        [Test]
         public void ShouldGetExerciseInstancesWithChosenLanguage()
         {
             // Cannot be tested with sqlite

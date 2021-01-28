@@ -77,5 +77,12 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         /// </param>
         /// <returns>list of minimal collections.</returns>
         List<MinimalCollection> SearchAndFilter(string search_term, string written_language);
+
+        /// <summary>
+        /// Retrieves the collectionView entity.
+        /// </summary>
+        /// <param name="id">the id of the collection.</param>
+        /// <returns>the collection view.</returns>
+        CollectionView GetCollectionView(int id);
     }
 }

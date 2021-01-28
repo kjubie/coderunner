@@ -234,5 +234,27 @@ namespace FHTW.CodeRunner.DataAccess.Sql
 
             return result;
         }
+
+        /// <inheritdoc/>
+        public CollectionView GetCollectionView(int id)
+        {
+            CollectionView collection_view = this.context.Collection.AsNoTracking()
+                .Where(c => c.Id == id)
+                .Select(CollectionView.FromCollection)
+                .SingleOrDefault();
+
+            if (collection_view == null)
+            {
+                throw new DalException($"GetCollectionView failed, no collection with id = {id} exists");
+            }
+
+            ExerciseRepository exerciseRepository = new ExerciseRepository(this.context);
+
+            var exercise_ids = collection_view.CollectionExercises.Select(ce => ce.FkExerciseId).ToList();
+
+            collection_view.MinimalExercises = exerciseRepository.GetMinimalList(exercise_ids);
+
+            return collection_view;
+        }
     }
 }

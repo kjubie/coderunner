@@ -48,6 +48,16 @@ namespace FHTW.CodeRunner.DataAccess.Interfaces
         public List<MinimalExercise> GetMinimalList();
 
         /// <summary>
+        /// Gets a list of exercises containing:
+        ///     - tagList.
+        ///     - writtenLanguageList.
+        ///     - programmingLanguageList.
+        /// </summary>
+        /// <param name="exercise_ids">the list of ids from which the minimalexercises are requested.</param>
+        /// <returns>The list of exercises.</returns>
+        public List<MinimalExercise> GetMinimalList(List<int> exercise_ids);
+
+        /// <summary>
         /// Searches in titel, description, tags, user, feedback and hint.
         /// Filters by programming and written lanugage.
         /// Throws ArgumentNullException if any parameter is null.

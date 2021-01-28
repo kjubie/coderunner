@@ -100,50 +100,6 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             return this.CreateAndUpdate(exercise);
         }
 
-        private void ResolveValueConflicts(Exercise exercise)
-        {
-            // set ids of existing questiontypes with no id.
-            // this can happen if an exercise imported from moodle has the same questiontype, but of course no id.
-            exercise.ExerciseVersion.ToList().ForEach(ev =>
-            {
-                ev.ExerciseLanguage.ToList().ForEach(el =>
-                {
-                    el.ExerciseBody.ToList().ForEach(eb =>
-                    {
-                        if (eb.FkTestSuite != null)
-                        {
-                            if (eb.FkTestSuite.FkQuestionType != null)
-                            {
-                                // get id if question type exists.
-                                var questionType = this.context.QuestionType
-                                    .AsNoTracking()
-                                    .SingleOrDefault(qt => qt.Name == eb.FkTestSuite.FkQuestionType.Name);
-
-                                if (questionType != null)
-                                {
-                                    eb.FkTestSuite.FkQuestionType.Id = questionType.Id;
-                                    eb.FkTestSuite.FkQuestionType.FkProgrammingLanuageId = questionType.FkProgrammingLanuageId;
-                                }
-                            }
-                        }
-                    });
-                });
-            });
-
-            exercise.ExerciseTag.ToList().ForEach(et =>
-            {
-                if (et.FkTag != null)
-                {
-                    int? id = this.context.Tag.AsNoTracking().SingleOrDefault(t => t.Name == et.FkTag.Name)?.Id;
-                    if (id != null)
-                    {
-                        et.FkTagId = (int)id;
-                        et.FkTag = null;
-                    }
-                }
-            });
-        }
-
         /// <inheritdoc/>
         public Exercise GetById(int id, int version = -1)
         {
@@ -184,6 +140,15 @@ namespace FHTW.CodeRunner.DataAccess.Sql
         public List<MinimalExercise> GetMinimalList()
         {
             return this.context.Exercise.AsNoTracking()
+                .Select(MinimalExercise.FromExercise)
+                .ToList();
+        }
+
+        /// <inheritdoc/>
+        public List<MinimalExercise> GetMinimalList(List<int> exercise_ids)
+        {
+            return this.context.Exercise.AsNoTracking()
+                .Where(e => exercise_ids.Contains(e.Id))
                 .Select(MinimalExercise.FromExercise)
                 .ToList();
         }
@@ -444,6 +409,50 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             }
 
             return exercise;
+        }
+
+        private void ResolveValueConflicts(Exercise exercise)
+        {
+            // set ids of existing questiontypes with no id.
+            // this can happen if an exercise imported from moodle has the same questiontype, but of course no id.
+            exercise.ExerciseVersion.ToList().ForEach(ev =>
+            {
+                ev.ExerciseLanguage.ToList().ForEach(el =>
+                {
+                    el.ExerciseBody.ToList().ForEach(eb =>
+                    {
+                        if (eb.FkTestSuite != null)
+                        {
+                            if (eb.FkTestSuite.FkQuestionType != null)
+                            {
+                                // get id if question type exists.
+                                var questionType = this.context.QuestionType
+                                    .AsNoTracking()
+                                    .SingleOrDefault(qt => qt.Name == eb.FkTestSuite.FkQuestionType.Name);
+
+                                if (questionType != null)
+                                {
+                                    eb.FkTestSuite.FkQuestionType.Id = questionType.Id;
+                                    eb.FkTestSuite.FkQuestionType.FkProgrammingLanuageId = questionType.FkProgrammingLanuageId;
+                                }
+                            }
+                        }
+                    });
+                });
+            });
+
+            exercise.ExerciseTag.ToList().ForEach(et =>
+            {
+                if (et.FkTag != null)
+                {
+                    int? id = this.context.Tag.AsNoTracking().SingleOrDefault(t => t.Name == et.FkTag.Name)?.Id;
+                    if (id != null)
+                    {
+                        et.FkTagId = (int)id;
+                        et.FkTag = null;
+                    }
+                }
+            });
         }
     }
 }
