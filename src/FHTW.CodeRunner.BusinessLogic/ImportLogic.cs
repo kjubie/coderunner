@@ -4,12 +4,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using AutoMapper;
 using FHTW.CodeRunner.BusinessLogic.Exceptions;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using FHTW.CodeRunner.DataAccess.Interfaces;
 using FHTW.CodeRunner.DataAccess.Sql;
+using FHTW.CodeRunner.ExportService.Exceptions;
 using FHTW.CodeRunner.ExportService.Interfaces;
 using Microsoft.Extensions.Logging;
 using BlEntities = FHTW.CodeRunner.BusinessLogic.Entities;
@@ -87,7 +89,8 @@ namespace FHTW.CodeRunner.BusinessLogic
                     importData.Question = question;
                     if (question.Coderunnertype == null)
                     {
-                        // TODO: Errorhandling.
+                        this.logger.LogError("Question Type is null");
+                        throw new ValidationException("Question Type is null");
                     }
 
                     var dalQuestionType = this.exerciseRepository.GetQuestionType(question.Coderunnertype);
@@ -117,10 +120,20 @@ namespace FHTW.CodeRunner.BusinessLogic
                 this.collectionRepository.CreateOrUpdate(dalCollection);
                 this.logger.LogInformation("BL passing Collection with Title: " + collection.Title + " to DAL.");
             }
-            catch (DalException e)
+            catch (ValidationException e)
             {
                 this.logger.LogError(e.Message);
-                throw new BlDataAccessException("An error occured while importing the collection.", e);
+                throw new BlValidationException("BL received collection with Title " + importData.Title + ".", e);
+            }
+            catch (ExportXmlConversionException e)
+            {
+                this.logger.LogError(e.Message);
+                throw new BlDataAccessException("BL unable to import collection with Title " + importData.Title + ".", e);
+            }
+            catch (Exception e)
+            {
+                this.logger.LogError(e.Message);
+                throw new BlDataAccessException("An error occured while importing the collection " + importData.Title + ".", e);
             }
         }
     }

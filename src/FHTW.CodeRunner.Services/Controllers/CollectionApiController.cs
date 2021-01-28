@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FHTW.CodeRunner.BusinessLogic.Exceptions;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -63,10 +64,29 @@ namespace FHTW.CodeRunner.Services.Controllers
                 });
             }
 
-            var blCollection = this.mapper.Map<BlEntities.Collection>(body);
+            try
+            {
+                var blCollection = this.mapper.Map<BlEntities.Collection>(body);
 
-            this.collectionLogic.SaveCollection(blCollection);
-            return this.Ok();
+                this.collectionLogic.SaveCollection(blCollection);
+                return this.Ok();
+            }
+            catch (BlValidationException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
         }
 
         /// <summary>
@@ -80,10 +100,66 @@ namespace FHTW.CodeRunner.Services.Controllers
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
         public virtual IActionResult GetMinimalCollection()
         {
-            List<BlEntities.MinimalCollection> blMinimalCollections = this.collectionLogic.GetMinimalCollectionList();
-            var svcMinimalCollections = this.mapper.Map<List<SvcEntities.MinimalCollection>>(blMinimalCollections);
+            try
+            {
+                List<BlEntities.MinimalCollection> blMinimalCollections = this.collectionLogic.GetMinimalCollectionList();
+                var svcMinimalCollections = this.mapper.Map<List<SvcEntities.MinimalCollection>>(blMinimalCollections);
 
-            return this.Ok(svcMinimalCollections);
+                return this.Ok(svcMinimalCollections);
+            }
+            catch (BlValidationException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+        }
+
+        /// <summary>
+        /// Gets a collection by id.
+        /// </summary>
+        /// <param name="id">The id of the collection.</param>
+        /// <returns>A full collection.</returns>
+        [HttpGet]
+        [Route("collection/{id}")]
+        [SwaggerOperation("GetCollectionById")]
+        [SwaggerResponse(statusCode: 200, type: typeof(SvcEntities.FullCollection), description: "Successful response")]
+        [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
+        public virtual IActionResult GetCollectionById(int id)
+        {
+            try
+            {
+                List<BlEntities.MinimalCollection> blMinimalCollections = this.collectionLogic.GetMinimalCollectionList();
+                var svcMinimalCollections = this.mapper.Map<List<SvcEntities.MinimalCollection>>(blMinimalCollections);
+
+                return this.Ok(svcMinimalCollections);
+            }
+            catch (BlValidationException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
         }
 
         /// <summary>
@@ -106,11 +182,30 @@ namespace FHTW.CodeRunner.Services.Controllers
                 });
             }
 
-            var blSearchObject = this.mapper.Map<BlEntities.SearchObject>(body);
-            List<BlEntities.MinimalCollection> blMinimalCollectionList = this.collectionLogic.SearchAndFilter(blSearchObject);
-            var svcMinimalCollectionList = this.mapper.Map<List<SvcEntities.MinimalCollection>>(blMinimalCollectionList);
+            try
+            {
+                var blSearchObject = this.mapper.Map<BlEntities.SearchObject>(body);
+                List<BlEntities.MinimalCollection> blMinimalCollectionList = this.collectionLogic.SearchAndFilter(blSearchObject);
+                var svcMinimalCollectionList = this.mapper.Map<List<SvcEntities.MinimalCollection>>(blMinimalCollectionList);
 
-            return this.Ok(svcMinimalCollectionList);
+                return this.Ok(svcMinimalCollectionList);
+            }
+            catch (BlValidationException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
         }
     }
 }

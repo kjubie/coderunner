@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FHTW.CodeRunner.BusinessLogic.Exceptions;
 using FHTW.CodeRunner.BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -55,11 +56,30 @@ namespace FHTW.CodeRunner.Services.Controllers
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
         public virtual IActionResult GetExerciseById(int id)
         {
-            int version = -1;
-            BlEntities.Exercise blExercise = this.exerciseLogic.GetExerciseById(id, version);
-            var svcExercise = this.mapper.Map<SvcEntities.Exercise>(blExercise);
+            try
+            {
+                int version = -1;
+                BlEntities.Exercise blExercise = this.exerciseLogic.GetExerciseById(id, version);
+                var svcExercise = this.mapper.Map<SvcEntities.Exercise>(blExercise);
 
-            return this.Ok(svcExercise);
+                return this.Ok(svcExercise);
+            }
+            catch (BlValidationException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
         }
 
         /// <summary>
@@ -75,10 +95,29 @@ namespace FHTW.CodeRunner.Services.Controllers
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
         public virtual IActionResult GetExerciseById(int id, int version)
         {
-            BlEntities.Exercise blExercise = this.exerciseLogic.GetExerciseById(id, version);
-            var svcExercise = this.mapper.Map<SvcEntities.Exercise>(blExercise);
+            try
+            {
+                BlEntities.Exercise blExercise = this.exerciseLogic.GetExerciseById(id, version);
+                var svcExercise = this.mapper.Map<SvcEntities.Exercise>(blExercise);
 
-            return this.Ok(svcExercise);
+                return this.Ok(svcExercise);
+            }
+            catch (BlValidationException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
         }
 
         /// <summary>
@@ -101,10 +140,29 @@ namespace FHTW.CodeRunner.Services.Controllers
                 });
             }
 
-            var blExercise = this.mapper.Map<BlEntities.Exercise>(body);
+            try
+            {
+                var blExercise = this.mapper.Map<BlEntities.Exercise>(body);
 
-            this.exerciseLogic.SaveExercise(blExercise);
-            return this.Ok();
+                this.exerciseLogic.SaveExercise(blExercise);
+                return this.Ok();
+            }
+            catch (BlValidationException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
         }
 
         /// <summary>
@@ -127,10 +185,29 @@ namespace FHTW.CodeRunner.Services.Controllers
                 });
             }
 
-            var blExercise = this.mapper.Map<BlEntities.Exercise>(body);
+            try
+            {
+                var blExercise = this.mapper.Map<BlEntities.Exercise>(body);
 
-            this.exerciseLogic.ValidateExercise(blExercise);
-            return this.Ok();
+                this.exerciseLogic.ValidateExercise(blExercise);
+                return this.Ok();
+            }
+            catch (BlValidationException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
         }
 
         /// <summary>
@@ -144,10 +221,29 @@ namespace FHTW.CodeRunner.Services.Controllers
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
         public virtual IActionResult GetExerciseCreatePreparation()
         {
-            BlEntities.ExerciseCreatePreparation blExerciseCreatePreparation = this.exerciseLogic.GetExerciseCreatePreparation();
-            var svcExerciseCreatePreparation = this.mapper.Map<SvcEntities.ExerciseCreatePreparation>(blExerciseCreatePreparation);
+            try
+            {
+                BlEntities.ExerciseCreatePreparation blExerciseCreatePreparation = this.exerciseLogic.GetExerciseCreatePreparation();
+                var svcExerciseCreatePreparation = this.mapper.Map<SvcEntities.ExerciseCreatePreparation>(blExerciseCreatePreparation);
 
-            return this.Ok(svcExerciseCreatePreparation);
+                return this.Ok(svcExerciseCreatePreparation);
+            }
+            catch (BlValidationException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
         }
 
         /// <summary>
@@ -161,10 +257,29 @@ namespace FHTW.CodeRunner.Services.Controllers
         [SwaggerResponse(statusCode: 400, type: typeof(SvcEntities.Error), description: "An error occurred loading.")]
         public virtual IActionResult GetMinimalExercise()
         {
-            List<BlEntities.MinimalExercise> blExerciseShort = this.exerciseLogic.GetMinimalExerciseList();
-            var svcExerciseShort = this.mapper.Map<List<SvcEntities.MinimalExercise>>(blExerciseShort);
+            try
+            {
+                List<BlEntities.MinimalExercise> blExerciseShort = this.exerciseLogic.GetMinimalExerciseList();
+                var svcExerciseShort = this.mapper.Map<List<SvcEntities.MinimalExercise>>(blExerciseShort);
 
-            return this.Ok(svcExerciseShort);
+                return this.Ok(svcExerciseShort);
+            }
+            catch (BlValidationException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
         }
 
         /// <summary>
@@ -187,11 +302,30 @@ namespace FHTW.CodeRunner.Services.Controllers
                 });
             }
 
-            var blSearchObject = this.mapper.Map<BlEntities.SearchObject>(body);
-            List<BlEntities.MinimalExercise> blMinimalExerciseList = this.exerciseLogic.SearchAndFilter(blSearchObject);
-            var svcMinimalExerciseList = this.mapper.Map<List<SvcEntities.MinimalExercise>>(blMinimalExerciseList);
+            try
+            {
+                var blSearchObject = this.mapper.Map<BlEntities.SearchObject>(body);
+                List<BlEntities.MinimalExercise> blMinimalExerciseList = this.exerciseLogic.SearchAndFilter(blSearchObject);
+                var svcMinimalExerciseList = this.mapper.Map<List<SvcEntities.MinimalExercise>>(blMinimalExerciseList);
 
-            return this.Ok(svcMinimalExerciseList);
+                return this.Ok(svcMinimalExerciseList);
+            }
+            catch (BlValidationException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
+            catch (BlDataAccessException e)
+            {
+                this.logger.LogError(e.Message);
+                return this.BadRequest(new SvcEntities.Error
+                {
+                    ErrorMessage = e.Message,
+                });
+            }
         }
     }
 }
