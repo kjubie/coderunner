@@ -69,7 +69,7 @@ namespace FHTW.CodeRunner.Services.Helpers
             IEnumerable<HtmlNode> nodes = doc.DocumentNode.SelectNodes("//code[contains(@class, 'language')]");
             if (nodes == null)
             {
-                return new XCData(rawHtml).ToString();
+                return rawHtml;
             }
 
             foreach (var node in nodes)
@@ -98,7 +98,7 @@ namespace FHTW.CodeRunner.Services.Helpers
 
             string convertedHtml = doc.DocumentNode.OuterHtml;
 
-            return new XCData(convertedHtml).ToString();
+            return convertedHtml;
         }
     }
 }
