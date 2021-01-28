@@ -16,6 +16,7 @@ export class ListViewComponent {
     @Output() exportCollectionEvent = new EventEmitter<number>();
     @Output() addExerciseToCollectionEvent = new EventEmitter<number>();
     @Output() editExerciseEvent = new EventEmitter<number>();
+    @Output() showCollectionEvent = new EventEmitter<number>();
 
     exportExercise(idx: number) {
         this.exportExerciseEvent.emit(idx);
@@ -31,5 +32,9 @@ export class ListViewComponent {
 
     editExercise(idx: number) {
         this.editExerciseEvent.emit(idx);
+    }
+
+    showCollection(idx: number) {
+        this.showCollectionEvent.emit(idx);
     }
 }

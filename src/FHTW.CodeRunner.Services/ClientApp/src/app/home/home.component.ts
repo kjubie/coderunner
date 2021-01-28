@@ -138,6 +138,14 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  showCollectionObserver = {
+    next: x => { this.collectionDataService.showCollection = x },
+    error: err => { console.log('Observer got an error: ' + err) },
+    complete: () => {
+      this.router.navigate(['/show-collection']);
+    }
+  }
+
   exportSingleExercise(idx: number, modalContent) {
     this.selectedExercise = this.exerciseList[idx];
 
@@ -242,6 +250,10 @@ export class HomeComponent implements OnInit {
     idx += 1;
     console.log('load complete exercise from the database');
     this.createExerciseService.getExercise(idx).subscribe(this.getExerciseObserver);
+  }
+
+  showCollection(idx: number) {
+    this.collectionDataService.showCollection(this.collectionList[idx].id).subscribe(this.showCollectionObserver);
   }
 
   switchLists() {
