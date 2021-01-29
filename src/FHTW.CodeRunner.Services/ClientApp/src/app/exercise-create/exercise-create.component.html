@@ -10,8 +10,17 @@
     <save-tab *ngIf="selectedElement.includes('Summary')" [(exercise)]="exercise"></save-tab>
 </div>
 
+
 <div class="text-right">
     <input type="button" class="btn btn-primary next-btn" value="Temporary Save" (click)="SaveTempExercise()">
     <input type="button" class="btn btn-primary next-btn" value="Save" (click)="SaveExercise()">
     <input type="button" class="btn btn-primary next-btn" value="Summary" (click)="setSelectedElement('Summary')">
+</div>
+
+<!-- Error Message Toast -->
+<div class="toast d-flex justify-content-center text-white bg-danger border-0 position-sticky" role="alert" aria-live="assertive" aria-atomic="true" data-delay="15000">
+    <div class="toast-body">
+      {{errorMsg}}
+    </div>
+    <button type="button" class="btn ml-2 toastClose" data-dismiss="toast" aria-label="Close">&times;</button>
 </div>

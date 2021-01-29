@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import {catchError, tap} from "rxjs/operators";
@@ -22,38 +22,37 @@ export class CreateExerciseService {
   }
 
   // GET Request -> fetch written, programming Lang etc. for create
-  prepareExercise(): Observable<PrepareCreateExercise> {
-    return this.http.get<PrepareCreateExercise>(this.prepareExerciseUrl).pipe(
+  prepareExercise(): Observable<HttpResponse<Object>> {
+    return this.http.get<HttpResponse<PrepareCreateExercise>>(this.prepareExerciseUrl, { observe: 'response' }).pipe(
       tap(_ => console.log("languages and question types fetched from db")),
-      catchError(this.handleError<PrepareCreateExercise>('prepareExercise'))
+      catchError(this.handleError<HttpResponse<PrepareCreateExercise>>('prepareExercise'))
     );
   }
 
   // POST Request -> Save new Exercise to DB
-  saveExercise(exercise: Exercise): Observable<Exercise> {
-    return this.http.post<Exercise>(this.createExerciseUrl, exercise)
+  saveExercise(exercise: Exercise): Observable<HttpResponse<any>> {
+    return this.http.post<HttpResponse<Exercise>>(this.createExerciseUrl, exercise, { observe: 'response' as 'body' })
       .pipe(
-        tap((createdExercise: Exercise) => console.log("exercise saved to database: " + createdExercise)),
-        catchError(this.handleError<Exercise>('saveExercise', exercise))
+        tap(_ => console.log("exercise saved to database")),
+        catchError(this.handleError<HttpResponse<Exercise>>('saveExercise'))
       );
   }
 
   // POST Request -> Save new Exercise to DB
-  saveTempExercise(exercise: Exercise): Observable<Exercise> {
-    return this.http.post<Exercise>(this.createTempExerciseUrl, exercise)
+  saveTempExercise(exercise: Exercise): Observable<HttpResponse<any>>{
+    return this.http.post<HttpResponse<Exercise>>(this.createTempExerciseUrl, exercise, { observe: 'response' as 'body' })
       .pipe(
-        tap((createdExercise: Exercise) => console.log("exercise saved to database: " + createdExercise)),
-        catchError(this.handleError<Exercise>('saveExercise', exercise))
+        tap(_ => console.log("exercise saved to database")),
+        catchError(this.handleError<HttpResponse<Exercise>>('saveExercise'))
       );
   }
 
   // GET Request -> get complete exercise from DB
-  getExercise(idx: number): Observable<Exercise> {
+  getExercise(idx: number): Observable<HttpResponse<Object>> {
     let getExerciseUrl = "https://localhost:5001/api/exercise/" + idx.toString();
-    console.log(getExerciseUrl);
-    return this.http.get<Exercise>(getExerciseUrl).pipe(
+    return this.http.get<HttpResponse<Exercise>>(getExerciseUrl, { observe: 'response' }).pipe(
       tap(resp => console.log(resp)),
-      catchError(this.handleError<Exercise>('getExercise'))
+      catchError(this.handleError<HttpResponse<Exercise>>('getExercise'))
     );
   }
 

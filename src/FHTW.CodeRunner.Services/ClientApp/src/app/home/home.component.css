@@ -145,3 +145,15 @@ div.text-right {
 .clickable {
     cursor: pointer;
 }
+
+.toast {
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    max-width: 100%;
+    border-radius: 0;
+}
+
+.toastClose {
+    color: white;
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ExerciseHome } from '../data-objects/exercise-home';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from "rxjs/operators";
 import { Collection } from '../data-objects/exercise-collection/collection';
@@ -30,27 +30,27 @@ export class CollectionDataService {
       this.exerciseCounter -= 1;
     }
 
-    saveCollection(collection: Collection): Observable<Collection> {
-      return this.http.post<Collection>(this.createCollectionUrl, collection)
+    saveCollection(collection: Collection): Observable<HttpResponse<Object>> {
+      return this.http.post<HttpResponse<Collection>>(this.createCollectionUrl, collection, { observe: 'response' as 'body' })
         .pipe(
-          tap((createdCollection: Collection) => console.log("collection saved to database: " + createdCollection)),
-          catchError(this.handleError<Collection>('saveCollection', collection))
+          tap(_ => console.log("collection saved to database")),
+          catchError(this.handleError<HttpResponse<Collection>>('saveCollection'))
       );
     }
 
-    importCollection(importCollection: ImportCollection): Observable<ImportCollection> {
-      return this.http.post<ImportCollection>(this.importCollectionUrl, importCollection)
+    importCollection(importCollection: ImportCollection): Observable<HttpResponse<Object>> {
+      return this.http.post<HttpResponse<ImportCollection>>(this.importCollectionUrl, importCollection, { observe: 'response' as 'body' })
         .pipe(
-          tap((createdCollection: ImportCollection) => console.log("collection saved to database: " + createdCollection)),
-          catchError(this.handleError<ImportCollection>('saveCollection', importCollection))
-      );      
+          tap(_ => console.log("collection saved to database")),
+          catchError(this.handleError<HttpResponse<ImportCollection>>('saveCollection'))
+      );
     }
 
-    getCollection(id: number): Observable<ShowCollection> {
-      return this.http.get<ShowCollection>(this.getCollectionUrl + id)
+    getCollection(id: number): Observable<HttpResponse<Object>> {
+      return this.http.get<HttpResponse<ShowCollection>>(this.getCollectionUrl + id, { observe: 'response' })
       .pipe(
         tap(_ => console.log("fetched collectio to show")),
-        catchError(this.handleError<ShowCollection>('getCollection'))
+        catchError(this.handleError<HttpResponse<ShowCollection>>('getCollection'))
       );
     }
 

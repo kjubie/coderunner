@@ -14,7 +14,9 @@ import { PrepareCreateExercise } from '../data-objects/create-exercise/prepare-c
 import { CreateExerciseService } from '../services/create-exercise.service';
 import { ProgrammingLanguage } from '../data-objects/programming-language';
 import { Router } from '@angular/router';
-
+import { HttpResponse } from '@angular/common/http';
+import * as $ from "jquery";
+import "bootstrap";
 
 @Component({
   selector: 'app-exercise-collection',
@@ -23,8 +25,8 @@ import { Router } from '@angular/router';
 })
 export class ExerciseCollectionComponent implements OnInit{
   
-  // TODO: Global Settings
-  
+  httpResponse: HttpResponse<Object>;
+  errorMsg: string;
   collection: Collection = new Collection();
   exerciseList: ExerciseHome[];
   availableLangs: WrittenLanguage[] = [{id: 1, name: "English"}];
@@ -76,37 +78,48 @@ export class ExerciseCollectionComponent implements OnInit{
     this.collection.collectionExerciseList = this.collectionExerciseList;
     this.collection.collectionLanguageList = this.collectionLangsList;
 
-    console.log(this.collection);
-
     this.collectionDataService.saveCollection(this.collection).subscribe(this.createCollectionObserver);
   }
 
   prepareExerciseObserver = {
-    next: x => { this.dataLists = x},
+    next: x => { if (x != undefined) { this.dataLists = x.body; this.httpResponse = x } else { this.httpResponse = undefined }},
     error: err => console.error('Observer got an error: ' + err),
     complete: () => {
-      this.availableLangs = this.dataLists.writtenLanguageList;
-      this.globalLangs = [...this.dataLists.writtenLanguageList];
-      this.globalProgLangs = this.dataLists.programmingLanguageList;
-      this.existingTags = this.dataLists.tagList;
-
-      for (let idx = 0; idx < this.availableLangs.length; idx++) {
-        // remove default written lang:
-        if (this.availableLangs[idx].name == "English") {
-          this.availableLangs.splice(idx, 1);
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to get Data!";
+        $('.toast').toast('show');
+      }
+      else if (this.httpResponse.status == 200) {
+        this.availableLangs = this.dataLists.writtenLanguageList;
+        this.globalLangs = [...this.dataLists.writtenLanguageList];
+        this.globalProgLangs = this.dataLists.programmingLanguageList;
+        this.existingTags = this.dataLists.tagList;
+  
+        for (let idx = 0; idx < this.availableLangs.length; idx++) {
+          // remove default written lang:
+          if (this.availableLangs[idx].name == "English") {
+            this.availableLangs.splice(idx, 1);
+          }
         }
       }
     }
   }
 
   createCollectionObserver = {
-    next: x => { this.SaveCollection = x },
+    next: x => { if (x != undefined) { this.SaveCollection = x.body; this.httpResponse = x } else { this.httpResponse = undefined}},
     error: err => console.error('Observer got an error: ' + err),
     complete: () => {
-      console.log("Collection was saved to database")
-      this.collectionDataService.sharedExerciseList = [];
-      this.collection = null;
-      this.router.navigate(['/']);
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to create Collection!";
+        $('.toast').toast('show');
+      }
+      else if (this.httpResponse.status == 200) {
+        console.log("Collection was saved to database")
+        this.collectionDataService.sharedExerciseList = [];
+        this.collectionDataService.exerciseCounter = 0;
+        this.collection = null;
+        this.router.navigate(['/']);
+      }
     }
   }
   

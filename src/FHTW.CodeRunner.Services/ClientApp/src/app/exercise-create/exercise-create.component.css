@@ -97,3 +97,15 @@
 .modalForm input[type=text], .modalForm select {
    border-radius: 5px;
 }
+
+.toast {
+   position: absolute;
+   bottom: 0;
+   width: 100vw;
+   max-width: 100%;
+   border-radius: 0;
+}
+
+.toastClose {
+   color: white;
+}

@@ -17,10 +17,10 @@ export class ExerciseListHomeService {
     ) { }
 
     // GET all exercies from db (short)
-    getAllExercies(): Observable<ExerciseHome[]> {
-        return this.http.get<ExerciseHome[]>(this.getAllExercisesUrl).pipe(
+    getAllExercies(): Observable<HttpResponse<Object>> {
+        return this.http.get<HttpResponse<ExerciseHome[]>>(this.getAllExercisesUrl, { observe: 'response' }).pipe(
             tap(_ => console.log('fetched all exercises from db')),
-            catchError(this.handleError<ExerciseHome[]>('getAllExercies'))
+            catchError(this.handleError<HttpResponse<ExerciseHome[]>>('getAllExercies'))
         );
     }
 
@@ -35,20 +35,20 @@ export class ExerciseListHomeService {
       );
     }
 
-    search(searchFilter: SearchFilter): Observable<ExerciseHome[]> {
+    search(searchFilter: SearchFilter): Observable<HttpResponse<Object>> {
       console.log(searchFilter);
-      return this.http.post<ExerciseHome[]>(this.searchFilterUrl, searchFilter)
+      return this.http.post<HttpResponse<ExerciseHome[]>>(this.searchFilterUrl, searchFilter, { observe: 'response' as 'body' })
       .pipe(
         tap(_ => console.log("fetched exercises from db for filter")),
-        catchError(this.handleError<ExerciseHome[]>('search'))
+        catchError(this.handleError<HttpResponse<ExerciseHome[]>>('search'))
       ); 
     }
 
-    searchCollection(searchFilter: SearchFilter): Observable<CollectionHome[]> {
-      return this.http.post<CollectionHome[]>(this.searchFilterUrl, searchFilter)
+    searchCollection(searchFilter: SearchFilter): Observable<HttpResponse<Object>> {
+      return this.http.post<HttpResponse<CollectionHome[]>>(this.searchFilterUrl, searchFilter, { observe: 'response' as 'body' })
       .pipe(
         tap(_ => console.log("fetched collections from db for filter")),
-        catchError(this.handleError<CollectionHome[]>('search'))
+        catchError(this.handleError<HttpResponse<CollectionHome[]>>('search'))
       ); 
     }
 
