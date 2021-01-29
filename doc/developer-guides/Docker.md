@@ -135,3 +135,7 @@ Beim häufigen builden des Images während des Troubleshootings ist es 2-mal vor
 Dieses Problem ist beim starten des fertigen Containers aufgetreten. Beim start der Application hat SpaService ng serve mit einem random Port ausgeführt und weil dieser Port im Container nicht exposed war kam es zum Error (der Grund ist nur eine Vermutung). Beim Troubleshooting ist aufgefallen, dass im StartUp.cs `ng serve` ausgeführt wenn die Applikation in einem Developer Environment gestartet wird. Deswegen wurde temporär im `docker-compose.override.yml` die Variable `ASPNETCORE_ENVIRONMENT` auf `Production` gesetzt. Danach kam es aber zum Zertifikat Problem (siehe Zertifikat Kapitel) und es wurde zu Development zurückgesetzt. Aus irgendeinem unbekannten Grund trat das ng serve Problem danach nicht mehr auf. Die Docker Compose Dateien waren aber genau gleich, der einzige unterschied wahr, dass das dev Zertifikat hinzugefügt wurde (siehe Zertifikat Kapitel).
 
 Sollte das Problem wieder auftreten kann versucht werden im `ClientApp/package.json` beim `ng serve` einen fixen, freien Port zu setzten.
+
+## ASPNETCORE_ENVIRONMENT
+
+Wenn diese Umgebungsvariable in `docker-compose` Dateien aud `Production` steht wird eine sehr veraltete Version des Uis gestartet. Deswegen ist dieser Wert auch in der Release Fassung von FHTW-CodeRunner auf `Development gesetzt`.

@@ -16,7 +16,7 @@ services:
     links:
         - "db"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_Kestrel__Certificates__Default__Password=jDyhoAhAY6mfGa189lSB
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/dev-key.pfx
