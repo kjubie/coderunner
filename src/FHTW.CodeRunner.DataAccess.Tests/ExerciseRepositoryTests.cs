@@ -375,8 +375,10 @@ namespace FHTW.CodeRunner.DataAccess.Tests
             {
                 IExerciseRepository rep = new ExerciseRepository(context);
 
-                var e = rep.GetQuestionType("python_question_type");
+                var e = rep.GetQuestionType("c_program");
 
+
+                Assert.AreEqual("C", e.FkProgrammingLanguage.Name);
                 Assert.IsNotNull(e);
             }
         }
