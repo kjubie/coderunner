@@ -67,8 +67,11 @@ export class ExerciseCollectionComponent implements OnInit{
     this.exerciseList = this.collectionDataService.sharedExerciseList;
 
     this.exerciseList.forEach(exercise => {
-      this.collectionExerciseList.push(new CollectionExercise(exercise.id));
+      var colExercise = new CollectionExercise(exercise.id);
+      colExercise.version = exercise.versionList[exercise.versionList.length - 1];
+      this.collectionExerciseList.push(colExercise);
     });
+
   }
 
   SaveCollection() {
