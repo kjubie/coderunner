@@ -21,6 +21,10 @@ Um die node module zu installieren muss
 
 ausgeführt werden.
 
+### Benutzer erstellen
+
+Um Benutzer in der Datenbank zu seeden muss in `FHTW-CodeRunner\src\FHTW.CodeRunner.DataAccess.Sql\Resources\user.json` ein neuer Eintrag gemacht werden. Der benötigte Passwort Hash kann zum Beispiel auf https://sha512.online/ generiert werden.
+
 ## Starten mit Docker
 
 ### In Visual Studio
@@ -39,9 +43,11 @@ Sollten Probleme auftreten kann unsere Docker Dokumentation zur Hilfe gezogen we
 
 ### Aus der Cli prebuild
 
+Zum starten von einem prebuild Image muss einfach nur im Ordner `FHTW-CodeRunner/docker_release` `docker-compose up` ausgeführt werden.
+
 ## Normal starten
 
-Wenn die Applikation auf dem eigenen Computer laufen soll, muss zuerst die Datenbank manuell gestartet werden. Dafür muss einfach
+Wenn die Applikation auf dem eigenen Computer laufen soll, muss zuerst die Datenbank manuell gestartet werden. Dafür muss
 
 ```bash
 ...\FHTW-CodeRunner\database> docker-compose up

@@ -93,9 +93,22 @@ Zu den generierten Dateien wurden noch die Datenbank hinzugefügt und die jeweil
 
 ## Zertifikat
 
+! Das in diesem Absatz beschriebene Problem wurde gelöst, das Zertifikat wurde nicht in den Container kopiert.
+
 Um die Applikation starten zu können, benötigt man ein SSL Zertifikat. Dafür wurde ein selbst signiertes development Zertifikat erstellt bzw das von Visual Studio erstellte Zertifikat exportiert. Dieses Zertifikat scheint aber nur zu funktionieren wenn `ASPNETCORE_ENVIRONMENT` auf `Development steht`.
 
 Das Passwort zum Zertifikat steht in der `docker-compose.override.yml` Datei sollte es benötigt werden, bzw. kann jederzeit das Zertifikat mit einem neuen ersetzt werden.
+
+## Volume Mounts
+
+In den von Visual Studio erstellten `docker-compose.override.yml` werden normalerweise zwei Pfade in den Container gemountet.
+
+```Dockerfile
+- ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+- ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+```
+
+In diesem Pfaden befinden sich das benötigte developer Zertifikat und Passwort. Allerdings, weil wir das Zertifikat in den Container kopieren, benötigen wir sie nicht und haben sie entfernt um den Container auch auf Linux ausführen zu können.
 
 ## Mögliche Fehler
 
