@@ -36,7 +36,7 @@
 
                 <label for="tagSelect" class="col-2 col-form-label">Tags</label>
                 <div class="col-10">
-                    <span *ngFor="let tag of exercise.exerciseTagList; let idx = index" class="badge badge-pill tag">{{ tag.tag.name }}</span>
+                    <span *ngFor="let tag of exercise.exerciseTagList" class="badge badge-pill tag">{{ tag.tag.name }}</span>
                 </div>
             </div>
 
@@ -47,11 +47,6 @@
                     <label for="fullTitle" class="col-2 col-form-label">Exercise Title</label>
                     <div class="col-10">
                         <input type="text" class="form-control-plaintext" id="fullTitle" readonly name="fullTitle" [value]="lang.exerciseHeader.fullTitle">
-                    </div>
-    
-                    <label for="shortTitle" class="col-2 col-form-label">Short Title</label>
-                    <div class="col-10">
-                        <input type="text" class="form-control-plaintext" id="shortTitle" readonly name="shortTitle" [value]="lang.exerciseHeader.shortTitle">
                     </div>
     
                     <label for="introduction" class="col-2 col-form-label">Exercise Introduction</label>
@@ -65,7 +60,7 @@
         <!-- TODO: Show for each ProgLang -->
         <h5 class="subheading">Bodies</h5>
         <div class="contentSeperator mb-3">
-            <div *ngFor="let prog of exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody" class="from-group row mb-1 content-group">
+            <div *ngFor="let prog of exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody; let idx = index" class="from-group row mb-1 content-group">
                 <h5 class="col-12">{{ prog.programmingLanguage.name }}</h5>
                 <label for="programmingLang" class="col-2 col-form-label">Language</label>
                 <div class="col-10">
@@ -103,11 +98,18 @@
                 </div>
 
                 <div *ngFor="let lang of exercise.exerciseVersionList[0].exerciseLanguageList" class="col-12 row mt-1">
-                    <!-- TODO: show for each language -->
                     <h4 class="col-12">{{ lang.writtenLanguage.name }}</h4>
                     <label for="genFeedback" class="col-2 col-form-label">General Feedback</label>
                     <div class="col-10">
-                        <textarea class="form-control-plaintext" id="genFeedback" name="genFeedback" rows="9" readonly [value]="prog.feedback"></textarea>
+                        <textarea class="form-control-plaintext" id="genFeedback" name="genFeedback" rows="9" readonly [value]="lang.exerciseBody[idx].feedback"></textarea>
+                    </div>
+                    <label for="genFeedback" class="col-2 col-form-label">Description</label>
+                    <div class="col-10">
+                        <textarea class="form-control-plaintext" id="genFeedback" name="genFeedback" rows="9" readonly [value]="lang.exerciseBody[idx].description"></textarea>
+                    </div>
+                    <label for="genFeedback" class="col-2 col-form-label">Hints</label>
+                    <div class="col-10">
+                        <textarea class="form-control-plaintext" id="genFeedback" name="genFeedback" rows="5" readonly [value]="lang.exerciseBody[idx].hint"></textarea>
                     </div>
                 </div>
 
@@ -145,11 +147,12 @@
                             <input type="text" class="form-control-plaintext" name="regexDescription" id="regexDescription" readonly [value]="prog.filesDescription">
                         </div>
             
-                        <!-- TODO: add filesizes -->
                         <label for="maxDataSize" class="col-2 col-form-label">Max Filesize</label>
                         <div class="col-10">
                             <select disabled class="form-control" name="fileSize" id="fileSize" disabled>
-                                <option *ngIf="prog.filesSize == '0'">10kB</option>
+                                <option *ngIf="prog.filesSize == '10240'">10kB</option>
+                                <option *ngIf="prog.filesSize == '102400'">100kB</option>
+                                <option *ngIf="prog.filesSize == '1024000'">1000kB</option>
                             </select>
                         </div>
                     </div>
@@ -210,8 +213,8 @@
                 <div class="col-12">
                     <h4 class="tabHeading mt-3">{{prog.programmingLanguage.name}} Test Cases</h4>
                     <div class="mb-3">
-                        <div *ngFor="let test of prog.testSuite.testCaseList; let i = index" class="content-group row mb-1">
-                            <label for="testcase" class="col-2 col-form-label">Testcase {{i + 1}}</label>
+                        <div *ngFor="let test of prog.testSuite.testCaseList; let testIdx = index" class="content-group row mb-1">
+                            <label for="testcase" class="col-2 col-form-label">Testcase {{testIdx + 1}}</label>
                             <div class="col-10">
                                 <textarea class="form-control-plaintext" id="testcase" name="testcase" rows="5" readonly [value]="test.testCode"></textarea>
                             </div>

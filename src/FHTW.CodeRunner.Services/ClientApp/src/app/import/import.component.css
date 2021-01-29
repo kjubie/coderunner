@@ -24,3 +24,15 @@ input[type=text], input[type=number], textarea, select {
     background-color: rgb(255, 222, 222);
     padding: 10px;
 }
+
+.toast {
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    max-width: 100%;
+    border-radius: 0;
+}
+
+.toastClose {
+    color: white;
+}
