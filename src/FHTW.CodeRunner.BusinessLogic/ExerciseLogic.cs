@@ -117,7 +117,7 @@ namespace FHTW.CodeRunner.BusinessLogic
             {
                 try
                 {
-                    if (exercise.Created == null)
+                    if (exercise.Created == null || (exercise.ExerciseVersion?.First()?.VersionNumber ?? 0) < 1)
                     {
                         exercise.Created = DateTime.Now;
                     }
@@ -147,7 +147,7 @@ namespace FHTW.CodeRunner.BusinessLogic
             {
                 try
                 {
-                    if (exercise.Created == null)
+                    if (exercise.Created == null || (exercise.ExerciseVersion?.First()?.VersionNumber ?? 0) < 1)
                     {
                         exercise.Created = DateTime.Now;
                     }
@@ -168,7 +168,7 @@ namespace FHTW.CodeRunner.BusinessLogic
         }
 
         /// <inheritdoc/>
-        public void ValidateExercise(BlEntities.Exercise exercise)
+        public void ValidateExercise(BlEntities.Exercise exercise, int exerciseId, int exerciseVersion)
         {
             if (exercise == null)
             {
@@ -184,21 +184,13 @@ namespace FHTW.CodeRunner.BusinessLogic
 
                     if (validationResult.IsValid)
                     {
-                        if (exercise.Created == null)
-                        {
-                            exercise.Created = DateTime.Now;
-                        }
-
-                        var dalExercise = this.mapper.Map<DalEntities.Exercise>(exercise);
-
-                        // TODO: Own function.
-                        // this.exerciseRepository.TemporarySave(dalExercise);
-                        this.logger.LogInformation("BL passing Exercise with Title: " + exercise.Title + " to DAL.");
+                        this.exerciseRepository.UpdateValidState(exerciseId, exerciseVersion, DalEntities.ValidState.Valid);
+                        this.logger.LogInformation("BL Exercise with Title: " + exercise.Title + " is valid");
                     }
                     else
                     {
-                        this.logger.LogError("BL received invalid Exercise in SaveExercise with Title: " + exercise.Title);
-                        throw new ValidationException("exercise " + validationResult.Errors.Select(err => err.ErrorMessage).ToString());
+                        this.exerciseRepository.UpdateValidState(exerciseId, exerciseVersion, DalEntities.ValidState.NotValid);
+                        this.logger.LogInformation("BL Exercise with Title: " + exercise.Title + " is not valid");
                     }
                 }
                 catch (ValidationException e)

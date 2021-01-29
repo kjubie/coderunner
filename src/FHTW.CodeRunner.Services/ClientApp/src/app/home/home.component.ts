@@ -312,8 +312,8 @@ export class HomeComponent implements OnInit {
   }
 
   viewExercise(idx: number) {
-    idx += 1;
-    this.createExerciseService.getExercise(idx).subscribe(this.viewExerciseObserver);
+    let id = this.exerciseList[idx].id;
+    this.createExerciseService.getExercise(id).subscribe(this.viewExerciseObserver);
   }
 
   viewCollection(idx: number) {

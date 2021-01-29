@@ -183,7 +183,7 @@ export class ExerciseCreateComponent implements OnInit {
   }
 
   addNewTest(test: TestCase) {
-    this.exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseBody[this.programmingLangIdx].testSuite.testCaseList.push(test);
+    this.exercise.exerciseVersionList[this.latestVersion].exerciseLanguageList[0].exerciseBody[this.programmingLangIdx].testSuite.testCaseList.push(test);
   }
 
   removeTestCase(idx: number) {

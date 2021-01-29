@@ -51,7 +51,9 @@ namespace FHTW.CodeRunner.BusinessLogic.Interfaces
         /// Function for validating an exercise.
         /// </summary>
         /// <param name="exercise">The incoming exercise.</param>
-        public void ValidateExercise(Exercise exercise);
+        /// <param name="exerciseId">The id of the exercise.</param>
+        /// <param name="exerciseVersion">The version of the exercise.</param>
+        public void ValidateExercise(Exercise exercise, int exerciseId, int exerciseVersion);
 
         /// <summary>
         /// Function for filtering exercises.
