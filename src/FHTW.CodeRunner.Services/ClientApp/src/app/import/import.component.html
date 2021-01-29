@@ -23,3 +23,11 @@
     <button class="btn btn-primary ml-2" [disabled]="!validFile || !importCollection.writtenLanguage || !importCollection.title || !fileContent" (click)="Import()">Import</button>
   </div>
 </div>
+
+<!-- Error Message Toast -->
+<div class="toast d-flex justify-content-center text-white bg-danger border-0 position-sticky" role="alert" aria-live="assertive" aria-atomic="true" data-delay="15000">
+  <div class="toast-body">
+    {{errorMsg}}
+  </div>
+  <button type="button" class="btn ml-2 toastClose" data-dismiss="toast" aria-label="Close">&times;</button>
+</div>

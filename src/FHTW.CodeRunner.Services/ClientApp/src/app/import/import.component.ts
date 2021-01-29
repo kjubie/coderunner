@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Author } from '../data-objects/author';
@@ -6,6 +7,8 @@ import { ImportCollection } from '../data-objects/import-collection/import-colle
 import { WrittenLanguage } from '../data-objects/written-language';
 import { CreateExerciseService } from '../services/create-exercise.service';
 import { CollectionDataService } from '../services/exercise-collection.data.service';
+import * as $ from "jquery";
+import "bootstrap";
 
 @Component({
   selector: 'app-import',
@@ -15,6 +18,8 @@ import { CollectionDataService } from '../services/exercise-collection.data.serv
 
 export class ImportComponent implements OnInit {
 
+  errorMsg: string;
+  httpResponse: HttpResponse<Object>;
   supportedFileTypes = ['xml'];
   validFile = true;
   fileContent: string;
@@ -33,19 +38,32 @@ export class ImportComponent implements OnInit {
   }
 
   prepareExerciseObserver = {
-    next: x => { this.dataLists = x.body},
+    next: x => { if (x != undefined) { this.dataLists = x.body; this.httpResponse = x } else { this.httpResponse = undefined }},
     error: err => console.error('Observer got an error: ' + err),
     complete: () => {
-      this.writtenLangs = this.dataLists.writtenLanguageList;
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to prepare Data!";
+        $('.toast').toast('show');
+      }
+      else if (this.httpResponse.status == 200) {
+        this.writtenLangs = this.dataLists.writtenLanguageList;
+      }
     }
   }
 
   importCollectionObserver = {
-    next: x => { this.Import = x },
+    next: x => { if (x != undefined) { this.Import = x.body; this.httpResponse = x } else { this.httpResponse = undefined }},
     error: err => console.error('Observer got an error: ' + err),
     complete: () => {
-      console.log("Collection was saved to database")
-      this.importCollection = new ImportCollection;
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to import Collection!";
+        $('.toast').toast('show');
+      }
+      else if (this.httpResponse.status == 200) {
+        console.log("Collection was saved to database")
+        this.importCollection = new ImportCollection;
+        this.router.navigate(['/']);
+      }
     }
   }
 
@@ -55,7 +73,6 @@ export class ImportComponent implements OnInit {
     this.importCollection.user.id = (localStorage.getItem('user_id') !== null) ? parseInt(localStorage.getItem('user_id')) : 0;
     this.importCollection.user.name = localStorage.getItem('name');
 
-    console.log(this.importCollection);
     this.collectionDataService.importCollection(this.importCollection).subscribe(this.importCollectionObserver);
   }
 
