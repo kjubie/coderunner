@@ -49,7 +49,7 @@ namespace FHTW.CodeRunner.Services.Converters
                 if (header != null)
                 {
                     question.Name.Text = header.FullTitle;
-                    question.Questiontext.Text = header.Introduction + " ";
+                    question.Questiontext.Text = header.Introduction + Environment.NewLine;
                     question.Templateparams = header.TemplateParam;
                     question.Hoisttemplateparams = header.TemplateParamLiftFlag == true ? "1" : "0";
                     question.Twigall = header.TwigAllFlag == true ? "1" : "0";
@@ -59,8 +59,9 @@ namespace FHTW.CodeRunner.Services.Converters
                 if (body != null)
                 {
                     question.Questiontext.Format = "html";
-                    question.Questiontext.Text += markdownHtmlHandler.MarkdownToHtml(body.Description);
-                    question.Questiontext.Text += markdownHtmlHandler.MarkdownToHtml(body.Hint);
+                    question.Questiontext.Text += body.Description;
+                    question.Questiontext.Text += Environment.NewLine;
+                    question.Questiontext.Text += body.Hint;
                     question.Questiontext.Text = markdownHtmlHandler.MarkdownToHtml(question.Questiontext.Text);
 
                     question.Generalfeedback.Format = "html";

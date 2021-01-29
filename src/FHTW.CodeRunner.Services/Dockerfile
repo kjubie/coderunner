@@ -12,7 +12,7 @@ RUN apt-get update -yq \
     && curl -L https://deb.nodesource.com/setup_12.x | bash \
 	&& apt-get -y install nodejs
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS build
 RUN apt-get update -yq \
     && apt-get -yq install curl gnupg ca-certificates \
     && curl -L https://deb.nodesource.com/setup_12.x | bash \
