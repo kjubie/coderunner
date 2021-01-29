@@ -2,7 +2,7 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 RUN apt-get update -yq \
-    && apt-get -yq install curl gnupg \
+    && apt-get -yq install curl gnupg git \
     && curl -sL https://deb.nodesource.com/setup_12.x | bash \
 	&& apt-get -yq install nodejs
 WORKDIR /app
@@ -13,7 +13,7 @@ EXPOSE 5001
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS build
 RUN apt-get update -yq \
-    && apt-get -yq install curl gnupg \
+    && apt-get -yq install curl gnupg git \
     && curl -sL https://deb.nodesource.com/setup_12.x | bash \
 	&& apt-get -yq install nodejs
 WORKDIR /src
@@ -28,15 +28,19 @@ COPY ["FHTW.CodeRunner.DataAccess.Sql/FHTW.CodeRunner.DataAccess.Sql.csproj", "F
 COPY ["FHTW.CodeRunner.DataAccess.Entities/FHTW.CodeRunner.DataAccess.Entities.csproj", "FHTW.CodeRunner.DataAccess.Entities/"]
 COPY ["FHTW.CodeRunner.DataAccess.Interfaces/FHTW.CodeRunner.DataAccess.Interfaces.csproj", "FHTW.CodeRunner.DataAccess.Interfaces/"]
 RUN dotnet restore "FHTW.CodeRunner.Services/FHTW.CodeRunner.Services.csproj"
+COPY ["FHTW.CodeRunner.Services/ClientApp/", "ClientApp"]
 COPY . .
 WORKDIR "/src/FHTW.CodeRunner.Services"
 RUN dotnet build "FHTW.CodeRunner.Services.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "FHTW.CodeRunner.Services.csproj" -c Release -o /app/publish
-COPY ["ClientApp/", "ClientApp/"]
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY --from=build /src/ClientApp /app/ClientApp
+WORKDIR /app/ClientApp
+RUN npm install
+WORKDIR /app
 ENTRYPOINT ["dotnet", "FHTW.CodeRunner.Services.dll"]
