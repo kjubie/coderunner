@@ -59,7 +59,8 @@ namespace FHTW.CodeRunner.Services.Converters
                 if (body != null)
                 {
                     question.Questiontext.Format = "html";
-                    question.Questiontext.Text += body.Description;
+                    question.Questiontext.Text += markdownHtmlHandler.MarkdownToHtml(body.Description);
+                    question.Questiontext.Text += markdownHtmlHandler.MarkdownToHtml(body.Hint);
                     question.Questiontext.Text = markdownHtmlHandler.MarkdownToHtml(question.Questiontext.Text);
 
                     question.Generalfeedback.Format = "html";
@@ -113,7 +114,7 @@ namespace FHTW.CodeRunner.Services.Converters
                             newTestCase.Extra.Text = testCase.AdditionalData;
                             newTestCase.Display.Text = testCase.DisplayType;
 
-                            newTestCase.Testtype = "0"; // TODO: Changeable?
+                            newTestCase.Testtype = "0";
                             newTestCase.Useasexample = testCase.UseAsExampleFlag == true ? "1" : "0";
                             newTestCase.Hiderestiffail = testCase.HideOnFailFlag == true ? "1" : "0";
                             newTestCase.Mark = System.Convert.ToString(testCase.Points);
@@ -138,7 +139,7 @@ namespace FHTW.CodeRunner.Services.Converters
                     }
                 }
 
-                // TODO: The following attributes are uncertain and have to be discussed
+                // The following attributes are uncertain and have to be discussed
                 question.Penalty = string.Empty;
                 question.Hidden = "0";
                 question.Answerboxcolumns = "100";

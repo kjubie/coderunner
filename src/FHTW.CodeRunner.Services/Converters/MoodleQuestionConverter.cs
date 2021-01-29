@@ -95,7 +95,7 @@ namespace FHTW.CodeRunner.Services.Converters
             {
                 Id = 0,
                 Description = markdownHtmlHandler.HtmlToMarkdown(question.Questiontext?.Text),
-                Hint = string.Empty, // TODO: Hint?
+                Hint = string.Empty,
                 FieldLines = int.TryParse(question.Answerboxlines, out x) ? x : 0,
                 GradingFlag = question.Allornothing == "1" ? true : false,
                 SubtractSystem = question.Penaltyregime,
@@ -122,20 +122,21 @@ namespace FHTW.CodeRunner.Services.Converters
                 TestOnSaveFlag = question.Validateonsave == "1" ? true : false,
                 GlobalExtraParam = question.Globalextra,
                 RuntimeData = string.Empty, // TODO: RuntimeData? File im Moodle. Pls add.
-                PreCheck = int.TryParse(question.Precheck, out x) ? (BlEntities.PreCheckState)x : BlEntities.PreCheckState.Deactivated, // TODO: Errorhandling
-                GeneralFeedbackDisplay = int.TryParse(question.Displayfeedback, out x) ? (BlEntities.GeneralFeedbackDisplayState)x : BlEntities.GeneralFeedbackDisplayState.SetFromTest, // TODO: Errorhandling
+                PreCheck = int.TryParse(question.Precheck, out x) ? (BlEntities.PreCheckState)x : BlEntities.PreCheckState.Deactivated,
+                GeneralFeedbackDisplay = int.TryParse(question.Displayfeedback, out x) ? (BlEntities.GeneralFeedbackDisplayState)x : BlEntities.GeneralFeedbackDisplayState.SetFromTest,
                 TestCase = new List<BlEntities.TestCase>(),
             };
 
             var testCases = question.Testcases?.Testcase;
             if (testCases != null)
             {
+                int count = 0;
                 foreach (var testCase in testCases)
                 {
                     var exerciseTestCase = new BlEntities.TestCase
                     {
                         Id = 0,
-                        OrderUsed = 0, // TODO: OrderUsed?
+                        OrderUsed = ++count,
                         TestCode = testCase.Testcode?.Text,
                         StandardInput = testCase.Stdin?.Text,
                         ExpectedOutput = testCase.Expected?.Text,

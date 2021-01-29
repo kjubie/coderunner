@@ -24,11 +24,11 @@
             <div class="col-10 form-inline">
                 <div class="form-group col-3">
                     <input type="checkbox" id="liftParam" name="liftParam" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.templateParamLiftFlag" (ngModelUpdate)="this.exerciseChangeEvent.emit(this.exercise)">
-                    <p class="ml-3">Lift Template Parameters</p>
+                    <p class="checkboxText">Lift Template Parameters</p>
                 </div>
                 <div class="form-group col-3">
                     <input type="checkbox" id="twigAll" name="twigAll" [(ngModel)]="exercise.exerciseVersionList[0].exerciseLanguageList[0].exerciseHeader.twigAllFlag" (ngModelUpdate)="this.exerciseChangeEvent.emit(this.exercise)">
-                    <p class="ml-3">Twig for All</p>
+                    <p class="checkboxText">Twig for All</p>
                 </div>
             </div>
 

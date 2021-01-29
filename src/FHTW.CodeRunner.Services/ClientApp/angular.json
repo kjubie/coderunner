@@ -41,7 +41,11 @@
               "node_modules/prismjs/components/prism-java.min.js",
               "node_modules/prismjs/components/prism-javascript.min.js",
               "node_modules/prismjs/components/prism-python.min.js",
+              "node_modules/prismjs/components/prism-pascal.min.js",
               "node_modules/prismjs/components/prism-ruby.min.js",
+              "node_modules/prismjs/components/prism-rust.min.js",
+              "node_modules/prismjs/components/prism-php.min.js",
+              "node_modules/prismjs/components/prism-sql.min.js",
               "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js"
             ]
           },

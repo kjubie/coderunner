@@ -13,4 +13,8 @@ export class TestSuitTabComponent  {
     @Input() questionTypes: QuestionType[];
 
     @Output() testSuiteChangeEvent = new EventEmitter<TestSuite>();
+
+    compareById(item1, item2) {
+        return item1 && item2 && item1.id === item2.id;
+    }
 }

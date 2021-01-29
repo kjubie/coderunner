@@ -59,7 +59,7 @@ export class ImportComponent implements OnInit {
     this.collectionDataService.importCollection(this.importCollection).subscribe(this.importCollectionObserver);
   }
 
-  upload() {
+  upload(files: any) {
     let file = (<HTMLInputElement>document.getElementById('fileDrop')).files.item(0);
     let fileName = file.name.split('.')[1];
 
