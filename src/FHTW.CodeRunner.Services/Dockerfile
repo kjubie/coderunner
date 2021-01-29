@@ -40,6 +40,7 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 COPY --from=build /src/ClientApp /app/ClientApp
+COPY --from=build /src/FHTW.CodeRunner.Services/dev-key.pfx /app
 WORKDIR /app/ClientApp
 RUN npm install
 WORKDIR /app
