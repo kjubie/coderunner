@@ -68,10 +68,7 @@ namespace FHTW.CodeRunner.BusinessLogic
             {
                 try
                 {
-                    if (collection.Created == null)
-                    {
-                        collection.Created = DateTime.Now;
-                    }
+                    collection.Created = DateTime.Now;
 
                     var dalCollection = this.mapper.Map<DalEntities.Collection>(collection);
 
