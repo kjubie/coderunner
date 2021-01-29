@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
@@ -15,18 +15,18 @@ export class ExerciseExportService {
     ) { }
 
     // POST exercise for export
-    exportExercise(exercise: ExerciseExport): Observable<ExerciseExport> {
-      return this.http.post<ExerciseExport>(this.exportExerciseUrl, exercise, { responseType: 'text' as 'json' }).pipe(
+    exportExercise(exercise: ExerciseExport): Observable<HttpResponse<Object>> {
+      return this.http.post<HttpResponse<ExerciseExport>>(this.exportExerciseUrl, exercise, { responseType: 'text' as 'json', observe: 'response' as 'body' }).pipe(
         tap(_ => console.log('exercise was exported')),
-        catchError(this.handleError<ExerciseExport>('exportExercise'))
+        catchError(this.handleError<HttpResponse<ExerciseExport>>('exportExercise'))
       );
     }
 
     // POST collection for export
-    exportCollection(collection: CollectionExport): Observable<CollectionExport> {
-      return this.http.post<CollectionExport>(this.exportCollectionUrl, collection, { responseType: 'text' as 'json' }).pipe(
+    exportCollection(collection: CollectionExport): Observable<HttpResponse<Object>> {
+      return this.http.post<HttpResponse<CollectionExport>>(this.exportCollectionUrl, collection, { responseType: 'text' as 'json', observe: 'response' as 'body' }).pipe(
         tap(_ => console.log('collection was exported')),
-        catchError(this.handleError<CollectionExport>('exportCollection'))
+        catchError(this.handleError<HttpResponse<CollectionExport>>('exportCollection'))
       );
     }
 

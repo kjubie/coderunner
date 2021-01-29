@@ -13,6 +13,9 @@ import { Exercise } from '../data-objects/create-exercise/exercise';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { ExerciseCreateComponent } from '../exercise-create/exercise-create.component';
 import { PrepareCreateExercise } from '../data-objects/create-exercise/prepare-create-exercise';
+import { HttpResponse } from '@angular/common/http';
+import * as $ from "jquery";
+import "bootstrap";
 
 
 const routes: Routes = [
@@ -33,6 +36,8 @@ const routes: Routes = [
 })
 export class HomeComponent implements OnInit {
 
+  errorMsg: string;
+  httpResponse: HttpResponse<Object>;
   viewSelected: string = "list";
   xmlExportString: string;
   searchFilter: SearchFilter = new SearchFilter();
@@ -67,94 +72,137 @@ export class HomeComponent implements OnInit {
   }
 
   prepareObserver = {
-    next: x => { this.languageData = x },
+    next: x => { if (x != undefined) { this.languageData = x.body; this.httpResponse = x } else { this.httpResponse = undefined }},
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
-      this.languageData.writtenLanguageList.forEach(lang => {
-        this.languages.push(lang.name);
-      });
-
-      this.languageData.programmingLanguageList.forEach(lang => {
-        this.programmingLangs.push(lang.name);
-      });
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to prepare Exercise!";
+        $('.toast').toast('show');
+      }
+      else if (this.httpResponse.status == 200) {
+        this.languageData.writtenLanguageList.forEach(lang => {
+          this.languages.push(lang.name);
+        });
+  
+        this.languageData.programmingLanguageList.forEach(lang => {
+          this.programmingLangs.push(lang.name);
+        });
+      }
     }
   }
 
   loadAllExercisesObserver = {
-    next: x => { this.exerciseList = x },
+    next: x => { if (x != undefined) { this.exerciseList = x.body; this.httpResponse = x } else { this.httpResponse = undefined }},
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
-      console.log(this.exerciseList);
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to load Exercises from Database!";
+        $('.toast').toast('show');
+      }
     }
   }
 
   loadAllCollectionsObserver = {
-    next: x => { this.collectionList = x.body; },
+    next: x => { if (x != undefined) { this.collectionList = x.body; this.httpResponse = x } else { this.httpResponse = undefined }},
     error: err => { console.log('Observer got an error: ' + err); },
     complete: () => {
-      console.log(this.collectionList);
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to load Collections from Database!";
+        $('.toast').toast('show');
+      }
     }
   }
 
   exportExerciseObserver = {
-    next: x => { this.xmlExportString = x },
+    next: x => { if (x != undefined) { this.xmlExportString = x.body; this.httpResponse = x } else { this.httpResponse = undefined }},
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
-      console.log('download xml file');
-      this.downloadXMLFile('ExportExercise');
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to export Exercise!";
+        $('.toast').toast('show');        
+      } 
+      else if (this.httpResponse.status == 200) {
+        this.downloadXMLFile('ExportExercise');
+      }
     }
   }
 
   exportCollectionObserver = {
-    next: x => { this.xmlExportString = x },
+    next: x => { if (x != undefined) { this.xmlExportString = x.body; this.httpResponse = x } else { this.httpResponse = undefined }},
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
-      console.log('download xml file');
-      console.log(this.xmlExportString);
-      this.downloadXMLFile('ExportCollection');
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to export Collection!";
+        $('.toast').toast('show');        
+      } 
+      else if (this.httpResponse.status == 200) {
+        this.downloadXMLFile('ExportCollection');
+      }
     }
   }
 
   searchFilterObserver = {
-    next: x => { this.exerciseList = x },
+    next: x => { if (x != undefined) { this.exerciseList = x.body; this.httpResponse = x } else { this.httpResponse = undefined } },
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
-      console.log(this.exerciseList);
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to load Exercises for set Filter!";
+        $('.toast').toast('show');
+      }
     }
   }
 
   searchCollectionFilterObserver = {
-    next: x => { this.collectionList = x },
+    next: x => { if (x != undefined) { this.collectionList = x.body; this.httpResponse = x } else { this.httpResponse = undefined }},
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
-      console.log(this.collectionList);
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to load Collections for set Filter!";
+        $('.toast').toast('show');
+      }
     }
   }
 
   getExerciseObserver = {
-    next: x => { this.exerciseToEdit = x },
+    next: x => { if (x != undefined) { this.exerciseToEdit = x.body; this.httpResponse = x } else { this.httpResponse = undefined } },
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
-      this.createExerciseService.editExercise = this.exerciseToEdit;
-
-      this.router.navigate(['/exercise-create']);
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to get Exercise!";
+        $('.toast').toast('show');
+      }
+      else if (this.httpResponse.status == 200) {
+        this.createExerciseService.editExercise = this.exerciseToEdit;
+        this.router.navigate(['/exercise-create']);
+      }
     }
   }
 
   viewExerciseObserver = {
-    next: x => { this.createExerciseService.viewExercise = x },
+    next: x => { if (x != undefined) { this.createExerciseService.viewExercise = x.body; this.httpResponse = x } else { this.httpResponse = undefined } },
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
-      this.router.navigate(['/exercise-view']);
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to load Exercise for View!";
+        $('.toast').toast('show');
+      }
+      else if (this.httpResponse.status == 200) {
+        this.router.navigate(['/exercise-view']);
+      }
     }
   }
 
   viewCollectionObserver = {
-    next: x => { this.collectionDataService.collectionToShow = x },
+    next: x => { if (x != undefined) { this.collectionDataService.collectionToShow = x.body; this.httpResponse = x } else { this.httpResponse = undefined } },
     error: err => { console.log('Observer got an error: ' + err) },
     complete: () => {
-      console.log(this.collectionDataService.collectionToShow);
-      this.router.navigate(['/show-collection']);
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to load Collection for View!";
+        $('.toast').toast('show');
+      }
+      else if (this.httpResponse.status == 200) {
+        this.router.navigate(['/show-collection']);
+      }
     }
   }
 
@@ -269,8 +317,8 @@ export class HomeComponent implements OnInit {
   }
 
   viewCollection(idx: number) {
-    idx += 1;
-    this.collectionDataService.getCollection(idx).subscribe(this.viewCollectionObserver);
+    let id = this.collectionList[idx].id;
+    this.collectionDataService.getCollection(id).subscribe(this.viewCollectionObserver);
   }
 
   switchLists() {

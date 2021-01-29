@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 import { ExerciseLanguage } from '../data-objects/create-exercise/exercise-language';
 import { TestSuite } from '../data-objects/create-exercise/test-suite';
 import { ExerciseBody } from '../data-objects/create-exercise/exercise-body';
+import { HttpResponse } from '@angular/common/http';
+import * as $ from "jquery";
+import "bootstrap";
 
 @Component({
   selector: 'app-exercise-create',
@@ -20,6 +23,8 @@ import { ExerciseBody } from '../data-objects/create-exercise/exercise-body';
 })
 export class ExerciseCreateComponent implements OnInit {
 
+  httpResponse: HttpResponse<Object>;
+  errorMsg: string;
   exercise: Exercise;
   selectedElement = 'General';
 
@@ -43,70 +48,84 @@ export class ExerciseCreateComponent implements OnInit {
   constructor(private createExerciseService: CreateExerciseService, private helper: CreateExerciseHelperService, private router: Router) {}
 
   createExerciseObserver = {
-    next: x => { this.SaveExercise = x },
+    next: x => { if (x != undefined) { this.SaveExercise = x.body; this.httpResponse = x } else { this.httpResponse = undefined }},
     error: err => console.error('Observer got an error: ' + err),
     complete: () => {
-      console.log("exercise was saved to database")
-      this.router.navigate(['/']);
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to create Exercise!";
+        $('.toast').toast('show');
+      } 
+      else if (this.httpResponse.status == 200) {
+        this.router.navigate(['/']);
+      }
     }
   }
 
   createTempExerciseObserver = {
-    next: x => { this.exercise = x },
+    next: x => { if (x != undefined) { this.exercise = x.body; this.httpResponse = x } else { this.httpResponse = undefined }},
     error: err => console.error('Observer got an error: ' + err),
     complete: () => {
-      console.log("temporary exercise was saved to database")
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to temporarily save Exercise!";
+        $('.toast').toast('show');
+      }
     }
   }
 
   prepareExerciseObserver = {
-    next: x => { this.dataToCreateExercise = x},
+    next: x => { if (x != undefined) { this.dataToCreateExercise = x.body; this.httpResponse = x } else { this.httpResponse = undefined }},
     error: err => console.error('Observer got an error: ' + err),
     complete: () => {
-      this.writtenLangs = this.dataToCreateExercise.writtenLanguageList;
-      this.programmingLangs = this.dataToCreateExercise.programmingLanguageList;
-      this.questionTypes = this.dataToCreateExercise.questionTypeList;
-      this.tagList = this.dataToCreateExercise.tagList;
-
-      for (let idx = 0; idx < this.writtenLangs.length; idx++) {
-        // remove default written lang:
-        if (this.writtenLangs[idx].name == "English") {
-          this.exercise.exerciseVersionList[0].exerciseLanguageList[0].writtenLanguage = this.writtenLangs[idx];
-          this.usedWLangs.push(this.writtenLangs[idx]);
-          this.writtenLangs.splice(idx, 1);
-        }
+      if (this.httpResponse == undefined) {
+        this.errorMsg = "Unable to prepare Exercise!";
+        $('.toast').toast('show');
       }
-
-      if (this.exercise.title !== undefined && this.exercise.title !== "") {
-        // remove already used written and programming langs
-        this.latestVersion = this.exercise.exerciseVersionList.length - 1;
-        this.exercise.exerciseVersionList[this.latestVersion].exerciseLanguageList.forEach(exerciseLang => {
-          let writtenLang = exerciseLang.writtenLanguage;
-          if (this.writtenLangs.find(e => e.name === writtenLang.name) !== undefined) {
-            let element = this.writtenLangs.find(e => e.name === writtenLang.name);
-            this.usedWLangs.push(element);
-            let idx = this.writtenLangs.indexOf(element);
+      else if (this.httpResponse.status == 200) {
+        this.writtenLangs = this.dataToCreateExercise.writtenLanguageList;
+        this.programmingLangs = this.dataToCreateExercise.programmingLanguageList;
+        this.questionTypes = this.dataToCreateExercise.questionTypeList;
+        this.tagList = this.dataToCreateExercise.tagList;
+  
+        for (let idx = 0; idx < this.writtenLangs.length; idx++) {
+          // remove default written lang:
+          if (this.writtenLangs[idx].name == "English") {
+            this.exercise.exerciseVersionList[0].exerciseLanguageList[0].writtenLanguage = this.writtenLangs[idx];
+            this.usedWLangs.push(this.writtenLangs[idx]);
             this.writtenLangs.splice(idx, 1);
           }
-        });
-        this.exercise.exerciseVersionList[this.latestVersion].exerciseLanguageList[0].exerciseBody.forEach(body => {
-          let programmingLang = body.programmingLanguage;
-          if (this.programmingLangs.find(e => e.name === programmingLang.name) !== undefined) {
-            let element = this.programmingLangs.find(e => e.name === programmingLang.name);
-            this.usedPLangs.push(element);
-            let idx = this.programmingLangs.indexOf(element);
-            this.programmingLangs.splice(idx, 1);
-          }
-
-          let testAmount = body.testSuite.testCaseList.length;
-
-          this.testCases.push(testAmount);
-        });
-        if (this.writtenLangs.length == 0) {
-          this.langsAvailable = false;
         }
-        if (this.programmingLangs.length == 0) {
-          this.pLangsAvailable = false;
+  
+        if (this.exercise.title !== undefined && this.exercise.title !== "") {
+          // remove already used written and programming langs
+          this.latestVersion = this.exercise.exerciseVersionList.length - 1;
+          this.exercise.exerciseVersionList[this.latestVersion].exerciseLanguageList.forEach(exerciseLang => {
+            let writtenLang = exerciseLang.writtenLanguage;
+            if (this.writtenLangs.find(e => e.name === writtenLang.name) !== undefined) {
+              let element = this.writtenLangs.find(e => e.name === writtenLang.name);
+              this.usedWLangs.push(element);
+              let idx = this.writtenLangs.indexOf(element);
+              this.writtenLangs.splice(idx, 1);
+            }
+          });
+          this.exercise.exerciseVersionList[this.latestVersion].exerciseLanguageList[0].exerciseBody.forEach(body => {
+            let programmingLang = body.programmingLanguage;
+            if (this.programmingLangs.find(e => e.name === programmingLang.name) !== undefined) {
+              let element = this.programmingLangs.find(e => e.name === programmingLang.name);
+              this.usedPLangs.push(element);
+              let idx = this.programmingLangs.indexOf(element);
+              this.programmingLangs.splice(idx, 1);
+            }
+  
+            let testAmount = body.testSuite.testCaseList.length;
+  
+            this.testCases.push(testAmount);
+          });
+          if (this.writtenLangs.length == 0) {
+            this.langsAvailable = false;
+          }
+          if (this.programmingLangs.length == 0) {
+            this.pLangsAvailable = false;
+          }
         }
       }
     }

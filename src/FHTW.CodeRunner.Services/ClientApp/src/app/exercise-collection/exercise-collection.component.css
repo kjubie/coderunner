@@ -108,3 +108,15 @@ input[type=text], input[type=number], textarea, select {
 .redBorder {
    border-color: rgb(255, 92, 92);
 }
+
+.toast {
+   position: absolute;
+   bottom: 0;
+   width: 100vw;
+   max-width: 100%;
+   border-radius: 0;
+}
+
+.toastClose {
+   color: white;
+}
