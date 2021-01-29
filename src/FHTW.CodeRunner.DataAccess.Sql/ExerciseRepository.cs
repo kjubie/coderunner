@@ -299,7 +299,7 @@ namespace FHTW.CodeRunner.DataAccess.Sql
             ids.UnionWith(exercise_ids_from_tag_search);
 
             // apply filter only if values are set
-            if (programming_language != string.Empty && written_language != string.Empty)
+            if (programming_language != string.Empty || written_language != string.Empty)
             {
                 HashSet<int> filter_ids = this.context.ExerciseBody
                     .Search(b => b.FkProgrammingLanguage.Name)
