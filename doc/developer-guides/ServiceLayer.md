@@ -1,6 +1,6 @@
 # Service Layer
 
-Nachfolgend werden einzelne Besonderheiten des Service Layer erläutert. Die zugehörigen Projekte beginnen mit `FHTW.CodeRunner.Services`.
+Nachfolgend werden einzelne Besonderheiten des Service Layers erläutert. Die zugehörigen Projekte beginnen mit `FHTW.CodeRunner.Services`.
 
 ## AutoMapper
 
@@ -12,7 +12,7 @@ Als Authentifizierung wurde hier sehr simpel Basic Authentication eingesetzt. Da
 
 ## Swagger
 
-Damit eine gute Kommunikation mit den Frontend-Entwicklern sichergestellt ist, haben wir uns auch entschieden Swagger zu verwenden. Die Konfiguration dazu befinden sich in `Startup.cs` und sieht wie folgt aus:
+Damit eine gute Kommunikation mit den Frontend-Entwicklern sichergestellt ist, haben wir uns auch entschieden Swagger zu verwenden. Die Konfiguration dazu befindet sich in `Startup.cs` und sieht wie folgt aus:
 
 ```csharp
 services

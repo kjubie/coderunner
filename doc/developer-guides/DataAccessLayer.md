@@ -4,14 +4,14 @@ Nachfolgend werden einzelne Besonderheiten des Data Access Layer erläutert. Die
 
 ## Entity Framework Core
 
-Für den Data Access wir das Entity Framework Core (v 5.0.2)verwendet.
-Der dazugehörigen DbContext (CodeRunnerContext) befindet sich im `FHTW.CodeRunner.DataAccess.Sql` Projekt.
+Für den Data Access wird das Entity Framework Core (v 5.0.2)verwendet.
+Der dazugehörige DbContext (CodeRunnerContext) befindet sich im `FHTW.CodeRunner.DataAccess.Sql` Projekt.
 Die Entities wurden mittels der Database-First Methode erstellt und vom Framework automatisch generiert.
 
 ## PostgreSQL DB
 
-Die PostgreSQL Datenbank wurde von dem Herrn Alexander Sus vorgegeben.
-Sie läuft in einem einem Docker Container und kann deswegen während der Entwicklung leicht neu aufgesetzt werden, sollte es zu Problemen kommen. Genaueres zum Aufsetzen der Datenbank mit Docker steht im Setup Guide.
+Die PostgreSQL Datenbank wurde von Herrn Alexander Sus vorgegeben.
+Sie läuft in einem Docker Container und kann daher während der Entwicklung leicht neu aufgesetzt werden, sollte es zu Problemen kommen. Genaueres zum Aufsetzen der Datenbank mit Docker steht im Setup Guide.
 
 - PostgreSQL Version: 13
 - Port: 5432 (Default)
@@ -21,11 +21,11 @@ Sie läuft in einem einem Docker Container und kann deswegen während der Entwic
 
 ## Repository Pattern
 
-Der Data Access wurde mit dem Repository Pattern umgesetzt. Alle DB queries laufen über die Repositories ab und sie sind auch somit das Interface zum BusinessLayer. Die Interfaces zu den Repositories befinden sich im `FHTW.CodeRunner.DataAccess.Interfaces` Project und die dazu gehörigen Implementierungen im `FHTW.CodeRunner.DataAccess.Sql` Projekt.
+Der Data Access wurde mit dem Repository Pattern umgesetzt. Alle DB queries laufen über die Repositories ab und sind somit auch das Interface zum BusinessLayer. Die Interfaces zu den Repositories befinden sich im `FHTW.CodeRunner.DataAccess.Interfaces` Project und die dazu gehörigen Implementierungen im `FHTW.CodeRunner.DataAccess.Sql` Projekt.
 
 ## Entities
 
-Die Entities befinden sich im `FHTW.CodeRunner.DataAccess.Entities` Projekt. Weil die Entities automatisch generiert wurden, gibt es mehr Navigational Properties als eigentlich gebraucht sind. Diese Properties wurden behalten wegen der Möglichkeit, dass sie später noch verwendet werden könnten.
+Die Entities befinden sich im `FHTW.CodeRunner.DataAccess.Entities` Projekt. Da die Entities automatisch generiert wurden, gibt es mehr Navigational Properties als eigentlich gebraucht werden. Diese Properties wurden behalten wegen der Möglichkeit, dass sie später noch verwendet werden könnten.
 
 Genauere Informationen zu dem Aufbau der Entities befinden sich im Datenstruktur Dokument.
 
@@ -44,9 +44,9 @@ Die Logic zum seeden ist in `FHTW.CodeRunner.DataAccess.Sql.CodeRunnerContextExt
 
 ### Probleme beim Seeden
 
-!! Das folgende Problem wurde mittlereweile gelöst. Zur Informationszwecken und für den Fall, dass es nochmal auftritt wurde die Erklärung des Problems in der Dokumentation beibehalten.
+!! Das folgende Problem wurde mittlereweile gelöst. Zu Informationszwecken und für den Fall, dass es nochmal auftritt wurde die Erklärung des Problems in der Dokumentation beibehalten.
 
-Beim seeden der Datenbank ist es vorgekommen, dass die von PostgreSQL generierten Ids nach dem seeden nichtmehr mit den Ids der Daten synchronisiert waren. Deswegen mussten die fixen Ids aus den Testdaten entfernt werden. Deswegen kann vor dem seeden nich tmehr einfach überprüft werden, ob die Testdaten bereits in der Datenbank sind. Aufgrund dessen muss die Datenbank beim neuen Aufsetzen explizit geseeded werden. Genauere Information dazu befinden sich im Setup Guide.
+Beim seeden der Datenbank ist es vorgekommen, dass die von PostgreSQL generierten Ids nach dem seeden nichtmehr mit den Ids der Daten synchronisiert waren. Deswegen mussten die fixen Ids aus den Testdaten entfernt werden. Deswegen kann vor dem seeden nicht mehr einfach überprüft werden, ob die Testdaten bereits in der Datenbank sind. Aufgrund dessen muss die Datenbank beim neuen Aufsetzen explizit geseeded werden. Genauere Information dazu befinden sich im Setup Guide.
 
 #### Lösung
 
@@ -54,4 +54,4 @@ Das Problem wurde gelöst indem nach dem seeden die id sequence explizit geupdat
 
 ## Migrationen
 
-Falls es gewollt ist, dass die Daten in der Datenbank beim ändern des Daten Schemas behaltet werden, wurde die Erstellung von Migrationen eingerichtet. Die Migrationen befinden sich im `FHTW.CodeRunner.Migrations` Projekt.
+Falls es gewollt ist, dass die Daten in der Datenbank beim ändern des Daten Schemas behalten werden, wurde die Erstellung von Migrationen eingerichtet. Die Migrationen befinden sich im `FHTW.CodeRunner.Migrations` Projekt.

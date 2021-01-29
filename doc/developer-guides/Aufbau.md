@@ -7,11 +7,11 @@ Das Projekt ist in mehrere Komponenten aufgeteilt. Vorwiegend wird hier zwischen
 * **Data Access Layer**: beinhaltet Klassen zur Anbindung an die Datenbank.
 * **Export Service Layer**: beinhaltet Klassen zur Konvertierung für das Moodle Format.
 
-Jeder dieser Layer verfolgt dabei eine ähnlich Aufteilung. So wurde versucht für jeden Layer Entities, Interfaces und Unit Tests zu verwenden.
+Jeder dieser Layer verfolgt dabei eine ähnliche Aufteilung. So wurde versucht für jeden Layer Entities, Interfaces und Unit Tests zu verwenden.
 
 ## Packages
 
-Auf Solution Ebene ist hier nur StyleCop zu erwähnen. Dieses Package dient einem einheitlichen Coding-Stil im Projekt. Hier können aber natürlich auch Konfigurationen vorgenommen werden und dies gelingt mit dem File `stylecop.json`. Dieses ist solution-wide und jedes einzelne CS-Projekt referenziert auf dieses als Link. Das bedeutet, dass dieses File nicht in jedem einzelnen Projekt einzeln erstellt oder später angepasst werden muss. In einem `csproj` sieht dies wie folgt aus:
+Auf Solution Ebene ist hier nur StyleCop zu erwähnen. Dieses Package dient einem einheitlichen Coding-Stil im Projekt. Hier können aber natürlich auch Konfigurationen vorgenommen werden. Dies gelingt über das File `stylecop.json`. Dieses ist solution-wide und jedes einzelne CS-Projekt referenziert auf dieses als Link. Das bedeutet, dass dieses File nicht in jedem einzelnen Projekt einzeln erstellt oder später angepasst werden muss. In einem `csproj` sieht dies wie folgt aus:
 
 ```xml
 <ItemGroup>

@@ -60,7 +60,7 @@ Gegenüberstellung der Begriffe aus Moodle und den Begriffen in unseren Entities
 ### **Nicht unterstützte Felder**
 
 Manche Moodle Felder wurden ausgelassen. Das betrifft hauptsächlich die Felder die mit Anpassung zu tun haben.
-Diese Anpassungsfelder sind im Moodle erst ersichtlich wenn `Anpassung` abgehakt wurden. Sie wurden aus folgenden Gründen weggelassen:
+Diese Anpassungsfelder sind im Moodle erst ersichtlich wenn `Anpassung` abgehakt wurde. Sie wurden aus folgenden Gründen weggelassen:
 
 - Die Fragetyp Prototypen stehen unserer Applikation nicht zur Verfügung
 - Das Ausführen des Codes in einer Sandbox wird von uns nicht unterstützt
@@ -88,7 +88,7 @@ Die weggelassenen Felder sind:
 
 ### **Exercise**
 
-Eine Aufbau einer Exercise sieht ungefähr so aus:
+Eine Aufbau einer Exercise sieht ungefähr wie folgt aus:
 
 Das [] Symbol bedeutet, dass es sich um eine Liste handelt.
 
@@ -104,7 +104,7 @@ Das [] Symbol bedeutet, dass es sich um eine Liste handelt.
 ```
 
 Wie man sieht ist die Exercise sehr verschachtelt, das hat aber auch seinen Gründe. Das Hauptproblem bei der Exercise ist, dass es sie in verschiedenen Versionen, Sprachen und Programmiersprachen gibt.
-Deswegen teilen sich die Komponenten der Exercise in verschieden Teile auf, die entweder allgemein gültig, Sprachenspezifisch, Programmiersprachenspezifisch oder Sprachen- und Programmiersprachenspezifisch sind.
+Deswegen teilen sich die Komponenten der Exercise in verschiedene Teile auf, die entweder allgemein gültig, Sprachenspezifisch, Programmiersprachenspezifisch oder Sprachen- und Programmiersprachenspezifisch sind.
 Zusätzlich teilt sich die Exercise noch in verschiedene Versionen auf.
 
 Allgemein Gültige Komponenten:

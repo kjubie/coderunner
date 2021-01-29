@@ -41,7 +41,7 @@ Sollten Probleme auftreten kann unsere Docker Dokumentation zur Hilfe gezogen we
 
 ## Normal starten
 
-Wenn die Applikation auf den eigenen Computer laufen soll muss zuerst die Datenbank manuell gestartet werden. Dafür muss einfach
+Wenn die Applikation auf dem eigenen Computer laufen soll, muss zuerst die Datenbank manuell gestartet werden. Dafür muss einfach
 
 ```bash
 ...\FHTW-CodeRunner\database> docker-compose up
@@ -55,4 +55,4 @@ Danach kann `FHTW.CodeRunner.Service` im Solution Explorer als Startup Project a
 
 ### 1
 
-Es kann nur eine Instanz der Datenbank laufen (es gibt eine beim Start beim Docker und eine beim normalen starten). Mann kann einfach in der DockerDesktop den nicht benötigten Container löschen. Die testdb läuft auf einen anderen Port.
+Es kann nur eine Instanz der Datenbank laufen (es gibt eine beim Start von Docker und eine beim normalen starten). Mann kann einfach in der DockerDesktop den nicht benötigten Container löschen. Die testdb läuft auf einem anderen Port.
