@@ -20,8 +20,11 @@ div.btn-group {
 }
 
 .isSelected {
-    color: rgb(53, 171, 240);
-    text-decoration: underline;
+    color: black;
+}
+
+.isInactive {
+    color: gray;
 }
 
 .isInactive:hover {
@@ -144,6 +147,10 @@ div.text-right {
 
 .clickable {
     cursor: pointer;
+}
+
+.clickable:hover {
+    color: rgb(112, 203, 255);
 }
 
 .toast {
