@@ -317,8 +317,8 @@ export class HomeComponent implements OnInit {
   }
 
   viewCollection(idx: number) {
-    idx += 1;
-    this.collectionDataService.getCollection(idx).subscribe(this.viewCollectionObserver);
+    let id = this.collectionList[idx].id;
+    this.collectionDataService.getCollection(id).subscribe(this.viewCollectionObserver);
   }
 
   switchLists() {
