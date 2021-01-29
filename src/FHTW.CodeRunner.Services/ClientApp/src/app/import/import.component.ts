@@ -33,7 +33,7 @@ export class ImportComponent implements OnInit {
   }
 
   prepareExerciseObserver = {
-    next: x => { this.dataLists = x},
+    next: x => { this.dataLists = x.body},
     error: err => console.error('Observer got an error: ' + err),
     complete: () => {
       this.writtenLangs = this.dataLists.writtenLanguageList;
