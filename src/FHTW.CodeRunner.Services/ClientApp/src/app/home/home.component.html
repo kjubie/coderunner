@@ -47,7 +47,7 @@
   <!-- ToDo: get data from db, implement filters, different display options -->
   <div class="container">
     <div *ngIf="showExercises" class="text-center">
-        <h2><span class="isSelected">Exercises</span>  |  <span class="isInactive" (click)="switchLists()">Collections</span></h2>
+      <h2><span class="isSelected">Exercises</span>  |  <span class="isInactive" (click)="switchLists()">Collections</span></h2>
     </div>
     <div *ngIf="!showExercises" class="text-center">
       <h2><span class="isInactive" (click)="switchLists()">Exercises</span>  |  <span class="isSelected">Collections</span></h2>

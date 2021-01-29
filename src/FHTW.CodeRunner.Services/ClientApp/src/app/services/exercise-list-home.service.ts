@@ -11,6 +11,7 @@ export class ExerciseListHomeService {
     private getAllExercisesUrl = "https://localhost:5001/api/exercise/minimal";
     private getAllCollectionsUrl = "https://localhost:5001/api/collection/minimal";
     private searchFilterUrl = "https://localhost:5001/api/exercise/search";
+    private searchCollectionFilterUrl = "https://localhost:5001/api/collection/search";
 
     constructor(
         private http: HttpClient,
@@ -45,7 +46,7 @@ export class ExerciseListHomeService {
     }
 
     searchCollection(searchFilter: SearchFilter): Observable<HttpResponse<Object>> {
-      return this.http.post<HttpResponse<CollectionHome[]>>(this.searchFilterUrl, searchFilter, { observe: 'response' as 'body' })
+      return this.http.post<HttpResponse<CollectionHome[]>>(this.searchCollectionFilterUrl, searchFilter, { observe: 'response' as 'body' })
       .pipe(
         tap(_ => console.log("fetched collections from db for filter")),
         catchError(this.handleError<HttpResponse<CollectionHome[]>>('search'))

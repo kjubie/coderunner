@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-6">
-                    <h4 (click)="viewExercise(i)" class="clickable isInactive"><strong>{{ exercise.title }}</strong></h4>
+                    <h4 (click)="viewExercise(i)" class="clickable"><strong>{{ exercise.title }}</strong></h4>
                     <div class="colour-blue">By {{ exercise.user.name }}</div>
                     <div>Creation Date: {{ exercise.created }}</div>
                 </div>
@@ -36,7 +36,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-6">
-                    <h4 (click)="viewCollection(i)" class="clickable isInactive"><strong>{{ collection.title }}</strong></h4>
+                    <h4 (click)="viewCollection(i)" class="clickable"><strong>{{ collection.title }}</strong></h4>
                     <div class="colour-blue">By {{ collection.user.name }}</div>
                     <div>Creation Date: {{ collection.created }}</div>
                     <div>Exercise Count: {{ collection.exerciseCount }}</div>

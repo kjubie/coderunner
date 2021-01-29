@@ -336,7 +336,8 @@ export class HomeComponent implements OnInit {
   search() {
     if (this.showExercises) {
       this.exerciseListHomeService.search(this.searchFilter).subscribe(this.searchFilterObserver);
-    } else {
+    }
+    else if (!this.showExercises) {
       this.exerciseListHomeService.searchCollection(this.searchFilter).subscribe(this.searchCollectionFilterObserver);
     }
   }
