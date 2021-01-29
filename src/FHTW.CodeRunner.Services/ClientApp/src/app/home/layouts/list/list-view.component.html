@@ -5,7 +5,7 @@
                 <div class="col-6">
                     <h4 (click)="viewExercise(i)" class="clickable"><strong>{{ exercise.title }}</strong></h4>
                     <div class="colour-blue">By {{ exercise.user.name }}</div>
-                    <div>Creation Date: {{ exercise.created }}</div>
+                    <div>Creation Date: {{exercise.created | date :'medium'}}</div>
                 </div>
                 <div class="col-5 text-right">
                     <span *ngFor="let tag of exercise.tagList" class="badge badge-pill tag">{{ tag.name }}</span>
@@ -38,7 +38,7 @@
                 <div class="col-6">
                     <h4 (click)="viewCollection(i)" class="clickable"><strong>{{ collection.title }}</strong></h4>
                     <div class="colour-blue">By {{ collection.user.name }}</div>
-                    <div>Creation Date: {{ collection.created }}</div>
+                    <div>Creation Date: {{collection.created | date :'medium'}}</div>
                     <div>Exercise Count: {{ collection.exerciseCount }}</div>
                 </div>
                 <div class="col-5 text-right">
