@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: coderunnerdb
+    ports: 
+        - 5432:5432 
+  fhtw.coderunner.services:
+    image: fhtwcoderunnerservices:latest
+    build:
+      context: .
+      dockerfile: ../src/FHTW.CodeRunner.Services/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=jDyhoAhAY6mfGa189lSB
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/dev-key.pfx
+    ports:
+      - 5000:80
+      - 5001:443
+    links:
+        - "db"
