@@ -21,6 +21,13 @@ Auf Solution Ebene ist hier nur StyleCop zu erwähnen. Dieses Package dient eine
 
 ## Weitere Anmerkungen
 
+### ASP.NET Core Basics
+
+Vor Beginn der Arbeit an dem Projekt sollte man den generellen Aufbau einer ASP.NET Applikation verstanden haben:
+
+* ASP.NET Core fundamentals: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/?view=aspnetcore-5.0
+* ASP.NET Code Architecture: https://dotnet.microsoft.com/learn/aspnet/architecture
+
 ### .NET Version
 
 Bei der Entwicklung wurden stets die aktuellsten Versionen von .NET verwendet. Das bedeutet:
