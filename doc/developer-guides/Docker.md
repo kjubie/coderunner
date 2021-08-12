@@ -13,7 +13,7 @@ Es wurde Anfangs mittels Visual Studio mittels der "add docker support" Funktion
 
 Da wir vor diesem Projekt noch nicht mit Docker gearbeitet haben, hat uns die Aufteilung des Dockerfiles in verschiedene Phasen ein wenig verwirrt. Deswegen wollten wir an dieser Stelle unsere Erkenntnisse dazu festhalten.
 
-Das aufteilen des Dockerfiles in mehrere Phasen ist eine Praxis die [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) heißt. Es wird gemacht um die größe des Images gering zu halten und den Build Prozess zu optimieren, indem sich in jeder Build Phase nur jene Dinge im Image befinden, die auch benötigt werden. Zum Beispiel wird in der Build Phase (wo FROM * AS build steht) die Applikation gebuildet und in der Publish Phase nur die gebauten Dateien hinüberkopiert.
+Das Aufteilen des Dockerfiles in mehrere Phasen ist eine Praxis die [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) heißt. Es wird gemacht um die größe des Images gering zu halten und den Build Prozess zu optimieren, indem sich in jeder Build Phase nur jene Dinge im Image befinden, die auch benötigt werden. Zum Beispiel wird in der Build Phase (wo FROM * AS build steht) die Applikation gebuildet und in der Publish Phase nur die gebauten Dateien hinüberkopiert.
 
 Das Alles ist an sich sehr nützlich, nur ist es besonders wichtig zu wissen wo, wann und welche Dateien wohin kopiert werden. Es gab bei uns mehrere Probleme bei denen Dateien zur Runtime zur Verfügung stehen sollten, diese aber nur zur Build Phase kopiert wurden.
 
