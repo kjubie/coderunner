@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FHTW.CodeRunner.DataAccess.Entities\FHTW.CodeRunner.DataAccess.Entities.csproj" />
     <ProjectReference Include="..\FHTW.CodeRunner.Services\FHTW.CodeRunner.Services.csproj" />
   </ItemGroup>
 

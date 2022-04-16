@@ -1,0 +1,24 @@
+Das Problem, warum man das Projekt nicht über Docker starten konnte, lag wahrscheinlich daran, dass 'npm install' in der Client App nicht automatisch ausgeführt wurde.
+
+Mit einem manuellen 'npm install' funktioniert es.
+
+Derzeit wird das file gesucht in dem das Command 'npm install' spezifiziert werden muss.
+
+DB Auth Failure fix:
+
+You need to define a password for user postgres
+
+1. Get container
+	docker ps
+
+2. Enter inside of the container
+	docker exec -it postgresql-container-local bash
+
+3. Switch User to postgres
+	su postgres
+
+4. Start query console
+	psql
+
+5. Define password
+	ALTER ROLE postgres WITH PASSWORD 'admin';

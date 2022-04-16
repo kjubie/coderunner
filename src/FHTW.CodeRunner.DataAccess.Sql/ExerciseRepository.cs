@@ -389,22 +389,11 @@ namespace FHTW.CodeRunner.DataAccess.Sql
                 {
                     if (e.Entry.IsKeySet)
                     {
-                        e.Entry.State = EntityState.Unchanged;
+                        e.Entry.State = EntityState.Modified;
                     }
                     else
                     {
                         e.Entry.State = EntityState.Added;
-                    }
-                });
-
-                this.context.SaveChanges();
-
-                // update existing
-                this.context.ChangeTracker.TrackGraph(exercise, e =>
-                {
-                    if (e.Entry.IsKeySet)
-                    {
-                        e.Entry.State = EntityState.Modified;
                     }
                 });
 

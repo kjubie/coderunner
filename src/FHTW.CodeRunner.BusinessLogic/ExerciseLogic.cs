@@ -130,7 +130,7 @@ namespace FHTW.CodeRunner.BusinessLogic
                 catch (Exception e)
                 {
                     this.logger.LogError(e.Message);
-                    throw new BlDataAccessException("Unable to save Exercise with Title: " + exercise.Title + " to DAL.", e);
+                    throw new BlDataAccessException("Unable to save Exercise with Title: " + exercise.Title + " to DAL." + e, e);
                 }
             }
         }
