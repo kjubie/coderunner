@@ -67,7 +67,7 @@ namespace FHTW.CodeRunner.Services
             if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
             {
                 Debug.WriteLine("Running inside of Docker");
-                connection = this.Configuration.GetConnectionString("DockerConnection");
+                connection = this.Configuration.GetConnectionString("DefaultConnection");
             }
             else
             {
