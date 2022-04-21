@@ -6,8 +6,12 @@ RUN apt-get update -yq \
     && curl -sL https://deb.nodesource.com/setup_12.x | bash \
 	&& apt-get -yq install nodejs
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+
+LABEL io.openshift.expose-services="8080:http"
+
+EXPOSE 9090
+ENV ASPNETCORE_URLS=http://*:9090
+
 EXPOSE 5000
 EXPOSE 5001
 
