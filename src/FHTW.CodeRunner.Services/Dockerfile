@@ -16,19 +16,18 @@ RUN apt-get update -yq \
     && apt-get -yq install curl gnupg git \
     && curl -sL https://deb.nodesource.com/setup_12.x | bash \
 	&& apt-get -yq install nodejs
-WORKDIR /src
-COPY ["FHTW.CodeRunner.Services/FHTW.CodeRunner.Services.csproj", "FHTW.CodeRunner.Services/"]
-COPY ["FHTW.CodeRunner.Services.DTOs/FHTW.CodeRunner.Services.DTOs.csproj", "FHTW.CodeRunner.Services.DTOs/"]
-COPY ["FHTW.CodeRunner.BusinessLogic.Interfaces/FHTW.CodeRunner.BusinessLogic.Interfaces.csproj", "FHTW.CodeRunner.BusinessLogic.Interfaces/"]
-COPY ["FHTW.CodeRunner.BusinessLogic.Entities/FHTW.CodeRunner.BusinessLogic.Entities.csproj", "FHTW.CodeRunner.BusinessLogic.Entities/"]
-COPY ["FHTW.CodeRunner.Services.Interfaces/FHTW.CodeRunner.Services.Interfaces.csproj", "FHTW.CodeRunner.Services.Interfaces/"]
-COPY ["FHTW.CodeRunner.BusinessLogic/FHTW.CodeRunner.BusinessLogic.csproj", "FHTW.CodeRunner.BusinessLogic/"]
-COPY ["FHTW.CodeRunner.Migrations/FHTW.CodeRunner.Migrations.csproj", "FHTW.CodeRunner.Migrations/"]
-COPY ["FHTW.CodeRunner.DataAccess.Sql/FHTW.CodeRunner.DataAccess.Sql.csproj", "FHTW.CodeRunner.DataAccess.Sql/"]
-COPY ["FHTW.CodeRunner.DataAccess.Entities/FHTW.CodeRunner.DataAccess.Entities.csproj", "FHTW.CodeRunner.DataAccess.Entities/"]
-COPY ["FHTW.CodeRunner.DataAccess.Interfaces/FHTW.CodeRunner.DataAccess.Interfaces.csproj", "FHTW.CodeRunner.DataAccess.Interfaces/"]
-RUN dotnet restore "FHTW.CodeRunner.Services/FHTW.CodeRunner.Services.csproj"
-COPY ["FHTW.CodeRunner.Services/ClientApp/", "ClientApp"]
+COPY ["src/FHTW.CodeRunner.Services/FHTW.CodeRunner.Services.csproj", "src/FHTW.CodeRunner.Services/"]
+COPY ["src/FHTW.CodeRunner.Services.DTOs/FHTW.CodeRunner.Services.DTOs.csproj", "src/FHTW.CodeRunner.Services.DTOs/"]
+COPY ["src/FHTW.CodeRunner.BusinessLogic.Interfaces/FHTW.CodeRunner.BusinessLogic.Interfaces.csproj", "src/FHTW.CodeRunner.BusinessLogic.Interfaces/"]
+COPY ["src/FHTW.CodeRunner.BusinessLogic.Entities/FHTW.CodeRunner.BusinessLogic.Entities.csproj", "src/FHTW.CodeRunner.BusinessLogic.Entities/"]
+COPY ["src/FHTW.CodeRunner.Services.Interfaces/FHTW.CodeRunner.Services.Interfaces.csproj", "src/FHTW.CodeRunner.Services.Interfaces/"]
+COPY ["src/FHTW.CodeRunner.BusinessLogic/FHTW.CodeRunner.BusinessLogic.csproj", "src/FHTW.CodeRunner.BusinessLogic/"]
+COPY ["src/FHTW.CodeRunner.Migrations/FHTW.CodeRunner.Migrations.csproj", "src/FHTW.CodeRunner.Migrations/"]
+COPY ["src/FHTW.CodeRunner.DataAccess.Sql/FHTW.CodeRunner.DataAccess.Sql.csproj", "src/FHTW.CodeRunner.DataAccess.Sql/"]
+COPY ["src/FHTW.CodeRunner.DataAccess.Entities/FHTW.CodeRunner.DataAccess.Entities.csproj", "src/FHTW.CodeRunner.DataAccess.Entities/"]
+COPY ["src/FHTW.CodeRunner.DataAccess.Interfaces/FHTW.CodeRunner.DataAccess.Interfaces.csproj", "src/FHTW.CodeRunner.DataAccess.Interfaces/"]
+RUN dotnet restore "src/FHTW.CodeRunner.Services/FHTW.CodeRunner.Services.csproj"
+COPY ["src/FHTW.CodeRunner.Services/ClientApp/", "ClientApp"]
 COPY . .
 WORKDIR "/src/FHTW.CodeRunner.Services"
 RUN dotnet build "FHTW.CodeRunner.Services.csproj" -c Release -o /app/build
