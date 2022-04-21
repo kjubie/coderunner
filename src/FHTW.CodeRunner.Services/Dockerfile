@@ -27,7 +27,7 @@ COPY ["src/FHTW.CodeRunner.DataAccess.Sql/FHTW.CodeRunner.DataAccess.Sql.csproj"
 COPY ["src/FHTW.CodeRunner.DataAccess.Entities/FHTW.CodeRunner.DataAccess.Entities.csproj", "src/FHTW.CodeRunner.DataAccess.Entities/"]
 COPY ["src/FHTW.CodeRunner.DataAccess.Interfaces/FHTW.CodeRunner.DataAccess.Interfaces.csproj", "src/FHTW.CodeRunner.DataAccess.Interfaces/"]
 RUN dotnet restore "src/FHTW.CodeRunner.Services/FHTW.CodeRunner.Services.csproj"
-COPY ["src/FHTW.CodeRunner.Services/ClientApp/", "ClientApp"]
+COPY ["src/FHTW.CodeRunner.Services/ClientApp/", "src/ClientApp"]
 COPY . .
 WORKDIR "/src/FHTW.CodeRunner.Services"
 RUN dotnet build "FHTW.CodeRunner.Services.csproj" -c Release -o /app/build
