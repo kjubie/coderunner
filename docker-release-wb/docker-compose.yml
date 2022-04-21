@@ -1,15 +1,6 @@
 version: '3.4'
 
-services:
-  db:
-    image: postgres:13
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: coderunnerdb
-    ports: 
-        - 5432:5432 
+services: 
   fhtw.coderunner.services:
     image: fhtwcoderunnerservices:latest
     build:
