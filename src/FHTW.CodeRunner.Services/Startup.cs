@@ -62,18 +62,7 @@ namespace FHTW.CodeRunner.Services
         /// <param name="services">The collection for the sevices.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            string connection;
-
-            if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
-            {
-                Debug.WriteLine("Running inside of Docker");
-                connection = this.Configuration.GetConnectionString("DockerConnection");
-            }
-            else
-            {
-                Debug.WriteLine("Running outside of Docker");
-                connection = this.Configuration.GetConnectionString("DefaultConnection");
-            }
+            string connection = this.Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<CodeRunnerContext>(
                 options =>
