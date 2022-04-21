@@ -9,8 +9,8 @@ WORKDIR /app
 
 LABEL io.openshift.expose-services="8080:http"
 
-EXPOSE 9090
-ENV ASPNETCORE_URLS=http://*:9090
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://*:8080
 
 EXPOSE 5000
 EXPOSE 5001
