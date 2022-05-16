@@ -8,7 +8,7 @@ import { sha512 } from 'js-sha512';
 })
 export class LoginService {
 
-  private loginUrl = 'httpa://localhost:5001/api/user/authenticate';
+  private loginUrl = 'https://localhost:5001/api/user/authenticate';
 
   constructor(private httpClient: HttpClient) { }
 
