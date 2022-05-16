@@ -60,7 +60,7 @@ namespace FHTW.CodeRunner.Services.Helpers
 
             if (!this.Request.Headers.ContainsKey("Authorization"))
             {
-                return AuthenticateResult.Fail("Missing Authorization Header");
+                return AuthenticateResult.Fail(Request);
             }
 
             int? result = null;
