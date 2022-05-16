@@ -60,7 +60,7 @@ namespace FHTW.CodeRunner.Services.Helpers
 
             if (!this.Request.Headers.ContainsKey("Authorization"))
             {
-                return AuthenticateResult.Fail(this.Request.toString());
+                return AuthenticateResult.Fail("Buty why?");
             }
 
             int? result = null;
